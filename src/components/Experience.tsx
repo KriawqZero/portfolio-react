@@ -76,7 +76,7 @@ export default function Experience() {
           
           {achievements.map((achievement, index) => (
             <div 
-              key={achievement.title}
+              key={index}
               className="flex items-start gap-6 bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/30 hover:border-gray-600/50 transition-all duration-300"
             >
               {/* Ícone e ano */}

@@ -36,8 +36,9 @@ export default function Hero() {
             <div className="flex flex-wrap gap-2 text-sm text-gray-400" role="list" aria-label="Modalidades de trabalho disponíveis">
               {[
                 { text: 'Freelancer', icon: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6' },
-                { text: 'Remoto', icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
-                { text: 'Híbrido/Presencial', icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2m-2 0H7m0 0H5m2 0v-5a2 2 0 012-2h2a2 2 0 012 2v5' }
+                { text: 'CLT', icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2m-2 0H7m0 0H5m2 0v-5a2 2 0 012-2h2a2 2 0 012 2v5' },
+                { text: 'Remoto/Presencial', icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z' },
+                { text: 'Mudança Geográfica', icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z' }
               ].map((item, index) => (
                 <span key={item.text}>
                   <span className="flex items-center" role="listitem">
@@ -46,10 +47,13 @@ export default function Hero() {
                     </svg>
                     {item.text}
                   </span>
-                  {index < 2 && <span className="text-gray-500 mx-1" aria-hidden="true">•</span>}
+                  {index < 3 && <span className="text-gray-500 mx-1" aria-hidden="true">•</span>}
                 </span>
               ))}
             </div>
+            <p className="text-sm text-gray-500 italic">
+              *Disponível para mudança de cidade/estado conforme a oportunidade
+            </p>
           </div>
 
           <div className="flex flex-wrap gap-3 pt-4" role="list" aria-label="Principais tecnologias">

@@ -51,7 +51,7 @@ export default function About() {
               para entregar produtos que fazem a diferença.
             </p>
 
-            <div className="space-y-4">
+            <div className="space-y-4 mb-6">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 bg-indigo-500 rounded-full"></div>
                 <span className="text-gray-300">Especialista em <strong>NestJS</strong> e <strong>Node.js</strong></span>
@@ -64,6 +64,32 @@ export default function About() {
                 <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
                 <span className="text-gray-300">Frontend moderno com <strong>React</strong> e <strong>Next.js</strong></span>
               </div>
+            </div>
+
+            {/* Disponibilidade */}
+            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/30">
+              <h3 className="text-lg font-semibold text-white mb-3">💼 Disponibilidade</h3>
+              <div className="grid grid-cols-2 gap-3 text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-gray-300">Projetos Freelancer</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-gray-300">Trabalho CLT</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-gray-300">100% Remoto</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-gray-300">Mudança Geográfica</span>
+                </div>
+              </div>
+              <p className="text-xs text-gray-500 mt-3">
+                Localizado em Corumbá-MS, disponível para oportunidades em todo o Brasil
+              </p>
             </div>
           </div>
 

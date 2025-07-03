@@ -1,8 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
-
 export default function Skills() {
-  const skillsRef = useRef<HTMLElement>(null)
-
   const skillCategories = [
     {
       title: 'Backend',

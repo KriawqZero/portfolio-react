@@ -36,24 +36,29 @@ export default function Contact() {
 
   const workModes = [
     {
-      title: 'Freelancer',
-      description: 'Projetos pontuais com foco em resultados',
+      title: 'Projetos Freelancer',
+      description: 'Desenvolvimento de projetos pontuais com foco em resultados',
       icon: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6'
     },
     {
-      title: 'Remoto',
-      description: 'Trabalho 100% remoto com comunicação eficiente',
+      title: 'Trabalho CLT',
+      description: 'Oportunidades de emprego formal com carteira assinada',
+      icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2m-2 0H7m0 0H5m2 0v-5a2 2 0 012-2h2a2 2 0 012 2v5'
+    },
+    {
+      title: 'Remoto/Presencial',
+      description: 'Flexibilidade total para trabalho remoto ou presencial',
       icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
     },
     {
-      title: 'Híbrido/Presencial',
-      description: 'Disponível para Campo Grande/MS e região',
-      icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2m-2 0H7m0 0H5m2 0v-5a2 2 0 012-2h2a2 2 0 012 2v5'
+      title: 'Mudança Geográfica',
+      description: 'Disponível para relocação conforme a oportunidade',
+      icon: 'M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z'
     }
   ]
 
   const quickInfo = [
-    { label: 'Localização', value: 'Campo Grande, MS' },
+    { label: 'Localização Atual', value: 'Corumbá, MS' },
     { label: 'Fuso Horário', value: 'UTC-4 (Brasília)' },
     { label: 'Idiomas', value: 'Português, Inglês Técnico' },
     { label: 'Disponibilidade', value: 'Imediata' }
@@ -112,14 +117,14 @@ export default function Contact() {
               <h3 className="text-2xl font-bold text-white mb-6">
                 Modalidades de Trabalho
               </h3>
-              <div className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {workModes.map((mode, index) => (
                   <div 
-                    key={mode.title}
+                    key={index}
                     className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/30"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="p-2 bg-indigo-500/20 rounded-lg border border-indigo-500/30">
+                      <div className="p-2 bg-indigo-500/20 rounded-lg border border-indigo-500/30 flex-shrink-0">
                         <svg className="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={mode.icon} />
                         </svg>
@@ -156,13 +161,35 @@ export default function Contact() {
               ))}
             </div>
 
+            {/* Disponibilidade geográfica */}
+            <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/30">
+              <h4 className="text-lg font-semibold text-white mb-3">🌎 Disponibilidade Geográfica</h4>
+              <div className="space-y-2 text-sm">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span className="text-gray-300">Corumbá-MS (localização atual)</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <span className="text-gray-300">Trabalho 100% remoto</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  <span className="text-gray-300">Relocação para outras cidades/estados</span>
+                </div>
+              </div>
+              <p className="text-xs text-gray-500 mt-3">
+                A relocação depende da qualidade da oportunidade e condições oferecidas
+              </p>
+            </div>
+
             {/* CTA principal */}
             <div className="bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-xl p-8 border border-indigo-500/20 mt-8">
               <h3 className="text-xl font-bold text-white mb-4">
                 🚀 Pronto para começar?
               </h3>
               <p className="text-gray-300 mb-6">
-                Entre em contato para discutirmos seu projeto. Respondo rapidamente e sempre com propostas claras e objetivas.
+                Entre em contato para discutirmos seu projeto ou oportunidade. Respondo rapidamente e sempre com propostas claras e objetivas.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">

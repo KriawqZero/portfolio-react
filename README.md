@@ -91,3 +91,10 @@ Programador Júnior Freelancer especializado em **NestJS**, **React/Next.js** e 
 **Disponível para**: Projetos freelancer • Desenvolvimento full-stack • Consultoria técnica • Arquitetura de sistemas
 
 *"Transformando problemas complexos em soluções elegantes com código limpo e arquitetura robusta"*
+# Adicione à pasta public/
+- og-image.jpg (1200x630) # Para compartilhamento social
+- favicon-32x32.png
+- favicon-16x16.png  
+- apple-touch-icon.png (180x180)
+- android-chrome-192x192.png
+- android-chrome-512x512.png
