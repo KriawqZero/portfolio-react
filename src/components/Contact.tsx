@@ -10,7 +10,7 @@ export default function Contact() {
         </svg>
       ),
       color: 'from-indigo-500 to-purple-500',
-      description: 'Email principal para contatos profissionais'
+      description: 'Email principal para oportunidades profissionais'
     },
     {
       type: 'LinkedIn',
@@ -50,21 +50,48 @@ export default function Contact() {
     }
   ]
 
-  const location = {
-    city: 'Corumbá, MS',
-    country: 'Brasil',
+  const workPreferences = {
+    location: 'Corumbá, MS - Brasil',
     timezone: 'GMT-4 (Horário de Brasília)',
-    availability: 'Disponível para trabalho remoto'
+    modalities: [
+      {
+        type: 'Remoto',
+        description: 'Experiência completa em trabalho remoto',
+        icon: (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        )
+      },
+      {
+        type: 'Híbrido',
+        description: 'Flexibilidade entre remoto e presencial',
+        icon: (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+          </svg>
+        )
+      },
+      {
+        type: 'Presencial',
+        description: 'Disposição para mudança conforme oportunidade',
+        icon: (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2m-2 0H7m0 0H5m2 0v-5a2 2 0 012-2h2a2 2 0 012 2v5" />
+          </svg>
+        )
+      }
+    ]
   }
 
   return (
     <section id="contato" className="container mx-auto px-6 py-16">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-center mb-4 text-white">
-          Vamos Conversar?
+          Vamos Trabalhar Juntos?
         </h2>
         <p className="text-xl text-center text-gray-300 mb-16">
-          Estou sempre aberto a novos projetos e oportunidades interessantes
+          Aberto a oportunidades freelancer, contratação remota, híbrida ou presencial
         </p>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -103,7 +130,7 @@ export default function Contact() {
             ))}
           </div>
 
-          {/* Informações e Disponibilidade */}
+          {/* Modalidades de Trabalho */}
           <div className="space-y-6">
             {/* Localização */}
             <div className="bg-gray-800 p-6 rounded-2xl shadow-lg">
@@ -115,7 +142,7 @@ export default function Contact() {
                   </svg>
                 </div>
                 <h3 className="font-bold text-white">
-                  Localização
+                  Localização Base
                 </h3>
               </div>
               <div className="space-y-2 text-sm">
@@ -123,91 +150,72 @@ export default function Contact() {
                   <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   </svg>
-                  {location.city}, {location.country}
+                  {workPreferences.location}
                 </div>
                 <div className="flex items-center text-gray-300">
                   <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  {location.timezone}
-                </div>
-                <div className="flex items-center text-green-400 font-medium">
-                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                  </svg>
-                  {location.availability}
+                  {workPreferences.timezone}
                 </div>
               </div>
             </div>
 
-            {/* Horário de Trabalho */}
+            {/* Modalidades de Trabalho */}
             <div className="bg-gray-800 p-6 rounded-2xl shadow-lg">
               <div className="flex items-center mb-4">
                 <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl text-white mr-3">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
                   </svg>
                 </div>
                 <h3 className="font-bold text-white">
-                  Disponibilidade
+                  Modalidades
                 </h3>
               </div>
-              <div className="space-y-2 text-sm">
-                <div className="flex items-center text-gray-300">
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707" />
-                  </svg>
-                  Segunda - Sexta: 08:00 - 18:00
-                </div>
-                <div className="flex items-center text-gray-300">
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                  </svg>
-                  Flexível para projetos urgentes
-                </div>
-                <div className="flex items-center text-indigo-400 font-medium">
-                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                  </svg>
-                  Resposta rápida no WhatsApp
-                </div>
+              <div className="space-y-3">
+                {workPreferences.modalities.map((modality, index) => (
+                  <div key={index} className="flex items-start text-sm">
+                    <div className="text-indigo-400 mr-3 mt-0.5">
+                      {modality.icon}
+                    </div>
+                    <div>
+                      <div className="text-gray-300 font-medium">{modality.type}</div>
+                      <div className="text-gray-400 text-xs">{modality.description}</div>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
 
-            {/* Expertise */}
+            {/* Disponibilidade */}
             <div className="bg-gradient-to-r from-gray-800 to-gray-700 p-6 rounded-2xl border border-gray-600">
               <div className="flex items-center mb-4">
-                <svg className="w-6 h-6 text-indigo-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <svg className="w-6 h-6 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <h3 className="font-bold text-white">
-                  Pronto para seu projeto
+                  Status Atual
                 </h3>
               </div>
               <div className="space-y-2 text-sm">
-                <div className="flex items-center text-gray-300">
-                  <svg className="w-4 h-4 mr-2 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <div className="flex items-center text-green-400 font-medium">
+                  <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  Desenvolvimento ágil
+                  Disponível para novas oportunidades
                 </div>
                 <div className="flex items-center text-gray-300">
-                  <svg className="w-4 h-4 mr-2 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  Foco em qualidade e performance
+                  Início imediato ou conforme combinado
                 </div>
                 <div className="flex items-center text-gray-300">
-                  <svg className="w-4 h-4 mr-2 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  Comunicação transparente
-                </div>
-                <div className="flex items-center text-gray-300">
-                  <svg className="w-4 h-4 mr-2 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                  </svg>
-                  Soluções escaláveis
+                  Disposição para mudança geográfica
                 </div>
               </div>
             </div>
@@ -218,10 +226,10 @@ export default function Contact() {
         <div className="mt-16 text-center">
           <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 rounded-2xl text-white">
             <h3 className="text-2xl font-bold mb-4">
-              Tem um projeto em mente?
+              Que tal conversarmos sobre uma oportunidade?
             </h3>
-            <p className="text-indigo-100 mb-6 max-w-2xl mx-auto">
-              Seja para um MVP, sistema complexo ou consultoria técnica, estou aqui para transformar suas ideias em soluções robustas e escaláveis.
+            <p className="text-indigo-100 mb-6 max-w-3xl mx-auto">
+              Seja para um projeto freelancer, uma posição remota, híbrida ou presencial - estou sempre interessado em desafios que me permitam crescer profissionalmente e contribuir com soluções inovadoras.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
