@@ -82,7 +82,7 @@ Programador Júnior Freelancer especializado em **NestJS**, **React/Next.js** e 
 ## Contato Profissional
 
 - **Email**: marciliortizz@gmail.com
-- **LinkedIn**: [Marcílio Ortiz Barbosa](https://www.linkedin.com/in/marc%C3%ADlio-ortiz-barbosa-7b5a35165/)
+- **LinkedIn**: [Marcilio Ortiz Barbosa](https://www.linkedin.com/in/marcilio-ortiz/)
 - **WhatsApp**: [+55 (67) 98407-9762](https://api.whatsapp.com/send?phone=5567984079762)
 - **Localização**: Corumbá, MS - Brasil (Trabalho Remoto)
 

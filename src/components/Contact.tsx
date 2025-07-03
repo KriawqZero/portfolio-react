@@ -1,4 +1,12 @@
+import { useScrollReveal, useScrollRevealList } from '../hooks/useScrollReveal'
+
 export default function Contact() {
+  // Scroll reveal hooks
+  const titleReveal = useScrollReveal({ delay: 0 })
+  const descriptionReveal = useScrollReveal({ delay: 200 })
+  const locationReveal = useScrollReveal({ delay: 600 })
+  const ctaReveal = useScrollReveal({ delay: 800 })
+
   const contacts = [
     {
       type: 'Email',
@@ -13,8 +21,8 @@ export default function Contact() {
     },
     {
       type: 'LinkedIn',
-      value: 'Marcílio Ortiz Barbosa',
-      href: 'https://www.linkedin.com/in/marc%C3%ADlio-ortiz-barbosa-7b5a35165/',
+      value: 'Marcilio Ortiz Barbosa',
+      href: 'https://www.linkedin.com/in/marcilio-ortiz/',
       icon: (
         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
           <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -46,15 +54,36 @@ export default function Contact() {
     }
   ]
 
+  // Hook para animar cada contato
+  const { setElementRef: setContactRef, visibleItems: contactsVisible } = useScrollRevealList(
+    contacts.length, 
+    { delay: 400 }
+  )
+
   return (
     <section id="contato" className="container mx-auto px-6 py-16">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-4 text-white">
-          Contato
-        </h2>
-        <p className="text-xl text-center text-gray-300 mb-12">
-          Disponível para freelancer, remoto, híbrido ou presencial
-        </p>
+        <div 
+          ref={titleReveal.elementRef}
+          className={`text-center mb-4 ${
+            titleReveal.isVisible ? 'slide-down-visible' : 'slide-down-hidden'
+          }`}
+        >
+          <h2 className="text-4xl font-bold text-white">
+            Contato
+          </h2>
+        </div>
+        
+        <div 
+          ref={descriptionReveal.elementRef}
+          className={`text-center mb-12 ${
+            descriptionReveal.isVisible ? 'fade-in-visible' : 'fade-in-hidden'
+          }`}
+        >
+          <p className="text-xl text-gray-300">
+            Disponível para freelancer, remoto, híbrido ou presencial
+          </p>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-6 mb-12">
           {contacts.map((contact, index) => (
@@ -63,7 +92,10 @@ export default function Contact() {
               href={contact.href}
               target={contact.href.startsWith('http') ? '_blank' : '_self'}
               rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              className="group bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover-lift"
+              ref={setContactRef(index)}
+              className={`group bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover-lift ${
+                contactsVisible[index] ? 'slide-scale-visible' : 'slide-scale-hidden'
+              }`}
             >
               <div className="flex items-center space-x-4">
                 <div className={`p-3 bg-gradient-to-r ${contact.color} rounded-xl text-white group-hover:scale-110 transition-transform duration-300`}>
@@ -88,7 +120,12 @@ export default function Contact() {
         </div>
 
         {/* Localização */}
-        <div className="bg-gray-800 p-6 rounded-2xl shadow-lg text-center">
+        <div 
+          ref={locationReveal.elementRef}
+          className={`bg-gray-800 p-6 rounded-2xl shadow-lg text-center mb-12 ${
+            locationReveal.isVisible ? 'blur-visible' : 'blur-hidden'
+          }`}
+        >
           <div className="flex items-center justify-center mb-3">
             <svg className="w-6 h-6 text-indigo-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -104,7 +141,12 @@ export default function Contact() {
         </div>
 
         {/* CTA Final */}
-        <div className="mt-12 text-center">
+        <div 
+          ref={ctaReveal.elementRef}
+          className={`text-center ${
+            ctaReveal.isVisible ? 'slide-up-visible' : 'slide-up-hidden'
+          }`}
+        >
           <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 rounded-2xl text-white">
             <h3 className="text-2xl font-bold mb-4">
               Vamos conversar?

@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://marcilio-portfolio.vercel.app/sitemap.xml
+
+# Crawl-delay para evitar sobrecarga
+Crawl-delay: 1
+
+# Permitir acesso a recursos estáticos
+Allow: /assets/
+Allow: /*.css
+Allow: /*.js
+Allow: /*.jpg
+Allow: /*.png
+Allow: /*.svg
+Allow: /*.webp
+
+# Bloquear arquivos desnecessários
+Disallow: /src/
+Disallow: /*.map
+Disallow: /node_modules/
+Disallow: /.git/ 

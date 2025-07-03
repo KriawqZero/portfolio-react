@@ -1,14 +1,37 @@
+import { useScrollReveal } from '../hooks/useScrollReveal'
+
 export default function About() {
+  // Calcular idade dinamicamente
+  const calculateAge = () => {
+    const birthDate = new Date('2006-09-01'); // Ajuste a data de nascimento aqui
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    
+    return age;
+  }
+
+  // Scroll reveal hooks
+  const titleReveal = useScrollReveal({ delay: 0 })
+  const descriptionReveal = useScrollReveal({ delay: 200 })
+  const mainContentReveal = useScrollReveal({ delay: 400 })
+  const leftCardReveal = useScrollReveal({ delay: 600 })
+  const rightCardReveal = useScrollReveal({ delay: 800 })
+
   const formacao = {
     graduacao: {
       curso: 'Sistemas de Informação',
       instituicao: 'UFMS',
-      status: 'Cursando'
+      status: 'Futuro'
     },
     tecnico: {
       curso: 'Técnico em Informática',
       instituicao: 'IFMS',
-      status: 'Concluído (2024)'
+      status: '2023 - Atualmente'
     }
   }
 
@@ -23,16 +46,36 @@ export default function About() {
   return (
     <section id="sobre" className="container mx-auto px-6 py-16">
       <div className="max-w-4xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-4 text-white">
-          Sobre Mim
-        </h2>
-        <p className="text-xl text-center text-gray-300 mb-12">
-          Desenvolvedor Full Stack com especialização em NestJS e React
-        </p>
+        <div 
+          ref={titleReveal.elementRef}
+          className={`text-center mb-4 ${
+            titleReveal.isVisible ? 'slide-down-visible' : 'slide-down-hidden'
+          }`}
+        >
+          <h2 className="text-4xl font-bold text-white">
+            Sobre Mim
+          </h2>
+        </div>
+        
+        <div 
+          ref={descriptionReveal.elementRef}
+          className={`text-center mb-12 ${
+            descriptionReveal.isVisible ? 'fade-in-visible' : 'fade-in-hidden'
+          }`}
+        >
+          <p className="text-xl text-gray-300">
+            Desenvolvedor Full Stack com especialização em NestJS e React
+          </p>
+        </div>
 
-        <div className="bg-gray-800 p-8 rounded-2xl shadow-lg mb-8">
+        <div 
+          ref={mainContentReveal.elementRef}
+          className={`bg-gray-800 p-8 rounded-2xl shadow-lg mb-8 ${
+            mainContentReveal.isVisible ? 'slide-up-visible' : 'slide-up-hidden'
+          }`}
+        >
           <p className="text-lg text-gray-300 leading-relaxed mb-6">
-            Desenvolvedor Full Stack com <strong>7+ anos de experiência</strong> e especialização em <strong>NestJS</strong>. 
+            Desenvolvedor Full Stack com <strong>{calculateAge()} anos</strong> e <strong>7+ anos de experiência</strong> e especialização em <strong>NestJS</strong>. 
             Já desenvolvi <strong>30+ projetos</strong>, incluindo sistemas em produção com mais de 1.000 usuários ativos.
           </p>
           
@@ -44,7 +87,12 @@ export default function About() {
 
         <div className="grid md:grid-cols-2 gap-8">
           {/* Formação */}
-          <div className="bg-gray-800 p-6 rounded-2xl shadow-lg">
+          <div 
+            ref={leftCardReveal.elementRef}
+            className={`bg-gray-800 p-6 rounded-2xl shadow-lg ${
+              leftCardReveal.isVisible ? 'slide-right-visible' : 'slide-right-hidden'
+            }`}
+          >
             <h3 className="text-xl font-bold text-white mb-4">
               Formação
             </h3>
@@ -71,14 +119,24 @@ export default function About() {
           </div>
 
           {/* Especialidades */}
-          <div className="bg-gray-800 p-6 rounded-2xl shadow-lg">
+          <div 
+            ref={rightCardReveal.elementRef}
+            className={`bg-gray-800 p-6 rounded-2xl shadow-lg ${
+              rightCardReveal.isVisible ? 'slide-left-visible' : 'slide-left-hidden'
+            }`}
+          >
             <h3 className="text-xl font-bold text-white mb-4">
               Especialidades
             </h3>
             
             <div className="space-y-3">
               {habilidades.map((habilidade, index) => (
-                <div key={index} className="flex items-center">
+                <div 
+                  key={index} 
+                  className={`flex items-center stagger-${Math.min(index + 1, 6)} ${
+                    rightCardReveal.isVisible ? 'fade-in-visible' : 'fade-in-hidden'
+                  }`}
+                >
                   <svg className="w-5 h-5 text-indigo-500 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
