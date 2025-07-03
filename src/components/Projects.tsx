@@ -1,248 +1,199 @@
-import { useScrollReveal, useScrollRevealList } from '../hooks/useScrollReveal'
-
 export default function Projects() {
-  // Scroll reveal hooks
-  const titleReveal = useScrollReveal({ delay: 0 })
-  const descriptionReveal = useScrollReveal({ delay: 200 })
-  const ctaReveal = useScrollReveal({ delay: 400 })
-
   const projects = [
     {
-      title: "condy.com.br - Sistema de Chamados",
-      description: "Sistema de segurança extrema com workflow de chamados multi-etapas e integração AWS S3.",
-      tech: ["NestJS", "React", "NextJS", "PostgreSQL", "Docker", "AWS S3"],
-      highlights: [
-        "Sistema em produção com segurança extrema",
-        "VPC configurada para domínio customizado",
-        "Workflow de chamados em múltiplas etapas"
-      ],
-      status: "Em produção",
-      category: "Full Stack",
-      icon: (
-        <img src="https://condy.com.br/favicon.ico" alt="Logo do sistema Condy.com.br" className="w-8 h-8" />
-      ),
-      siteLink: "https://condy.com.br",
-      repo: null
+      title: 'Condy.com.br',
+      description: 'Sistema de chamados com segurança extrema utilizando AWS VPC. Desenvolvido para atender pequenas empresas com alta confidencialidade.',
+      technologies: ['NestJS', 'PostgreSQL', 'AWS VPC', 'Docker'],
+      status: 'live',
+      link: 'https://condy.com.br',
+      highlight: true
     },
     {
-      title: "SmartAssistant",
-      description: "Plataforma de atendimento humanizado com IA via WhatsApp Business para estabelecimentos.",
-      tech: ["NestJS", "React", "OpenAI API", "WhatsApp Business API", "PostgreSQL"],
-      highlights: [
-        "Integração com WhatsApp Business API",
-        "IA conversacional humanizada",
-        "Dashboard para gerenciar conversas"
-      ],
-      status: "Em desenvolvimento",
-      category: "IA & Automação",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-label="Ícone de chat do SmartAssistant">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-        </svg>
-      ),
-      siteLink: null,
-      repo: null,
-      showInDevelopment: true
+      title: 'SmartAssistant',
+      description: 'IA integrada ao WhatsApp Business para automação de atendimento, utilizando processamento de linguagem natural.',
+      technologies: ['NestJS', 'OpenAI API', 'WhatsApp API', 'Redis'],
+      status: 'development',
+      highlight: true
     },
     {
-      title: "Sistema IFMS - Certificados",
-      description: "Automação de processos acadêmicos com redução de 80% no tempo de emissão de documentos.",
-      tech: ["Laravel 11", "Alpine.js", "TailwindCSS", "MariaDB"],
-      highlights: [
-        "Redução de 80% no tempo de emissão",
-        "Mais de 1.000 usuários ativos",
-        "Adoção institucional oficial"
-      ],
-      status: "Em produção",
-      category: "Institucional",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-label="Ícone de educação do sistema IFMS">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-        </svg>
-      ),
-      siteLink: null,
-      repo: "https://github.com/KriawqZero/IFMS-Sistema_CargaHoraria"
+      title: 'Sistema IFMS',
+      description: 'Automação de processos acadêmicos para o IFMS, com mais de 1.000 usuários ativos. Reduziu tempo de processos em 80%.',
+      technologies: ['Laravel', 'MySQL', 'Bootstrap', 'jQuery'],
+      status: 'repository',
+      repo: 'https://github.com/KriawqZero/IFMS-Sistema_CargaHoraria',
+      highlight: true
     }
   ]
 
-  // Hook para animar cada projeto
-  const { setElementRef: setProjectRef, visibleItems: projectsVisible } = useScrollRevealList(
-    projects.length, 
-    { delay: 600 }
-  )
+  const getStatusInfo = (status: string) => {
+    switch (status) {
+      case 'live':
+        return {
+          label: 'Online',
+          color: 'bg-green-500/20 text-green-400 border-green-500/30',
+          icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z'
+        }
+      case 'development':
+        return {
+          label: 'Em Desenvolvimento',
+          color: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
+          icon: 'M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4'
+        }
+      case 'private':
+        return {
+          label: 'Privado',
+          color: 'bg-gray-500/20 text-gray-400 border-gray-500/30',
+          icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z'
+        }
+      default:
+        return {
+          label: 'Projeto',
+          color: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
+          icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a2 2 0 012-2h2a2 2 0 012 2v5m-4 0h4'
+        }
+    }
+  }
+
+  const renderProjectButton = (project: any) => {
+    if (project.status === 'live' && project.link) {
+      return (
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+        >
+          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+          Ver Site
+        </a>
+      )
+    }
+
+    if (project.status === 'development') {
+      return (
+        <span className="inline-flex items-center px-6 py-3 bg-yellow-600/20 text-yellow-400 rounded-lg font-medium border border-yellow-500/30">
+          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
+          </svg>
+          Em Desenvolvimento
+        </span>
+      )
+    }
+
+    if (project.status === 'repository' && project.repo) {
+      return (
+        <a href={project.repo} target="_blank" rel="noopener noreferrer" className="inline-flex items-center px-6 py-3 bg-indigo-600/20 text-indigo-400 rounded-lg font-medium border border-indigo-500/30">
+          <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+          Ver Repositório 
+        </a>
+      )
+    }
+
+    return (
+      <span className="inline-flex items-center px-6 py-3 bg-gray-600/20 text-gray-400 rounded-lg font-medium border border-gray-500/30">
+        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+        </svg>
+        Repositório Privado
+      </span>
+    )
+  }
 
   return (
-    <section id="projetos" className="container mx-auto px-6 py-16" role="main">
+    <section className="container mx-auto px-6 py-20">
       <div className="max-w-6xl mx-auto">
-        <div 
-          ref={titleReveal.elementRef}
-          className={`text-center mb-4 ${
-            titleReveal.isVisible ? 'slide-down-visible' : 'slide-down-hidden'
-          }`}
-        >
-          <h2 className="text-4xl font-bold text-white">
+        {/* Título da seção */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-white mb-4">
             Projetos em Destaque
           </h2>
-        </div>
-        
-        <div 
-          ref={descriptionReveal.elementRef}
-          className={`text-center mb-16 ${
-            descriptionReveal.isVisible ? 'fade-in-visible' : 'fade-in-hidden'
-          }`}
-        >
-          <p className="text-xl text-gray-300">
-            Seleção dos principais projetos desenvolvidos
-          </p>
+          <div className="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto rounded-full"></div>
         </div>
 
-        <div className="grid lg:grid-cols-2 xl:grid-cols-3 gap-8" role="list" aria-label="Lista de projetos desenvolvidos">
-          {projects.map((project, index) => (
-            <article 
-              key={index} 
-              ref={setProjectRef(index)}
-              className={`bg-gray-800 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover-lift h-full flex flex-col ${
-                projectsVisible[index] ? 'rotate-visible' : 'rotate-hidden'
-              }`}
-              role="listitem"
-            >
-              <header className="flex items-start justify-between mb-4">
-                <div className="flex items-center">
-                  <div className="text-indigo-400 mr-4">{project.icon}</div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-1">
-                      {project.title}
-                    </h3>
-                    <div className="flex items-center space-x-3">
-                      <span className="px-2 py-1 bg-gray-700 text-gray-300 rounded-full text-xs">
-                        {project.category}
-                      </span>
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        project.status === "Em produção" ? "bg-green-500/20 text-green-400" :
-                        project.status === "Em desenvolvimento" ? "bg-yellow-500/20 text-yellow-400" :
-                        "bg-blue-500/20 text-blue-400"
-                      }`}>
-                        {project.status}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </header>
-
-              <p className="text-gray-300 mb-4 flex-grow">
-                {project.description}
-              </p>
-
-              {/* Tech Stack */}
-              <div className="mb-4">
-                <h4 className="sr-only">Tecnologias utilizadas</h4>
-                <div className="flex flex-wrap gap-2" role="list" aria-label="Tecnologias utilizadas no projeto">
-                  {project.tech.map((tech, i) => (
-                    <span 
-                      key={i} 
-                      className={`px-2 py-1 bg-indigo-500/20 text-indigo-400 rounded text-xs stagger-${Math.min(i + 1, 6)} ${
-                        projectsVisible[index] ? 'fade-in-visible' : 'fade-in-hidden'
-                      }`} 
-                      role="listitem"
-                    >
-                      {tech}
+        {/* Grid de projetos */}
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+          {projects.map((project) => {
+            const statusInfo = getStatusInfo(project.status)
+            
+            return (
+              <div 
+                key={project.title}
+                className={`group bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/30 hover:border-gray-600/50 transition-all duration-500 ${
+                  project.highlight ? 'hover:scale-105 hover:shadow-2xl' : ''
+                }`}
+              >
+                {/* Status badge */}
+                <div className="flex items-center justify-between mb-4">
+                  <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${statusInfo.color}`}>
+                    <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={statusInfo.icon} />
+                    </svg>
+                    {statusInfo.label}
+                  </span>
+                  
+                  {project.highlight && (
+                    <span className="inline-flex items-center px-2 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-xs border border-indigo-500/30">
+                      ⭐ Destaque
                     </span>
-                  ))}
+                  )}
                 </div>
-              </div>
 
-              {/* Highlights */}
-              <div className="mb-6">
-                <h4 className="sr-only">Principais características</h4>
-                <div className="space-y-2" role="list" aria-label="Principais características do projeto">
-                  {project.highlights.map((highlight, i) => (
-                    <div 
-                      key={i} 
-                      className={`flex items-center text-sm stagger-${Math.min(i + 1, 6)} ${
-                        projectsVisible[index] ? 'slide-right-visible' : 'slide-right-hidden'
-                      }`} 
-                      role="listitem"
-                    >
-                      <svg className="w-4 h-4 text-green-400 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                      <span className="text-gray-300">{highlight}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
+                {/* Conteúdo do projeto */}
+                <div className="space-y-4">
+                  <h3 className="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">
+                    {project.title}
+                  </h3>
+                  
+                  <p className="text-gray-300 leading-relaxed">
+                    {project.description}
+                  </p>
 
-              {/* Links */}
-              <footer className="flex flex-col sm:flex-row gap-3 mt-auto">
-                {project.siteLink && (
-                  <a
-                    href={project.siteLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 bg-indigo-600 text-white py-3 px-4 rounded-lg text-center hover:bg-indigo-700 transition-colors font-medium"
-                    aria-label={`Visitar site do projeto ${project.title}`}
-                  >
-                    Ver Site
-                  </a>
-                )}
-
-                {!project.siteLink && project.showInDevelopment && (
-                  <div className="flex-1 bg-gray-700 text-gray-300 py-3 px-4 rounded-lg text-center font-medium">
-                    Em desenvolvimento
+                  {/* Tecnologias */}
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech) => (
+                      <span 
+                        key={tech}
+                        className="px-3 py-1 bg-gray-700/50 text-gray-300 rounded-full text-sm border border-gray-600/30"
+                      >
+                        {tech}
+                      </span>
+                    ))}
                   </div>
-                )}
 
-                {project.repo ? (
-                  <a
-                    href={project.repo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex-1 ${
-                      project.siteLink
-                        ? "border-2 border-indigo-600 text-indigo-400 hover:bg-gray-700"
-                        : "bg-indigo-600 text-white hover:bg-indigo-700"
-                    } py-3 px-4 rounded-lg text-center transition-colors font-medium`}
-                    aria-label={`Ver repositório do projeto ${project.title} no GitHub`}
-                  >
-                    Ver Repositório
-                  </a>
-                ) : (
-                  !project.siteLink &&
-                  !project.showInDevelopment && (
-                    <div className="flex-1 bg-gray-700 text-gray-400 py-3 px-4 rounded-lg text-center font-medium">
-                      Repositório Privado
-                    </div>
-                  )
-                )}
-              </footer>
-            </article>
-          ))}
+                  {/* Botão de ação */}
+                  <div className="pt-4">
+                    {renderProjectButton(project)}
+                  </div>
+                </div>
+              </div>
+            )
+          })}
         </div>
 
-        {/* CTA Section */}
-        <aside 
-          ref={ctaReveal.elementRef}
-          className={`mt-16 text-center ${
-            ctaReveal.isVisible ? 'blur-visible' : 'blur-hidden'
-          }`}
-        >
-          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 rounded-2xl text-white">
-            <h3 className="text-2xl font-bold mb-4">
-              Gostou dos projetos?
+        {/* Call to action */}
+        <div className="mt-16 text-center">
+          <div className="bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-xl p-8 border border-indigo-500/20">
+            <h3 className="text-2xl font-bold text-white mb-4">
+              Interessado em ver mais projetos?
             </h3>
-            <p className="text-indigo-100 mb-6">
-              Vamos conversar sobre sua próxima ideia
+            <p className="text-gray-300 mb-6">
+              Tenho mais de 30 projetos desenvolvidos. Entre em contato para conhecer meu portfólio completo.
             </p>
             <a
               href="#contato"
-              className="inline-block bg-white text-indigo-600 px-8 py-3 rounded-lg hover:bg-gray-50 transition-all duration-300 hover:scale-105 font-medium"
-              aria-label="Entrar em contato para discutir novos projetos"
+              className="inline-flex items-center px-8 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
             >
-              Falar Comigo
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+              Vamos Conversar
             </a>
           </div>
-        </aside>
+        </div>
       </div>
     </section>
   )

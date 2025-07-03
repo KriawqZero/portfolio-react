@@ -1,37 +1,23 @@
-import { useEffect, useState } from 'react'
-
 export default function Hero() {
-  const [isLoaded, setIsLoaded] = useState(false)
-
-  useEffect(() => {
-    // Trigger animation após o componente montar
-    const timer = setTimeout(() => {
-      setIsLoaded(true)
-    }, 100)
-
-    return () => clearTimeout(timer)
-  }, [])
-
   return (
-    <section className="container mx-auto px-6 py-24 text-center relative overflow-hidden" role="banner">
-      <div className="relative z-10 max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
+    <section className="container mx-auto px-6 py-24 text-center relative" role="banner">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
         {/* Container da Foto */}
-        <div className={`relative group md:w-1/3 ${
-          isLoaded ? 'scale-visible' : 'scale-hidden'
-        }`}>
-          <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full blur-xl opacity-30 group-hover:opacity-50 transition-all duration-500 animate-pulse" />
+        <div className="relative group md:w-1/3">
+          <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full blur-xl opacity-30 group-hover:opacity-50 transition-all duration-500" />
           <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-blue-500 p-2 mx-auto">
-            <div className="w-full h-full rounded-full bg-gray-700 flex items-center justify-center text-8xl font-bold text-gray-300" aria-label="Foto de perfil de Marcilio Ortiz">
-              K
-            </div>
+            <img
+              src="/foto-perfil.jpg"
+              alt="Foto de perfil de Marcilio Ortiz"
+              className="w-full h-full rounded-full object-cover bg-gray-700"
+              aria-label="Foto de perfil de Marcilio Ortiz"
+            />
           </div>
         </div>
 
         {/* Texto */}
         <div className="md:w-2/3 text-left space-y-6">
-          <div className={`space-y-2 ${
-            isLoaded ? 'slide-right-visible' : 'slide-right-hidden'
-          }`} style={{ transitionDelay: '200ms' }}>
+          <div className="space-y-2">
             <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
               Marcilio Ortiz
             </h1>
@@ -40,9 +26,7 @@ export default function Hero() {
             </p>
           </div>
           
-          <div className={`space-y-3 ${
-            isLoaded ? 'slide-right-visible' : 'slide-right-hidden'
-          }`} style={{ transitionDelay: '400ms' }}>
+          <div className="space-y-3">
             <h2 className="text-xl text-gray-300">
               Desenvolvedor Full Stack
             </h2>
@@ -56,13 +40,7 @@ export default function Hero() {
                 { text: 'Híbrido/Presencial', icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2m-2 0H7m0 0H5m2 0v-5a2 2 0 012-2h2a2 2 0 012 2v5' }
               ].map((item, index) => (
                 <span key={item.text}>
-                  <span 
-                    className={`flex items-center stagger-${index + 1} ${
-                      isLoaded ? 'fade-in-visible' : 'fade-in-hidden'
-                    }`} 
-                    role="listitem"
-                    style={{ transitionDelay: `${600 + (index * 100)}ms` }}
-                  >
+                  <span className="flex items-center" role="listitem">
                     <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={item.icon} />
                     </svg>
@@ -74,32 +52,25 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className={`flex flex-wrap gap-3 pt-4 ${
-            isLoaded ? 'slide-right-visible' : 'slide-right-hidden'
-          }`} style={{ transitionDelay: '600ms' }} role="list" aria-label="Principais tecnologias">
+          <div className="flex flex-wrap gap-3 pt-4" role="list" aria-label="Principais tecnologias">
             {[
               { text: 'NestJS', color: 'bg-indigo-500/20 text-indigo-400 border-indigo-500/30' },
               { text: 'React/Next.js', color: 'bg-purple-500/20 text-purple-400 border-purple-500/30' },
               { text: 'Laravel', color: 'bg-red-500/20 text-red-400 border-red-500/30' },
               { text: 'AWS Cloud', color: 'bg-blue-500/20 text-blue-400 border-blue-500/30' },
               { text: 'Docker', color: 'bg-[#0db7ed]/20 text-[#0db7ed] border-[#0db7ed]/40' }
-            ].map((tech, index) => (
+            ].map((tech) => (
               <span 
                 key={tech.text}
-                className={`px-4 py-2 ${tech.color} rounded-full text-sm font-medium border stagger-${index + 1} ${
-                  isLoaded ? 'scale-visible' : 'scale-hidden'
-                }`} 
+                className={`px-4 py-2 ${tech.color} rounded-full text-sm font-medium border transition-all duration-300 hover:scale-105`} 
                 role="listitem"
-                style={{ transitionDelay: `${800 + (index * 100)}ms` }}
               >
                 {tech.text}
               </span>
             ))}
           </div>
 
-          <div className={`flex flex-wrap gap-4 pt-6 ${
-            isLoaded ? 'slide-up-visible' : 'slide-up-hidden'
-          }`} style={{ transitionDelay: '1000ms' }}>
+          <div className="flex flex-wrap gap-4 pt-6">
             <a
               href="#contato"
               className="px-8 py-3 bg-indigo-600 text-white rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl hover:bg-transparent hover:text-indigo-600 hover:border-2 hover:border-indigo-600 hover:scale-105 border-2 border-transparent"

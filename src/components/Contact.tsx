@@ -1,174 +1,197 @@
-import { useScrollReveal, useScrollRevealList } from '../hooks/useScrollReveal'
-
 export default function Contact() {
-  // Scroll reveal hooks
-  const titleReveal = useScrollReveal({ delay: 0 })
-  const descriptionReveal = useScrollReveal({ delay: 200 })
-  const locationReveal = useScrollReveal({ delay: 600 })
-  const ctaReveal = useScrollReveal({ delay: 800 })
-
-  const contacts = [
+  const contactMethods = [
     {
-      type: 'Email',
+      type: 'email',
+      title: 'Email',
       value: 'marciliortizz@gmail.com',
       href: 'mailto:marciliortizz@gmail.com',
-      icon: (
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-        </svg>
-      ),
-      color: 'from-indigo-500 to-purple-500'
+      icon: 'M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z',
+      color: 'bg-red-500/20 text-red-400 border-red-500/30'
     },
     {
-      type: 'LinkedIn',
-      value: 'Marcilio Ortiz Barbosa',
+      type: 'whatsapp',
+      title: 'WhatsApp',
+      value: '+55 (67) 9 8408-4389',
+      href: 'https://wa.me/5567984084389',
+      icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
+      color: 'bg-green-500/20 text-green-400 border-green-500/30'
+    },
+    {
+      type: 'linkedin',
+      title: 'LinkedIn',
+      value: '/in/marcilio-ortiz',
       href: 'https://www.linkedin.com/in/marcilio-ortiz/',
-      icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-        </svg>
-      ),
-      color: 'from-blue-600 to-blue-700'
+      icon: 'M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z',
+      color: 'bg-blue-500/20 text-blue-400 border-blue-500/30'
     },
     {
-      type: 'GitHub',
+      type: 'github',
+      title: 'GitHub',
       value: '@KriawqZero',
       href: 'https://github.com/KriawqZero',
-      icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-        </svg>
-      ),
-      color: 'from-gray-700 to-gray-900'
-    },
-    {
-      type: 'WhatsApp',
-      value: '+55 (67) 98407-9762',
-      href: 'https://api.whatsapp.com/send?phone=5567984079762',
-      icon: (
-        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
-        </svg>
-      ),
-      color: 'from-green-500 to-green-600'
+      icon: 'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22',
+      color: 'bg-gray-500/20 text-gray-400 border-gray-500/30'
     }
   ]
 
-  // Hook para animar cada contato
-  const { setElementRef: setContactRef, visibleItems: contactsVisible } = useScrollRevealList(
-    contacts.length, 
-    { delay: 400 }
-  )
+  const workModes = [
+    {
+      title: 'Freelancer',
+      description: 'Projetos pontuais com foco em resultados',
+      icon: 'M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6'
+    },
+    {
+      title: 'Remoto',
+      description: 'Trabalho 100% remoto com comunicação eficiente',
+      icon: 'M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z'
+    },
+    {
+      title: 'Híbrido/Presencial',
+      description: 'Disponível para Campo Grande/MS e região',
+      icon: 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2m-2 0H7m0 0H5m2 0v-5a2 2 0 012-2h2a2 2 0 012 2v5'
+    }
+  ]
+
+  const quickInfo = [
+    { label: 'Localização', value: 'Campo Grande, MS' },
+    { label: 'Fuso Horário', value: 'UTC-4 (Brasília)' },
+    { label: 'Idiomas', value: 'Português, Inglês Técnico' },
+    { label: 'Disponibilidade', value: 'Imediata' }
+  ]
 
   return (
-    <section id="contato" className="container mx-auto px-6 py-16">
-      <div className="max-w-4xl mx-auto">
-        <div 
-          ref={titleReveal.elementRef}
-          className={`text-center mb-4 ${
-            titleReveal.isVisible ? 'slide-down-visible' : 'slide-down-hidden'
-          }`}
-        >
-          <h2 className="text-4xl font-bold text-white">
-            Contato
+    <section className="container mx-auto px-6 py-20">
+      <div className="max-w-6xl mx-auto">
+        {/* Título da seção */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-white mb-4">
+            Entre em Contato
           </h2>
-        </div>
-        
-        <div 
-          ref={descriptionReveal.elementRef}
-          className={`text-center mb-12 ${
-            descriptionReveal.isVisible ? 'fade-in-visible' : 'fade-in-hidden'
-          }`}
-        >
-          <p className="text-xl text-gray-300">
-            Disponível para freelancer, remoto, híbrido ou presencial
+          <div className="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-500 mx-auto rounded-full"></div>
+          <p className="text-xl text-gray-300 mt-6">
+            Vamos conversar sobre seu próximo projeto
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-          {contacts.map((contact, index) => (
-            <a
-              key={contact.type}
-              href={contact.href}
-              target={contact.href.startsWith('http') ? '_blank' : '_self'}
-              rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-              ref={setContactRef(index)}
-              className={`group bg-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 hover-lift ${
-                contactsVisible[index] ? 'slide-scale-visible' : 'slide-scale-hidden'
-              }`}
-            >
-              <div className="flex items-center space-x-4">
-                <div className={`p-3 bg-gradient-to-r ${contact.color} rounded-xl text-white group-hover:scale-110 transition-transform duration-300`}>
-                  {contact.icon}
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-bold text-white mb-1">
-                    {contact.type}
-                  </h3>
-                  <p className="text-gray-300 font-medium">
-                    {contact.value}
-                  </p>
-                </div>
-                <div className="text-gray-400 group-hover:text-indigo-400 transition-colors">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </div>
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Informações de contato */}
+          <div className="space-y-8">
+            <h3 className="text-2xl font-bold text-white mb-6">
+              Canais de Comunicação
+            </h3>
+            
+            {/* Lista de contatos */}
+            <div className="grid md:grid-cols-2 gap-4">
+              {contactMethods.map((contact) => (
+                <a
+                  key={contact.type}
+                  href={contact.href}
+                  target={contact.type !== 'email' ? '_blank' : undefined}
+                  rel={contact.type !== 'email' ? 'noopener noreferrer' : undefined}
+                  className="group bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/30 hover:border-gray-600/50 transition-all duration-300 hover:scale-105"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className={`p-3 rounded-lg ${contact.color} border group-hover:scale-110 transition-transform`}>
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={contact.icon} />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white group-hover:text-indigo-400 transition-colors">
+                        {contact.title}
+                      </h4>
+                      <p className="text-gray-400 text-sm">{contact.value}</p>
+                    </div>
+                  </div>
+                </a>
+              ))}
+            </div>
+
+            {/* Modalidades de trabalho */}
+            <div className="mt-12">
+              <h3 className="text-2xl font-bold text-white mb-6">
+                Modalidades de Trabalho
+              </h3>
+              <div className="space-y-4">
+                {workModes.map((mode, index) => (
+                  <div 
+                    key={mode.title}
+                    className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/30"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="p-2 bg-indigo-500/20 rounded-lg border border-indigo-500/30">
+                        <svg className="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={mode.icon} />
+                        </svg>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-white mb-1">{mode.title}</h4>
+                        <p className="text-gray-400 text-sm">{mode.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            </a>
-          ))}
-        </div>
-
-        {/* Localização */}
-        <div 
-          ref={locationReveal.elementRef}
-          className={`bg-gray-800 p-6 rounded-2xl shadow-lg text-center mb-12 ${
-            locationReveal.isVisible ? 'blur-visible' : 'blur-hidden'
-          }`}
-        >
-          <div className="flex items-center justify-center mb-3">
-            <svg className="w-6 h-6 text-indigo-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <h3 className="font-bold text-white">
-              Corumbá, MS - Brasil
-            </h3>
+            </div>
           </div>
-          <p className="text-gray-300">
-            Disponível para mudança geográfica conforme a oportunidade
-          </p>
-        </div>
 
-        {/* CTA Final */}
-        <div 
-          ref={ctaReveal.elementRef}
-          className={`text-center ${
-            ctaReveal.isVisible ? 'slide-up-visible' : 'slide-up-hidden'
-          }`}
-        >
-          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 rounded-2xl text-white">
-            <h3 className="text-2xl font-bold mb-4">
-              Vamos conversar?
+          {/* Informações rápidas e CTA */}
+          <div className="space-y-8">
+            <h3 className="text-2xl font-bold text-white mb-6">
+              Informações Rápidas
             </h3>
-            <p className="text-indigo-100 mb-6">
-              Pronto para seu próximo projeto ou desafio
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="mailto:marciliortizz@gmail.com"
-                className="inline-block bg-white text-indigo-600 px-8 py-3 rounded-lg hover:bg-gray-50 transition-all duration-300 hover:scale-105 font-medium"
-              >
-                Enviar Email
-              </a>
-              <a
-                href="https://api.whatsapp.com/send?phone=5567984079762"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block border-2 border-white text-white px-8 py-3 rounded-lg hover:bg-white hover:text-indigo-600 transition-all duration-300 font-medium"
-              >
-                WhatsApp
-              </a>
+            
+            {/* Quick info grid */}
+            <div className="grid gap-4">
+              {quickInfo.map((info) => (
+                <div 
+                  key={info.label}
+                  className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 border border-gray-700/30"
+                >
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-400">{info.label}:</span>
+                    <span className="text-white font-medium">{info.value}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA principal */}
+            <div className="bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-xl p-8 border border-indigo-500/20 mt-8">
+              <h3 className="text-xl font-bold text-white mb-4">
+                🚀 Pronto para começar?
+              </h3>
+              <p className="text-gray-300 mb-6">
+                Entre em contato para discutirmos seu projeto. Respondo rapidamente e sempre com propostas claras e objetivas.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="mailto:marciliortizz@gmail.com"
+                  className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-indigo-600 text-white rounded-lg font-medium hover:bg-indigo-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+                >
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  Enviar Email
+                </a>
+                
+                <a
+                  href="https://wa.me/5567984084389"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 inline-flex items-center justify-center px-6 py-3 border-2 border-indigo-600 text-indigo-400 rounded-lg font-medium hover:bg-indigo-600 hover:text-white transition-all duration-300 hover:scale-105"
+                >
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                  WhatsApp
+                </a>
+              </div>
+              
+              <p className="text-gray-400 text-sm mt-4 text-center">
+                ⚡ Resposta em até 24 horas
+              </p>
             </div>
           </div>
         </div>
