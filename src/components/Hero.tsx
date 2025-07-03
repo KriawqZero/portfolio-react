@@ -10,7 +10,6 @@ export default function Hero() {
               K
             </div>
           </div>
-          <div className="absolute inset-0 rounded-full border-4 border-transparent group-hover:border-indigo-400/30 transition-all duration-300" />
         </div>
 
         {/* Texto */}
@@ -29,29 +28,14 @@ export default function Hero() {
               Desenvolvedor Full Stack
             </p>
             <p className="text-lg text-gray-400">
-              Estudante de Sistemas de Informação - UFMS
+              7+ anos de experiência • 30+ projetos entregues
             </p>
             <div className="flex flex-wrap gap-2 text-sm text-gray-400">
-              <span className="flex items-center">
-                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
-                </svg>
-                Freelancer
-              </span>
+              <span>Freelancer</span>
               <span className="text-gray-500">•</span>
-              <span className="flex items-center">
-                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                Remoto
-              </span>
+              <span>Remoto</span>
               <span className="text-gray-500">•</span>
-              <span className="flex items-center">
-                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2m-2 0H7m0 0H5m2 0v-5a2 2 0 012-2h2a2 2 0 012 2v5" />
-                </svg>
-                Híbrido/Presencial
-              </span>
+              <span>Híbrido/Presencial</span>
             </div>
           </div>
 
@@ -65,12 +49,6 @@ export default function Hero() {
             <span className="px-4 py-2 bg-blue-500/20 text-blue-400 rounded-full text-sm font-medium border border-blue-500/30">
               AWS Cloud
             </span>
-          </div>
-
-          <div className="pt-6">
-            <p className="text-lg text-gray-300 italic">
-              "Transformando problemas complexos em soluções elegantes com código limpo e arquitetura robusta"
-            </p>
           </div>
 
           <div className="flex flex-wrap gap-4 pt-6">
