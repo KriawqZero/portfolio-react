@@ -59,8 +59,8 @@ export default function Contact() {
 
   const quickInfo = [
     { label: 'Localização Atual', value: 'Corumbá, MS' },
-    { label: 'Fuso Horário', value: 'UTC-4 (Brasília)' },
-    { label: 'Idiomas', value: 'Português, Inglês Técnico' },
+    { label: 'Fuso Horário', value: 'UTC-4 (Campo Grande)' },
+    { label: 'Idiomas', value: 'Português, Inglês Intermediário' },
     { label: 'Disponibilidade', value: 'Imediata' }
   ]
 
@@ -163,7 +163,12 @@ export default function Contact() {
 
             {/* Disponibilidade geográfica */}
             <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700/30">
-              <h4 className="text-lg font-semibold text-white mb-3">🌎 Disponibilidade Geográfica</h4>
+              <div className="flex items-center gap-2 mb-3">
+                <svg className="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <h4 className="text-lg font-semibold text-white">Disponibilidade Geográfica</h4>
+              </div>
               <div className="space-y-2 text-sm">
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-green-500 rounded-full"></div>
@@ -185,9 +190,12 @@ export default function Contact() {
 
             {/* CTA principal */}
             <div className="bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-xl p-8 border border-indigo-500/20 mt-8">
-              <h3 className="text-xl font-bold text-white mb-4">
-                🚀 Pronto para começar?
-              </h3>
+              <div className="flex items-center gap-2 mb-4">
+                <svg className="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <h3 className="text-xl font-bold text-white">Pronto para começar?</h3>
+              </div>
               <p className="text-gray-300 mb-6">
                 Entre em contato para discutirmos seu projeto ou oportunidade. Respondo rapidamente e sempre com propostas claras e objetivas.
               </p>
@@ -216,9 +224,12 @@ export default function Contact() {
                 </a>
               </div>
               
-              <p className="text-gray-400 text-sm mt-4 text-center">
-                ⚡ Resposta em até 24 horas
-              </p>
+              <div className="flex items-center justify-center gap-2 mt-4">
+                <svg className="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <p className="text-gray-400 text-sm">Resposta em até 24 horas</p>
+              </div>
             </div>
           </div>
         </div>

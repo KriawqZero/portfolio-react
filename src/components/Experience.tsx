@@ -9,22 +9,23 @@ export default function Experience() {
   const achievements = [
     {
       title: 'Sistema IFMS em Produção',
-      description: 'Desenvolvimento de sistema que automatizou processos acadêmicos, reduzindo tempo de emissão em 80%',
+      description: 'Sistema utilizado por professores para gerenciar certificados e horas diversificadas de alunos, atendendo tanto o ensino superior quanto o técnico. Já conta com mais de 1000 alunos cadastrados e segue crescendo com as novas turmas.',
       year: '2024',
-      icon: 'M12 14l9-5-9-5-9 5 9 5z',
+      // Ícone de papel/folha/caderneta
+      icon: 'M7 4h10a2 2 0 012 2v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6a2 2 0 012-2zm0 0V2m10 2V2M9 8h6M9 12h6M9 16h3',
       color: 'indigo'
     },
     {
-      title: 'Condy.com.br - Segurança Extrema',
-      description: 'Sistema de chamados com arquitetura VPC na AWS para máxima confidencialidade',
-      year: '2024',
+      title: 'Condy.com.br - Chamados para Empresas e Condomínios',
+      description: 'Sistema de chamados de serviço para empresas e condomínios, garantindo segurança e eficiência operacional',
+      year: '2025',
       icon: 'M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z',
       color: 'green'
     },
     {
       title: 'Especialização em NestJS',
       description: 'Domínio completo do framework, incluindo microservices, guards, pipes e arquitetura modular',
-      year: '2023',
+      year: '2024',
       icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z',
       color: 'purple'
     }

@@ -1,0 +1,11 @@
+services:
+  vue-portfolio:
+    build: .
+    container_name: vue-portfolio
+    restart: always
+    networks:
+      - nginx
+
+networks:
+  nginx:
+    driver: bridge
