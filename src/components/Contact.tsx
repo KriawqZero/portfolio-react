@@ -1,7 +1,12 @@
+import { useLanguage } from '../i18n/LanguageContext'
+import type { ReactNode } from 'react'
+
 export default function Contact() {
-  const contacts = [
+  const { t } = useLanguage()
+
+  const contactItems = [
     {
-      type: 'Email Principal',
+      label: t.contact.email.label,
       value: 'marciliortizz@gmail.com',
       href: 'mailto:marciliortizz@gmail.com',
       icon: (
@@ -10,10 +15,10 @@ export default function Contact() {
         </svg>
       ),
       color: 'from-indigo-500 to-purple-500',
-      description: 'Email principal para oportunidades profissionais'
+      description: t.contact.email.description,
     },
     {
-      type: 'LinkedIn',
+      label: t.contact.linkedin.label,
       value: 'Marcílio Ortiz Barbosa',
       href: 'https://www.linkedin.com/in/marc%C3%ADlio-ortiz-barbosa-7b5a35165/',
       icon: (
@@ -22,10 +27,10 @@ export default function Contact() {
         </svg>
       ),
       color: 'from-blue-600 to-blue-700',
-      description: 'Conecte-se comigo no LinkedIn'
+      description: t.contact.linkedin.description,
     },
     {
-      type: 'GitHub',
+      label: t.contact.github.label,
       value: '@KriawqZero',
       href: 'https://github.com/KriawqZero',
       icon: (
@@ -34,10 +39,10 @@ export default function Contact() {
         </svg>
       ),
       color: 'from-gray-700 to-gray-900',
-      description: 'Confira meus projetos no GitHub'
+      description: t.contact.github.description,
     },
     {
-      type: 'WhatsApp',
+      label: t.contact.whatsapp.label,
       value: '+55 (67) 98407-9762',
       href: 'https://api.whatsapp.com/send?phone=5567984079762',
       icon: (
@@ -46,60 +51,38 @@ export default function Contact() {
         </svg>
       ),
       color: 'from-green-500 to-green-600',
-      description: 'Fale comigo diretamente no WhatsApp'
-    }
+      description: t.contact.whatsapp.description,
+    },
   ]
 
-  const workPreferences = {
-    location: 'Corumbá, MS - Brasil',
-    timezone: 'GMT-4 (Horário de Brasília)',
-    modalities: [
-      {
-        type: 'Remoto',
-        description: 'Experiência completa em trabalho remoto',
-        icon: (
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-        )
-      },
-      {
-        type: 'Híbrido',
-        description: 'Flexibilidade entre remoto e presencial',
-        icon: (
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-          </svg>
-        )
-      },
-      {
-        type: 'Presencial',
-        description: 'Disposição para mudança conforme oportunidade',
-        icon: (
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2m-2 0H7m0 0H5m2 0v-5a2 2 0 012-2h2a2 2 0 012 2v5" />
-          </svg>
-        )
-      }
-    ]
-  }
+  const modalityIcons: ReactNode[] = [
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>,
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+    </svg>,
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-2m-2 0H7m0 0H5m2 0v-5a2 2 0 012-2h2a2 2 0 012 2v5" />
+    </svg>,
+  ]
 
   return (
     <section id="contato" className="container mx-auto px-6 py-16">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-bold text-center mb-4 text-white">
-          Vamos Trabalhar Juntos?
+          {t.contact.title}
         </h2>
         <p className="text-xl text-center text-gray-300 mb-16">
-          Aberto a oportunidades freelancer, contratação remota, híbrida ou presencial
+          {t.contact.subtitle}
         </p>
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Contatos */}
           <div className="lg:col-span-2 grid md:grid-cols-2 gap-6">
-            {contacts.map((contact, index) => (
+            {contactItems.map((contact) => (
               <a
-                key={contact.type}
+                key={contact.label}
                 href={contact.href}
                 target={contact.href.startsWith('http') ? '_blank' : '_self'}
                 rel={contact.href.startsWith('http') ? 'noopener noreferrer' : undefined}
@@ -111,7 +94,7 @@ export default function Contact() {
                   </div>
                   <div className="flex-1">
                     <h3 className="font-bold text-white mb-1">
-                      {contact.type}
+                      {contact.label}
                     </h3>
                     <p className="text-gray-300 font-medium mb-2">
                       {contact.value}
@@ -142,7 +125,7 @@ export default function Contact() {
                   </svg>
                 </div>
                 <h3 className="font-bold text-white">
-                  Localização Base
+                  {t.contact.locationTitle}
                 </h3>
               </div>
               <div className="space-y-2 text-sm">
@@ -150,18 +133,18 @@ export default function Contact() {
                   <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   </svg>
-                  {workPreferences.location}
+                  {t.contact.location}
                 </div>
                 <div className="flex items-center text-gray-300">
                   <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  {workPreferences.timezone}
+                  {t.contact.timezone}
                 </div>
               </div>
             </div>
 
-            {/* Modalidades de Trabalho */}
+            {/* Modalidades */}
             <div className="bg-gray-800 p-6 rounded-2xl shadow-lg">
               <div className="flex items-center mb-4">
                 <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl text-white mr-3">
@@ -170,14 +153,14 @@ export default function Contact() {
                   </svg>
                 </div>
                 <h3 className="font-bold text-white">
-                  Modalidades
+                  {t.contact.modalitiesTitle}
                 </h3>
               </div>
               <div className="space-y-3">
-                {workPreferences.modalities.map((modality, index) => (
+                {t.contact.modalities.map((modality, index) => (
                   <div key={index} className="flex items-start text-sm">
                     <div className="text-indigo-400 mr-3 mt-0.5">
-                      {modality.icon}
+                      {modalityIcons[index]}
                     </div>
                     <div>
                       <div className="text-gray-300 font-medium">{modality.type}</div>
@@ -188,14 +171,14 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Disponibilidade */}
+            {/* Status */}
             <div className="bg-gradient-to-r from-gray-800 to-gray-700 p-6 rounded-2xl border border-gray-600">
               <div className="flex items-center mb-4">
                 <svg className="w-6 h-6 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <h3 className="font-bold text-white">
-                  Status Atual
+                  {t.contact.statusTitle}
                 </h3>
               </div>
               <div className="space-y-2 text-sm">
@@ -203,19 +186,19 @@ export default function Contact() {
                   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                   </svg>
-                  Disponível para novas oportunidades
+                  {t.contact.statusAvailable}
                 </div>
                 <div className="flex items-center text-gray-300">
                   <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                   </svg>
-                  Início imediato ou conforme combinado
+                  {t.contact.statusStart}
                 </div>
                 <div className="flex items-center text-gray-300">
                   <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  Disposição para mudança geográfica
+                  {t.contact.statusRelocation}
                 </div>
               </div>
             </div>
@@ -226,17 +209,17 @@ export default function Contact() {
         <div className="mt-16 text-center">
           <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 rounded-2xl text-white">
             <h3 className="text-2xl font-bold mb-4">
-              Que tal conversarmos sobre uma oportunidade?
+              {t.contact.ctaTitle}
             </h3>
             <p className="text-indigo-100 mb-6 max-w-3xl mx-auto">
-              Seja para um projeto freelancer, uma posição remota, híbrida ou presencial - estou sempre interessado em desafios que me permitam crescer profissionalmente e contribuir com soluções inovadoras.
+              {t.contact.ctaDescription}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="mailto:marciliortizz@gmail.com"
                 className="inline-block bg-white text-indigo-600 px-8 py-3 rounded-lg hover:bg-gray-50 transition-all duration-300 hover:scale-105 font-medium"
               >
-                Enviar Email
+                {t.contact.ctaSendEmail}
               </a>
               <a
                 href="https://api.whatsapp.com/send?phone=5567984079762"
@@ -244,7 +227,7 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 className="inline-block border-2 border-white text-white px-8 py-3 rounded-lg hover:bg-white hover:text-indigo-600 transition-all duration-300 font-medium"
               >
-                WhatsApp
+                {t.contact.ctaWhatsApp}
               </a>
             </div>
           </div>

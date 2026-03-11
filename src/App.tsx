@@ -1,11 +1,16 @@
+import { LanguageProvider } from "./i18n/LanguageContext"
+import { useLanguage } from "./i18n/LanguageContext"
 import About from "./components/About"
 import Contact from "./components/Contact"
 import Experience from "./components/Experience"
 import Hero from "./components/Hero"
+import LanguageSwitcher from "./components/LanguageSwitcher"
 import Projects from "./components/Projects"
 import Skills from "./components/Skills"
 
-function App() {
+function AppContent() {
+  const { t } = useLanguage()
+
   return (
     <div className="min-h-screen bg-gray-900 transition-colors duration-300 relative overflow-hidden">
       {/* Fundo Global */}
@@ -17,6 +22,8 @@ function App() {
         </div>
         <div className="absolute inset-0 bg-noise opacity-5" />
       </div>
+
+      <LanguageSwitcher />
 
       <div className="relative z-10">
         <Hero />
@@ -30,13 +37,21 @@ function App() {
         <footer className="bg-gray-800 mt-16 py-8">
           <div className="container mx-auto px-6 text-center">
             <p className="text-gray-300 text-sm">
-              © 2025 Marcilio Ortiz (Kriawq).<br />
-              Desenvolvido com React, TypeScript e Tailwind CSS.
+              {t.footer.text}<br />
+              {t.footer.builtWith}
             </p>
           </div>
         </footer>
       </div>
     </div>
+  )
+}
+
+function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   )
 }
 
