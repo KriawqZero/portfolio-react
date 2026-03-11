@@ -47,7 +47,7 @@ export default function Navbar() {
               K
             </div>
             <span className="text-sm font-semibold text-white hidden sm:block">
-              Kriawq
+              Marcilio Ortiz
             </span>
           </a>
 

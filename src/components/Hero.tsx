@@ -27,10 +27,11 @@ export default function Hero() {
               style={{ background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))', filter: 'blur(32px)' }} />
             <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-[2px]"
               style={{ background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))' }}>
-              <div className="w-full h-full rounded-full flex items-center justify-center text-4xl sm:text-5xl font-bold"
-                style={{ background: 'var(--bg-surface)', color: 'var(--text-muted)' }}>
-                K
-              </div>
+              <img 
+                src="/foto-perfil.JPEG" 
+                alt="Marcilio Ortiz" 
+                className="w-full h-full rounded-full object-cover"
+              />
             </div>
           </motion.div>
 
