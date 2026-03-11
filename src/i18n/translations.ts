@@ -94,6 +94,7 @@ interface TranslationSchema {
     email: { label: string; description: string }
     linkedin: { label: string; description: string }
     github: { label: string; description: string }
+    avantis: { label: string; description: string }
     whatsapp: { label: string; description: string }
     locationTitle: string
     location: string
@@ -319,6 +320,10 @@ export const translations: Record<Locale, TranslationSchema> = {
       github: {
         label: 'GitHub',
         description: 'Projetos e código',
+      },
+      avantis: {
+        label: 'Avantis Studio',
+        description: 'Meu estúdio de tecnologia',
       },
       whatsapp: {
         label: 'Canal privado',
@@ -548,6 +553,10 @@ export const translations: Record<Locale, TranslationSchema> = {
       github: {
         label: 'GitHub',
         description: 'Projects & code',
+      },
+      avantis: {
+        label: 'Avantis Studio',
+        description: 'My technology studio',
       },
       whatsapp: {
         label: 'Private channel',

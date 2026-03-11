@@ -39,6 +39,17 @@ export default function Contact() {
       ),
       description: t.contact.github.description,
     },
+    {
+      label: t.contact.avantis.label,
+      value: 'avantis.studio',
+      href: 'https://avantis.studio/',
+      icon: (
+        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+        </svg>
+      ),
+      description: t.contact.avantis.description,
+    },
   ]
 
   return (
@@ -52,7 +63,7 @@ export default function Contact() {
 
         <div className="grid gap-6">
           {/* Contact Cards */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 gap-4">
             {contactItems.map((contact, index) => (
               <motion.a
                 key={contact.label}
