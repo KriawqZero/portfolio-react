@@ -28,7 +28,7 @@ export default function Hero() {
             <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-[2px]"
               style={{ background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))' }}>
               <img 
-                src="/foto-perfil.JPEG" 
+                src="/marcilio.jpg" 
                 alt="Marcilio Ortiz" 
                 className="w-full h-full rounded-full object-cover"
               />
