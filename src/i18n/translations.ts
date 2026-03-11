@@ -137,7 +137,7 @@ export const translations: Record<Locale, TranslationSchema> = {
     },
     about: {
       title: 'Sobre Mim',
-      bio: 'Desenvolvedor Full Stack TypeScript com mais de 7 anos de experiência, focado em arquitetura de sistemas escaláveis e desenvolvimento SaaS. Construo plataformas completas com NestJS e Next.js — do design da API ao deploy em produção. Vários sistemas reais em uso, incluindo plataformas com mais de 1.000 usuários ativos.',
+      bio: 'Desenvolvedor Full Stack TypeScript atuando profissionalmente desde 2025, com jornada de programação iniciada em 2017. Focado em arquitetura de sistemas escaláveis e desenvolvimento SaaS. Construo plataformas completas com NestJS e Next.js — do design da API ao deploy em produção. Sistemas reais em uso, incluindo plataforma institucional com 400+ usuários ativos.',
       educationTitle: 'Formação',
       education: {
         course: 'Técnico Integrado em Informática',
@@ -147,8 +147,8 @@ export const translations: Record<Locale, TranslationSchema> = {
       },
       journeyTitle: 'Trajetória',
       journey: [
-        'Programando desde os 11 anos — mais de 7 anos de experiência',
-        'Trajetória autodidata com vários sistemas em produção',
+        'Programando desde 2017 (11 anos) — mods, jogos Unity, automações',
+        'Trajetória autodidata, atuando profissionalmente desde 2025',
         'Foco em arquitetura de sistemas, não apenas desenvolvimento',
         'Experiência com projetos institucionais e SaaS',
       ],
@@ -261,10 +261,10 @@ export const translations: Record<Locale, TranslationSchema> = {
     },
     experience: {
       title: 'Experiência',
-      subtitle: 'Mais de 7 anos construindo sistemas reais',
+      subtitle: 'Programando desde 2017, atuando profissionalmente desde 2025',
       stats: [
-        { number: '7+', label: 'Anos programando' },
-        { number: '1000+', label: 'Usuários em produção' },
+        { number: '8+', label: 'Anos programando' },
+        { number: '400+', label: 'Usuários em produção' },
         { number: '80%', label: 'Redução em processos' },
       ],
       items: [
@@ -366,7 +366,7 @@ export const translations: Record<Locale, TranslationSchema> = {
     },
     about: {
       title: 'About Me',
-      bio: 'Full Stack TypeScript developer with 7+ years of experience, focused on scalable system architecture and SaaS development. I build end-to-end platforms with NestJS and Next.js — from API design to production deployment. Multiple real-world systems in use, including platforms serving 1,000+ active users.',
+      bio: 'Full Stack TypeScript developer working professionally since 2025, with a coding journey started in 2017. Focused on scalable system architecture and SaaS development. I build end-to-end platforms with NestJS and Next.js — from API design to production deployment. Real-world systems in use, including institutional platform serving 400+ active users.',
       educationTitle: 'Education',
       education: {
         course: 'Technical Degree in Computer Science',
@@ -376,8 +376,8 @@ export const translations: Record<Locale, TranslationSchema> = {
       },
       journeyTitle: 'Journey',
       journey: [
-        'Coding since age 11 — over 7 years of hands-on experience',
-        'Self-taught path with multiple production systems',
+        'Coding since 2017 (age 11) — mods, Unity games, automations',
+        'Self-taught journey, working professionally since 2025',
         'Focus on system architecture, not just development',
         'Experience with institutional and SaaS projects',
       ],
@@ -490,10 +490,10 @@ export const translations: Record<Locale, TranslationSchema> = {
     },
     experience: {
       title: 'Experience',
-      subtitle: '7+ years building real-world systems',
+      subtitle: 'Coding since 2017, working professionally since 2025',
       stats: [
-        { number: '7+', label: 'Years coding' },
-        { number: '1000+', label: 'Users in production' },
+        { number: '8+', label: 'Years coding' },
+        { number: '400+', label: 'Users in production' },
         { number: '80%', label: 'Process time reduction' },
       ],
       items: [
