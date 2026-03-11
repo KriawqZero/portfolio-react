@@ -39,13 +39,12 @@ export default function Navbar() {
       >
         <div className="container mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
-            <div
-              className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold text-white"
-              style={{ background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))' }}
-            >
-              K
-            </div>
+          <a href="#" className="flex items-center gap-2.5 group">
+            <img 
+              src="/logo-simple.png" 
+              alt="Marcilio Ortiz" 
+              className="h-8 w-auto transition-transform duration-300 group-hover:scale-105"
+            />
             <span className="text-sm font-semibold text-white hidden sm:block">
               Marcilio Ortiz
             </span>
