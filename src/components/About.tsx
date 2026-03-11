@@ -5,7 +5,13 @@ import { motion } from 'framer-motion'
 export default function About() {
   const { t } = useLanguage()
 
-  const expertiseIcons = ['⚡', '🔗', '🏗️', '🤖', '☁️']
+  const expertiseIcons = [
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>,
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>,
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>,
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>,
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>,
+  ]
 
   return (
     <SectionWrapper id="sobre" className="container mx-auto px-5 sm:px-6 py-16 sm:py-24">
@@ -33,7 +39,7 @@ export default function About() {
                 transition={{ delay: index * 0.06, duration: 0.4 }}
                 className="glass-card p-4 sm:p-5 text-center"
               >
-                <div className="text-xl mb-2">{expertiseIcons[index]}</div>
+                <div className="mb-2" style={{ color: 'var(--accent-blue)' }}>{expertiseIcons[index]}</div>
                 <h4 className="font-medium text-xs sm:text-sm mb-1" style={{ color: 'var(--accent-blue)' }}>
                   {item.title}
                 </h4>

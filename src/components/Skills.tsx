@@ -11,7 +11,12 @@ export default function Skills() {
     { gradient: 'linear-gradient(135deg, var(--accent-violet), var(--accent-blue))' },
   ]
 
-  const competencyEmojis = ['💻', '🛡️', '☁️', '⚡']
+  const competencyIcons = [
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>,
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" /></svg>,
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" /></svg>,
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>,
+  ]
 
   return (
     <SectionWrapper id="habilidades" className="container mx-auto px-5 sm:px-6 py-16 sm:py-24">
@@ -64,7 +69,7 @@ export default function Skills() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {t.skills.competencies.map((comp, index) => (
               <div key={index} className="text-center">
-                <div className="text-2xl mb-3">{competencyEmojis[index]}</div>
+                <div className="mb-3" style={{ color: 'var(--accent-blue)' }}>{competencyIcons[index]}</div>
                 <h4 className="font-medium text-sm mb-1" style={{ color: 'var(--text-primary)' }}>{comp.title}</h4>
                 <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{comp.description}</p>
               </div>
