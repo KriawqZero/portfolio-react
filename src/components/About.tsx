@@ -39,7 +39,7 @@ export default function About() {
                 transition={{ delay: index * 0.06, duration: 0.4 }}
                 className="glass-card p-4 sm:p-5 text-center"
               >
-                <div className="mb-2" style={{ color: 'var(--accent-blue)' }}>{expertiseIcons[index]}</div>
+                <div className="flex justify-center mb-2" style={{ color: 'var(--accent-blue)' }}>{expertiseIcons[index]}</div>
                 <h4 className="font-medium text-xs sm:text-sm mb-1" style={{ color: 'var(--accent-blue)' }}>
                   {item.title}
                 </h4>

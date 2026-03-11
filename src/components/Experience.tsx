@@ -31,7 +31,7 @@ export default function Experience() {
               transition={{ delay: index * 0.08, duration: 0.4 }}
               className="glass-card p-4 sm:p-6 text-center"
             >
-              <div className="mb-2" style={{ color: 'var(--accent-blue)' }}>{statIcons[index]}</div>
+              <div className="flex justify-center mb-2" style={{ color: 'var(--accent-blue)' }}>{statIcons[index]}</div>
               <div className="text-2xl sm:text-3xl font-bold mb-1 gradient-text">{stat.number}</div>
               <div className="text-[11px] sm:text-sm" style={{ color: 'var(--text-muted)' }}>{stat.label}</div>
             </motion.div>

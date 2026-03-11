@@ -69,7 +69,7 @@ export default function Skills() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {t.skills.competencies.map((comp, index) => (
               <div key={index} className="text-center">
-                <div className="mb-3" style={{ color: 'var(--accent-blue)' }}>{competencyIcons[index]}</div>
+                <div className="flex justify-center mb-3" style={{ color: 'var(--accent-blue)' }}>{competencyIcons[index]}</div>
                 <h4 className="font-medium text-sm mb-1" style={{ color: 'var(--text-primary)' }}>{comp.title}</h4>
                 <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{comp.description}</p>
               </div>
