@@ -7,7 +7,7 @@ export default function Projects() {
 
   const projectLinks = [
     { siteLink: 'https://condy.com.br', repo: null },
-    { siteLink: null, repo: null, showInDevelopment: true },
+    { siteLink: 'https://webgestor.com.br/', repo: null },
     { siteLink: null, repo: 'https://github.com/KriawqZero/IFMS-Sistema_CargaHoraria' },
   ]
 
@@ -100,10 +100,10 @@ export default function Projects() {
                         <a href={links.siteLink} target="_blank" rel="noopener noreferrer"
                           className="btn-primary text-xs py-2 px-4">{t.projects.viewSite}</a>
                       )}
-                      {!links.siteLink && links.showInDevelopment && (
+                      {!links.siteLink && !links.repo && (
                         <span className="text-xs py-2 px-4 rounded-lg font-medium"
                           style={{ background: 'var(--glass-bg)', color: 'var(--text-muted)', border: '1px solid var(--glass-border)' }}>
-                          {t.projects.inDevelopment}
+                          {t.projects.privateRepo}
                         </span>
                       )}
                       {links.repo && (
