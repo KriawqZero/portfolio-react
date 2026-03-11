@@ -1,19 +1,9 @@
 import { useLanguage } from '../i18n/LanguageContext'
-import type { ReactNode } from 'react'
+import SectionWrapper from './SectionWrapper'
+import { motion } from 'framer-motion'
 
 export default function Projects() {
   const { t } = useLanguage()
-
-  const projectIcons: ReactNode[] = [
-    <img src="https://condy.com.br/favicon.ico" alt="Condy" className="w-8 h-8" />,
-    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-    </svg>,
-    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l9-5-9-5-9 5 9 5z" />
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-    </svg>,
-  ]
 
   const projectLinks = [
     { siteLink: 'https://condy.com.br', repo: null },
@@ -21,10 +11,12 @@ export default function Projects() {
     { siteLink: null, repo: 'https://github.com/KriawqZero/IFMS-Sistema_CargaHoraria' },
   ]
 
-  const getStatusClass = (status: string) => {
-    if (status === 'production') return 'bg-green-500/20 text-green-400'
-    if (status === 'development') return 'bg-yellow-500/20 text-yellow-400'
-    return 'bg-blue-500/20 text-blue-400'
+  const getStatusStyle = (status: string) => {
+    if (status === 'production')
+      return { background: 'rgba(74,222,128,0.08)', color: '#4ade80', border: '1px solid rgba(74,222,128,0.15)' }
+    if (status === 'development')
+      return { background: 'rgba(250,204,21,0.08)', color: '#facc15', border: '1px solid rgba(250,204,21,0.15)' }
+    return { background: 'rgba(91,140,255,0.08)', color: 'var(--accent-blue)', border: '1px solid rgba(91,140,255,0.15)' }
   }
 
   const getStatusLabel = (status: string) => {
@@ -34,140 +26,120 @@ export default function Projects() {
   }
 
   return (
-    <section id="projetos" className="container mx-auto px-6 py-16">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-4 text-white">
-          {t.projects.title}
-        </h2>
-        <p className="text-xl text-center text-gray-300 mb-16">
-          {t.projects.subtitle}
-        </p>
+    <SectionWrapper id="projetos" className="container mx-auto px-5 sm:px-6 py-16 sm:py-24">
+      <div className="max-w-5xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="section-title mb-3">{t.projects.title}</h2>
+          <p className="section-subtitle">{t.projects.subtitle}</p>
+        </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        {/* Project Cards */}
+        <div className="space-y-5">
           {t.projects.items.map((project, index) => {
             const links = projectLinks[index]
             return (
-              <div
+              <motion.div
                 key={project.title}
-                className="bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden hover-lift"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                className="glass-card overflow-hidden"
               >
-                <div className="p-6 pb-4">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center">
-                      <div className="text-indigo-400 mr-4">{projectIcons[index]}</div>
-                      <div>
-                        <h3 className="text-xl font-bold text-white">
-                          {project.title}
-                        </h3>
-                        <div className="flex items-center gap-3 mt-1">
-                          <span className="px-2 py-1 bg-indigo-500/20 text-indigo-400 rounded-full text-xs font-medium">
-                            {project.category}
-                          </span>
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusClass(project.status)}`}>
-                            {getStatusLabel(project.status)}
-                          </span>
-                        </div>
+                <div className="p-5 sm:p-7">
+                  {/* Header row */}
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
+                    <div>
+                      <h3 className="text-lg sm:text-xl font-semibold" style={{ color: 'var(--text-primary)' }}>
+                        {project.title}
+                      </h3>
+                      <div className="flex flex-wrap items-center gap-2 mt-2">
+                        <span className="text-xs px-2.5 py-1 rounded-md"
+                          style={{ background: 'rgba(91,140,255,0.08)', color: 'var(--accent-blue)', border: '1px solid rgba(91,140,255,0.12)' }}>
+                          {project.category}
+                        </span>
+                        <span className="text-xs px-2.5 py-1 rounded-md" style={getStatusStyle(project.status)}>
+                          {getStatusLabel(project.status)}
+                        </span>
                       </div>
                     </div>
                   </div>
 
-                  <p className="text-gray-300 mb-6 leading-relaxed">
+                  <p className="text-sm leading-relaxed mb-5" style={{ color: 'var(--text-muted)' }}>
                     {project.description}
                   </p>
 
-                  <div className="mb-6">
-                    <h4 className="font-semibold text-white mb-3">{t.projects.highlightsLabel}</h4>
-                    <div className="grid grid-cols-1 gap-2">
+                  {/* Highlights */}
+                  <div className="mb-5">
+                    <h4 className="text-xs font-semibold uppercase tracking-wider mb-3" style={{ color: 'var(--text-muted)' }}>
+                      {t.projects.highlightsLabel}
+                    </h4>
+                    <div className="grid sm:grid-cols-2 gap-2">
                       {project.highlights.map((highlight, i) => (
-                        <div key={i} className="flex items-center text-sm">
-                          <svg className="w-4 h-4 text-green-400 mr-2 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                        <div key={i} className="flex items-start gap-2 text-sm">
+                          <svg className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" style={{ color: '#4ade80' }}>
                             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                           </svg>
-                          <span className="text-gray-300">{highlight}</span>
+                          <span style={{ color: 'var(--text-secondary)' }}>{highlight}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="mb-6">
-                    <h4 className="font-semibold text-white mb-3">{t.projects.stackLabel}</h4>
-                    <div className="flex flex-wrap gap-2">
+                  {/* Tech + Actions */}
+                  <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+                    <div className="flex flex-wrap gap-1.5">
                       {project.tech.map((tech, i) => (
-                        <span key={i} className="px-3 py-1 bg-gray-700 text-gray-300 rounded-full text-sm">
-                          {tech}
-                        </span>
+                        <span key={i} className="tech-tag text-[11px] sm:text-xs">{tech}</span>
                       ))}
                     </div>
-                  </div>
 
-                  <div className="flex flex-col sm:flex-row gap-3">
-                    {links.siteLink && (
-                      <a
-                        href={links.siteLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 bg-indigo-600 text-white py-3 px-4 rounded-lg text-center hover:bg-indigo-700 transition-colors font-medium"
-                      >
-                        {t.projects.viewSite}
-                      </a>
-                    )}
-
-                    {!links.siteLink && links.showInDevelopment && (
-                      <div className="flex-1 bg-gray-700 text-gray-300 py-3 px-4 rounded-lg text-center font-medium">
-                        {t.projects.inDevelopment}
-                      </div>
-                    )}
-
-                    {links.repo ? (
-                      <a
-                        href={links.repo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`flex-1 ${
-                          links.siteLink
-                            ? 'border-2 border-indigo-600 text-indigo-400 hover:bg-gray-700'
-                            : 'bg-indigo-600 text-white hover:bg-indigo-700'
-                        } py-3 px-4 rounded-lg text-center transition-colors font-medium`}
-                      >
-                        {t.projects.viewRepo}
-                      </a>
-                    ) : (
-                      !links.siteLink &&
-                      !links.showInDevelopment && (
-                        <div className="flex-1 bg-gray-700 text-gray-400 py-3 px-4 rounded-lg text-center font-medium">
-                          {t.projects.privateRepo}
-                        </div>
-                      )
-                    )}
+                    <div className="flex gap-2 flex-shrink-0">
+                      {links.siteLink && (
+                        <a href={links.siteLink} target="_blank" rel="noopener noreferrer"
+                          className="btn-primary text-xs py-2 px-4">{t.projects.viewSite}</a>
+                      )}
+                      {!links.siteLink && links.showInDevelopment && (
+                        <span className="text-xs py-2 px-4 rounded-lg font-medium"
+                          style={{ background: 'var(--glass-bg)', color: 'var(--text-muted)', border: '1px solid var(--glass-border)' }}>
+                          {t.projects.inDevelopment}
+                        </span>
+                      )}
+                      {links.repo && (
+                        <a href={links.repo} target="_blank" rel="noopener noreferrer"
+                          className="btn-secondary text-xs py-2 px-4">{t.projects.viewRepo}</a>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             )
           })}
         </div>
 
-        {/* CTA Section */}
-        <div className="mt-20 text-center">
-          <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-12 rounded-3xl text-white relative overflow-hidden">
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-16 sm:mt-20"
+        >
+          <div className="relative rounded-2xl p-8 sm:p-10 text-center overflow-hidden"
+            style={{ background: 'linear-gradient(135deg, rgba(91,140,255,0.12), rgba(122,92,255,0.12))', border: '1px solid rgba(91,140,255,0.15)' }}>
             <div className="relative z-10">
-              <h3 className="text-3xl font-bold mb-4">
+              <h3 className="text-xl sm:text-2xl font-bold mb-3" style={{ color: 'var(--text-primary)' }}>
                 {t.projects.ctaTitle}
               </h3>
-              <p className="text-indigo-100 mb-6 max-w-2xl mx-auto">
+              <p className="text-sm mb-6 max-w-lg mx-auto" style={{ color: 'var(--text-muted)' }}>
                 {t.projects.ctaDescription}
               </p>
-              <a
-                href="#contato"
-                className="inline-block bg-white text-indigo-600 px-8 py-3 rounded-lg hover:bg-gray-50 transition-all duration-300 hover:scale-105 font-medium"
-              >
-                {t.projects.ctaButton}
-              </a>
+              <a href="#contato" className="btn-primary inline-block">{t.projects.ctaButton}</a>
             </div>
-            <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-32 translate-x-32" />
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full translate-y-24 -translate-x-24" />
           </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </SectionWrapper>
   )
 }

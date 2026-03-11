@@ -1,87 +1,124 @@
+import { motion } from 'framer-motion'
 import { useLanguage } from '../i18n/LanguageContext'
 
 export default function Hero() {
   const { t } = useLanguage()
 
-  const tagColors = [
-    'bg-indigo-500/20 text-indigo-400 border-indigo-500/30',
-    'bg-purple-500/20 text-purple-400 border-purple-500/30',
-    'bg-blue-500/20 text-blue-400 border-blue-500/30',
-  ]
-
   return (
-    <section className="container mx-auto px-6 py-24 text-center relative overflow-hidden">
-      <div className="relative z-10 max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
-        {/* Container da Foto */}
-        <div className="relative group md:w-1/3">
-          <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full blur-xl opacity-30 group-hover:opacity-50 transition-all duration-500 animate-pulse" />
-          <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-indigo-500 via-purple-500 to-blue-500 p-2 mx-auto">
-            <div className="w-full h-full rounded-full bg-gray-700 flex items-center justify-center text-8xl font-bold text-gray-300">
-              K
-            </div>
-          </div>
-          <div className="absolute inset-0 rounded-full border-4 border-transparent group-hover:border-indigo-400/30 transition-all duration-300" />
-        </div>
+    <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
+      {/* Hero ambient glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full opacity-30"
+          style={{ background: 'radial-gradient(ellipse, rgba(91,140,255,0.15), transparent 70%)' }} />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[300px] rounded-full opacity-20"
+          style={{ background: 'radial-gradient(ellipse, rgba(122,92,255,0.12), transparent 70%)' }} />
+      </div>
 
-        {/* Texto */}
-        <div className="md:w-2/3 text-left space-y-6 animate-fade-in-up">
-          <div className="space-y-2">
-            <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">
+      <div className="container mx-auto px-6 pt-24 pb-16 sm:pt-28 sm:pb-20 relative z-10">
+        <div className="max-w-4xl mx-auto flex flex-col items-center text-center gap-8">
+          {/* Avatar */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="relative group"
+          >
+            <div className="absolute inset-0 rounded-full opacity-40 group-hover:opacity-60 transition-opacity duration-700"
+              style={{ background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))', filter: 'blur(32px)' }} />
+            <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-[2px]"
+              style={{ background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))' }}>
+              <div className="w-full h-full rounded-full flex items-center justify-center text-4xl sm:text-5xl font-bold"
+                style={{ background: 'var(--bg-surface)', color: 'var(--text-muted)' }}>
+                K
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Name + Role */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="space-y-4"
+          >
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight gradient-text">
               Marcilio Ortiz
             </h1>
-            <p className="text-xl text-indigo-400 font-medium">
-              @Kriawq
-            </p>
-          </div>
-          
-          <div className="space-y-3">
-            <p className="text-xl text-gray-300">
+            <p className="text-lg sm:text-xl font-medium" style={{ color: 'var(--accent-blue)' }}>
               {t.hero.role}
             </p>
-            <p className="text-lg text-gray-400">
-              {t.hero.subtitle}
-            </p>
-            <div className="flex flex-wrap gap-2 text-sm text-gray-400">
-              <span className="flex items-center">
-                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {t.hero.available}
-              </span>
-              <span className="text-gray-500">•</span>
-              <span className="flex items-center">
-                <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                {t.hero.remote}
-              </span>
-            </div>
-          </div>
+          </motion.div>
 
-          <div className="flex flex-wrap gap-3 pt-4">
-            {t.hero.tags.map((tag, i) => (
-              <span key={tag} className={`px-4 py-2 rounded-full text-sm font-medium border ${tagColors[i]}`}>
-                {tag}
-              </span>
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="text-base sm:text-lg max-w-xl leading-relaxed"
+            style={{ color: 'var(--text-muted)' }}
+          >
+            {t.hero.subtitle}
+          </motion.p>
+
+          {/* Status badges */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-wrap justify-center gap-2 sm:gap-3"
+          >
+            <span className="flex items-center gap-1.5 text-xs sm:text-sm px-3 py-1.5 rounded-full"
+              style={{ background: 'rgba(74, 222, 128, 0.08)', color: '#4ade80', border: '1px solid rgba(74, 222, 128, 0.15)' }}>
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+              {t.hero.available}
+            </span>
+            <span className="text-xs sm:text-sm px-3 py-1.5 rounded-full"
+              style={{ background: 'var(--glass-bg)', color: 'var(--text-muted)', border: '1px solid var(--glass-border)' }}>
+              {t.hero.remote}
+            </span>
+          </motion.div>
+
+          {/* Tags */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-wrap justify-center gap-2"
+          >
+            {t.hero.tags.map((tag) => (
+              <span key={tag} className="tech-tag">{tag}</span>
             ))}
-          </div>
+          </motion.div>
 
-          <div className="flex flex-wrap gap-4 pt-6">
-            <a
-              href="#contato"
-              className="px-8 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
-            >
-              {t.hero.cta}
-            </a>
-            <a
-              href="#projetos"
-              className="px-8 py-3 border-2 border-indigo-600 text-indigo-400 rounded-lg hover:bg-gray-800 transition-all duration-300"
-            >
-              {t.hero.viewProjects}
-            </a>
-          </div>
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col sm:flex-row gap-3 pt-2 w-full sm:w-auto"
+          >
+            <a href="#contato" className="btn-primary text-center">{t.hero.cta}</a>
+            <a href="#projetos" className="btn-secondary text-center">{t.hero.viewProjects}</a>
+          </motion.div>
         </div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      >
+        <motion.div
+          animate={{ y: [0, 6, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+          className="w-5 h-8 rounded-full flex justify-center pt-1.5"
+          style={{ border: '1px solid var(--glass-border)' }}
+        >
+          <div className="w-1 h-2 rounded-full" style={{ background: 'var(--text-muted)' }} />
+        </motion.div>
+      </motion.div>
     </section>
   )
 } 
