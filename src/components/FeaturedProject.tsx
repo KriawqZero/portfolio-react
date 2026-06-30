@@ -150,12 +150,14 @@ export default function FeaturedProject() {
               {p.tech.map((t) => <span key={t} className="tech-tag">{t}</span>)}
             </div>
 
-            <div className="fp-fade">
-              <a href={p.link} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '1.25rem 3rem' }}>
-                Explorar plataforma
-                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-              </a>
-            </div>
+            {p.link && (
+              <div className="fp-fade">
+                <a href={p.link} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: '1.25rem 3rem' }}>
+                  Explorar plataforma
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                </a>
+              </div>
+            )}
           </div>
 
           {/* Right — Mockup */}
@@ -179,16 +181,20 @@ export default function FeaturedProject() {
                 ref={mockupInnerRef}
                 style={{
                   position: 'absolute',
-                  inset: '-15%',
-                  background: 'radial-gradient(circle at 50% 30%, rgba(63, 24, 171, 0.15), transparent 60%)',
+                  inset: 0,
+                  background: p.image ? 'none' : 'radial-gradient(circle at 50% 30%, rgba(63, 24, 171, 0.15), transparent 60%)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
               >
-                <span style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(3rem, 6vw, 6rem)', fontWeight: 800, color: 'rgba(255,255,255,0.03)', transform: 'rotate(-5deg)' }}>
-                  {p.name} UI
-                </span>
+                {p.image ? (
+                  <img src={p.image} alt={`${p.name} Interface`} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                ) : (
+                  <span style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(3rem, 6vw, 6rem)', fontWeight: 800, color: 'rgba(255,255,255,0.03)', transform: 'rotate(-5deg)' }}>
+                    {p.name} UI
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -203,9 +209,9 @@ export default function FeaturedProject() {
 
         @media (min-width: 768px) {
           .featured-grid { grid-template-columns: 1fr 1.2fr !important; }
-          .featured-section { min-height: 200svh; }
-          .featured-text-col { height: 100svh; padding-top: 0; }
-          .featured-mockup-col { padding-top: 50svh; padding-bottom: 50svh; }
+          .featured-section { min-height: 200dvh; }
+          .featured-text-col { height: 100dvh; padding-top: 0; }
+          .featured-mockup-col { padding-top: 50dvh; padding-bottom: 50dvh; }
         }
       `}</style>
     </section>

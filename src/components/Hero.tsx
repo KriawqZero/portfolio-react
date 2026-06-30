@@ -143,12 +143,11 @@ export default function Hero() {
       id="inicio"
       style={{
         position: 'relative',
-        minHeight: '100svh', // Responsive height
+        minHeight: '100dvh', // Responsive height (dvh for Safari)
         display: 'flex',
         alignItems: 'center',
         paddingTop: 'calc(var(--section-spacing) / 2)',
         paddingBottom: 'calc(var(--section-spacing) / 2)',
-        // overflow: 'hidden' -> REMOVIDO para permitir que a foto vaze para baixo
       }}
     >
       <div className="container" style={{ position: 'relative', zIndex: 10, height: '100%' }}>
@@ -213,49 +212,66 @@ export default function Hero() {
           </div>
 
           {/* Right column — Cinematic Photo Integration */}
-          <div ref={artRef} className="hero-art-col" style={{ position: 'absolute', bottom: 0, right: '5vw', height: '110%', width: '45vw', maxWidth: '700px', pointerEvents: 'none', zIndex: 5, display: 'flex', justifyContent: 'center' }}>
-
+          <div ref={artRef} className="hero-art-col" style={{ pointerEvents: 'none', zIndex: 5, display: 'flex', justifyContent: 'center' }}>
             {/* Layer -2: MO Logo Background */}
             <img
               ref={logoRef}
-              className="hero-fade"
+              className="hero-fade hero-logo"
               src="/marciliortiz-logo.svg"
               alt=""
-              style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', width: '120%', opacity: 0.2, filter: 'blur(12px)', userSelect: 'none', zIndex: -2 }}
             />
-
             {/* Layer -1: Purple Glow */}
             <div
               ref={glowRef}
-              className="hero-fade"
-              style={{ position: 'absolute', bottom: '20%', left: '50%', transform: 'translateX(-50%)', width: '80%', aspectRatio: '1/1', background: 'radial-gradient(circle, rgba(63, 24, 171, 0.25) 0%, transparent 60%)', filter: 'blur(40px)', zIndex: -1 }}
+              className="hero-fade hero-glow"
             />
-
             {/* Layer 1: Photo (Bleeding out of bottom) */}
             <img
               ref={photoRef}
-              className="hero-fade"
+              className="hero-fade hero-photo"
               src="/marcilio-pose.png"
               alt="Marcilio Ortiz"
-              style={{ position: 'absolute', bottom: '-25%', left: '48%', transform: 'translateX(-50%)', height: '105%', objectFit: 'contain', userSelect: 'none', filter: 'drop-shadow(0px 20px 40px rgba(0,0,0,0.4))', zIndex: 1 }}
             />
           </div>
         </div>
       </div>
 
       <style>{`
+        .hero-art-col {
+          position: absolute;
+          bottom: 0;
+          right: 5vw;
+          height: 110%;
+          width: 45vw;
+          max-width: 700px;
+        }
+        .hero-logo {
+          position: absolute; top: 15%; left: 50%; transform: translateX(-50%); width: 120%; opacity: 0.4; filter: blur(12px); user-select: none; z-index: -2;
+        }
+        .hero-glow {
+          position: absolute; bottom: 20%; left: 50%; transform: translateX(-50%); width: 80%; aspect-ratio: 1/1; background: radial-gradient(circle, rgba(63, 24, 171, 0.25) 0%, transparent 60%); filter: blur(40px); z-index: -1;
+        }
+        .hero-photo {
+          position: absolute; bottom: -25%; left: 48%; transform: translateX(-50%); height: 105%; object-fit: contain; user-select: none; filter: drop-shadow(0px 20px 40px rgba(0,0,0,0.4)); z-index: 1;
+        }
+
         @media (min-width: 1024px) { 
           .hero-grid { grid-template-columns: 1.2fr 0.8fr !important; } 
         }
         @media (max-width: 1023px) {
           .hero-art-col {
             position: relative !important;
-            height: 60vh !important;
+            height: 50vh !important;
             width: 100% !important;
             margin-top: 4rem;
-            bottom: auto !important;
+            right: auto;
           }
           .hero-grid { display: flex !important; flex-direction: column; }
+          .hero-photo {
+            bottom: 0 !important;
+            height: 90% !important;
+            left: 50% !important;
+          }
         }
       `}</style>
     </section>

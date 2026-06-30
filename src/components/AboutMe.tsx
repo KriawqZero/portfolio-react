@@ -134,7 +134,7 @@ export default function AboutMe() {
       </span>
 
       <div className="container">
-        <div className="about-grid" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '8rem', position: 'relative' }}>
+        <div className="about-grid" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 'clamp(4rem, 8vw, 8rem)', position: 'relative' }}>
 
           {/* Left Column — Text */}
           <div ref={textColRef} className="about-text-col" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', maxWidth: 600, zIndex: 10 }}>
@@ -244,10 +244,10 @@ export default function AboutMe() {
         }
 
         @media (min-width: 1024px) { 
-          .about-section { min-height: 200svh; }
-          .about-text-col { height: 100svh; padding-top: 0; padding-bottom: 0; }
-          .about-stats-col { padding-top: 50svh; padding-bottom: 50svh; }
-          .about-grid { grid-template-columns: 1fr 1fr !important; gap: 4rem; } 
+          .about-section { min-height: 200dvh; }
+          .about-text-col { height: 100dvh; padding-top: 0; padding-bottom: 0; }
+          .about-stats-col { padding-top: 50dvh; padding-bottom: 50dvh; }
+          .about-grid { grid-template-columns: 1fr 1fr !important; gap: 4rem !important; } 
           .about-art-col { 
             right: -10%;
             top: 20%;

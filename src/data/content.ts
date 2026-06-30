@@ -46,7 +46,8 @@ export const content = {
         { value: 'AWS', label: 'Cloud' },
       ],
       tech: ['NestJS', 'Next.js', 'PostgreSQL', 'Docker', 'AWS S3'],
-      link: 'https://condy.com.br',
+      link: '',
+      image: '/condy-tablet.png',
     },
   },
 

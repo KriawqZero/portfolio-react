@@ -204,9 +204,9 @@ export default function Avantis() {
 
         @media (min-width: 1024px) {
           .avantis-grid { grid-template-columns: 1fr 1.2fr !important; }
-          .avantis-section { min-height: 200svh; padding-top: 0; }
-          .avantis-text-col { height: 100svh; padding-top: 0; }
-          .avantis-logo-col { padding-top: 50svh; padding-bottom: 50svh; }
+          .avantis-section { min-height: 200dvh; padding-top: 0; }
+          .avantis-text-col { height: 100dvh; padding-top: 0; }
+          .avantis-logo-col { padding-top: 50dvh; padding-bottom: 50dvh; }
         }
 
         @media (hover: hover) and (pointer: fine) {

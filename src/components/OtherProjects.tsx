@@ -80,7 +80,7 @@ export default function OtherProjects() {
                 boxShadow: '0 -20px 40px rgba(0,0,0,0.5)',
                 overflow: 'hidden',
                 willChange: 'transform, opacity',
-                top: `calc(10svh + ${index * 20}px)`, // Used by sticky in desktop
+                top: `calc(10dvh + ${index * 20}px)`, // Used by sticky in desktop
               }}
             >
               {/* Card background glow */}
@@ -134,7 +134,7 @@ export default function OtherProjects() {
         @media (min-width: 768px) {
           .other-project-card {
             position: sticky !important;
-            min-height: 60svh !important;
+            min-height: 60dvh !important;
             margin-bottom: 0;
           }
         }

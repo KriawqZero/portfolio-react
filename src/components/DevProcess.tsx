@@ -165,7 +165,7 @@ export default function DevProcess() {
         style={{
           display: 'flex',
           alignItems: 'center',
-          height: '100svh',
+          height: '100dvh',
           width: 'fit-content',
           willChange: 'transform',
           position: 'relative',
@@ -176,7 +176,7 @@ export default function DevProcess() {
         <div style={{
           width: '50vw',
           minWidth: 600,
-          height: '100svh',
+          height: '100dvh',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
@@ -209,7 +209,7 @@ export default function DevProcess() {
             style={{
               width: '45vw',
               minWidth: 450,
-              height: '100svh',
+              height: '100dvh',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
