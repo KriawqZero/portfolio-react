@@ -213,7 +213,7 @@ export default function Hero() {
           </div>
 
           {/* Right column — Cinematic Photo Integration */}
-          <div ref={artRef} className="hero-art-col" style={{ position: 'absolute', bottom: 0, right: 0, height: '110%', width: '45vw', maxWidth: '700px', pointerEvents: 'none', zIndex: 5, display: 'flex', justifyContent: 'center' }}>
+          <div ref={artRef} className="hero-art-col" style={{ position: 'absolute', bottom: 0, right: '5vw', height: '110%', width: '45vw', maxWidth: '700px', pointerEvents: 'none', zIndex: 5, display: 'flex', justifyContent: 'center' }}>
 
             {/* Layer -2: MO Logo Background */}
             <img
@@ -221,7 +221,7 @@ export default function Hero() {
               className="hero-fade"
               src="/marciliortiz-logo.svg"
               alt=""
-              style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', width: '120%', opacity: 0.4, filter: 'blur(12px)', userSelect: 'none', zIndex: -2 }}
+              style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', width: '120%', opacity: 0.2, filter: 'blur(12px)', userSelect: 'none', zIndex: -2 }}
             />
 
             {/* Layer -1: Purple Glow */}
@@ -237,7 +237,7 @@ export default function Hero() {
               className="hero-fade"
               src="/marcilio-pose.png"
               alt="Marcilio Ortiz"
-              style={{ position: 'absolute', bottom: '-25%', left: '50%', transform: 'translateX(-50%)', height: '105%', objectFit: 'contain', userSelect: 'none', filter: 'drop-shadow(0px 20px 40px rgba(0,0,0,0.4))', zIndex: 1 }}
+              style={{ position: 'absolute', bottom: '-25%', left: '48%', transform: 'translateX(-50%)', height: '105%', objectFit: 'contain', userSelect: 'none', filter: 'drop-shadow(0px 20px 40px rgba(0,0,0,0.4))', zIndex: 1 }}
             />
           </div>
         </div>
