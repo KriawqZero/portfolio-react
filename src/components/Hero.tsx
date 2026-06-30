@@ -21,15 +21,47 @@ export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const artRef = useRef<HTMLDivElement>(null)
+  const photoRef = useRef<HTMLImageElement>(null)
+  const logoRef = useRef<HTMLImageElement>(null)
+  const glowRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     // Cinematic scroll reveal masks with MatchMedia for responsiveness
     const mm = gsap.matchMedia(sectionRef)
 
-    mm.add('(min-width: 768px)', () => {
-      // Parallax effect out of Hero (Desktop only)
+    mm.add('(min-width: 1024px)', () => {
+      // Mouse Parallax 2.5D (Desktop only)
+      const xSetPhoto = gsap.quickSetter(photoRef.current, "x", "px")
+      const ySetPhoto = gsap.quickSetter(photoRef.current, "y", "px")
+      const xSetLogo = gsap.quickSetter(logoRef.current, "x", "px")
+      const ySetLogo = gsap.quickSetter(logoRef.current, "y", "px")
+      const xSetGlow = gsap.quickSetter(glowRef.current, "x", "px")
+      const ySetGlow = gsap.quickSetter(glowRef.current, "y", "px")
+
+      const onMouseMove = (e: MouseEvent) => {
+        const { innerWidth, innerHeight } = window
+        // Normalized coordinates from -0.5 to 0.5
+        const x = (e.clientX / innerWidth - 0.5)
+        const y = (e.clientY / innerHeight - 0.5)
+
+        // Photo moves slightly towards the mouse
+        xSetPhoto(x * 15)
+        ySetPhoto(y * 15)
+
+        // Glow moves away from the mouse
+        xSetGlow(x * -30)
+        ySetGlow(y * -30)
+
+        // Logo moves away slightly slower
+        xSetLogo(x * -10)
+        ySetLogo(y * -10)
+      }
+
+      window.addEventListener('mousemove', onMouseMove)
+
+      // Scroll Parallax out of Hero
       gsap.to(contentRef.current, {
-        y: -150,
+        y: -100,
         opacity: 0,
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -39,12 +71,9 @@ export default function Hero() {
         }
       })
 
-      // Art space scales down and blurs out
-      gsap.to(artRef.current, {
-        scale: 0.8,
-        filter: 'blur(10px)',
-        y: 100,
-        opacity: 0.2,
+      // Photo scrolls up slightly slower than the page (stays longer)
+      gsap.to(photoRef.current, {
+        yPercent: -15,
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
@@ -52,13 +81,37 @@ export default function Hero() {
           scrub: 1,
         }
       })
+
+      // Logo scrolls down to increase depth separation
+      gsap.to(logoRef.current, {
+        yPercent: 20,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        }
+      })
+
+      return () => {
+        window.removeEventListener('mousemove', onMouseMove)
+      }
     })
 
-    mm.add('(max-width: 767px)', () => {
+    mm.add('(max-width: 1023px)', () => {
       // Subtle mobile fade out instead of large parallax
-      gsap.to([contentRef.current, artRef.current], {
+      gsap.to(contentRef.current, {
         opacity: 0.2,
         y: -50,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        }
+      })
+      gsap.to(photoRef.current, {
+        yPercent: -5,
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top top',
@@ -93,15 +146,16 @@ export default function Hero() {
         minHeight: '100svh', // Responsive height
         display: 'flex',
         alignItems: 'center',
-        overflow: 'hidden',
         paddingTop: 'calc(var(--section-spacing) / 2)',
         paddingBottom: 'calc(var(--section-spacing) / 2)',
+        // overflow: 'hidden' -> REMOVIDO para permitir que a foto vaze para baixo
       }}
     >
-      <div className="container" style={{ position: 'relative', zIndex: 10 }}>
-        <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(4rem, 10vw, 8rem)', alignItems: 'center' }}>
+      <div className="container" style={{ position: 'relative', zIndex: 10, height: '100%' }}>
+        <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(2rem, 5vw, 4rem)', alignItems: 'center', minHeight: '80vh' }}>
+
           {/* Left column */}
-          <div ref={contentRef} style={{ maxWidth: 1000 }}>
+          <div ref={contentRef} style={{ maxWidth: 800, position: 'relative', zIndex: 10 }}>
             <div className="mask-text-container" style={{ marginBottom: '2rem' }}>
               <p className="section-label mask-text hero-mask">{hero.greeting}</p>
             </div>
@@ -158,18 +212,51 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right column — Art space + availability */}
-          <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-            <div ref={artRef} style={{ width: '100%', aspectRatio: '1 / 1', maxWidth: 460, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <div style={{ position: 'absolute', inset: '-50%', background: 'radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 60%)', filter: 'blur(40px)', pointerEvents: 'none', zIndex: 0 }} />
-              <img className="hero-fade" src="/logo-simple.svg" alt="MO" style={{ width: 'clamp(120px, 18vw, 200px)', opacity: 0.85, filter: 'drop-shadow(0px 20px 40px rgba(139,92,246,0.25))', userSelect: 'none', pointerEvents: 'none', position: 'relative', zIndex: 1 }} />
-            </div>
+          {/* Right column — Cinematic Photo Integration */}
+          <div ref={artRef} className="hero-art-col" style={{ position: 'absolute', bottom: 0, right: 0, height: '110%', width: '45vw', maxWidth: '700px', pointerEvents: 'none', zIndex: 5, display: 'flex', justifyContent: 'center' }}>
+
+            {/* Layer -2: MO Logo Background */}
+            <img
+              ref={logoRef}
+              className="hero-fade"
+              src="/marciliortiz-logo.svg"
+              alt=""
+              style={{ position: 'absolute', top: '15%', left: '50%', transform: 'translateX(-50%)', width: '120%', opacity: 0.4, filter: 'blur(12px)', userSelect: 'none', zIndex: -2 }}
+            />
+
+            {/* Layer -1: Purple Glow */}
+            <div
+              ref={glowRef}
+              className="hero-fade"
+              style={{ position: 'absolute', bottom: '20%', left: '50%', transform: 'translateX(-50%)', width: '80%', aspectRatio: '1/1', background: 'radial-gradient(circle, rgba(63, 24, 171, 0.25) 0%, transparent 60%)', filter: 'blur(40px)', zIndex: -1 }}
+            />
+
+            {/* Layer 1: Photo (Bleeding out of bottom) */}
+            <img
+              ref={photoRef}
+              className="hero-fade"
+              src="/marcilio-pose.png"
+              alt="Marcilio Ortiz"
+              style={{ position: 'absolute', bottom: '-25%', left: '50%', transform: 'translateX(-50%)', height: '105%', objectFit: 'contain', userSelect: 'none', filter: 'drop-shadow(0px 20px 40px rgba(0,0,0,0.4))', zIndex: 1 }}
+            />
           </div>
         </div>
       </div>
 
       <style>{`
-        @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1.2fr 0.8fr !important; } }
+        @media (min-width: 1024px) { 
+          .hero-grid { grid-template-columns: 1.2fr 0.8fr !important; } 
+        }
+        @media (max-width: 1023px) {
+          .hero-art-col {
+            position: relative !important;
+            height: 60vh !important;
+            width: 100% !important;
+            margin-top: 4rem;
+            bottom: auto !important;
+          }
+          .hero-grid { display: flex !important; flex-direction: column; }
+        }
       `}</style>
     </section>
   )
