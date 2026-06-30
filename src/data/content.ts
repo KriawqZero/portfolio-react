@@ -52,10 +52,23 @@ export const content = {
 
   about: {
     number: '02',
-    label: 'QUEM SOU EU',
-    name: 'Marcilio Ortiz',
-    role: 'Desenvolvedor Backend & Full Stack',
+    label: 'SOBRE MIM',
+    title: 'Mais que código,',
+    titleHighlight: 'propósito.',
     text: 'Ainda no Ensino Técnico, atuo como freelancer há mais de um ano entregando soluções reais. Como desenvolvedor independente, domino o ciclo completo do produto. Minha paixão é projetar arquiteturas no Backend, mas sei que o usuário consome interfaces. Busco minha primeira oportunidade corporativa para transformar essa vivência Full Stack em valor real para uma grande equipe.',
+    cta: 'Conhecer minha jornada',
+    stats: [
+      { value: '+1', label: 'ano', sublabel: 'De imersão diária em programação' },
+      { value: '+30', label: 'projetos', sublabel: 'Aplicações web e desafios práticos' },
+      { value: '+10', label: 'clientes', sublabel: 'Atendidos com soluções em produção' },
+      { value: '+500', label: 'commits', sublabel: 'Registrados no GitHub no último ano' },
+      { value: '+5', label: 'tecnologias', sublabel: 'Dominadas na stack principal' },
+      { value: '100%', label: 'foco', sublabel: 'Em construir sistemas robustos e escaláveis' },
+      { value: '+1000', label: 'horas', sublabel: 'Lendo documentação oficial' },
+      { value: '+20k', label: 'linhas', sublabel: 'De código escritas ou refatoradas' },
+      { value: '∞', label: 'bugs', sublabel: 'Resolvidos com muita paciência' },
+      { value: '∞', label: '', sublabel: 'Vontade de aprender e evoluir' },
+    ],
   },
 
   otherProjects: {
