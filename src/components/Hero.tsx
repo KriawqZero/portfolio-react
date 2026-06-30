@@ -1,125 +1,176 @@
+import { useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { useLanguage } from '../i18n/LanguageContext'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { content } from '../data/content'
+import { SiReact, SiTypescript, SiNestjs, SiNodedotjs, SiPostgresql, SiDocker } from 'react-icons/si'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const techIcons: Record<string, React.ReactNode> = {
+  react: <SiReact size={24} />,
+  typescript: <SiTypescript size={24} />,
+  nestjs: <SiNestjs size={24} />,
+  nodejs: <SiNodedotjs size={24} />,
+  postgresql: <SiPostgresql size={24} />,
+  docker: <SiDocker size={24} />,
+}
 
 export default function Hero() {
-  const { t } = useLanguage()
+  const { hero } = content
+  const sectionRef = useRef<HTMLElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+  const artRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Cinematic scroll reveal masks with MatchMedia for responsiveness
+    const mm = gsap.matchMedia(sectionRef)
+
+    mm.add('(min-width: 768px)', () => {
+      // Parallax effect out of Hero (Desktop only)
+      gsap.to(contentRef.current, {
+        y: -150,
+        opacity: 0,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        }
+      })
+
+      // Art space scales down and blurs out
+      gsap.to(artRef.current, {
+        scale: 0.8,
+        filter: 'blur(10px)',
+        y: 100,
+        opacity: 0.2,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        }
+      })
+    })
+
+    mm.add('(max-width: 767px)', () => {
+       // Subtle mobile fade out instead of large parallax
+       gsap.to([contentRef.current, artRef.current], {
+        opacity: 0.2,
+        y: -50,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        }
+      })
+    })
+
+    mm.add('all', () => {
+      // Mask reveals for initial load (All devices)
+      gsap.fromTo('.hero-mask', 
+        { y: '100%' }, 
+        { y: '0%', duration: 1.2, stagger: 0.15, ease: 'power4.out', delay: 0.2 }
+      )
+      
+      gsap.fromTo('.hero-fade',
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: 'power3.out', delay: 0.8 }
+      )
+    })
+
+    return () => mm.revert()
+  }, [])
 
   return (
-    <section className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
-      {/* Hero ambient glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full opacity-30"
-          style={{ background: 'radial-gradient(ellipse, rgba(91,140,255,0.15), transparent 70%)' }} />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[300px] rounded-full opacity-20"
-          style={{ background: 'radial-gradient(ellipse, rgba(122,92,255,0.12), transparent 70%)' }} />
-      </div>
-
-      <div className="container mx-auto px-6 pt-24 pb-16 sm:pt-28 sm:pb-20 relative z-10">
-        <div className="max-w-4xl mx-auto flex flex-col items-center text-center gap-8">
-          {/* Avatar */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="relative group"
-          >
-            <div className="absolute inset-0 rounded-full opacity-40 group-hover:opacity-60 transition-opacity duration-700"
-              style={{ background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))', filter: 'blur(32px)' }} />
-            <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full p-[2px]"
-              style={{ background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))' }}>
-              <img 
-                src="/marcilio.jpg" 
-                alt="Marcilio Ortiz" 
-                className="w-full h-full rounded-full object-cover"
-              />
+    <section
+      ref={sectionRef}
+      id="inicio"
+      style={{
+        position: 'relative',
+        minHeight: '100svh', // Responsive height
+        display: 'flex',
+        alignItems: 'center',
+        overflow: 'hidden',
+        paddingTop: 'calc(var(--section-spacing) / 2)',
+        paddingBottom: 'calc(var(--section-spacing) / 2)',
+      }}
+    >
+      <div className="container" style={{ position: 'relative', zIndex: 10 }}>
+        <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(4rem, 10vw, 8rem)', alignItems: 'center' }}>
+          {/* Left column */}
+          <div ref={contentRef} style={{ maxWidth: 1000 }}>
+            <div className="mask-text-container" style={{ marginBottom: '2rem' }}>
+              <p className="section-label mask-text hero-mask">{hero.greeting}</p>
             </div>
-          </motion.div>
+            
+            <div className="mask-text-container" style={{ marginBottom: '3rem' }}>
+              <p className="mask-text hero-mask" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 700, letterSpacing: '0.15em', color: 'var(--text-primary)', textTransform: 'uppercase' }}>
+                {hero.name}
+              </p>
+              <div className="mask-text hero-mask" style={{ width: '80px', height: '2px', background: 'linear-gradient(24deg, #F9FFFD, #3F18AB)', marginTop: '1.25rem' }} />
+            </div>
 
-          {/* Name + Role */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-            className="space-y-4"
-          >
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight gradient-text">
-              Marcilio Ortiz
+            <h1 style={{ marginBottom: '2rem' }}>
+              <div className="mask-text-container">
+                <span className="text-hero mask-text hero-mask" style={{ display: 'block', color: 'var(--text-primary)' }}>
+                  {hero.role[0]}
+                </span>
+              </div>
+              <div className="mask-text-container">
+                <span className="text-hero gradient-text mask-text hero-mask" style={{ display: 'block', paddingBottom: '0.1em' }}>
+                  {hero.role[1]}
+                </span>
+              </div>
             </h1>
-            <p className="text-lg sm:text-xl font-medium" style={{ color: 'var(--accent-blue)' }}>
-              {t.hero.role}
+
+            <p className="hero-fade" style={{ fontSize: 'var(--text-xl)', color: 'var(--text-muted)', maxWidth: 520, lineHeight: 1.6, marginBottom: '3rem' }}>
+              {hero.subtitle}
             </p>
-          </motion.div>
 
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="text-base sm:text-lg max-w-xl leading-relaxed"
-            style={{ color: 'var(--text-muted)' }}
-          >
-            {t.hero.subtitle}
-          </motion.p>
+            <div className="hero-fade" style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '4rem' }}>
+              <a href="#projetos" className="btn-primary">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                {hero.ctaPrimary}
+              </a>
+              <a href="#sobre" className="btn-secondary">{hero.ctaSecondary}</a>
+            </div>
 
-          {/* Status badges */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap justify-center gap-2 sm:gap-3"
-          >
-            <span className="flex items-center gap-1.5 text-xs sm:text-sm px-3 py-1.5 rounded-full"
-              style={{ background: 'rgba(74, 222, 128, 0.08)', color: '#4ade80', border: '1px solid rgba(74, 222, 128, 0.15)' }}>
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              {t.hero.available}
-            </span>
-            <span className="text-xs sm:text-sm px-3 py-1.5 rounded-full"
-              style={{ background: 'var(--glass-bg)', color: 'var(--text-muted)', border: '1px solid var(--glass-border)' }}>
-              {t.hero.remote}
-            </span>
-          </motion.div>
+            <div className="hero-fade">
+              <p className="section-label" style={{ marginBottom: '1.5rem', fontSize: '0.65rem' }}>TECNOLOGIAS</p>
+              <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+                {hero.techs.map((tech) => (
+                  <motion.div 
+                    key={tech.name} 
+                    whileHover={{ scale: 1.15, y: -5 }} 
+                    transition={{ duration: 0.2 }} 
+                    style={{ color: 'var(--text-muted)', cursor: 'pointer', transition: 'color 0.3s' }} 
+                    onMouseEnter={(e) => { (e.currentTarget.style.color = 'var(--accent-light)') }} 
+                    onMouseLeave={(e) => { (e.currentTarget.style.color = 'var(--text-muted)') }} 
+                    title={tech.name}
+                  >
+                    {techIcons[tech.icon] || <span style={{ fontSize: 28 }}>⚡</span>}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
 
-          {/* Tags */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-wrap justify-center gap-2"
-          >
-            {t.hero.tags.map((tag) => (
-              <span key={tag} className="tech-tag">{tag}</span>
-            ))}
-          </motion.div>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col sm:flex-row gap-3 pt-2 w-full sm:w-auto"
-          >
-            <a href="#contato" className="btn-primary text-center">{t.hero.cta}</a>
-            <a href="#projetos" className="btn-secondary text-center">{t.hero.viewProjects}</a>
-          </motion.div>
+          {/* Right column — Art space + availability */}
+          <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div ref={artRef} style={{ width: '100%', aspectRatio: '1 / 1', maxWidth: 520, borderRadius: 32, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
+              <div style={{ position: 'absolute', inset: '-30%', background: 'radial-gradient(circle, rgba(63,24,171,0.12) 0%, transparent 70%)', filter: 'blur(30px)' }} />
+              <span className="hero-fade" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(6rem, 15vw, 14rem)', fontWeight: 800, color: 'rgba(255,255,255,0.015)', letterSpacing: '-0.04em', userSelect: 'none', position: 'relative' }}>MO</span>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
-          className="w-5 h-8 rounded-full flex justify-center pt-1.5"
-          style={{ border: '1px solid var(--glass-border)' }}
-        >
-          <div className="w-1 h-2 rounded-full" style={{ background: 'var(--text-muted)' }} />
-        </motion.div>
-      </motion.div>
+      <style>{`
+        @media (min-width: 1024px) { .hero-grid { grid-template-columns: 1.2fr 0.8fr !important; } }
+      `}</style>
     </section>
   )
-} 
+}
