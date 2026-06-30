@@ -7,6 +7,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function AboutMe() {
   const sectionRef = useRef<HTMLElement>(null)
+  const textColRef = useRef<HTMLDivElement>(null)
   const numberRef = useRef<HTMLSpanElement>(null)
   const artRef = useRef<HTMLDivElement>(null)
   const statsContainerRef = useRef<HTMLDivElement>(null)
@@ -29,21 +30,21 @@ export default function AboutMe() {
         })
       }
 
-      // Pin the Art element (Desktop only)
+      // Pin text column when it reaches the top
+      ScrollTrigger.create({
+        trigger: textColRef.current,
+        start: 'top top',
+        endTrigger: sectionRef.current,
+        end: 'bottom bottom',
+        pin: true,
+        pinSpacing: false,
+      })
+
+      // Gentle rotation of background Art
       if (artRef.current) {
-        ScrollTrigger.create({
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom bottom',
-          pin: artRef.current,
-          pinSpacing: false,
-        })
-        
-        // Gentle rotation while scrolling
         gsap.to(artRef.current, {
           rotation: 15,
           scale: 1.05,
-          filter: 'blur(0px)',
           scrollTrigger: {
             trigger: sectionRef.current,
             start: 'top bottom',
@@ -56,19 +57,37 @@ export default function AboutMe() {
 
     mm.add('all', () => {
       // Reveal text
-      gsap.fromTo('.about-mask', 
-        { y: '100%' }, 
-        { y: '0%', duration: 1.2, stagger: 0.15, ease: 'power4.out',
+      gsap.fromTo('.about-mask',
+        { y: '100%' },
+        {
+          y: '0%', duration: 1.2, stagger: 0.15, ease: 'power4.out',
           scrollTrigger: { trigger: sectionRef.current, start: 'top 60%' }
         }
       )
 
       gsap.fromTo('.about-fade',
         { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 1, stagger: 0.15, ease: 'power3.out',
+        {
+          opacity: 1, y: 0, duration: 1, stagger: 0.15, ease: 'power3.out',
           scrollTrigger: { trigger: sectionRef.current, start: 'top 50%' }
         }
       )
+
+      // Stats Micro-animations
+      gsap.utils.toArray('.stat-item').forEach((item: any) => {
+        gsap.fromTo(item,
+          { opacity: 0, y: 50, scale: 0.9 },
+          {
+            opacity: 1, y: 0, scale: 1,
+            duration: 0.8,
+            ease: 'back.out(1.5)',
+            scrollTrigger: {
+              trigger: item,
+              start: 'top 85%',
+            }
+          }
+        )
+      })
 
       // Stat counters
       const statElements = document.querySelectorAll('.stat-number')
@@ -77,15 +96,16 @@ export default function AboutMe() {
         if (targetValue > 0) {
           gsap.fromTo(el,
             { innerHTML: 0 },
-            { 
+            {
               innerHTML: targetValue,
               duration: 2,
               ease: 'power3.out',
               scrollTrigger: { trigger: el, start: 'top 80%' },
               snap: { innerHTML: 1 },
-              onUpdate: function() {
+              onUpdate: function () {
                 const prefix = el.getAttribute('data-prefix') || ''
-                el.innerHTML = prefix + Math.round(this.targets()[0].innerHTML)
+                const suffix = el.getAttribute('data-suffix') || ''
+                el.innerHTML = prefix + Math.round(this.targets()[0].innerHTML) + suffix
               }
             }
           )
@@ -115,14 +135,14 @@ export default function AboutMe() {
 
       <div className="container">
         <div className="about-grid" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '8rem', position: 'relative' }}>
-          
-          {/* Left Column — Text & Stats */}
-          <div className="about-text-col" style={{ maxWidth: 600, zIndex: 10 }}>
-            <div className="mask-text-container" style={{ marginBottom: '2.5rem' }}>
+
+          {/* Left Column — Text */}
+          <div ref={textColRef} className="about-text-col" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', maxWidth: 600, zIndex: 10 }}>
+            <div className="mask-text-container" style={{ marginBottom: '1rem' }}>
               <p className="section-label mask-text about-mask">{data.label}</p>
             </div>
 
-            <h2 style={{ marginBottom: '4rem' }}>
+            <h2 style={{ marginBottom: '1.5rem' }}>
               <div className="mask-text-container">
                 <span className="text-display mask-text about-mask" style={{ display: 'block' }}>{data.title}</span>
               </div>
@@ -133,23 +153,34 @@ export default function AboutMe() {
               </div>
             </h2>
 
-            <p className="about-fade" style={{ fontSize: 'var(--text-xl)', color: 'var(--text-muted)', lineHeight: 1.8, marginBottom: '5rem', paddingLeft: '2rem', borderLeft: '1px solid var(--glass-border)' }}>
+            <p className="about-fade" style={{ fontSize: 'var(--text-xl)', color: 'var(--text-muted)', lineHeight: 1.5, marginBottom: '1.5rem', maxWidth: '90%', paddingLeft: '1.5rem', borderLeft: '1px solid var(--glass-border)' }}>
               {data.text}
             </p>
 
-            <div ref={statsContainerRef} style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
+            <div className="about-fade" style={{ marginTop: '0.5rem' }}>
+              <a href="#processo" className="link-underline" style={{ fontSize: 'var(--text-base)', color: 'var(--accent-light)', fontWeight: 500, letterSpacing: '0.05em' }}>
+                {data.cta} <span style={{ marginLeft: '0.5rem' }}>↓</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Right Column — Scrolling Stats */}
+          <div className="about-stats-col" style={{ display: 'flex', alignItems: 'center', zIndex: 10 }}>
+            <div ref={statsContainerRef} style={{ display: 'flex', flexDirection: 'column', gap: '4rem', width: '100%' }}>
               {data.stats.map((stat, i) => {
                 const numOnly = stat.value.replace(/[^0-9.]/g, '')
                 const prefix = stat.value.replace(/[0-9.].*/g, '')
+                const suffix = stat.value.replace(/^[^0-9.]*[0-9.]*/, '')
                 const isInfinity = stat.value === '∞'
-                
+
                 return (
-                  <div key={i} className="about-fade" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-                    <div style={{ width: 120, flexShrink: 0 }}>
-                      <span 
+                  <div key={i} className="stat-item" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+                    <div style={{ minWidth: 'clamp(140px, 15vw, 220px)', flexShrink: 0 }}>
+                      <span
                         className={`gradient-text ${!isInfinity ? 'stat-number' : ''}`}
                         data-val={numOnly}
                         data-prefix={prefix}
+                        data-suffix={suffix}
                         style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(3rem, 6vw, 4.5rem)', fontWeight: 800, lineHeight: 1, display: 'block' }}
                       >
                         {isInfinity ? '∞' : '0'}
@@ -167,17 +198,11 @@ export default function AboutMe() {
                 )
               })}
             </div>
-            
-            <div className="about-fade" style={{ marginTop: '5rem' }}>
-              <a href="#processo" className="link-underline" style={{ fontSize: 'var(--text-base)', color: 'var(--accent-light)', fontWeight: 500, letterSpacing: '0.05em' }}>
-                {data.cta} <span style={{ marginLeft: '0.5rem' }}>↓</span>
-              </a>
-            </div>
           </div>
 
-          {/* Right Column — Pinned MO Art */}
+          {/* Background Ambient MO Art */}
           <div className="about-art-col">
-            <div 
+            <div
               ref={artRef}
               style={{
                 width: '100%',
@@ -191,8 +216,8 @@ export default function AboutMe() {
                 willChange: 'transform, filter'
               }}
             >
-              <span style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(8rem, 20vw, 20rem)', fontWeight: 900, color: 'rgba(255,255,255,0.02)', letterSpacing: '-0.05em' }}>MO</span>
-              
+              <img src="/logo-simple.svg" alt="MO" style={{ width: 'clamp(200px, 30vw, 400px)', opacity: 0.1, userSelect: 'none', pointerEvents: 'none', position: 'relative', filter: 'grayscale(1)' }} />
+
               {/* Orbital rings */}
               <div style={{ position: 'absolute', inset: '10%', border: '1px solid rgba(63, 24, 171, 0.15)', borderRadius: '50%', borderTopColor: 'transparent', borderBottomColor: 'transparent' }} />
               <div style={{ position: 'absolute', inset: '20%', border: '1px dashed rgba(63, 24, 171, 0.08)', borderRadius: '50%', transform: 'rotate(45deg)' }} />
@@ -204,7 +229,8 @@ export default function AboutMe() {
 
       <style>{`
         .about-section { min-height: auto; }
-        .about-text-col { padding-top: 0; padding-bottom: 0; }
+        .about-text-col { height: auto; padding-top: 0; padding-bottom: 2rem; }
+        .about-stats-col { padding-top: 2rem; padding-bottom: 4rem; }
         .about-art-col {
           position: absolute;
           right: -20%;
@@ -218,14 +244,14 @@ export default function AboutMe() {
         }
 
         @media (min-width: 1024px) { 
-          .about-section { min-height: 150svh; }
-          .about-text-col { padding-top: 10svh; padding-bottom: 30svh; }
-          .about-grid { grid-template-columns: 1.2fr 0.8fr !important; } 
+          .about-section { min-height: 200svh; }
+          .about-text-col { height: 100svh; padding-top: 0; padding-bottom: 0; }
+          .about-stats-col { padding-top: 50svh; padding-bottom: 50svh; }
+          .about-grid { grid-template-columns: 1fr 1fr !important; gap: 4rem; } 
           .about-art-col { 
-            position: static; 
-            opacity: 1;
-            height: 100svh;
-            width: 100%;
+            right: -10%;
+            top: 20%;
+            opacity: 0.6;
           }
         }
       `}</style>

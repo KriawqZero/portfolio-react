@@ -100,26 +100,26 @@ export default function Contact() {
       </span>
 
       {/* Massive MO Art glow at the bottom center */}
-      <div 
+      <div
         ref={artRef}
         style={{
           position: 'absolute', bottom: '-20%', left: '50%', transform: 'translateX(-50%)',
           width: '100vw', height: '100vw', maxWidth: 1000, maxHeight: 1000,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(63, 24, 171, 0.1) 0%, transparent 60%)',
+          background: 'radial-gradient(circle, rgba(63, 24, 171, 0.15) 0%, transparent 60%)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           pointerEvents: 'none',
           zIndex: 0,
+          filter: 'blur(0px)',
+          willChange: 'transform, filter'
         }}
       >
-        <span style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(10rem, 30vw, 30rem)', fontWeight: 900, color: 'rgba(255,255,255,0.02)', letterSpacing: '-0.05em' }}>
-          MO
-        </span>
+        <img src="/marciliortiz-logo.svg" alt="MO" style={{ width: 'clamp(250px, 40vw, 500px)', opacity: 0.2, filter: 'grayscale(1)', userSelect: 'none' }} />
       </div>
 
       <div className="container" style={{ position: 'relative', zIndex: 10 }}>
         <div className="contact-grid" style={{ display: 'grid', gap: '6rem', alignItems: 'center' }}>
-          
+
           {/* Left — Info */}
           <div>
             <p className="section-label" style={{ marginBottom: '2rem' }}>{data.label}</p>

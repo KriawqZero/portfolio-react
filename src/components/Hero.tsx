@@ -55,8 +55,8 @@ export default function Hero() {
     })
 
     mm.add('(max-width: 767px)', () => {
-       // Subtle mobile fade out instead of large parallax
-       gsap.to([contentRef.current, artRef.current], {
+      // Subtle mobile fade out instead of large parallax
+      gsap.to([contentRef.current, artRef.current], {
         opacity: 0.2,
         y: -50,
         scrollTrigger: {
@@ -70,11 +70,11 @@ export default function Hero() {
 
     mm.add('all', () => {
       // Mask reveals for initial load (All devices)
-      gsap.fromTo('.hero-mask', 
-        { y: '100%' }, 
+      gsap.fromTo('.hero-mask',
+        { y: '100%' },
         { y: '0%', duration: 1.2, stagger: 0.15, ease: 'power4.out', delay: 0.2 }
       )
-      
+
       gsap.fromTo('.hero-fade',
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: 'power3.out', delay: 0.8 }
@@ -105,7 +105,7 @@ export default function Hero() {
             <div className="mask-text-container" style={{ marginBottom: '2rem' }}>
               <p className="section-label mask-text hero-mask">{hero.greeting}</p>
             </div>
-            
+
             <div className="mask-text-container" style={{ marginBottom: '3rem' }}>
               <p className="mask-text hero-mask" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 700, letterSpacing: '0.15em', color: 'var(--text-primary)', textTransform: 'uppercase' }}>
                 {hero.name}
@@ -142,13 +142,13 @@ export default function Hero() {
               <p className="section-label" style={{ marginBottom: '1.5rem', fontSize: '0.65rem' }}>TECNOLOGIAS</p>
               <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
                 {hero.techs.map((tech) => (
-                  <motion.div 
-                    key={tech.name} 
-                    whileHover={{ scale: 1.15, y: -5 }} 
-                    transition={{ duration: 0.2 }} 
-                    style={{ color: 'var(--text-muted)', cursor: 'pointer', transition: 'color 0.3s' }} 
-                    onMouseEnter={(e) => { (e.currentTarget.style.color = 'var(--accent-light)') }} 
-                    onMouseLeave={(e) => { (e.currentTarget.style.color = 'var(--text-muted)') }} 
+                  <motion.div
+                    key={tech.name}
+                    whileHover={{ scale: 1.15, y: -5 }}
+                    transition={{ duration: 0.2 }}
+                    style={{ color: 'var(--text-muted)', cursor: 'pointer', transition: 'color 0.3s' }}
+                    onMouseEnter={(e) => { (e.currentTarget.style.color = 'var(--accent-light)') }}
+                    onMouseLeave={(e) => { (e.currentTarget.style.color = 'var(--text-muted)') }}
                     title={tech.name}
                   >
                     {techIcons[tech.icon] || <span style={{ fontSize: 28 }}>⚡</span>}
@@ -159,10 +159,10 @@ export default function Hero() {
           </div>
 
           {/* Right column — Art space + availability */}
-          <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div ref={artRef} style={{ width: '100%', aspectRatio: '1 / 1', maxWidth: 520, borderRadius: 32, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden' }}>
-              <div style={{ position: 'absolute', inset: '-30%', background: 'radial-gradient(circle, rgba(63,24,171,0.12) 0%, transparent 70%)', filter: 'blur(30px)' }} />
-              <span className="hero-fade" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(6rem, 15vw, 14rem)', fontWeight: 800, color: 'rgba(255,255,255,0.015)', letterSpacing: '-0.04em', userSelect: 'none', position: 'relative' }}>MO</span>
+          <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+            <div ref={artRef} style={{ width: '100%', aspectRatio: '1 / 1', maxWidth: 460, position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ position: 'absolute', inset: '-50%', background: 'radial-gradient(circle, rgba(139,92,246,0.12) 0%, transparent 60%)', filter: 'blur(40px)', pointerEvents: 'none', zIndex: 0 }} />
+              <img className="hero-fade" src="/logo-simple.svg" alt="MO" style={{ width: 'clamp(120px, 18vw, 200px)', opacity: 0.85, filter: 'drop-shadow(0px 20px 40px rgba(139,92,246,0.25))', userSelect: 'none', pointerEvents: 'none', position: 'relative', zIndex: 1 }} />
             </div>
           </div>
         </div>

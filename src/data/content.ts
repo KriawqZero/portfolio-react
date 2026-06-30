@@ -14,19 +14,19 @@ export const content = {
     name: 'Marcilio Ortiz',
     role: ['Desenvolvedor', 'Full Stack'],
     subtitle:
-      'Estudante apaixonado por criar experiências digitais modernas, funcionais e com propósito. Transformo ideias em interfaces que conectam.',
+      'Estudante Técnico em Informática com experiência real em projetos freelancer. Atuo de ponta a ponta: da arquitetura de banco de dados e APIs robustas até a interface final, pois um produto de verdade não vive apenas de respostas JSON.',
     availability: {
       status: 'Disponível para oportunidades',
       types: ['Estágio', 'Emprego', 'Projetos'],
       cta: 'Vamos construir algo incrível juntos?',
     },
     techs: [
-      { name: 'React', icon: 'react' },
-      { name: 'TypeScript', icon: 'typescript' },
       { name: 'NestJS', icon: 'nestjs' },
       { name: 'Node.js', icon: 'nodejs' },
       { name: 'PostgreSQL', icon: 'postgresql' },
       { name: 'Docker', icon: 'docker' },
+      { name: 'TypeScript', icon: 'typescript' },
+      { name: 'React', icon: 'react' },
     ],
     ctaPrimary: 'Ver Projetos',
     ctaSecondary: 'Sobre mim',
@@ -55,12 +55,19 @@ export const content = {
     label: 'SOBRE MIM',
     title: 'Mais que código,',
     titleHighlight: 'propósito.',
-    text: 'Sou um estudante de desenvolvimento web apaixonado por transformar ideias em interfaces que fazem sentido. Atualmente focado em React e na criação de experiências digitais modernas, acessíveis e funcionais.',
+    text: 'Ainda no Ensino Técnico, atuo como freelancer há mais de um ano entregando soluções reais. Como desenvolvedor independente, domino o ciclo completo do produto. Minha paixão é projetar arquiteturas no Backend, mas sei que o usuário consome interfaces. Busco minha primeira oportunidade corporativa para transformar essa vivência Full Stack em valor real para uma grande equipe.',
     cta: 'Conhecer minha jornada',
     stats: [
-      { value: '+1', label: 'ano', sublabel: 'Estudando e praticando' },
-      { value: '+10', label: 'projetos', sublabel: 'Projetos pessoais' },
-      { value: '∞', label: '', sublabel: 'Horas de dedicação' },
+      { value: '+1', label: 'ano', sublabel: 'De imersão diária em programação' },
+      { value: '+30', label: 'projetos', sublabel: 'Aplicações web e desafios práticos' },
+      { value: '+10', label: 'clientes', sublabel: 'Atendidos com soluções em produção' },
+      { value: '+500', label: 'commits', sublabel: 'Registrados no GitHub no último ano' },
+      { value: '+5', label: 'tecnologias', sublabel: 'Dominadas na stack principal' },
+      { value: '100%', label: 'foco', sublabel: 'Em construir sistemas robustos e escaláveis' },
+      { value: '+1000', label: 'horas', sublabel: 'Lendo documentação oficial' },
+      { value: '+20k', label: 'linhas', sublabel: 'De código escritas ou refatoradas' },
+      { value: '∞', label: 'bugs', sublabel: 'Resolvidos com muita paciência' },
+      { value: '∞', label: '', sublabel: 'Vontade de aprender e evoluir' },
     ],
   },
 
@@ -96,8 +103,21 @@ export const content = {
     ],
   },
 
-  stack: {
+  avantis: {
     number: '04',
+    label: 'A INICIATIVA',
+    title: 'Do estudo à',
+    titleHighlight: 'prática real.',
+    subtitle: '',
+    text: 'Quando comecei a desenvolver trabalhos para clientes, percebi que a apresentação importava tanto quanto o código. Foi assim que criei a Avantis: uma marca para estruturar meu portfólio, padronizar entregas e consolidar minha identidade profissional. Ela marca a fase em que assumi a responsabilidade de transformar estudo em soluções reais.',
+    links: [
+      { label: 'avantis.dev', href: 'https://avantis.dev' },
+      { label: 'instagram.com/avantis.dev', href: 'https://instagram.com/avantis.dev' }
+    ]
+  },
+
+  stack: {
+    number: '05',
     label: 'STACK & DIFERENCIAIS',
     title: 'Ferramentas que uso para criar',
     titleHighlight: 'soluções',
@@ -145,7 +165,7 @@ export const content = {
   },
 
   process: {
-    number: '05',
+    number: '06',
     label: 'PROCESSO',
     title: 'Como eu desenvolvo',
     steps: [
@@ -177,7 +197,7 @@ export const content = {
   },
 
   contact: {
-    number: '06',
+    number: '07',
     label: 'VAMOS CONVERSAR?',
     title: 'Tem uma',
     titleHighlight: 'oportunidade',
@@ -240,6 +260,6 @@ export const content = {
       { label: 'E-mail', href: 'mailto:marciliortizz@gmail.com' },
     ],
     availableFor: ['Estágio', 'Projetos', 'Colaborações'],
-    copyright: '© 2025 Marcilio Ortiz. Todos os direitos reservados.',
+    copyright: '© 2026 Marcilio Ortiz. Todos os direitos reservados.',
   },
 }

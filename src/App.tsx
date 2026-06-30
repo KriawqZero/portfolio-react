@@ -8,6 +8,7 @@ import Hero from './components/Hero'
 import FeaturedProject from './components/FeaturedProject'
 import AboutMe from './components/AboutMe'
 import OtherProjects from './components/OtherProjects'
+import Avantis from './components/Avantis'
 import StackAndDifferentials from './components/StackAndDifferentials'
 import DevProcess from './components/DevProcess'
 import Contact from './components/Contact'
@@ -83,6 +84,7 @@ export default function App() {
         <FeaturedProject />
         <AboutMe />
         <OtherProjects />
+        <Avantis />
         <StackAndDifferentials />
         <DevProcess />
         <Contact />
