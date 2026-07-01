@@ -177,9 +177,9 @@ export const content = {
       stack: ['NestJS', 'Next.js', 'Expo', 'PostgreSQL'],
       narrative: 'Desenvolvido para dar autonomia real à operação do restaurante. O desafio central foi modelar a API e gerenciar o estado no cliente para que a equipe pudesse alterar preços e pratos durante o horário de pico sem intervenção técnica.',
       links: [
-        { label: 'API', href: 'https://github.com/KriawqZero/sushi-api' },
-        { label: 'Admin', href: 'https://github.com/KriawqZero/sushi-admin' },
-        { label: 'App', href: 'https://github.com/KriawqZero/sushi-app' }
+        { label: 'API', href: 'https://github.com/KriawqZero/rv-api' },
+        { label: 'Admin', href: 'https://github.com/KriawqZero/rv-admin' },
+        { label: 'App', href: 'https://github.com/KriawqZero/rv-frontend' }
       ]
     },
     {
@@ -189,7 +189,7 @@ export const content = {
       stack: ['HTML5 Canvas', 'TypeScript', 'Vite'],
       narrative: 'Um experimento escolar de renderização e gamificação. O foco técnico foi abandonar engines prontas e gerenciar o game loop, colisões e renderização gráfica diretamente no HTML5 Canvas com TypeScript puro.',
       links: [
-        { label: 'Repositório', href: 'https://github.com/KriawqZero/maze-game' }
+        { label: 'Repositório', href: 'https://github.com/KriawqZero/jogo_matematica' }
       ]
     },
     {
@@ -199,7 +199,7 @@ export const content = {
       stack: ['Java', 'NeoForge', 'Minecraft API'],
       narrative: 'Construído em Java sobre o ecossistema NeoForge para resolver o problema de armazenamento em grande escala no jogo. O maior aprendizado foi lidar com a complexidade e as restrições da API interna do Minecraft.',
       links: [
-        { label: 'Repositório', href: 'https://github.com/KriawqZero/storage-crates' }
+        { label: 'Repositório', href: 'https://github.com/KriawqZero/kriawqsstoragecrates' }
       ]
     },
     {
@@ -209,7 +209,7 @@ export const content = {
       stack: ['Java', 'NeoForge', 'Gradle'],
       narrative: 'Focado em adicionar componentes mecânicos ao jogo. A arquitetura exigiu manipulação profunda dos estados de blocos e da física nativa do motor do Minecraft, além da configuração minuciosa de builds no Gradle.',
       links: [
-        { label: 'Repositório', href: 'https://github.com/KriawqZero/simple-machines' }
+        { label: 'Repositório', href: 'https://github.com/KriawqZero/kriawqssimplemachines-26.1.2' }
       ]
     },
     {
@@ -220,7 +220,7 @@ export const content = {
       narrative: 'Site institucional desenvolvido para minha marca como freelancer. O objetivo foi criar uma página de alta conversão para atrair pequenas empresas e microempreendedores, utilizando Framer Motion para micro-interações que transmitem profissionalismo.',
       links: [
         { label: 'Acessar Site', href: 'https://avantis.dev' },
-        { label: 'Repositório', href: 'https://github.com/KriawqZero/portfolio-avantis' }
+        { label: 'Repositório', href: 'https://github.com/KriawqZero/avantis-porfolio' }
       ]
     }
   ],
