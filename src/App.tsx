@@ -5,10 +5,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import CursorGlow from './components/CursorGlow'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import FeaturedProject from './components/FeaturedProject'
-import AboutMe from './components/AboutMe'
-import OtherProjects from './components/OtherProjects'
+import Trajectory from './components/Trajectory'
 import Avantis from './components/Avantis'
+import AboutMe from './components/AboutMe'
 import DevProcess from './components/DevProcess'
 import Contact from './components/Contact'
 
@@ -79,10 +78,9 @@ export default function App() {
 
       <main style={{ position: 'relative', zIndex: 10 }}>
         <Hero />
-        <FeaturedProject />
-        <AboutMe />
-        <OtherProjects />
+        <Trajectory />
         <Avantis />
+        <AboutMe />
         <DevProcess />
         <Contact />
       </main>
