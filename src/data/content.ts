@@ -43,10 +43,10 @@ export const content = {
         glowColor: 'rgba(63, 24, 171, 0.12)',
         projects: [
           {
-            name: 'Ecossistema Corretor',
+            name: 'Catálogo & App Imobiliário',
             type: 'Solução sob Medida',
             year: '2025',
-            narrative: 'Desenvolvi uma plataforma imobiliária completa para o meu pai. Ele é corretor de imóveis e leigo em tecnologia. Criei um portal público em Next.js altamente performático para indexação no Google (SEO) e um aplicativo mobile nativo em Expo que ele usa na rua para cadastrar imóveis. Integrei a API da OpenAI para receber os dados crus coletados por ele e gerar descrições comerciais impecáveis automaticamente.',
+            narrative: 'Um site catálogo de imóveis para o meu pai e um app simples para ele enviar fotos da rua. A interface é super direta, mas o verdadeiro brilho é a tecnologia invisível: ele manda os dados todos crus e bagunçados pelo celular, e a OpenAI formata tudo em uma descrição comercial perfeita para o site. É engenharia tirando o atrito da vida de um usuário leigo.',
             stack: 'Next.js SSR · Expo/React Native · Prisma · MinIO · OpenAI API',
             links: [
               { label: 'Visitar Site', href: 'https://marciliobarbosacorretor.com.br/' },
@@ -59,7 +59,7 @@ export const content = {
             name: 'SISCO',
             type: 'Acadêmico (Em Produção)',
             year: '2025',
-            narrative: 'Meu Trabalho de Conclusão de Curso do ensino médio técnico no IFMS. Em vez de deixar o código morrer na gaveta da escola, projetei uma arquitetura robusta baseada no Service Pattern e processamento assíncrono em fila para automatizar a contagem de horas complementares. O projeto foi homologado e hoje opera em produção real, gerenciando a vida acadêmica de mais de 200 alunos e coordenadores.',
+            narrative: 'Meu TCC do ensino médio. O impacto real desse sistema não está na arquitetura do código, mas na organização. Antes dele, a gestão de horas complementares era um caos de planilhas desorganizadas jogadas em grupos de WhatsApp. O SISCO pegou essa bagunça e transformou num sistema de verdade, centralizado, que hoje mais de 200 alunos e coordenadores usam. Eu substituí o caos do Excel por um software real.',
             stack: 'Laravel 11 · Livewire 3 · Alpine.js · MariaDB',
             links: [{ label: 'Repositório', href: 'https://github.com/KriawqZero/SISCO-IFMS' }],
             stat: { value: '200+', label: 'usuários ativos' },
@@ -103,19 +103,19 @@ export const content = {
         glowColor: 'rgba(239, 68, 68, 0.08)',
         projects: [
           {
-            name: 'Mine Voxel Engine (Legado)',
+            name: 'Minecraft Clone (OpenGL Legado)',
             type: 'Laboratório Pessoal',
             year: '2024',
-            narrative: 'Para entender como os motores gráficos funcionam sem a abstração de engines prontas, decidi construir um motor baseado em voxels usando C++ e OpenGL clássico. O maior desafio técnico foi desenvolver o sistema de câmera 3D em primeira pessoa, calculando sensibilidade do mouse, pitch, yaw e matrizes de projeção usando puramente matemática vetorial no ensino médio.',
+            narrative: 'Sim, o nome original era só uma abreviação preguiçosa para Minecraft. Minha intenção aqui era tentar recriar um clone básico do jogo do zero para entender matemática 3D e renderização gráfica sem engines prontas. Quebrei muito a cabeça no ensino médio com matrizes de projeção e vetores só para fazer uma câmera em primeira pessoa funcionar em C++.',
             stack: 'C++20 · OpenGL · GLFW · GLM · Dear ImGui',
             links: [{ label: 'Repositório', href: 'https://github.com/KriawqZero/mine' }],
             stat: { value: '3D Math', label: 'pipeline clássica' },
           },
           {
-            name: 'Mine (OpenGL Moderno)',
+            name: 'Minecraft Clone (Moderno)',
             type: 'Experimento Incompleto',
             year: '2024',
-            narrative: 'Uma tentativa honesta de refatorar o motor de voxels anterior para a pipeline programável moderna da GPU, utilizando Shaders, VBOs e VAOs. O projeto acabou sendo congelado devido ao final do semestre letivo na escola, tornando-se um cemitério de código altamente produtivo. Guardar esse repositório público é um lembrete do meu primeiro contato bruto com alocação manual de memória e compilação de shaders na unha.',
+            narrative: 'Minha tentativa de pegar o clone de Minecraft e reescrevê-lo para a pipeline moderna da GPU (com Shaders e VBOs). O semestre letivo acabou e o projeto virou um cemitério de código incompleto, mas me ensinou na força bruta como alocar memória na mão e compilar shaders. Um atrito direto e muito divertido com a máquina.',
             stack: 'C++20 · OpenGL Core Profile · GLEW · CMake',
             links: [{ label: 'Repositório', href: 'https://github.com/KriawqZero/mine_glModerno' }],
             stat: { value: 'GPU Pipeline', label: 'projeto incompleto' },
@@ -168,6 +168,62 @@ export const content = {
       },
     ],
   },
+
+  archive: [
+    {
+      year: '2025',
+      name: 'Sushi do Verão (Ecossistema)',
+      type: 'Sistema Comercial',
+      stack: ['NestJS', 'Next.js', 'Expo', 'PostgreSQL'],
+      narrative: 'Desenvolvido para dar autonomia real à operação do restaurante. O desafio central foi modelar a API e gerenciar o estado no cliente para que a equipe pudesse alterar preços e pratos durante o horário de pico sem intervenção técnica.',
+      links: [
+        { label: 'API', href: 'https://github.com/KriawqZero/sushi-api' },
+        { label: 'Admin', href: 'https://github.com/KriawqZero/sushi-admin' },
+        { label: 'App', href: 'https://github.com/KriawqZero/sushi-app' }
+      ]
+    },
+    {
+      year: '2024',
+      name: 'Labirinto Geométrico',
+      type: 'Web Game',
+      stack: ['HTML5 Canvas', 'TypeScript', 'Vite'],
+      narrative: 'Um experimento escolar de renderização e gamificação. O foco técnico foi abandonar engines prontas e gerenciar o game loop, colisões e renderização gráfica diretamente no HTML5 Canvas com TypeScript puro.',
+      links: [
+        { label: 'Repositório', href: 'https://github.com/KriawqZero/maze-game' }
+      ]
+    },
+    {
+      year: '2024',
+      name: 'Storage Crates',
+      type: 'NeoForge Mod',
+      stack: ['Java', 'NeoForge', 'Minecraft API'],
+      narrative: 'Construído em Java sobre o ecossistema NeoForge para resolver o problema de armazenamento em grande escala no jogo. O maior aprendizado foi lidar com a complexidade e as restrições da API interna do Minecraft.',
+      links: [
+        { label: 'Repositório', href: 'https://github.com/KriawqZero/storage-crates' }
+      ]
+    },
+    {
+      year: '2024',
+      name: 'Simple Machines',
+      type: 'NeoForge Mod',
+      stack: ['Java', 'NeoForge', 'Gradle'],
+      narrative: 'Focado em adicionar componentes mecânicos ao jogo. A arquitetura exigiu manipulação profunda dos estados de blocos e da física nativa do motor do Minecraft, além da configuração minuciosa de builds no Gradle.',
+      links: [
+        { label: 'Repositório', href: 'https://github.com/KriawqZero/simple-machines' }
+      ]
+    },
+    {
+      year: '2023',
+      name: 'Portfolio Avantis',
+      type: 'Landing Page',
+      stack: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
+      narrative: 'Site institucional desenvolvido para minha marca como freelancer. O objetivo foi criar uma página de alta conversão para atrair pequenas empresas e microempreendedores, utilizando Framer Motion para micro-interações que transmitem profissionalismo.',
+      links: [
+        { label: 'Acessar Site', href: 'https://avantis.dev' },
+        { label: 'Repositório', href: 'https://github.com/KriawqZero/portfolio-avantis' }
+      ]
+    }
+  ],
 
   about: {
     number: '03',

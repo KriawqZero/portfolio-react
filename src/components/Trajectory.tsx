@@ -3,10 +3,12 @@ import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { content } from '../data/content'
+import ArchiveOverlay from './ArchiveOverlay'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function Trajectory() {
+  const [isArchiveOpen, setIsArchiveOpen] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
   const pinContainerRef = useRef<HTMLDivElement>(null)
   const progressBarRef = useRef<HTMLDivElement>(null)
@@ -306,7 +308,35 @@ export default function Trajectory() {
               </div>
             ))}
           </div>
+
+          {/* Mobile Archive Trigger */}
+          <div style={{ padding: '4rem 0 2rem 0', display: 'flex', justifyContent: 'center' }}>
+            <button 
+              onClick={() => setIsArchiveOpen(true)}
+              style={{
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: '99px',
+                padding: '1rem 2rem',
+                color: 'var(--text-secondary)',
+                fontSize: 'var(--text-sm)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em',
+                fontWeight: 600,
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                width: '100%',
+                justifyContent: 'center',
+                transition: 'all 0.2s'
+              }}
+            >
+              Explorar Arquivo Completo ↗
+            </button>
+          </div>
         </div>
+        <ArchiveOverlay isOpen={isArchiveOpen} onClose={() => setIsArchiveOpen(false)} />
       </section>
     )
   }
@@ -483,8 +513,39 @@ BUILD SUCCESSFUL`}
                 </div>
               </div>
 
-              {/* Skip Trajectory */}
-              <button 
+              {/* Extras (Desktop Bottom Nav) */}
+              <div style={{ marginTop: 'auto', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <button
+                  onClick={() => setIsArchiveOpen(true)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    textAlign: 'left',
+                    color: 'var(--text-primary)',
+                    fontSize: 'var(--text-xs)',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    width: 'fit-content',
+                    transition: 'color 0.2s',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem'
+                  }}
+                  onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent-light)'}
+                  onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+                >
+                  <span style={{ 
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', 
+                    width: '24px', height: '24px', borderRadius: '50%', 
+                    background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' 
+                  }}>+</span>
+                  Explorar Arquivo Completo
+                </button>
+                
+                {/* Skip Trajectory */}
+                <button 
                 onClick={handleSkip}
                 style={{
                   background: 'none',
@@ -505,6 +566,7 @@ BUILD SUCCESSFUL`}
               >
                 Pular trajetória ↓
               </button>
+            </div>
             </div>
 
             {/* Coluna Direita: Painéis de Projeto */}
@@ -587,6 +649,8 @@ BUILD SUCCESSFUL`}
           </div>
         </div>
       </div>
+
+      <ArchiveOverlay isOpen={isArchiveOpen} onClose={() => setIsArchiveOpen(false)} />
     </section>
   )
 }
