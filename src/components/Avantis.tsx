@@ -208,6 +208,11 @@ export default function Avantis() {
           .avantis-text-col { height: 100dvh; padding-top: 0; }
           .avantis-logo-col { padding-top: 50dvh; padding-bottom: 50dvh; }
         }
+        
+        @media (max-width: 767px) {
+          .avantis-grid { gap: 3rem !important; }
+          .avantis-logo-col { padding: 0 0 4rem 0; }
+        }
 
         @media (hover: hover) and (pointer: fine) {
           .avantis-card-link:hover {

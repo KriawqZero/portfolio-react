@@ -333,7 +333,7 @@ export default function Contact() {
             padding-top: var(--section-spacing) !important;
             padding-bottom: 4rem !important;
           }
-          .ep-label, .ep-title, .ep-text, .ep-copyright { opacity: 0 !important; }
+          .ep-label, .ep-title, .ep-text, .ep-copyright { opacity: 0; }
         }
       `}</style>
     </section>

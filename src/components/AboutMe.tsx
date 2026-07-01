@@ -166,7 +166,7 @@ export default function AboutMe() {
 
           {/* Right Column — Scrolling Stats */}
           <div className="about-stats-col" style={{ display: 'flex', alignItems: 'center', zIndex: 10 }}>
-            <div ref={statsContainerRef} style={{ display: 'flex', flexDirection: 'column', gap: '4rem', width: '100%' }}>
+            <div ref={statsContainerRef} className="about-stats-container" style={{ display: 'flex', flexDirection: 'column', gap: '4rem', width: '100%' }}>
               {data.stats.map((stat, i) => {
                 const numOnly = stat.value.replace(/[^0-9.]/g, '')
                 const prefix = stat.value.replace(/[0-9.].*/g, '')
@@ -253,6 +253,9 @@ export default function AboutMe() {
             top: 20%;
             opacity: 0.6;
           }
+        }
+        @media (max-width: 767px) {
+          .about-stats-container { gap: 2rem !important; }
         }
       `}</style>
     </section>

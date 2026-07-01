@@ -213,6 +213,10 @@ export default function FeaturedProject() {
           .featured-text-col { height: 100dvh; padding-top: 0; }
           .featured-mockup-col { padding-top: 50dvh; padding-bottom: 50dvh; }
         }
+        @media (max-width: 767px) {
+          .featured-grid { gap: 3rem !important; }
+          .featured-mockup-col { padding: 0 0 4rem 0; }
+        }
       `}</style>
     </section>
   )

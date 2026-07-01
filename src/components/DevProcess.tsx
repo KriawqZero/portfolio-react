@@ -104,7 +104,7 @@ export default function DevProcess() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
                 style={{
-                  padding: '2rem',
+                  padding: 'clamp(1.25rem, 5vw, 2rem)',
                   borderRadius: 16,
                   background: 'var(--glass-bg)',
                   border: '1px solid var(--glass-border)',
@@ -118,7 +118,7 @@ export default function DevProcess() {
                   color: 'rgba(255,255,255,0.03)',
                   position: 'absolute',
                   top: 12,
-                  right: 16,
+                  right: 'clamp(1rem, 4vw, 1.5rem)',
                 }}>
                   {step.number}
                 </span>

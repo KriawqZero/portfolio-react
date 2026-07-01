@@ -148,6 +148,7 @@ export default function Hero() {
         alignItems: 'center',
         paddingTop: 'calc(var(--section-spacing) / 2)',
         paddingBottom: 'calc(var(--section-spacing) / 2)',
+        overflow: 'hidden',
       }}
     >
       <div className="container" style={{ position: 'relative', zIndex: 10, height: '100%' }}>
@@ -261,15 +262,17 @@ export default function Hero() {
         @media (max-width: 1023px) {
           .hero-art-col {
             position: relative !important;
-            height: 50vh !important;
+            height: 40vh !important;
+            min-height: 300px;
             width: 100% !important;
-            margin-top: 4rem;
+            margin-top: 2rem;
             right: auto;
           }
           .hero-grid { display: flex !important; flex-direction: column; }
           .hero-photo {
             bottom: 0 !important;
-            height: 90% !important;
+            height: 100% !important;
+            max-width: 100vw;
             left: 50% !important;
           }
         }
