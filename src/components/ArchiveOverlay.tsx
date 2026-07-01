@@ -12,11 +12,13 @@ export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps)
   const containerRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const rowsRef = useRef<(HTMLDivElement | null)[]>([])
+  const wasOpen = useRef(false)
 
   useEffect(() => {
     if (!containerRef.current || !contentRef.current) return
 
     if (isOpen) {
+      wasOpen.current = true
       document.body.style.overflow = 'hidden'
       
       const tl = gsap.timeline()
@@ -29,16 +31,9 @@ export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps)
           { opacity: 1, y: 0, duration: 0.5, stagger: 0.05, ease: 'power3.out' },
           '-=0.2'
         )
-    } else {
-      const tl = gsap.timeline({
-        onComplete: () => {
-          gsap.set(containerRef.current, { display: 'none' })
-          document.body.style.overflow = ''
-        }
-      })
-      
-      tl.to(rowsRef.current, { opacity: 0, y: -10, duration: 0.3, stagger: 0.02, ease: 'power2.in' })
-        .to(containerRef.current, { autoAlpha: 0, duration: 0.4, ease: 'power2.in' }, '-=0.1')
+    } else if (wasOpen.current) {
+      // Pragmatic fix: Hard refresh to top of page to reset all GSAP instances
+      window.location.href = window.location.pathname
     }
 
     const handleEsc = (e: KeyboardEvent) => {
