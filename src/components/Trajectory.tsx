@@ -219,6 +219,23 @@ export default function Trajectory() {
                     viewport={{ once: true, margin: '-10%' }}
                     transition={{ duration: 0.8 }}
                   >
+                    {'type' in project && project.type && (
+                      <span style={{
+                        display: 'inline-block',
+                        width: 'fit-content',
+                        padding: '0.25rem 0.5rem',
+                        marginBottom: '0.75rem',
+                        fontSize: '10px',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.2em',
+                        color: 'rgba(255, 255, 255, 0.5)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        borderRadius: '9999px',
+                        fontFamily: 'monospace'
+                      }}>
+                        {project.type}
+                      </span>
+                    )}
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
                       <h4 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-3xl)', fontWeight: 700, color: 'var(--text-primary)' }}>
                         {project.name}
@@ -478,6 +495,23 @@ BUILD SUCCESSFUL`}
                     willChange: 'transform, opacity, filter'
                   }}
                 >
+                  {'type' in project && project.type && (
+                    <span style={{
+                      display: 'inline-block',
+                      width: 'fit-content',
+                      padding: '0.25rem 0.625rem',
+                      marginBottom: '1rem',
+                      fontSize: '11px',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.2em',
+                      color: 'rgba(255, 255, 255, 0.5)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      borderRadius: '9999px',
+                      fontFamily: 'monospace'
+                    }}>
+                      {project.type}
+                    </span>
+                  )}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '2rem' }}>
                     <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', fontWeight: 700, color: 'var(--text-primary)' }}>
                       {project.name}
