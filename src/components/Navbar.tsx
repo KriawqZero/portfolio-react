@@ -46,9 +46,9 @@ export default function Navbar() {
           }}
         >
           <img
-            src="/logo-simple.png"
+            src="/marciliortiz-logo-light.svg"
             alt="MO"
-            style={{ height: 32, width: 'auto' }}
+            style={{ height: 48, width: 'auto' }}
           />
         </a>
       </div>

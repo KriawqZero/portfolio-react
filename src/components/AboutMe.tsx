@@ -125,7 +125,7 @@ export default function AboutMe() {
         position: 'relative',
         paddingTop: 'var(--section-spacing)',
         paddingBottom: 'var(--section-spacing)',
-        background: '#030407', // Slightly darker to blend with App.tsx storytelling
+        background: 'transparent',
         overflow: 'hidden',
       }}
     >
@@ -216,11 +216,11 @@ export default function AboutMe() {
                 willChange: 'transform, filter'
               }}
             >
-              <img src="/logo-simple.svg" alt="MO" style={{ width: 'clamp(200px, 30vw, 400px)', opacity: 0.1, userSelect: 'none', pointerEvents: 'none', position: 'relative', filter: 'grayscale(1)' }} />
+              <img src="/marciliortiz-logo-light.svg" alt="MO" style={{ width: 'clamp(200px, 30vw, 400px)', opacity: 0.1, userSelect: 'none', pointerEvents: 'none', position: 'relative', filter: 'grayscale(1)' }} />
 
               {/* Orbital rings */}
-              <div style={{ position: 'absolute', inset: '10%', border: '1px solid rgba(63, 24, 171, 0.15)', borderRadius: '50%', borderTopColor: 'transparent', borderBottomColor: 'transparent' }} />
-              <div style={{ position: 'absolute', inset: '20%', border: '1px dashed rgba(63, 24, 171, 0.08)', borderRadius: '50%', transform: 'rotate(45deg)' }} />
+              <div style={{ position: 'absolute', inset: '10%', border: '1px solid var(--accent-glow-strong)', borderRadius: '50%', borderTopColor: 'transparent', borderBottomColor: 'transparent' }} />
+              <div style={{ position: 'absolute', inset: '20%', border: '1px dashed var(--accent-glow)', borderRadius: '50%', transform: 'rotate(45deg)' }} />
             </div>
           </div>
 

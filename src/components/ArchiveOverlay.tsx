@@ -53,12 +53,13 @@ export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps)
         display: 'none',
         opacity: 0,
         visibility: 'hidden',
-        background: 'rgba(9, 9, 11, 0.85)',
+        background: 'rgba(255, 255, 255, 0.6)',
         backdropFilter: 'blur(20px)',
         WebkitBackdropFilter: 'blur(20px)',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 'var(--container-padding)'
+        padding: 'var(--container-padding)',
+        color: 'var(--text-primary)'
       }}
     >
       <div 
@@ -69,11 +70,11 @@ export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps)
           height: '80vh',
           display: 'flex',
           flexDirection: 'column',
-          background: 'var(--bg-surface)',
+          background: 'var(--bg-primary)',
           border: '1px solid var(--glass-border)',
-          borderRadius: '24px',
+          borderRadius: '16px',
           overflow: 'hidden',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
+          boxShadow: '0 20px 40px rgba(0, 0, 0, 0.08)'
         }}
       >
         <style>
@@ -132,7 +133,7 @@ export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps)
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.color = 'var(--text-primary)'
-              e.currentTarget.style.background = 'rgba(255,255,255,0.05)'
+              e.currentTarget.style.background = 'rgba(0,0,0,0.05)'
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.color = 'var(--text-secondary)'
@@ -203,9 +204,9 @@ function ArchiveRow({ project, isActive, onClick, onRef }: ArchiveRowProps) {
     <div 
       ref={onRef}
       style={{
-        borderBottom: isActive ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(255,255,255,0.02)',
+        borderBottom: '1px solid var(--glass-border)',
         transition: 'border-color 0.3s, background 0.3s',
-        background: isActive ? 'rgba(255,255,255,0.03)' : 'transparent',
+        background: isActive ? 'var(--bg-card-hover)' : 'transparent',
       }}
     >
       <div
@@ -214,9 +215,11 @@ function ArchiveRow({ project, isActive, onClick, onRef }: ArchiveRowProps) {
         style={{
           padding: '1.25rem 2rem',
           cursor: 'pointer',
+          transition: 'background 0.2s ease',
+          background: isActive ? 'var(--bg-card-hover)' : 'transparent'
         }}
-        onMouseEnter={(e) => { if (!isActive) e.currentTarget.parentElement!.style.background = 'rgba(255,255,255,0.02)' }}
-        onMouseLeave={(e) => { if (!isActive) e.currentTarget.parentElement!.style.background = 'transparent' }}
+        onMouseEnter={(e) => { if (!isActive) e.currentTarget.style.background = 'var(--bg-card)' }}
+        onMouseLeave={(e) => { if (!isActive) e.currentTarget.style.background = 'transparent' }}
       >
         <div className="archive-year" style={{ color: 'var(--text-muted)', fontFamily: 'monospace' }}>{project.year}</div>
         <div style={{ color: 'var(--text-primary)', fontWeight: 500 }}>{project.name}</div>
@@ -226,7 +229,7 @@ function ArchiveRow({ project, isActive, onClick, onRef }: ArchiveRowProps) {
             <span key={j} style={{
               fontSize: '0.7rem',
               padding: '0.2rem 0.5rem',
-              background: 'rgba(255,255,255,0.05)',
+              background: 'rgba(0,0,0,0.05)',
               borderRadius: '4px',
               color: 'var(--text-secondary)'
             }}>
@@ -267,8 +270,8 @@ function ArchiveRow({ project, isActive, onClick, onRef }: ArchiveRowProps) {
                   style={{ 
                     padding: '0.5rem 1rem', 
                     fontSize: 'var(--text-xs)',
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(255,255,255,0.1)',
+                    background: 'rgba(0,0,0,0.03)',
+                    border: '1px solid var(--glass-border)',
                     borderRadius: '4px',
                     color: 'var(--text-primary)',
                     textDecoration: 'none',
@@ -279,8 +282,8 @@ function ArchiveRow({ project, isActive, onClick, onRef }: ArchiveRowProps) {
                     textTransform: 'uppercase',
                     letterSpacing: '0.05em'
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
-                  onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
+                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.08)'}
+                  onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(0,0,0,0.03)'}
                 >
                   {link.label} ↗
                 </a>

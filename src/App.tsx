@@ -26,15 +26,15 @@ export default function App() {
         trigger: '#sobre',
         start: 'top center',
         end: 'bottom center',
-        onEnter: () => gsap.to('body', { backgroundColor: '#050506', duration: 1 }),
-        onLeaveBack: () => gsap.to('body', { backgroundColor: '#09090B', duration: 1 }),
+        onEnter: () => gsap.to('body', { backgroundColor: 'var(--bg-surface)', duration: 1 }),
+        onLeaveBack: () => gsap.to('body', { backgroundColor: 'var(--bg-deep)', duration: 1 }),
       })
 
       ScrollTrigger.create({
         trigger: '#processo', // We need to add this ID to DevProcess
         start: 'top center',
-        onEnter: () => gsap.to('body', { backgroundColor: '#000000', duration: 1 }),
-        onLeaveBack: () => gsap.to('body', { backgroundColor: '#050506', duration: 1 }),
+        onEnter: () => gsap.to('body', { backgroundColor: 'var(--bg-primary)', duration: 1 }),
+        onLeaveBack: () => gsap.to('body', { backgroundColor: 'var(--bg-surface)', duration: 1 }),
       })
 
       // Central storytelling line
@@ -66,11 +66,11 @@ export default function App() {
       <div ref={bgRef} style={{ position: 'fixed', inset: 0, zIndex: 0, pointerEvents: 'none' }}>
         <div style={{
           position: 'absolute', inset: 0,
-          background: 'radial-gradient(ellipse 80% 50% at 50% -20%, rgba(63, 24, 171, 0.08), transparent)',
+          background: 'radial-gradient(ellipse 80% 50% at 50% -20%, var(--accent-glow-strong), transparent)',
         }} />
         <div style={{
           position: 'absolute', inset: 0,
-          background: 'radial-gradient(ellipse 60% 40% at 80% 60%, rgba(63, 24, 171, 0.04), transparent)',
+          background: 'radial-gradient(ellipse 60% 40% at 80% 60%, var(--accent-glow), transparent)',
         }} />
       </div>
 

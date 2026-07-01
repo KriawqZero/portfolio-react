@@ -218,7 +218,7 @@ export default function Hero() {
             <img
               ref={logoRef}
               className="hero-fade hero-logo"
-              src="/marciliortiz-logo.svg"
+              src="/marciliortiz-logo-light.svg"
               alt=""
             />
             {/* Layer -1: Purple Glow */}

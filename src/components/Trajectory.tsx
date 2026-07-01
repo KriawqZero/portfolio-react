@@ -253,11 +253,10 @@ export default function Trajectory() {
                         padding: '0.25rem 0.5rem',
                         marginBottom: '0.75rem',
                         fontSize: '10px',
-                        textTransform: 'uppercase',
-                        letterSpacing: '0.2em',
-                        color: 'rgba(255, 255, 255, 0.5)',
-                        border: '1px solid rgba(255, 255, 255, 0.1)',
-                        borderRadius: '9999px',
+                        fontWeight: 600,
+                        color: 'var(--text-secondary)',
+                        border: '1px solid var(--glass-border)',
+                        borderRadius: '4px',
                         fontFamily: 'monospace'
                       }}>
                         {project.type}
@@ -314,9 +313,9 @@ export default function Trajectory() {
             <button
               onClick={() => setIsArchiveOpen(true)}
               style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: '99px',
+                background: 'rgba(0,0,0,0.03)',
+                border: '1px solid var(--glass-border)',
+                borderRadius: '100px',
                 padding: '1rem 2rem',
                 color: 'var(--text-secondary)',
                 fontSize: 'var(--text-sm)',
@@ -369,22 +368,22 @@ export default function Trajectory() {
           />
 
           {/* Surface Grid */}
-          <div className="era-visual" style={{ position: 'absolute', inset: 0, opacity: 1, backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '100px 100px', transform: 'perspective(500px) rotateX(60deg) translateY(-100px) scale(2)' }} />
+          <div className="era-visual" style={{ position: 'absolute', inset: 0, opacity: 1, backgroundImage: 'linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px)', backgroundSize: '100px 100px', transform: 'perspective(500px) rotateX(60deg) translateY(-100px) scale(2)' }} />
 
           {/* Infra Logs */}
-          <div className="era-visual" style={{ position: 'absolute', inset: 0, opacity: 0, padding: '4rem', fontFamily: 'monospace', color: 'rgba(16, 185, 129, 0.05)', fontSize: '12px', display: 'flex', flexDirection: 'column', gap: '8px', overflow: 'hidden' }}>
+          <div className="era-visual" style={{ position: 'absolute', inset: 0, opacity: 0, padding: '4rem', fontFamily: 'monospace', color: 'rgba(16, 185, 129, 0.3)', fontSize: '12px', display: 'flex', flexDirection: 'column', gap: '8px', overflow: 'hidden' }}>
             {Array.from({ length: 40 }).map((_, i) => <div key={i}>[WORKER-{Math.floor(Math.random() * 9999)}] SYNC STORE_{Math.floor(Math.random() * 99)} OK - EXTRACTED {Math.floor(Math.random() * 50)} RECORDS {Date.now() - i * 1000}ms</div>)}
           </div>
 
           {/* LowLevel Wireframe */}
           <div className="era-visual" style={{ position: 'absolute', inset: 0, opacity: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ width: '40vw', height: '40vw', border: '1px solid rgba(239, 68, 68, 0.1)', borderRadius: '50%', transform: 'rotateX(75deg) rotateY(15deg) rotateZ(45deg)', position: 'absolute' }} />
-            <div style={{ width: '30vw', height: '30vw', border: '1px solid rgba(239, 68, 68, 0.1)', borderRadius: '50%', transform: 'rotateX(75deg) rotateY(15deg) rotateZ(45deg)', position: 'absolute' }} />
-            <div style={{ width: '20vw', height: '20vw', border: '1px solid rgba(239, 68, 68, 0.1)', borderRadius: '50%', transform: 'rotateX(75deg) rotateY(15deg) rotateZ(45deg)', position: 'absolute' }} />
+            <div style={{ width: '40vw', height: '40vw', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '50%', transform: 'rotateX(75deg) rotateY(15deg) rotateZ(45deg)', position: 'absolute' }} />
+            <div style={{ width: '30vw', height: '30vw', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '50%', transform: 'rotateX(75deg) rotateY(15deg) rotateZ(45deg)', position: 'absolute' }} />
+            <div style={{ width: '20vw', height: '20vw', border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: '50%', transform: 'rotateX(75deg) rotateY(15deg) rotateZ(45deg)', position: 'absolute' }} />
           </div>
 
           {/* Roots Terminal */}
-          <div className="era-visual" style={{ position: 'absolute', inset: 0, opacity: 0, padding: '4rem', fontFamily: 'monospace', color: 'rgba(245, 158, 11, 0.06)', fontSize: '14px', whiteSpace: 'pre-line' }}>
+          <div className="era-visual" style={{ position: 'absolute', inset: 0, opacity: 0, padding: '4rem', fontFamily: 'monospace', color: 'rgba(245, 158, 11, 0.4)', fontSize: '14px', whiteSpace: 'pre-line' }}>
             {`C:\\marcilinho\\PythonP\\Player> python main.py
 [INFO] Loading dependencies...
 [INFO] Found 342 .mp3 files
@@ -492,7 +491,7 @@ BUILD SUCCESSFUL`}
               </div>
 
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '2rem' }}>
-                <div style={{ position: 'relative', width: 2, height: 120, background: 'rgba(255,255,255,0.05)', borderRadius: 2 }}>
+                <div style={{ position: 'relative', width: 2, height: 120, background: 'rgba(0,0,0,0.06)', borderRadius: 2 }}>
                   <div
                     ref={progressBarRef}
                     style={{
@@ -539,33 +538,10 @@ BUILD SUCCESSFUL`}
                   <span style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     width: '24px', height: '24px', borderRadius: '50%',
-                    background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)'
+                    background: 'rgba(0,0,0,0.03)', border: '1px solid rgba(0,0,0,0.08)'
                   }}>+</span>
                   Explorar Arquivo Completo
                 </button>
-
-                {/* Skip Trajectory 
-                <button 
-                onClick={handleSkip}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  color: 'var(--text-muted)',
-                  fontSize: 'var(--text-sm)',
-                  marginTop: 'auto',
-                  textDecoration: 'underline',
-                  textDecorationColor: 'rgba(255,255,255,0.1)',
-                  textUnderlineOffset: '4px',
-                  cursor: 'pointer',
-                  width: 'fit-content',
-                  transition: 'color 0.2s'
-                }}
-                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
-                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
-              >
-                Pular trajetória ↓
-              </button>*/}
               </div>
             </div>
 
@@ -588,12 +564,11 @@ BUILD SUCCESSFUL`}
                       width: 'fit-content',
                       padding: '0.25rem 0.625rem',
                       marginBottom: '1rem',
-                      fontSize: '11px',
-                      textTransform: 'uppercase',
-                      letterSpacing: '0.2em',
-                      color: 'rgba(255, 255, 255, 0.5)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
-                      borderRadius: '9999px',
+                      fontSize: '10px',
+                      fontWeight: 600,
+                      color: 'var(--text-secondary)',
+                      border: '1px solid var(--glass-border)',
+                      borderRadius: '4px',
                       fontFamily: 'monospace'
                     }}>
                       {project.type}

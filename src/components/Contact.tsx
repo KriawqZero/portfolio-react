@@ -170,7 +170,7 @@ export default function Contact() {
         {/* Background Logo Watermark */}
         <img
           ref={logoRef}
-          src="/marciliortiz-logo.svg"
+          src="/marciliortiz-logo-light.svg"
           alt=""
           style={{
             position: 'absolute',
@@ -279,7 +279,7 @@ export default function Contact() {
                   {index < links.length - 1 && (
                     <span className="ep-separator" style={{
                       marginLeft: '1.5rem',
-                      color: 'rgba(255,255,255,0.08)',
+                      color: 'rgba(0,0,0,0.15)',
                       userSelect: 'none',
                       fontSize: 'var(--text-sm)',
                       opacity: 0,

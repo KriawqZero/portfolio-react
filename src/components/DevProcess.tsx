@@ -115,7 +115,7 @@ export default function DevProcess() {
                   fontFamily: 'var(--font-display)',
                   fontSize: 'var(--text-4xl)',
                   fontWeight: 800,
-                  color: 'rgba(255,255,255,0.03)',
+                  color: 'rgba(0,0,0,0.03)',
                   position: 'absolute',
                   top: 12,
                   right: 'clamp(1rem, 4vw, 1.5rem)',
@@ -149,7 +149,7 @@ export default function DevProcess() {
       }}
     >
       {/* Background connector line */}
-      <div style={{ position: 'absolute', top: '50%', left: '50vw', width: '200vw', height: 2, background: 'rgba(255,255,255,0.02)', zIndex: 0 }} />
+      <div style={{ position: 'absolute', top: '50%', left: '50vw', width: '200vw', height: 2, background: 'rgba(0,0,0,0.05)', zIndex: 0 }} />
       <div 
         ref={progressLineRef} 
         style={{ 
@@ -229,7 +229,7 @@ export default function DevProcess() {
                 position: 'relative',
                 overflow: 'hidden',
                 backdropFilter: 'blur(20px)',
-                boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+                boxShadow: '0 20px 40px rgba(0,0,0,0.08)',
               }}
             >
               <div style={{ position: 'absolute', top: '-20%', right: '-20%', width: '60%', height: '60%', background: 'radial-gradient(circle, rgba(63, 24, 171, 0.12) 0%, transparent 60%)', filter: 'blur(30px)', pointerEvents: 'none' }} />
@@ -238,7 +238,7 @@ export default function DevProcess() {
                 fontFamily: 'var(--font-display)',
                 fontSize: 'clamp(5rem, 8vw, 8rem)',
                 fontWeight: 800,
-                color: 'rgba(255,255,255,0.02)',
+                color: 'rgba(0,0,0,0.03)',
                 position: 'absolute',
                 top: -20,
                 right: 20,
