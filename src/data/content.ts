@@ -45,7 +45,7 @@ export const content = {
           {
             name: 'Catálogo & App Imobiliário',
             type: 'Solução sob Medida',
-            year: '2025',
+            year: '2026',
             narrative: 'Um site catálogo de imóveis para o meu pai e um app simples para ele enviar fotos da rua. A interface é super direta, mas o verdadeiro brilho é a tecnologia invisível: ele manda os dados todos crus e bagunçados pelo celular, e a OpenAI formata tudo em uma descrição comercial perfeita para o site. É engenharia tirando o atrito da vida de um usuário leigo.',
             stack: 'Next.js SSR · Expo/React Native · Prisma · MinIO · OpenAI API',
             links: [
@@ -67,7 +67,7 @@ export const content = {
           {
             name: 'VamoAgendar',
             type: 'SaaS Autoral',
-            year: '2025',
+            year: '2026',
             narrative: 'Um software como serviço (SaaS) completo de agendamento online focado em profissionais autônomos. Toda a complexidade da aplicação está concentrada no backend: desenvolvi um motor temporal complexo que calcula slots de horários livres cruzando fusos horários, durações de serviços, feriados locais e agendamentos existentes. Usei este projeto para dominar Server Actions e criptografia de assinaturas via webhooks.',
             stack: 'Next.js 16 · Prisma 7 · PostgreSQL · Mercado Pago · better-auth',
             links: [{ label: 'Repositório', href: 'https://github.com/KriawqZero/vamoagendar' }, { label: 'Visitar', href: 'https://vamoagendar.com.br/' }],
@@ -171,7 +171,7 @@ export const content = {
 
   archive: [
     {
-      year: '2025',
+      year: '2026',
       name: 'Sushi do Verão (Ecossistema)',
       type: 'Sistema Comercial',
       stack: ['NestJS', 'Next.js', 'Expo', 'PostgreSQL'],
