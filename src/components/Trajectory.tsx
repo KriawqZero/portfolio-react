@@ -213,14 +213,14 @@ export default function Trajectory() {
     })
   }
 
-  const handleSkip = () => {
+  /* const handleSkip = () => {
     const st = ScrollTrigger.getById('trajectory-pin')
     if (!st) return
     window.scrollTo({
       top: st.end + 10,
       behavior: 'smooth'
     })
-  }
+  } */
 
   // Mobile rendering (vertical stack)
   if (!isDesktop) {
