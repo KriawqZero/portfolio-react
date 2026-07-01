@@ -1,101 +1,66 @@
-# Marcilio Ortiz - Desenvolvedor Full Stack
+# Marcilio Ortiz — Experiência Digital
 
-Desenvolvedor Full Stack TypeScript especializado em **NestJS**, **React/Next.js** e **Laravel**. Atuando profissionalmente desde 2025, com jornada de programação iniciada em 2017. Sistemas reais em produção com 400+ usuários ativos.
+O código-fonte da minha apresentação profissional. Uma exploração sobre como transformar um portfólio tradicional em uma experiência narrativa e cinematográfica.
 
-## 🚀 Stack Principal
+## Sobre o Projeto
 
-* **Backend**: NestJS (Expert), Node.js, Laravel, TypeScript
-* **Frontend**: React, Next.js, TypeScript, Inertia.js
-* **Cloud & DevOps**: AWS (S3, VPC), Docker, NGINX
-* **Databases**: PostgreSQL, MariaDB/MySQL, Redis
+Quando decidi reescrever meu portfólio, cheguei a uma conclusão simples: listas de tecnologias e grades de cards não contam uma história. Elas apenas exibem dados. Eu não queria construir um currículo digital, queria criar um ambiente que refletisse meu nível de maturidade técnica, minha atenção aos detalhes e minha visão de design de software.
 
-## 💼 Projetos em Destaque
+O resultado é este projeto. Um site onde a interação, o ritmo e o espaço em branco são tão importantes quanto os projetos listados.
 
-### Condy - Sistema de Chamados
-* **Stack**: NestJS, Next.js, PostgreSQL, Docker, AWS
-* **Status**: Em produção
-* **Destaques**: 
-  - Workflow de chamados multi-etapas
-  - Upload dinâmico para AWS S3
-  - Controle de permissões granular
-  - Arquitetura separada frontend/backend
-* [Visitar Site](https://condy.com.br)
+## A Filosofia Narrativa
 
-### WebGestor - Páginas de Vendas CRM
-* **Stack**: Laravel, Inertia.js, React, MySQL, TailwindCSS
-* **Status**: Em produção
-* **Destaques**:
-  - Reformulação completa de páginas de vendas
-  - Integração com banco de dados legado (2006)
-  - Stack moderna integrada a sistema antigo
-  - Sistema multi-cliente em produção
-* [Visitar Site](https://webgestor.com.br/)
+A arquitetura de todo o site foi pensada em torno de uma jornada narrativa contínua. Em vez de simplesmente jogar informações na tela, a interface guia o visitante através de respostas sequenciais a perguntas lógicas:
 
-### SISCO - Sistema IFMS
-* **Stack**: Laravel, Alpine.js, TailwindCSS, MariaDB
-* **Status**: Em produção (uso obrigatório desde 2025)
-* **Impacto**: 
-  - 400+ alunos cadastrados (1º ao 6º semestre)
-  - Redução de 80% no tempo de emissão de certificados
-  - Adoção institucional oficial no campus
-  - Automação completa de processos acadêmicos
-* [Repositório](https://github.com/KriawqZero/IFMS-Sistema_CargaHoraria)
+- **Abertura:** *Quem sou eu e como me posiciono?*
+- **Profundidade:** *Do que sou capaz tecnicamente?*
+- **Processo:** *Como eu penso e estruturo meu trabalho?*
+- **Consistência:** *Esse nível de entrega se mantém em outros projetos?*
+- **Mercado:** *Tenho experiência real solucionando problemas de clientes?*
+- **Contexto Humano:** *Quem é a pessoa por trás do código?*
+- **Epílogo:** *Qual é o nosso próximo passo?*
 
-## 🎓 Formação
+Decisões difíceis foram tomadas durante o desenvolvimento para proteger essa narrativa. Seções clássicas, como "Minhas Habilidades" (aquelas listas intermináveis de logos) ou formulários de contato genéricos, foram completamente descartadas. A ideia é mostrar competência construindo algo maduro, e não apenas listando o que sei usar.
 
-* **Técnico Integrado em Informática** - IFMS (Desde Julho de 2022)
-* Programando desde 2017 (mods, jogos Unity, automações)
+## A Estrutura da Experiência
 
-## 📊 Experiência
+A jornada é dividida em atos interconectados, muitas vezes utilizando ancoragem na tela (*sticky scroll*) para não quebrar a imersão do visitante:
 
-* **8+ anos** programando (desde 2017)
-* **Atuação profissional** desde 2025
-* **400+ usuários** em sistemas de produção
-* **80% redução** em tempo de processos
+* **Hero:** Uma introdução cinematográfica com uso profundo de *glassmorphism* e manipulação de paralaxe responsiva.
+* **O Estudo de Caso:** Um mergulho focado em um sistema complexo, detalhando a arquitetura e as métricas em vez de apenas fornecer um link.
+* **O Processo:** Uma linha do tempo horizontal que exige do usuário uma rolagem física controlada, cadenciando a leitura do meu método de trabalho.
+* **O Catálogo:** Outros projetos apresentados através de um *scrubbing* contínuo, onde o tempo da transição é ditado diretamente pela velocidade do scroll do usuário.
+* **A Vida Real (Avantis):** Um respiro visual focado no mercado e na entrega de valor via consultoria e negócios.
+* **Epílogo:** O substituto do clássico "Contato". Uma seção travada na tela que evolui como os créditos de um filme, terminando com convites (e não botões) para iniciar uma conversa.
 
-## 🛠️ Tecnologias & Ferramentas
+## Sob o Capô: Tecnologias e Arquitetura
 
-### Backend & APIs
-[![NestJS](https://img.shields.io/badge/NestJS-E0234E?logo=nestjs&logoColor=white)](#)
-[![Node.js](https://img.shields.io/badge/Node.js-339933?logo=nodedotjs&logoColor=white)](#)
-[![Laravel](https://img.shields.io/badge/Laravel-FF2D20?logo=laravel&logoColor=white)](#)
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](#)
+O projeto não utiliza bibliotecas pesadas de UI. Tudo foi desenhado para manter controle total sobre a performance e a estética.
 
-### Frontend
-[![React](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black)](#)
-[![Next.js](https://img.shields.io/badge/Next.js-000000?logo=nextdotjs&logoColor=white)](#)
-[![Inertia.js](https://img.shields.io/badge/Inertia.js-9553E9?logo=inertia&logoColor=white)](#)
-[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?logo=tailwind-css&logoColor=white)](#)
+* **React + Vite:** A fundação. O Vite garante um ambiente de desenvolvimento instantâneo e um *build* final extremamente otimizado.
+* **TypeScript:** Segurança e previsibilidade na base de código. Todo o conteúdo textual do site é isolado em um arquivo de dados (`content.ts`) fortemente tipado, separando estritamente a narrativa da camada de apresentação (componentes).
+* **GSAP (GreenSock) + ScrollTrigger:** O coração das interações. Em vez de basear animações pesadas em estados do React (o que causaria gargalos de renderização), o GSAP manipula diretamente o DOM para manter os 60 FPS, gerenciando revelações por scroll e pinagem de seções.
+* **CSS Puro (Variáveis CSS):** Todo o design system (tipografia, cores, responsividade) vive em CSS Vanilla. O layout mobile, inclusive, desativa as complexas ancoragens cinematográficas para entregar uma experiência vertical clássica, sólida e hiper-fluida em celulares.
 
-### Cloud & DevOps
-[![AWS](https://img.shields.io/badge/AWS-232F3E?logo=amazon-aws&logoColor=white)](#)
-[![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)](#)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)](#)
-[![Redis](https://img.shields.io/badge/Redis-DC382D?logo=redis&logoColor=white)](#)
+## Principais Aprendizados
 
-## 🎯 Especializações
+O maior desafio técnico deste portfólio não foi arquitetar os componentes no React, mas sim dominar o **ritmo da interface**.
 
-* **Arquiteturas Escaláveis**: Microservices, RESTful APIs, SaaS multi-tenant
-* **AWS Cloud**: S3, VPC, configurações avançadas de rede
-* **Integração de Sistemas**: Modernização de sistemas legados
-* **DevOps**: Docker, NGINX, infraestrutura multi-cliente
-* **Automação**: Sistemas de automação de processos acadêmicos e empresariais
+* **O Silêncio Visual:** Aprendi que o que você remove é tão importante quanto o que você adiciona. Eliminar as antigas seções redundantes aumentou drasticamente o peso e o impacto da mensagem que sobrou.
+* **Direção de Scroll:** Integrar o GSAP me ensinou a pensar no *scroll* do usuário não como um simples movimento de página, mas como uma "linha do tempo" onde eu controlo exatamente o que acontece frame a frame.
+* **Menos é Mais (na comunicação):** Substituir formulários frios e textos corporativos por pequenas frases narrativas em cascata foi uma lição valiosa sobre *microcopy* e empatia com o visitante.
+* **Degradação Elegante:** Aceitar que a tela de um smartphone não deve simular um cinema, mas sim entregar a mesma qualidade através de uma abordagem mais simples e robusta.
 
-## 📈 GitHub Stats
+## Executando o Projeto
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=KriawqZero&show_icons=true&theme=dark&hide_border=true&bg_color=0A0A0F&title_color=5B8CFF&icon_color=5B8CFF&text_color=E5E7EB)
+Se você quiser explorar a estrutura, o CSS ou entender como as animações foram orquestradas na prática:
 
-![Linguagens Mais Usadas](https://github-readme-stats.vercel.app/api/top-langs/?username=KriawqZero&layout=compact&theme=dark&hide_border=true&bg_color=0A0A0F&title_color=5B8CFF&text_color=E5E7EB)
-
-## 📫 Contato Profissional
-
-* **Email**: [marciliortizz@gmail.com](mailto:marciliortizz@gmail.com)
-* **LinkedIn**: [Marcilio Ortiz Barbosa](https://www.linkedin.com/in/marcilio-ortiz-barbosa-7b5a35165/)
-* **GitHub**: [@KriawqZero](https://github.com/KriawqZero)
-* **Portfolio**: [marciliortiz.dev.br](https://marciliortiz.dev.br)
-
----
-
-**Disponível para**: Projetos freelance • Desenvolvimento full-stack • Consultoria técnica • Arquitetura de sistemas
-
-*"Transformando problemas complexos em soluções elegantes com código limpo e arquitetura robusta"*
+1. Clone o repositório
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
+3. Inicie o servidor de desenvolvimento:
+   ```bash
+   npm run dev
+   ```
