@@ -13,6 +13,7 @@ export default function Trajectory() {
   const counterRef = useRef<HTMLSpanElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
   const [isDesktop, setIsDesktop] = useState(true)
+  const activeEraIdRef = useRef(content.trajectory.eras[0].id)
 
   const { trajectory: data } = content
   
@@ -58,17 +59,48 @@ export default function Trajectory() {
 
       const tl = gsap.timeline({
         scrollTrigger: {
+          id: 'trajectory-pin',
           trigger: pinContainerRef.current,
           start: 'top top',
-          end: `+=${150 * (N - 1)}%`,
+          end: `+=${70 * (N - 1)}%`,
           pin: true,
-          scrub: 1.5,
+          scrub: 1,
           onUpdate: (self) => {
             if (progressBarRef.current) {
               gsap.set(progressBarRef.current, { scaleY: self.progress })
             }
             
             const activeIndex = Math.min(Math.floor(self.progress * N), N - 1)
+            const activeProject = allProjects[activeIndex]
+            
+            if (activeProject && activeProject.era.id !== activeEraIdRef.current) {
+               activeEraIdRef.current = activeProject.era.id
+               
+               // Update fast travel buttons opacity without triggering re-render
+               document.querySelectorAll('.era-nav-btn').forEach((btn) => {
+                 (btn as HTMLElement).style.opacity = '0.3'
+               })
+               const activeBtn = document.querySelector(`.era-nav-${activeProject.era.id}`)
+               if (activeBtn) {
+                 (activeBtn as HTMLElement).style.opacity = '1'
+               }
+            }
+
+            // Update mini-steppers
+            if (activeProject) {
+              const safeName = activeProject.name.replace(/[^a-zA-Z0-9]/g, '-')
+              document.querySelectorAll('.project-stepper').forEach(el => {
+                (el as HTMLElement).style.opacity = '0.2';
+                (el as HTMLElement).style.width = '8px';
+                (el as HTMLElement).style.background = 'var(--text-muted)';
+              })
+              const activeStepper = document.querySelector(`.project-stepper-${safeName}`)
+              if (activeStepper) {
+                (activeStepper as HTMLElement).style.opacity = '1';
+                (activeStepper as HTMLElement).style.width = '24px';
+                (activeStepper as HTMLElement).style.background = 'var(--text-primary)';
+              }
+            }
             
             if (counterRef.current) {
               counterRef.current.innerText = String(activeIndex + 1).padStart(2, '0')
@@ -139,6 +171,30 @@ export default function Trajectory() {
     return () => mm.revert()
   }, [isDesktop, N, allProjects, data.eras])
 
+  const handleFastTravel = (eraId: string) => {
+    const st = ScrollTrigger.getById('trajectory-pin')
+    if (!st) return
+
+    const projectIndex = allProjects.findIndex(p => p.era.id === eraId)
+    if (projectIndex === -1) return
+
+    const targetScroll = st.start + (projectIndex * window.innerHeight * 0.8)
+
+    window.scrollTo({
+      top: targetScroll,
+      behavior: 'smooth'
+    })
+  }
+
+  const handleSkip = () => {
+    const st = ScrollTrigger.getById('trajectory-pin')
+    if (!st) return
+    window.scrollTo({
+      top: st.end + 10,
+      behavior: 'smooth'
+    })
+  }
+
   // Mobile rendering (vertical stack)
   if (!isDesktop) {
     return (
@@ -189,11 +245,19 @@ export default function Trajectory() {
                         </div>
                       )}
                       
-                      {project.link && (
-                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ padding: '0.75rem 1.5rem' }}>
-                          Acessar <span style={{ marginLeft: '0.5rem' }}>↗</span>
-                        </a>
-                      )}
+                      <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
+                        {'links' in project && project.links ? (
+                          (project.links as {label: string, href: string}[]).map((link, idx) => (
+                            <a key={idx} href={link.href} target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ padding: '0.75rem 1.25rem', fontSize: 'var(--text-xs)' }}>
+                              {link.label} <span style={{ marginLeft: '0.5rem' }}>↗</span>
+                            </a>
+                          ))
+                        ) : 'link' in project && project.link ? (
+                          <a href={project.link as string} target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ padding: '0.75rem 1.5rem' }}>
+                            Acessar <span style={{ marginLeft: '0.5rem' }}>↗</span>
+                          </a>
+                        ) : null}
+                      </div>
                     </div>
                   </motion.div>
                 ))}
@@ -296,9 +360,66 @@ BUILD SUCCESSFUL`}
             {/* Coluna Esquerda: Títulos e Progresso */}
             <div style={{ display: 'flex', flexDirection: 'column', height: '60vh', justifyContent: 'center' }}>
               <p className="section-label" style={{ marginBottom: '1.5rem' }}>{data.label}</p>
-              <h2 className="text-display" style={{ marginBottom: '4rem' }}>{data.title} <span className="gradient-text">{data.titleHighlight}</span></h2>
+              <h2 className="text-display" style={{ marginBottom: '2rem' }}>{data.title} <span className="gradient-text">{data.titleHighlight}</span></h2>
               
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '2rem', marginTop: 'auto' }}>
+              {/* Interactive Index (Fast Travel) */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '3rem' }}>
+                {data.eras.map((era, index) => {
+                  const isInitialActive = index === 0;
+                  
+                  return (
+                    <div key={era.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                      <button
+                        className={`era-nav-btn era-nav-${era.id}`}
+                        onClick={() => handleFastTravel(era.id)}
+                        style={{
+                          background: 'none',
+                          border: 'none',
+                          textAlign: 'left',
+                          fontFamily: 'var(--font-display)',
+                          fontSize: 'var(--text-lg)',
+                          color: 'var(--text-primary)',
+                          opacity: isInitialActive ? 1 : 0.3,
+                          transition: 'opacity 0.3s ease',
+                          cursor: 'pointer',
+                          padding: 0,
+                          width: 'fit-content'
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
+                        onMouseLeave={(e) => {
+                           if (activeEraIdRef.current !== era.id) e.currentTarget.style.opacity = '0.3'
+                        }}
+                      >
+                        {era.name}
+                      </button>
+                      
+                      {/* Mini-stepper */}
+                      <div style={{ display: 'flex', gap: '0.35rem', paddingLeft: '2px' }}>
+                        {era.projects.map((p, pIdx) => {
+                           const isProjectInitialActive = index === 0 && pIdx === 0;
+                           const safeName = p.name.replace(/[^a-zA-Z0-9]/g, '-')
+                           return (
+                             <div 
+                               key={p.name}
+                               className={`project-stepper project-stepper-${safeName}`}
+                               style={{
+                                 height: '4px',
+                                 width: isProjectInitialActive ? '24px' : '8px',
+                                 background: isProjectInitialActive ? 'var(--text-primary)' : 'var(--text-muted)',
+                                 borderRadius: '2px',
+                                 opacity: isProjectInitialActive ? 1 : 0.2,
+                                 transition: 'all 0.3s ease'
+                               }}
+                             />
+                           )
+                        })}
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+              
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '2rem' }}>
                 <div style={{ position: 'relative', width: 2, height: 120, background: 'rgba(255,255,255,0.05)', borderRadius: 2 }}>
                   <div 
                     ref={progressBarRef}
@@ -319,6 +440,29 @@ BUILD SUCCESSFUL`}
                   </span>
                 </div>
               </div>
+
+              {/* Skip Trajectory */}
+              <button 
+                onClick={handleSkip}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  textAlign: 'left',
+                  color: 'var(--text-muted)',
+                  fontSize: 'var(--text-sm)',
+                  marginTop: 'auto',
+                  textDecoration: 'underline',
+                  textDecorationColor: 'rgba(255,255,255,0.1)',
+                  textUnderlineOffset: '4px',
+                  cursor: 'pointer',
+                  width: 'fit-content',
+                  transition: 'color 0.2s'
+                }}
+                onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-secondary)'}
+                onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+              >
+                Pular trajetória ↓
+              </button>
             </div>
 
             {/* Coluna Direita: Painéis de Projeto */}
@@ -363,11 +507,19 @@ BUILD SUCCESSFUL`}
                       <div />
                     )}
                     
-                    {project.link && (
-                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ padding: '1rem 2rem' }}>
-                        Explorar <span style={{ marginLeft: '0.5rem' }}>↗</span>
-                      </a>
-                    )}
+                    <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'flex-end', maxWidth: '50%' }}>
+                      {'links' in project && project.links ? (
+                        (project.links as {label: string, href: string}[]).map((link, idx) => (
+                          <a key={idx} href={link.href} target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ padding: '0.75rem 1.25rem', fontSize: 'var(--text-sm)' }}>
+                            {link.label} <span style={{ marginLeft: '0.5rem' }}>↗</span>
+                          </a>
+                        ))
+                      ) : 'link' in project && project.link ? (
+                        <a href={project.link as string} target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ padding: '1rem 2rem' }}>
+                          Explorar <span style={{ marginLeft: '0.5rem' }}>↗</span>
+                        </a>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               ))}

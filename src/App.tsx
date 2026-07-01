@@ -78,9 +78,9 @@ export default function App() {
 
       <main style={{ position: 'relative', zIndex: 10 }}>
         <Hero />
+        <AboutMe />
         <Trajectory />
         <Avantis />
-        <AboutMe />
         <DevProcess />
         <Contact />
       </main>
