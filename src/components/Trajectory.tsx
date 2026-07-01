@@ -166,6 +166,31 @@ export default function Trajectory() {
           }
         }
       })
+
+      const handleMouseMove = (e: MouseEvent) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 2
+        const y = (e.clientY / window.innerHeight - 0.5) * 2
+
+        gsap.to('.parallax-bg', {
+          x: x * 40,
+          y: y * 40,
+          ease: 'power2.out',
+          duration: 1.5
+        })
+
+        gsap.to('.parallax-fg', {
+          x: x * -15,
+          y: y * -15,
+          ease: 'power2.out',
+          duration: 1.5
+        })
+      }
+
+      window.addEventListener('mousemove', handleMouseMove)
+
+      return () => {
+        window.removeEventListener('mousemove', handleMouseMove)
+      }
     })
 
     return () => mm.revert()
@@ -346,7 +371,7 @@ BUILD SUCCESSFUL`}
         {/* ========================================================= */}
         {/* LAYER 1: Texto Decorativo Gigante                         */}
         {/* ========================================================= */}
-        <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 1, overflow: 'hidden' }}>
+        <div className="parallax-bg" style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 1, overflow: 'hidden', willChange: 'transform' }}>
           {data.eras.map((era, i) => (
             <div 
               key={era.id}
@@ -483,7 +508,7 @@ BUILD SUCCESSFUL`}
             </div>
 
             {/* Coluna Direita: Painéis de Projeto */}
-            <div style={{ position: 'relative', height: '60vh', width: '100%' }}>
+            <div className="parallax-fg" style={{ position: 'relative', height: '60vh', width: '100%', willChange: 'transform' }}>
               {allProjects.map((project) => (
                 <div
                   key={project.name}
