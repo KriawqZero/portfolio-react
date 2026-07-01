@@ -58,9 +58,9 @@ Se você quiser explorar a estrutura, o CSS ou entender como as animações fora
 1. Clone o repositório
 2. Instale as dependências:
    ```bash
-   npm install
+   pnpm install
    ```
 3. Inicie o servidor de desenvolvimento:
    ```bash
-   npm run dev
+   pnpm dev
    ```
