@@ -4,7 +4,6 @@ export const content = {
       { href: '#inicio', label: 'Início' },
       { href: '#sobre', label: 'Sobre' },
       { href: '#projetos', label: 'Projetos' },
-      { href: '#habilidades', label: 'Habilidades' },
       { href: '#contato', label: 'Contato' },
     ],
   },
@@ -83,6 +82,7 @@ export const content = {
           'Reformulação completa do sistema de páginas de vendas para clientes CRM. Stack moderna integrada a banco de dados legado.',
         tech: ['Laravel', 'Inertia.js', 'React', 'MySQL', 'TailwindCSS'],
         link: 'https://webgestor.com.br/',
+        stat: { value: 'Multi-cliente', label: 'em produção' },
         highlights: [
           'Reformulação completa de páginas de vendas',
           'Integração com banco de dados legado (2006)',
@@ -95,6 +95,7 @@ export const content = {
           'Sistema institucional oficial de emissão de certificados do IFMS. Adoção obrigatória para todos os alunos do ensino médio.',
         tech: ['Laravel', 'MariaDB', 'Alpine.js', 'TailwindCSS'],
         link: 'https://github.com/KriawqZero/IFMS-Sistema_CargaHoraria',
+        stat: { value: '400+', label: 'alunos' },
         highlights: [
           '400+ alunos cadastrados',
           'Redução de 80% no tempo de emissão',
@@ -117,56 +118,8 @@ export const content = {
     ]
   },
 
-  stack: {
-    number: '05',
-    label: 'STACK & DIFERENCIAIS',
-    title: 'Ferramentas que uso para criar',
-    titleHighlight: 'soluções',
-    subtitle:
-      'Tecnologias que estudo, pratico e utilizo para transformar ideias em projetos reais.',
-    skills: [
-      { name: 'React', category: 'Frontend' },
-      { name: 'TypeScript', category: 'Linguagem' },
-      { name: 'JavaScript', category: 'Linguagem' },
-      { name: 'HTML5', category: 'Frontend' },
-      { name: 'CSS3', category: 'Frontend' },
-      { name: 'Tailwind CSS', category: 'Frontend' },
-      { name: 'NestJS', category: 'Backend' },
-      { name: 'Node.js', category: 'Backend' },
-      { name: 'PostgreSQL', category: 'Database' },
-      { name: 'Git', category: 'Ferramentas' },
-      { name: 'GitHub', category: 'Ferramentas' },
-      { name: 'Vite', category: 'Ferramentas' },
-      { name: 'Figma', category: 'Design' },
-      { name: 'Docker', category: 'DevOps' },
-      { name: 'VS Code', category: 'Ferramentas' },
-    ],
-    differentials: [
-      {
-        title: 'Foco em UI',
-        description: 'Interfaces pensadas para o usuário final.',
-      },
-      {
-        title: 'Código limpo',
-        description: 'Legibilidade, organização e boas práticas.',
-      },
-      {
-        title: 'Responsividade',
-        description: 'Funciona perfeitamente em qualquer tela.',
-      },
-      {
-        title: 'Performance',
-        description: 'Carregamento rápido, animações suaves.',
-      },
-      {
-        title: 'Acessibilidade',
-        description: 'Web para todos, sem exceções.',
-      },
-    ],
-  },
-
   process: {
-    number: '06',
+    number: '05',
     label: 'PROCESSO',
     title: 'Como eu desenvolvo',
     steps: [
@@ -198,16 +151,14 @@ export const content = {
   },
 
   contact: {
-    number: '07',
-    label: 'VAMOS CONVERSAR?',
-    title: 'Tem uma',
-    titleHighlight: 'oportunidade',
-    titleEnd: 'em mente?',
-    subtitle:
-      'Estou sempre aberto a novas oportunidades, colaborações e ideias criativas.',
+    number: '06',
+    label: 'PRÓXIMO CAPÍTULO',
+    title: 'Vamos construir',
+    titleHighlight: 'juntos.',
+    text: 'Se você chegou até aqui, já conhece meu trabalho, meu processo e minha forma de pensar. Agora só falta a conversa. Estou disponível para oportunidades, colaborações e ideias que valham a pena construir.',
     links: {
       email: {
-        label: 'Enviar e-mail',
+        label: 'E-mail',
         value: 'marciliortizz@gmail.com',
         href: 'mailto:marciliortizz@gmail.com',
       },
@@ -221,46 +172,10 @@ export const content = {
         value: '@KriawqZero',
         href: 'https://github.com/KriawqZero',
       },
-      resume: {
-        label: 'Currículo (PDF)',
-        value: 'Download',
-        href: '#',
-      },
-    },
-    formLabels: {
-      name: 'Nome',
-      namePlaceholder: 'Seu nome',
-      email: 'E-mail',
-      emailPlaceholder: 'seu@email.com',
-      message: 'Mensagem',
-      messagePlaceholder: 'Fale sobre a oportunidade ou projeto...',
-      submit: 'Enviar mensagem',
     },
   },
 
   footer: {
-    description:
-      'Estudante de desenvolvimento web apaixonado por criar experiências digitais modernas, funcionais e com propósito.',
-    availability: 'Disponível para oportunidades',
-    availabilityDesc: 'Vamos conversar sobre como posso contribuir no seu projeto.',
-    availabilityCta: 'Entrar em contato',
-    navigation: [
-      { label: 'Início', href: '#inicio' },
-      { label: 'Sobre', href: '#sobre' },
-      { label: 'Projetos', href: '#projetos' },
-      { label: 'Habilidades', href: '#habilidades' },
-      { label: 'Contato', href: '#contato' },
-    ],
-    usefulLinks: [
-      { label: 'GitHub', href: 'https://github.com/KriawqZero' },
-      {
-        label: 'LinkedIn',
-        href: 'https://www.linkedin.com/in/marc%C3%ADlio-ortiz-barbosa-7b5a35165/',
-      },
-      { label: 'Currículo (PDF)', href: '#' },
-      { label: 'E-mail', href: 'mailto:marciliortizz@gmail.com' },
-    ],
-    availableFor: ['Estágio', 'Projetos', 'Colaborações'],
     copyright: '© 2026 Marcilio Ortiz. Todos os direitos reservados.',
   },
 }
