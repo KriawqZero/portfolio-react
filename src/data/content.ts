@@ -103,7 +103,7 @@ export const content = {
         glowColor: 'rgba(239, 68, 68, 0.08)',
         projects: [
           {
-            name: 'Minecraft Clone (OpenGL Legado)',
+            name: 'Voxel Engine (OpenGL Clássico)',
             type: 'Laboratório Pessoal',
             year: '2024',
             narrative: 'Sim, o nome original era só uma abreviação preguiçosa para Minecraft. Minha intenção aqui era tentar recriar um clone básico do jogo do zero para entender matemática 3D e renderização gráfica sem engines prontas. Quebrei muito a cabeça no ensino médio com matrizes de projeção e vetores só para fazer uma câmera em primeira pessoa funcionar em C++.',
@@ -112,7 +112,7 @@ export const content = {
             stat: { value: '3D Math', label: 'pipeline clássica' },
           },
           {
-            name: 'Minecraft Clone (Moderno)',
+            name: 'Voxel Engine (Shader Pipeline)',
             type: 'Experimento Incompleto',
             year: '2024',
             narrative: 'Minha tentativa de pegar o clone de Minecraft e reescrevê-lo para a pipeline moderna da GPU (com Shaders e VBOs). O semestre letivo acabou e o projeto virou um cemitério de código incompleto, mas me ensinou na força bruta como alocar memória na mão e compilar shaders. Um atrito direto e muito divertido com a máquina.',
@@ -129,7 +129,7 @@ export const content = {
         glowColor: 'rgba(245, 158, 11, 0.08)',
         projects: [
           {
-            name: 'Bank Simulator Kivy',
+            name: 'Simulador Bancário',
             type: 'Curiosidade de Infância',
             year: 'Março de 2020',
             narrative: 'Desenvolvido aos 12 anos de idade, exatamente na semana em que a pandemia estourou. Eu queria entender como os programas mantinham dados salvos após fechar a janela. Sem saber o que era um banco de dados relacional, criei uma mecânica rudimentar em Python para coletar inputs de texto, serializá-los e gravá-los de forma permanente no disco do meu computador de infância em arquivos JSON.',
@@ -138,7 +138,7 @@ export const content = {
             stat: { value: '12 anos', label: 'persistência crua' },
           },
           {
-            name: 'Music Player Kivy',
+            name: 'Player Desktop',
             type: 'Curiosidade de Infância',
             year: 'Março de 2020',
             narrative: 'Meu segundo experimento visual com Python na infância. Construí um player de áudio completo capaz de ler um diretório do Windows, filtrar arquivos com extensão .mp3 e gerenciar o estado das faixas (play, stop, avançar e retroceder). O código original possui caminhos engessados diretamente para a partição do meu computador de infância (F:/marcilinho/...), expondo a natureza pura e caseira do meu início na programação.',
@@ -147,7 +147,7 @@ export const content = {
             stat: { value: '12 anos', label: 'gerenciamento de arquivos' },
           },
           {
-            name: 'Cronômetro Kivy',
+            name: 'Event Loop',
             type: 'Curiosidade de Infância',
             year: 'Início de 2020',
             narrative: 'Criado um pouco antes da pandemia, este projeto nasceu da curiosidade de tirar o Python do terminal e colocá-lo em uma interface interativa. Me forçou a entender, pela primeira vez, o paradigma de desenvolvimento orientado a eventos. Descobrir que o tempo em uma tela não se atualiza sozinho e que era necessário criar um loop de agendamento em ciclos de 0.1 segundos sem travar a thread da UI foi minha primeira grande lição de arquitetura.',
@@ -156,7 +156,7 @@ export const content = {
             stat: { value: '12 anos', label: 'event loop' },
           },
           {
-            name: 'vbmod',
+            name: 'Mod para Minecraft (1.12.2)',
             type: 'O Marco Zero',
             year: 'Maio de 2019',
             narrative: 'O marco zero da minha jornada. O meu primeiro repositório publicado no GitHub, criado aos 12 anos de idade. Como jogador assíduo de Minecraft, eu queria mudar as regras do jogo. Me aventurei no Java para compilar meu próprio mod usando a API do Forge, adicionando novos blocos, minérios e uma fornalha funcional com interface gráfica própria. Uma colcha de retalhos feita na tentativa e erro que prova que programo desde criança por puro prazer.',
@@ -299,10 +299,10 @@ export const content = {
     text: 'Se você chegou até aqui, já conhece meu trabalho, meu processo e minha forma de pensar. Agora só falta a conversa.',
     narrativePhrases: [
       'Uma vaga.',
-      'Um estágio.',
-      'Uma parceria.',
-      'Uma ideia.',
-      'Ou apenas uma boa conversa.',
+      'Um novo projeto.',
+      'Uma parceria técnica.',
+      'Um desafio de arquitetura.',
+      'Sua próxima contratação.',
     ],
     links: {
       email: {
