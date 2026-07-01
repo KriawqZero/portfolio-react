@@ -18,9 +18,9 @@ export default function Trajectory() {
   const activeEraIdRef = useRef(content.trajectory.eras[0].id)
 
   const { trajectory: data } = content
-  
+
   // Flatten all projects with era info
-  const allProjects = data.eras.flatMap(era => 
+  const allProjects = data.eras.flatMap(era =>
     era.projects.map(p => ({ ...p, era }))
   )
   const N = allProjects.length
@@ -41,7 +41,7 @@ export default function Trajectory() {
       const panels = gsap.utils.toArray('.traj-panel') as HTMLElement[]
       const eraLabels = gsap.utils.toArray('.era-label') as HTMLElement[]
       const eraVisuals = gsap.utils.toArray('.era-visual') as HTMLElement[]
-      
+
       // Set initial states
       panels.forEach((panel, i) => {
         if (i > 0) {
@@ -50,11 +50,11 @@ export default function Trajectory() {
           gsap.set(panel, { pointerEvents: 'auto' })
         }
       })
-      
+
       eraLabels.forEach((label, i) => {
         if (i > 0) gsap.set(label, { opacity: 0, y: 20 })
       })
-      
+
       eraVisuals.forEach((visual, i) => {
         if (i > 0) gsap.set(visual, { opacity: 0 })
       })
@@ -71,21 +71,21 @@ export default function Trajectory() {
             if (progressBarRef.current) {
               gsap.set(progressBarRef.current, { scaleY: self.progress })
             }
-            
+
             const activeIndex = Math.min(Math.floor(self.progress * N), N - 1)
             const activeProject = allProjects[activeIndex]
-            
+
             if (activeProject && activeProject.era.id !== activeEraIdRef.current) {
-               activeEraIdRef.current = activeProject.era.id
-               
-               // Update fast travel buttons opacity without triggering re-render
-               document.querySelectorAll('.era-nav-btn').forEach((btn) => {
-                 (btn as HTMLElement).style.opacity = '0.3'
-               })
-               const activeBtn = document.querySelector(`.era-nav-${activeProject.era.id}`)
-               if (activeBtn) {
-                 (activeBtn as HTMLElement).style.opacity = '1'
-               }
+              activeEraIdRef.current = activeProject.era.id
+
+              // Update fast travel buttons opacity without triggering re-render
+              document.querySelectorAll('.era-nav-btn').forEach((btn) => {
+                (btn as HTMLElement).style.opacity = '0.3'
+              })
+              const activeBtn = document.querySelector(`.era-nav-${activeProject.era.id}`)
+              if (activeBtn) {
+                (activeBtn as HTMLElement).style.opacity = '1'
+              }
             }
 
             // Update mini-steppers
@@ -103,7 +103,7 @@ export default function Trajectory() {
                 (activeStepper as HTMLElement).style.background = 'var(--text-primary)';
               }
             }
-            
+
             if (counterRef.current) {
               counterRef.current.innerText = String(activeIndex + 1).padStart(2, '0')
             }
@@ -136,20 +136,20 @@ export default function Trajectory() {
           // Era transitions
           const currEraId = allProjects[i]?.era.id
           const nextEraId = allProjects[i + 1]?.era.id
-          
+
           if (currEraId !== nextEraId) {
             // Find era indices
             const currEraIdx = data.eras.findIndex(e => e.id === currEraId)
             const nextEraIdx = data.eras.findIndex(e => e.id === nextEraId)
-            
+
             // Shift glow
             if (glowRef.current) {
-               tl.to(glowRef.current, {
-                 background: `radial-gradient(circle at 75% 50%, ${allProjects[i+1].era.glowColor}, transparent 50%)`,
-                 duration: 0.5
-               }, i)
+              tl.to(glowRef.current, {
+                background: `radial-gradient(circle at 75% 50%, ${allProjects[i + 1].era.glowColor}, transparent 50%)`,
+                duration: 0.5
+              }, i)
             }
-            
+
             // Crossfade labels
             if (eraLabels[currEraIdx]) {
               tl.to(eraLabels[currEraIdx], { opacity: 0, y: -20, duration: 0.4 }, i)
@@ -157,7 +157,7 @@ export default function Trajectory() {
             if (eraLabels[nextEraIdx]) {
               tl.to(eraLabels[nextEraIdx], { opacity: 0.02, y: 0, duration: 0.4 }, i + 0.2)
             }
-            
+
             // Crossfade visuals
             if (eraVisuals[currEraIdx]) {
               tl.to(eraVisuals[currEraIdx], { opacity: 0, duration: 0.5 }, i)
@@ -237,7 +237,7 @@ export default function Trajectory() {
                   <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>{era.name}</h3>
                   <p style={{ color: 'var(--text-muted)' }}>{era.subtitle}</p>
                 </div>
-                
+
                 {era.projects.map((project) => (
                   <motion.div
                     key={project.name}
@@ -269,7 +269,7 @@ export default function Trajectory() {
                       </h4>
                       <span className="section-label">{project.year}</span>
                     </div>
-                    
+
                     <p style={{ fontSize: 'var(--text-lg)', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1rem' }}>
                       {project.narrative}
                     </p>
@@ -280,7 +280,7 @@ export default function Trajectory() {
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '2rem' }}>
                       {'stat' in project && project.stat && (
                         <div>
-                           <span className="gradient-text" style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', fontWeight: 700, display: 'block' }}>
+                          <span className="gradient-text" style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', fontWeight: 700, display: 'block' }}>
                             {project.stat.value}
                           </span>
                           <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
@@ -288,10 +288,10 @@ export default function Trajectory() {
                           </span>
                         </div>
                       )}
-                      
+
                       <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                         {'links' in project && project.links ? (
-                          (project.links as {label: string, href: string}[]).map((link, idx) => (
+                          (project.links as { label: string, href: string }[]).map((link, idx) => (
                             <a key={idx} href={link.href} target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ padding: '0.75rem 1.25rem', fontSize: 'var(--text-xs)' }}>
                               {link.label} <span style={{ marginLeft: '0.5rem' }}>↗</span>
                             </a>
@@ -311,7 +311,7 @@ export default function Trajectory() {
 
           {/* Mobile Archive Trigger */}
           <div style={{ padding: '4rem 0 2rem 0', display: 'flex', justifyContent: 'center' }}>
-            <button 
+            <button
               onClick={() => setIsArchiveOpen(true)}
               style={{
                 background: 'rgba(255,255,255,0.03)',
@@ -344,11 +344,11 @@ export default function Trajectory() {
   // Desktop rendering (Cinematic Layers)
   return (
     <section ref={sectionRef} id="projetos" style={{ position: 'relative' }}>
-      <div 
+      <div
         ref={pinContainerRef}
-        style={{ 
-          height: '100dvh', 
-          width: '100vw', 
+        style={{
+          height: '100dvh',
+          width: '100vw',
           position: 'relative',
           display: 'flex',
           alignItems: 'center',
@@ -359,30 +359,30 @@ export default function Trajectory() {
         {/* LAYER 0: Fundo Ambiental e Glows                          */}
         {/* ========================================================= */}
         <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0 }}>
-          <div 
+          <div
             ref={glowRef}
-            style={{ 
-              position: 'absolute', inset: 0, 
+            style={{
+              position: 'absolute', inset: 0,
               background: `radial-gradient(circle at 75% 50%, ${data.eras[0].glowColor}, transparent 50%)`,
               opacity: 0.6,
-            }} 
+            }}
           />
-          
+
           {/* Surface Grid */}
           <div className="era-visual" style={{ position: 'absolute', inset: 0, opacity: 1, backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '100px 100px', transform: 'perspective(500px) rotateX(60deg) translateY(-100px) scale(2)' }} />
-          
+
           {/* Infra Logs */}
           <div className="era-visual" style={{ position: 'absolute', inset: 0, opacity: 0, padding: '4rem', fontFamily: 'monospace', color: 'rgba(16, 185, 129, 0.05)', fontSize: '12px', display: 'flex', flexDirection: 'column', gap: '8px', overflow: 'hidden' }}>
             {Array.from({ length: 40 }).map((_, i) => <div key={i}>[WORKER-{Math.floor(Math.random() * 9999)}] SYNC STORE_{Math.floor(Math.random() * 99)} OK - EXTRACTED {Math.floor(Math.random() * 50)} RECORDS {Date.now() - i * 1000}ms</div>)}
           </div>
-          
+
           {/* LowLevel Wireframe */}
           <div className="era-visual" style={{ position: 'absolute', inset: 0, opacity: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <div style={{ width: '40vw', height: '40vw', border: '1px solid rgba(239, 68, 68, 0.1)', borderRadius: '50%', transform: 'rotateX(75deg) rotateY(15deg) rotateZ(45deg)', position: 'absolute' }} />
             <div style={{ width: '30vw', height: '30vw', border: '1px solid rgba(239, 68, 68, 0.1)', borderRadius: '50%', transform: 'rotateX(75deg) rotateY(15deg) rotateZ(45deg)', position: 'absolute' }} />
             <div style={{ width: '20vw', height: '20vw', border: '1px solid rgba(239, 68, 68, 0.1)', borderRadius: '50%', transform: 'rotateX(75deg) rotateY(15deg) rotateZ(45deg)', position: 'absolute' }} />
           </div>
-          
+
           {/* Roots Terminal */}
           <div className="era-visual" style={{ position: 'absolute', inset: 0, opacity: 0, padding: '4rem', fontFamily: 'monospace', color: 'rgba(245, 158, 11, 0.06)', fontSize: '14px', whiteSpace: 'pre-line' }}>
             {`C:\\marcilinho\\PythonP\\Player> python main.py
@@ -403,7 +403,7 @@ BUILD SUCCESSFUL`}
         {/* ========================================================= */}
         <div className="parallax-bg" style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 1, overflow: 'hidden', willChange: 'transform' }}>
           {data.eras.map((era, i) => (
-            <div 
+            <div
               key={era.id}
               className="era-label"
               style={{
@@ -428,17 +428,17 @@ BUILD SUCCESSFUL`}
         {/* ========================================================= */}
         <div className="container" style={{ height: '100%', position: 'relative', zIndex: 10 }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '8rem', height: '100%', alignItems: 'center' }}>
-            
+
             {/* Coluna Esquerda: Títulos e Progresso */}
             <div style={{ display: 'flex', flexDirection: 'column', height: '60vh', justifyContent: 'center' }}>
               <p className="section-label" style={{ marginBottom: '1.5rem' }}>{data.label}</p>
               <h2 className="text-display" style={{ marginBottom: '2rem' }}>{data.title} <span className="gradient-text">{data.titleHighlight}</span></h2>
-              
+
               {/* Interactive Index (Fast Travel) */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', marginBottom: '3rem' }}>
                 {data.eras.map((era, index) => {
                   const isInitialActive = index === 0;
-                  
+
                   return (
                     <div key={era.id} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                       <button
@@ -459,48 +459,48 @@ BUILD SUCCESSFUL`}
                         }}
                         onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
                         onMouseLeave={(e) => {
-                           if (activeEraIdRef.current !== era.id) e.currentTarget.style.opacity = '0.3'
+                          if (activeEraIdRef.current !== era.id) e.currentTarget.style.opacity = '0.3'
                         }}
                       >
                         {era.name}
                       </button>
-                      
+
                       {/* Mini-stepper */}
                       <div style={{ display: 'flex', gap: '0.35rem', paddingLeft: '2px' }}>
                         {era.projects.map((p, pIdx) => {
-                           const isProjectInitialActive = index === 0 && pIdx === 0;
-                           const safeName = p.name.replace(/[^a-zA-Z0-9]/g, '-')
-                           return (
-                             <div 
-                               key={p.name}
-                               className={`project-stepper project-stepper-${safeName}`}
-                               style={{
-                                 height: '4px',
-                                 width: isProjectInitialActive ? '24px' : '8px',
-                                 background: isProjectInitialActive ? 'var(--text-primary)' : 'var(--text-muted)',
-                                 borderRadius: '2px',
-                                 opacity: isProjectInitialActive ? 1 : 0.2,
-                                 transition: 'all 0.3s ease'
-                               }}
-                             />
-                           )
+                          const isProjectInitialActive = index === 0 && pIdx === 0;
+                          const safeName = p.name.replace(/[^a-zA-Z0-9]/g, '-')
+                          return (
+                            <div
+                              key={p.name}
+                              className={`project-stepper project-stepper-${safeName}`}
+                              style={{
+                                height: '4px',
+                                width: isProjectInitialActive ? '24px' : '8px',
+                                background: isProjectInitialActive ? 'var(--text-primary)' : 'var(--text-muted)',
+                                borderRadius: '2px',
+                                opacity: isProjectInitialActive ? 1 : 0.2,
+                                transition: 'all 0.3s ease'
+                              }}
+                            />
+                          )
                         })}
                       </div>
                     </div>
                   )
                 })}
               </div>
-              
+
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '2rem' }}>
                 <div style={{ position: 'relative', width: 2, height: 120, background: 'rgba(255,255,255,0.05)', borderRadius: 2 }}>
-                  <div 
+                  <div
                     ref={progressBarRef}
-                    style={{ 
-                      position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', 
+                    style={{
+                      position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
                       background: 'linear-gradient(180deg, var(--accent), var(--accent-light))',
                       transformOrigin: 'top', transform: 'scaleY(0)',
                       borderRadius: 2
-                    }} 
+                    }}
                   />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -536,15 +536,15 @@ BUILD SUCCESSFUL`}
                   onMouseEnter={(e) => e.currentTarget.style.color = 'var(--accent-light)'}
                   onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
                 >
-                  <span style={{ 
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', 
-                    width: '24px', height: '24px', borderRadius: '50%', 
-                    background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' 
+                  <span style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    width: '24px', height: '24px', borderRadius: '50%',
+                    background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)'
                   }}>+</span>
                   Explorar Arquivo Completo
                 </button>
-                
-                {/* Skip Trajectory */}
+
+                {/* Skip Trajectory 
                 <button 
                 onClick={handleSkip}
                 style={{
@@ -565,8 +565,8 @@ BUILD SUCCESSFUL`}
                 onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
               >
                 Pular trajetória ↓
-              </button>
-            </div>
+              </button>*/}
+              </div>
             </div>
 
             {/* Coluna Direita: Painéis de Projeto */}
@@ -575,7 +575,7 @@ BUILD SUCCESSFUL`}
                 <div
                   key={project.name}
                   className="traj-panel"
-                  style={{ 
+                  style={{
                     position: 'absolute', inset: 0,
                     display: 'flex', flexDirection: 'column',
                     justifyContent: 'center',
@@ -609,7 +609,7 @@ BUILD SUCCESSFUL`}
                   <p style={{ fontSize: 'var(--text-lg)', color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '1.5rem', maxWidth: '90%' }}>
                     {project.narrative}
                   </p>
-                  
+
                   <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', letterSpacing: '0.05em', fontStyle: 'italic', marginBottom: '3rem' }}>
                     {project.stack}
                   </p>
@@ -627,10 +627,10 @@ BUILD SUCCESSFUL`}
                     ) : (
                       <div />
                     )}
-                    
+
                     <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', justifyContent: 'flex-end', maxWidth: '50%' }}>
                       {'links' in project && project.links ? (
-                        (project.links as {label: string, href: string}[]).map((link, idx) => (
+                        (project.links as { label: string, href: string }[]).map((link, idx) => (
                           <a key={idx} href={link.href} target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ padding: '0.75rem 1.25rem', fontSize: 'var(--text-sm)' }}>
                             {link.label} <span style={{ marginLeft: '0.5rem' }}>↗</span>
                           </a>
