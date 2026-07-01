@@ -11,7 +11,6 @@ import OtherProjects from './components/OtherProjects'
 import Avantis from './components/Avantis'
 import DevProcess from './components/DevProcess'
 import Contact from './components/Contact'
-import Footer from './components/Footer'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -87,8 +86,6 @@ export default function App() {
         <DevProcess />
         <Contact />
       </main>
-
-      <Footer />
     </div>
   )
 }

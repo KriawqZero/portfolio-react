@@ -155,7 +155,14 @@ export const content = {
     label: 'PRÓXIMO CAPÍTULO',
     title: 'Vamos construir',
     titleHighlight: 'juntos.',
-    text: 'Se você chegou até aqui, já conhece meu trabalho, meu processo e minha forma de pensar. Agora só falta a conversa. Estou disponível para oportunidades, colaborações e ideias que valham a pena construir.',
+    text: 'Se você chegou até aqui, já conhece meu trabalho, meu processo e minha forma de pensar. Agora só falta a conversa.',
+    narrativePhrases: [
+      'Uma vaga.',
+      'Um estágio.',
+      'Uma parceria.',
+      'Uma ideia.',
+      'Ou apenas uma boa conversa.',
+    ],
     links: {
       email: {
         label: 'E-mail',
@@ -173,9 +180,6 @@ export const content = {
         href: 'https://github.com/KriawqZero',
       },
     },
-  },
-
-  footer: {
     copyright: '© 2026 Marcilio Ortiz. Todos os direitos reservados.',
   },
 }

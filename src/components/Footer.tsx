@@ -1,29 +1,5 @@
-import { content } from '../data/content'
-
+// Footer has been absorbed into the Contact epilogue section.
+// This file is kept empty to avoid orphan references during cleanup.
 export default function Footer() {
-  const { footer: data } = content
-
-  return (
-    <footer style={{ 
-      background: 'transparent', 
-      borderTop: '1px solid var(--glass-border)', 
-      padding: '3rem 0', 
-      position: 'relative', 
-      zIndex: 10,
-      marginTop: 'auto'
-    }}>
-      <div className="container">
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <p style={{ 
-            fontFamily: 'var(--font-display)',
-            fontSize: 'var(--text-sm)', 
-            color: 'var(--text-muted)',
-            letterSpacing: '0.05em'
-          }}>
-            {data.copyright}
-          </p>
-        </div>
-      </div>
-    </footer>
-  )
+  return null
 }
