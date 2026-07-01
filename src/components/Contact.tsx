@@ -192,12 +192,12 @@ export default function Contact() {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center', maxWidth: 700 }}>
 
             {/* Label */}
-            <p className="section-label ep-label" style={{ marginBottom: '2rem', opacity: 0 }}>
+            <p className="section-label ep-label" style={{ marginBottom: '1rem', opacity: 0 }}>
               {data.label}
             </p>
 
             {/* Title */}
-            <h2 className="text-display ep-title" style={{ marginBottom: '2rem', lineHeight: 1.1, opacity: 0 }}>
+            <h2 className="text-display ep-title" style={{ marginBottom: '1rem', lineHeight: 1.1, opacity: 0 }}>
               {data.title}{' '}
               <span className="gradient-text">{data.titleHighlight}</span>
             </h2>
@@ -208,14 +208,14 @@ export default function Contact() {
               color: 'var(--text-muted)',
               lineHeight: 1.8,
               maxWidth: 520,
-              marginBottom: '3rem',
+              marginBottom: '2rem',
               opacity: 0,
             }}>
               {data.text}
             </p>
 
             {/* Narrative Phrases */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', marginBottom: '5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', marginBottom: '2.5rem' }}>
               {data.narrativePhrases.map((phrase, i) => (
                 <span
                   key={i}
@@ -241,7 +241,7 @@ export default function Contact() {
               justifyContent: 'center',
               alignItems: 'center',
               gap: '1.5rem',
-              marginBottom: '6rem',
+              marginBottom: '4rem',
             }}>
               {links.map(([key, link], index) => (
                 <div key={key} style={{ display: 'flex', alignItems: 'center' }}>
