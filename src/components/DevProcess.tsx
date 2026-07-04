@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { content } from '../data/content'
+import { useLanguage } from '../hooks/useLanguage'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -19,7 +19,8 @@ export default function DevProcess() {
   const progressLineRef = useRef<HTMLDivElement>(null)
   const [isMobile, setIsMobile] = useState(false)
 
-  const { process: data } = content
+  const { t } = useLanguage()
+  const { process: data } = t
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768)
@@ -85,7 +86,7 @@ export default function DevProcess() {
     }, sectionRef)
 
     return () => ctx.revert()
-  }, [isMobile])
+  }, [isMobile, data])
 
   // Mobile: vertical layout
   if (isMobile) {
@@ -187,7 +188,7 @@ export default function DevProcess() {
           <p className="section-label" style={{ marginBottom: '1.5rem' }}>{data.label}</p>
           <h2 className="text-display" style={{ marginBottom: '1rem' }}>{data.title}</h2>
           <p style={{ fontSize: 'var(--text-lg)', color: 'var(--text-muted)', maxWidth: 480 }}>
-            Cada projeto segue um processo pensado para entregar qualidade em cada etapa, do planejamento ao deploy.
+            {data.description}
           </p>
 
           {/* Scroll indicator */}
@@ -198,7 +199,7 @@ export default function DevProcess() {
             gap: '1rem',
           }}>
             <div style={{ width: 80, height: 2, background: 'linear-gradient(90deg, var(--accent), transparent)' }} />
-            <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>role para avançar</span>
+            <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{data.scrollText}</span>
           </div>
         </div>
 

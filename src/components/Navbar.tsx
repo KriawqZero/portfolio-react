@@ -25,7 +25,7 @@ export default function Navbar() {
         pointerEvents: 'none', // So it doesn't block clicks on the rest of the screen
       }}
     >
-      <div className="container" style={{ display: 'flex', justifyContent: 'flex-start' }}>
+      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         {/* Logo */}
         <a
           href="#inicio"
@@ -34,7 +34,7 @@ export default function Navbar() {
             display: 'inline-flex',
             alignItems: 'center',
             transition: 'all 0.4s var(--ease-cinematic)',
-            opacity: scrolled ? 0.4 : 0, // Becomes very subtle when scrolled
+            opacity: scrolled ? 0.4 : 1,
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.transform = 'scale(1.05)'
@@ -51,6 +51,7 @@ export default function Navbar() {
             style={{ height: 32, width: 'auto' }}
           />
         </a>
+
       </div>
     </motion.nav>
   )

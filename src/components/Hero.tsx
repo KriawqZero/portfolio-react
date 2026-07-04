@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { content } from '../data/content'
+import { useLanguage } from '../hooks/useLanguage'
 import { SiReact, SiTypescript, SiNestjs, SiNodedotjs, SiPostgresql, SiDocker } from 'react-icons/si'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -17,7 +17,8 @@ const techIcons: Record<string, React.ReactNode> = {
 }
 
 export default function Hero() {
-  const { hero } = content
+  const { t, isFreelanceView } = useLanguage()
+  const { hero } = t
   const sectionRef = useRef<HTMLElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const artRef = useRef<HTMLDivElement>(null)
@@ -135,7 +136,7 @@ export default function Hero() {
     })
 
     return () => mm.revert()
-  }, [])
+  }, [hero, isFreelanceView])
 
   return (
     <section
@@ -180,9 +181,30 @@ export default function Hero() {
               </div>
             </h1>
 
-            <p className="hero-fade" style={{ fontSize: 'var(--text-xl)', color: 'var(--text-muted)', maxWidth: 520, lineHeight: 1.6, marginBottom: '3rem' }}>
+            <p className="hero-fade" style={{ fontSize: 'var(--text-xl)', color: 'var(--text-muted)', maxWidth: 520, lineHeight: 1.6, marginBottom: '2rem' }}>
               {hero.subtitle}
             </p>
+
+            {/* Availability status 
+            <div className="hero-fade" style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', marginBottom: '3rem', padding: '1rem', background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--glass-border)', borderRadius: '12px', maxWidth: '520px' }}>
+              <span style={{ 
+                width: '8px', 
+                height: '8px', 
+                borderRadius: '50%', 
+                background: '#10B981', 
+                boxShadow: '0 0 10px #10B981', 
+                marginTop: '6px',
+                flexShrink: 0
+              }} />
+              <div>
+                <p style={{ fontSize: 'var(--text-sm)', fontWeight: 600, color: 'var(--text-primary)', margin: 0 }}>
+                  {isFreelanceView ? hero.availability.freelanceStatus : hero.availability.defaultStatus}
+                </p>
+                <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-secondary)', margin: '0.25rem 0 0 0' }}>
+                  {(isFreelanceView ? hero.availability.freelanceTypes : hero.availability.defaultTypes).join(' · ')}
+                </p>
+              </div>
+            </div>*/}
 
             <div className="hero-fade" style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '4rem' }}>
               <a href="#projetos" className="btn-primary">

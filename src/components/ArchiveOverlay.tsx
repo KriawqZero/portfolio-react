@@ -1,10 +1,21 @@
 import { useRef, useEffect, useState } from 'react'
 import { gsap } from 'gsap'
-import { content } from '../data/content'
+import { useLanguage } from '../hooks/useLanguage'
 
 interface ArchiveOverlayProps {
   isOpen: boolean
   onClose: () => void
+}
+
+interface ProjectItem {
+  year: string
+  name: string
+  type: string
+  stack: string[]
+  link?: string
+  links: { label: string; href: string }[]
+  narrative?: string
+  details?: string
 }
 
 export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps) {
@@ -13,6 +24,28 @@ export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps)
   const contentRef = useRef<HTMLDivElement>(null)
   const rowsRef = useRef<(HTMLDivElement | null)[]>([])
   const wasOpen = useRef(false)
+
+  const { t, language } = useLanguage()
+  const { archive } = t
+
+  // Localized headers mapping
+  const headers = language === 'en' ? {
+    title: 'Full Archive',
+    subtitle: `All ${archive.length} documented projects.`,
+    year: 'Year',
+    project: 'Project',
+    type: 'Type',
+    stack: 'Stack',
+    links: 'Links'
+  } : {
+    title: 'Arquivo Completo',
+    subtitle: `Todos os ${archive.length} projetos documentados.`,
+    year: 'Ano',
+    project: 'Projeto',
+    type: 'Tipo',
+    stack: 'Stack',
+    links: 'Links'
+  }
 
   useEffect(() => {
     if (!containerRef.current || !contentRef.current) return
@@ -32,8 +65,8 @@ export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps)
           '-=0.2'
         )
     } else if (wasOpen.current) {
-      // Pragmatic fix: Hard refresh to top of page to reset all GSAP instances
-      window.location.href = window.location.pathname
+      // Pragmatic fix: Hard refresh to top of page to reset all GSAP instances, keeping query params
+      window.location.href = window.location.pathname + window.location.search
     }
 
     const handleEsc = (e: KeyboardEvent) => {
@@ -49,16 +82,15 @@ export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps)
       style={{
         position: 'fixed',
         inset: 0,
+        background: 'rgba(2, 2, 3, 0.95)',
+        backdropFilter: 'blur(30px)',
         zIndex: 9999,
         display: 'none',
-        opacity: 0,
-        visibility: 'hidden',
-        background: 'rgba(9, 9, 11, 0.85)',
-        backdropFilter: 'blur(20px)',
-        WebkitBackdropFilter: 'blur(20px)',
-        alignItems: 'center',
         justifyContent: 'center',
-        padding: 'var(--container-padding)'
+        alignItems: 'center',
+        padding: '2rem',
+        opacity: 0,
+        visibility: 'hidden'
       }}
     >
       <div 
@@ -66,43 +98,16 @@ export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps)
         style={{
           width: '100%',
           maxWidth: '1200px',
-          height: '80vh',
+          height: '85vh',
+          background: 'var(--glass-bg)',
+          border: '1px solid var(--glass-border)',
+          borderRadius: '32px',
           display: 'flex',
           flexDirection: 'column',
-          background: 'var(--bg-surface)',
-          border: '1px solid var(--glass-border)',
-          borderRadius: '24px',
           overflow: 'hidden',
-          boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.5)'
+          boxShadow: '0 30px 60px rgba(0,0,0,0.6)'
         }}
       >
-        <style>
-          {`
-            .archive-grid {
-              display: grid;
-              grid-template-columns: 80px 2fr 1.5fr 2fr 1fr;
-              gap: 1rem;
-              align-items: center;
-            }
-            @media (max-width: 1024px) {
-              .archive-grid {
-                grid-template-columns: 60px 2fr 1.5fr 1fr;
-              }
-              .archive-stack { display: none !important; }
-            }
-            @media (max-width: 768px) {
-              .archive-grid {
-                grid-template-columns: 1fr;
-                gap: 0.25rem;
-                padding-top: 1rem !important;
-                padding-bottom: 1rem !important;
-              }
-              .archive-year, .archive-type, .archive-header { display: none !important; }
-              .archive-links { justify-content: flex-start !important; margin-top: 0.5rem; }
-            }
-          `}
-        </style>
-
         {/* Header */}
         <div style={{
           padding: '2rem',
@@ -112,8 +117,8 @@ export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps)
           alignItems: 'center'
         }}>
           <div>
-            <h2 className="text-xl text-primary font-display" style={{ marginBottom: '0.25rem' }}>Arquivo Completo</h2>
-            <p className="text-sm text-secondary">Todos os {content.archive.length} projetos documentados.</p>
+            <h2 className="text-xl text-primary font-display" style={{ marginBottom: '0.25rem' }}>{headers.title}</h2>
+            <p className="text-sm text-secondary">{headers.subtitle}</p>
           </div>
           <button 
             onClick={onClose}
@@ -153,11 +158,11 @@ export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps)
           color: 'var(--text-muted)',
           fontWeight: 600
         }}>
-          <div className="archive-year">Ano</div>
-          <div>Projeto</div>
-          <div className="archive-type">Tipo</div>
-          <div className="archive-stack">Stack</div>
-          <div style={{ textAlign: 'right' }}>Links</div>
+          <div className="archive-year">{headers.year}</div>
+          <div>{headers.project}</div>
+          <div className="archive-type">{headers.type}</div>
+          <div className="archive-stack">{headers.stack}</div>
+          <div style={{ textAlign: 'right' }}>{headers.links}</div>
         </div>
 
         {/* Table Body (Scrollable) */}
@@ -165,7 +170,7 @@ export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps)
           flex: 1,
           overflowY: 'auto',
         }}>
-          {content.archive.map((project, i) => (
+          {archive.map((project, i) => (
             <ArchiveRow
               key={i}
               project={project}
@@ -181,7 +186,7 @@ export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps)
 }
 
 interface ArchiveRowProps {
-  project: typeof content.archive[0]
+  project: ProjectItem
   isActive: boolean
   onClick: () => void
   onRef: (el: HTMLDivElement | null) => void
@@ -202,31 +207,38 @@ function ArchiveRow({ project, isActive, onClick, onRef }: ArchiveRowProps) {
   return (
     <div 
       ref={onRef}
+      className={`archive-row ${isActive ? 'active' : ''}`}
       style={{
-        borderBottom: isActive ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(255,255,255,0.02)',
-        transition: 'border-color 0.3s, background 0.3s',
-        background: isActive ? 'rgba(255,255,255,0.03)' : 'transparent',
+        borderBottom: '1px solid var(--glass-border)',
+        background: isActive ? 'rgba(255,255,255,0.01)' : 'transparent',
+        transition: 'background 0.3s'
       }}
     >
-      <div
-        className="archive-grid"
+      <div 
         onClick={onClick}
+        className="archive-grid"
         style={{
-          padding: '1.25rem 2rem',
+          padding: '1.5rem 2rem',
           cursor: 'pointer',
+          alignItems: 'center',
         }}
-        onMouseEnter={(e) => { if (!isActive) e.currentTarget.parentElement!.style.background = 'rgba(255,255,255,0.02)' }}
-        onMouseLeave={(e) => { if (!isActive) e.currentTarget.parentElement!.style.background = 'transparent' }}
       >
-        <div className="archive-year" style={{ color: 'var(--text-muted)', fontFamily: 'monospace' }}>{project.year}</div>
-        <div style={{ color: 'var(--text-primary)', fontWeight: 500 }}>{project.name}</div>
-        <div className="archive-type" style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>{project.type}</div>
+        <div className="archive-year" style={{ fontFamily: 'monospace', fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>
+          {project.year}
+        </div>
+        <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
+          {project.name}
+        </div>
+        <div className="archive-type" style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+          {project.type}
+        </div>
         <div className="archive-stack" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
           {project.stack.map((tech, j) => (
             <span key={j} style={{
-              fontSize: '0.7rem',
-              padding: '0.2rem 0.5rem',
-              background: 'rgba(255,255,255,0.05)',
+              fontSize: '10px',
+              padding: '0.25rem 0.5rem',
+              background: 'rgba(255,255,255,0.02)',
+              border: '1px solid var(--glass-border)',
               borderRadius: '4px',
               color: 'var(--text-secondary)'
             }}>
@@ -254,7 +266,7 @@ function ArchiveRow({ project, isActive, onClick, onRef }: ArchiveRowProps) {
         <div style={{ padding: '0 2rem 2rem 2rem' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '800px' }}>
             <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)', lineHeight: 1.7 }}>
-              {'narrative' in project ? project.narrative as string : ''}
+              {project.narrative || ''}
             </p>
             
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>

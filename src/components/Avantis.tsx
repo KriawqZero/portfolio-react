@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { content } from '../data/content'
+import { useLanguage } from '../hooks/useLanguage'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -11,7 +11,8 @@ export default function Avantis() {
   const numberRef = useRef<HTMLSpanElement>(null)
   const logoContainerRef = useRef<HTMLDivElement>(null)
 
-  const { avantis: data } = content
+  const { t } = useLanguage()
+  const { avantis: data } = t
 
   useEffect(() => {
     const mm = gsap.matchMedia(sectionRef)
@@ -79,7 +80,7 @@ export default function Avantis() {
     })
 
     return () => mm.revert()
-  }, [])
+  }, [data])
 
   return (
     <section
@@ -130,7 +131,7 @@ export default function Avantis() {
                   Avantis
                 </span>
                 <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>
-                  Marca utilizada nos meus projetos freelance e trabalhos para clientes.
+                  {data.description}
                 </span>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.5rem' }}>

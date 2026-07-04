@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { content } from '../data/content'
+import { useLanguage } from '../hooks/useLanguage'
 import ArchiveOverlay from './ArchiveOverlay'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -15,9 +15,10 @@ export default function Trajectory() {
   const counterRef = useRef<HTMLSpanElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
   const [isDesktop, setIsDesktop] = useState(true)
-  const activeEraIdRef = useRef(content.trajectory.eras[0].id)
+  const activeEraIdRef = useRef('surface')
 
-  const { trajectory: data } = content
+  const { t } = useLanguage()
+  const { trajectory: data } = t
 
   // Flatten all projects with era info
   const allProjects = data.eras.flatMap(era =>
@@ -332,7 +333,7 @@ export default function Trajectory() {
                 transition: 'all 0.2s'
               }}
             >
-              Explorar Arquivo Completo ↗
+              {data.archiveText} ↗
             </button>
           </div>
         </div>
@@ -541,7 +542,7 @@ BUILD SUCCESSFUL`}
                     width: '24px', height: '24px', borderRadius: '50%',
                     background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)'
                   }}>+</span>
-                  Explorar Arquivo Completo
+                  {data.archiveText}
                 </button>
 
                 {/* Skip Trajectory 

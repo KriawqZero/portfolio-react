@@ -2,10 +2,12 @@ import { useEffect, useRef } from 'react'
 import { useSmoothScroll } from './hooks/useSmoothScroll'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useLanguage } from './hooks/useLanguage'
 import CursorGlow from './components/CursorGlow'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Trajectory from './components/Trajectory'
+import FreelanceProjects from './components/FreelanceProjects'
 import Avantis from './components/Avantis'
 import AboutMe from './components/AboutMe'
 import DevProcess from './components/DevProcess'
@@ -17,6 +19,16 @@ export default function App() {
   useSmoothScroll()
   const bgRef = useRef<HTMLDivElement>(null)
   const lineRef = useRef<HTMLDivElement>(null)
+
+  const { isFreelanceView, language } = useLanguage()
+
+  // Refresh GSAP scroll triggers when language or freelance view changes to prevent layout offset bugs
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 200)
+    return () => clearTimeout(timer)
+  }, [language, isFreelanceView])
 
   // Global Storytelling background shift & connecting line
   useEffect(() => {
@@ -53,10 +65,10 @@ export default function App() {
 
     })
     return () => ctx.revert()
-  }, [])
+  }, [language, isFreelanceView])
 
   return (
-    <div style={{ position: 'relative', overflowX: 'hidden' }}>
+    <div style={{ position: 'relative', overflow: 'clip' }}>
       <div className="noise-overlay" />
       <CursorGlow />
 
@@ -78,6 +90,7 @@ export default function App() {
 
       <main style={{ position: 'relative', zIndex: 10 }}>
         <Hero />
+        {isFreelanceView && <FreelanceProjects />}
         <AboutMe />
         <Trajectory />
         <Avantis />

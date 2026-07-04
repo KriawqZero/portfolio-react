@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { content } from '../data/content'
+import { useLanguage } from '../hooks/useLanguage'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -12,7 +12,8 @@ export default function AboutMe() {
   const artRef = useRef<HTMLDivElement>(null)
   const statsContainerRef = useRef<HTMLDivElement>(null)
 
-  const { about: data } = content
+  const { t } = useLanguage()
+  const { about: data } = t
 
   useEffect(() => {
     const mm = gsap.matchMedia(sectionRef)
@@ -114,7 +115,7 @@ export default function AboutMe() {
 
     })
     return () => mm.revert()
-  }, [])
+  }, [data])
 
   return (
     <section

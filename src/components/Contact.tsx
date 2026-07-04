@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { content } from '../data/content'
+import { useLanguage } from '../hooks/useLanguage'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -17,8 +17,10 @@ export default function Contact() {
   const logoRef = useRef<HTMLImageElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
 
-  const { contact: data } = content
+  const { t, isFreelanceView } = useLanguage()
+  const { contact: data } = t
   const links = Object.entries(data.links) as [string, { label: string; value: string; href: string }][]
+  const phrases = isFreelanceView && data.narrativePhrasesClient ? data.narrativePhrasesClient : data.narrativePhrases
 
   useEffect(() => {
     if (!pinRef.current) return
@@ -54,8 +56,8 @@ export default function Contact() {
         }
 
         // ── Act 3: Narrative phrases cascade (0.3 → 0.7) ──
-        const phrases = data.narrativePhrases
-        phrases.forEach((_, i) => {
+        const phrasesList = phrases
+        phrasesList.forEach((_, i) => {
           const offset = 0.35 + (i * 0.08)
           tl.fromTo(`.ep-phrase-${i}`,
             { y: 20, opacity: 0 },
@@ -68,7 +70,7 @@ export default function Contact() {
           }
         })
         // Keep last phrase fully visible
-        tl.to(`.ep-phrase-${phrases.length - 1}`, { opacity: 1, duration: 0.1 }, 0.35 + phrases.length * 0.08)
+        tl.to(`.ep-phrase-${phrasesList.length - 1}`, { opacity: 1, duration: 0.1 }, 0.35 + phrasesList.length * 0.08)
 
         // ── Act 4: Contact links appear one by one (0.65 → 0.85) ──
         links.forEach((_, i) => {
@@ -114,7 +116,7 @@ export default function Contact() {
         gsap.fromTo('.ep-title', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.ep-title', start: 'top 85%' } })
         gsap.fromTo('.ep-text', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.ep-text', start: 'top 85%' } })
 
-        data.narrativePhrases.forEach((_, i) => {
+        phrases.forEach((_, i) => {
           gsap.fromTo(`.ep-phrase-${i}`, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power2.out', scrollTrigger: { trigger: `.ep-phrase-${i}`, start: 'top 90%' } })
         })
 
@@ -128,7 +130,7 @@ export default function Contact() {
     }, sectionRef)
 
     return () => ctx.revert()
-  }, [])
+  }, [data, phrases])
 
   return (
     <section ref={sectionRef} id="contato" style={{ position: 'relative' }}>
@@ -199,7 +201,7 @@ export default function Contact() {
             {/* Title */}
             <h2 className="text-display ep-title" style={{ marginBottom: '1rem', lineHeight: 1.1, opacity: 0 }}>
               {data.title}{' '}
-              <span className="gradient-text">{data.titleHighlight}</span>
+              <span className="gradient-text">{isFreelanceView ? data.titleHighlightClient : data.titleHighlight}</span>
             </h2>
 
             {/* Paragraph */}
@@ -216,7 +218,7 @@ export default function Contact() {
 
             {/* Narrative Phrases */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem', marginBottom: '2.5rem' }}>
-              {data.narrativePhrases.map((phrase, i) => (
+              {phrases.map((phrase, i) => (
                 <span
                   key={i}
                   className={`ep-phrase-${i}`}
