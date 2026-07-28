@@ -154,7 +154,7 @@ export default function AboutMe() {
               </div>
             </h2>
 
-            <p className="about-fade" style={{ fontSize: 'var(--text-xl)', color: 'var(--text-muted)', lineHeight: 1.5, marginBottom: '1.5rem', maxWidth: '90%', paddingLeft: '1.5rem', borderLeft: '1px solid var(--glass-border)' }}>
+            <p className="about-fade" style={{ fontSize: 'var(--text-xl)', color: 'var(--text-body)', lineHeight: 1.5, marginBottom: '1.5rem', maxWidth: '90%', paddingLeft: '1.5rem', borderLeft: '1px solid var(--glass-border)' }}>
               {data.text}
             </p>
 
@@ -191,7 +191,7 @@ export default function AboutMe() {
                       <span style={{ fontSize: 'var(--text-lg)', fontWeight: 600, color: 'var(--text-primary)', display: 'block', marginBottom: '0.25rem' }}>
                         {stat.label}
                       </span>
-                      <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>
+                      <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-body)' }}>
                         {stat.sublabel}
                       </span>
                     </div>

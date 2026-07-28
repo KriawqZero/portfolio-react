@@ -207,7 +207,7 @@ export default function Contact() {
             {/* Paragraph */}
             <p className="ep-text" style={{
               fontSize: 'var(--text-xl)',
-              color: 'var(--text-muted)',
+              color: 'var(--text-body)',
               lineHeight: 1.8,
               maxWidth: 520,
               marginBottom: '2rem',
@@ -263,7 +263,7 @@ export default function Contact() {
                     }}
                   >
                     <span className="link-icon" style={{
-                      color: 'var(--text-muted)',
+                      color: 'var(--text-body)',
                       transition: 'all 0.6s var(--ease-cinematic)',
                     }}>
                       {contactIcons[key]}
@@ -294,7 +294,7 @@ export default function Contact() {
             {/* Copyright — End Credits */}
             <p className="ep-copyright" style={{
               fontSize: 'var(--text-xs)',
-              color: 'var(--text-muted)',
+              color: 'var(--text-body)',
               letterSpacing: '0.1em',
               opacity: 0,
             }}>

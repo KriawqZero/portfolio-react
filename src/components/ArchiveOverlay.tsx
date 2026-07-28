@@ -155,7 +155,7 @@ export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps)
           fontSize: '0.75rem',
           textTransform: 'uppercase',
           letterSpacing: '0.1em',
-          color: 'var(--text-muted)',
+          color: 'var(--text-body)',
           fontWeight: 600
         }}>
           <div className="archive-year">{headers.year}</div>
@@ -223,13 +223,13 @@ function ArchiveRow({ project, isActive, onClick, onRef }: ArchiveRowProps) {
           alignItems: 'center',
         }}
       >
-        <div className="archive-year" style={{ fontFamily: 'monospace', fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>
+        <div className="archive-year" style={{ fontFamily: 'monospace', fontSize: 'var(--text-sm)', color: 'var(--text-body)' }}>
           {project.year}
         </div>
         <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>
           {project.name}
         </div>
-        <div className="archive-type" style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+        <div className="archive-type" style={{ fontSize: 'var(--text-xs)', color: 'var(--text-body)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
           {project.type}
         </div>
         <div className="archive-stack" style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>

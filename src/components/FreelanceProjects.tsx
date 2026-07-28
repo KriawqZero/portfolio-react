@@ -439,7 +439,7 @@ export default function FreelanceProjects() {
           font-family: monospace;
           text-transform: uppercase;
           letter-spacing: 0.05em;
-          color: var(--text-muted);
+          color: var(--text-body);
           display: block;
           font-style: normal;
         }
@@ -482,7 +482,7 @@ export default function FreelanceProjects() {
           font-size: 11px;
           text-transform: uppercase;
           letter-spacing: 0.15em;
-          color: var(--text-muted);
+          color: var(--text-body);
           display: block;
           margin-bottom: 1rem;
         }
@@ -507,7 +507,7 @@ export default function FreelanceProjects() {
           font-size: 10px;
           text-transform: uppercase;
           letter-spacing: 0.15em;
-          color: var(--text-muted);
+          color: var(--text-body);
           display: block;
           margin-bottom: 1rem;
           opacity: 0.5;

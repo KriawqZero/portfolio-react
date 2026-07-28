@@ -141,7 +141,7 @@ export default function Avantis() {
                   <span style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: 'var(--text-primary)', display: 'block', marginBottom: '0.25rem' }}>
                     Avantis
                   </span>
-                  <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>
+                  <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-body)' }}>
                     {data.description}
                   </span>
                 </div>
@@ -156,7 +156,7 @@ export default function Avantis() {
                     className="avantis-card-link"
                     style={{ 
                       display: 'inline-flex', alignItems: 'center', gap: '0.5rem', 
-                      fontSize: 'var(--text-sm)', color: 'var(--text-muted)', 
+                      fontSize: 'var(--text-sm)', color: 'var(--text-body)', 
                       width: 'fit-content', transition: 'all 0.3s var(--ease-cinematic)' 
                     }}
                   >

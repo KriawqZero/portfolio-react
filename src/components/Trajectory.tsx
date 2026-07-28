@@ -236,7 +236,7 @@ export default function Trajectory() {
               <div key={era.id} style={{ display: 'flex', flexDirection: 'column', gap: '4rem' }}>
                 <div style={{ paddingBottom: '1rem', borderBottom: '1px solid var(--glass-border)' }}>
                   <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', color: 'var(--text-primary)', marginBottom: '0.5rem' }}>{era.name}</h3>
-                  <p style={{ color: 'var(--text-muted)' }}>{era.subtitle}</p>
+                  <p style={{ color: 'var(--text-body)' }}>{era.subtitle}</p>
                 </div>
 
                 {era.projects.map((project) => (
@@ -274,7 +274,7 @@ export default function Trajectory() {
                     <p style={{ fontSize: 'var(--text-lg)', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1rem' }}>
                       {project.narrative}
                     </p>
-                    <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', letterSpacing: '0.05em', fontStyle: 'italic', marginBottom: '2rem' }}>
+                    <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-body)', letterSpacing: '0.05em', fontStyle: 'italic', marginBottom: '2rem' }}>
                       {project.stack}
                     </p>
 
@@ -284,7 +284,7 @@ export default function Trajectory() {
                           <span className="gradient-text" style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-2xl)', fontWeight: 700, display: 'block' }}>
                             {project.stat.value}
                           </span>
-                          <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                          <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-body)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                             {project.stat.label}
                           </span>
                         </div>
@@ -508,7 +508,7 @@ BUILD SUCCESSFUL`}
                   <span ref={counterRef} style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-4xl)', fontWeight: 800, color: 'var(--text-primary)', lineHeight: 1 }}>
                     01
                   </span>
-                  <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>
+                  <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-body)' }}>
                     / {String(N).padStart(2, '0')}
                   </span>
                 </div>
@@ -604,14 +604,14 @@ BUILD SUCCESSFUL`}
                     <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(2.5rem, 4vw, 3.5rem)', fontWeight: 700, color: 'var(--text-primary)' }}>
                       {project.name}
                     </h3>
-                    <span className="section-label" style={{ color: 'var(--text-muted)' }}>{project.year}</span>
+                    <span className="section-label" style={{ color: 'var(--text-body)' }}>{project.year}</span>
                   </div>
 
                   <p style={{ fontSize: 'var(--text-lg)', color: 'var(--text-secondary)', lineHeight: 1.8, marginBottom: '1.5rem', maxWidth: '90%' }}>
                     {project.narrative}
                   </p>
 
-                  <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', letterSpacing: '0.05em', fontStyle: 'italic', marginBottom: '3rem' }}>
+                  <p style={{ fontSize: 'var(--text-xs)', color: 'var(--text-body)', letterSpacing: '0.05em', fontStyle: 'italic', marginBottom: '3rem' }}>
                     {project.stack}
                   </p>
 
@@ -621,7 +621,7 @@ BUILD SUCCESSFUL`}
                         <span className="gradient-text" style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-3xl)', fontWeight: 700, display: 'block', lineHeight: 1, marginBottom: '0.25rem' }}>
                           {project.stat.value}
                         </span>
-                        <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                        <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-body)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
                           {project.stat.label}
                         </span>
                       </div>

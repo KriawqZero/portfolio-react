@@ -127,7 +127,7 @@ export default function DevProcess() {
                 <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-xl)', fontWeight: 600, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
                   {step.title}
                 </h3>
-                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)', lineHeight: 1.7 }}>
+                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--text-body)', lineHeight: 1.7 }}>
                   {step.description}
                 </p>
               </motion.div>
@@ -187,7 +187,7 @@ export default function DevProcess() {
         }}>
           <p className="section-label" style={{ marginBottom: '1.5rem' }}>{data.label}</p>
           <h2 className="text-display" style={{ marginBottom: '1rem' }}>{data.title}</h2>
-          <p style={{ fontSize: 'var(--text-lg)', color: 'var(--text-muted)', maxWidth: 480 }}>
+          <p style={{ fontSize: 'var(--text-lg)', color: 'var(--text-body)', maxWidth: 480 }}>
             {data.description}
           </p>
 
@@ -199,7 +199,7 @@ export default function DevProcess() {
             gap: '1rem',
           }}>
             <div style={{ width: 80, height: 2, background: 'linear-gradient(90deg, var(--accent), transparent)' }} />
-            <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{data.scrollText}</span>
+            <span style={{ fontSize: 'var(--text-xs)', color: 'var(--text-body)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{data.scrollText}</span>
           </div>
         </div>
 
@@ -264,7 +264,7 @@ export default function DevProcess() {
 
               <p style={{
                 fontSize: 'var(--text-base)',
-                color: 'var(--text-muted)',
+                color: 'var(--text-body)',
                 lineHeight: 1.8,
               }}>
                 {step.description}

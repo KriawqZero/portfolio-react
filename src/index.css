@@ -26,6 +26,12 @@
   --text-primary: #FFFFFF;
   --text-secondary: #B0B0C0;
   --text-muted: #5A5A70;
+  /* Texto de leitura: --text-muted dá 2,97:1 sobre o fundo, abaixo do mínimo
+     WCAG AA (4,5:1). Este token cobre parágrafos e legendas; --text-muted segue
+     nos usos decorativos (steppers, números de seção, bordas). */
+  --text-body: #9A9AB0;
+  /* Rótulos e links de texto: --accent (#3F18AB) dá 1,83:1. */
+  --accent-text: #8B6BFF;
 
   /* Glass */
   --glass-bg: rgba(255, 255, 255, 0.02);
@@ -164,7 +170,7 @@ input, textarea {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.2em;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 
 .section-number {

@@ -295,7 +295,7 @@ export default function Hero() {
 
         .hero-subtitle {
           font-size: var(--text-xl);
-          color: var(--text-muted);
+          color: var(--text-body);
           max-width: 520px;
           line-height: 1.6;
           margin-bottom: 2rem;
