@@ -385,6 +385,48 @@ input, textarea {
   50% { transform: translateY(-15px); }
 }
 
+/* ── Toque ─────────────────────────────────────────────────────────
+   Em telas sem cursor fino, links e botões precisam de área confortável.
+   Mede-se o alvo, não a fonte — por isso min-height em vez de padding solto. */
+@media (pointer: coarse) {
+  .btn-primary,
+  .btn-secondary {
+    min-height: 48px;
+  }
+
+  .link-underline,
+  .avantis-card-link,
+  .meta-external-link,
+  .epilogue-link,
+  .archive-link {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Amplia a área tocável sem alterar o tamanho visual do logo */
+  .nav-logo {
+    min-height: 48px;
+    min-width: 48px;
+    padding-right: 0.75rem;
+  }
+}
+
+/* ── Movimento reduzido ────────────────────────────────────────────
+   Respeita a preferência do sistema. As revelações GSAP são desligadas
+   nos próprios componentes via gsap.matchMedia; aqui ficam as animações
+   e transições CSS. O layout permanece idêntico. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* ── Responsive ────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   :root {

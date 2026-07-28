@@ -99,7 +99,7 @@ export default function Hero() {
       }
     })
 
-    mm.add('(max-width: 1023px)', () => {
+    mm.add('(max-width: 1023px) and (prefers-reduced-motion: no-preference)', () => {
       // Subtle mobile fade out instead of large parallax
       gsap.to(contentRef.current, {
         opacity: 0.2,
@@ -122,7 +122,7 @@ export default function Hero() {
       })
     })
 
-    mm.add('all', () => {
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
       // Mask reveals for initial load (All devices)
       gsap.fromTo('.hero-mask',
         { y: '100%' },
@@ -133,6 +133,12 @@ export default function Hero() {
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 1, stagger: 0.1, ease: 'power3.out', delay: 0.8 }
       )
+    })
+
+    // Sem movimento: mesmo estado final, sem transição
+    mm.add('(prefers-reduced-motion: reduce)', () => {
+      gsap.set('.hero-mask', { y: '0%' })
+      gsap.set('.hero-fade', { opacity: 1, y: 0 })
     })
 
     return () => mm.revert()

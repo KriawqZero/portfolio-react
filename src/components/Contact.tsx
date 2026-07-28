@@ -29,7 +29,7 @@ export default function Contact() {
       const mm = gsap.matchMedia()
 
       // ─── DESKTOP: Full cinematic sticky scroll ───
-      mm.add('(min-width: 768px)', () => {
+      mm.add('(min-width: 768px) and (prefers-reduced-motion: no-preference)', () => {
 
         // Build the scrubbed timeline
         const tl = gsap.timeline({
@@ -110,8 +110,15 @@ export default function Contact() {
         })
       })
 
+      // ─── Sem movimento: estado final direto ───
+      mm.add('(prefers-reduced-motion: reduce)', () => {
+        gsap.set('.ep-label, .ep-title, .ep-text, .ep-copyright, .ep-separator', { opacity: 1, y: 0 })
+        phrases.forEach((_, i) => gsap.set(`.ep-phrase-${i}`, { opacity: 1, y: 0 }))
+        links.forEach((_, i) => gsap.set(`.ep-link-${i}`, { opacity: 1, y: 0 }))
+      })
+
       // ─── MOBILE: Sequential reveal without pin ───
-      mm.add('(max-width: 767px)', () => {
+      mm.add('(max-width: 767px) and (prefers-reduced-motion: no-preference)', () => {
         gsap.fromTo('.ep-label', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.ep-label', start: 'top 85%' } })
         gsap.fromTo('.ep-title', { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.ep-title', start: 'top 85%' } })
         gsap.fromTo('.ep-text', { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 1.2, ease: 'power3.out', scrollTrigger: { trigger: '.ep-text', start: 'top 85%' } })

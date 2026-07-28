@@ -16,8 +16,13 @@ export default function FreelanceProjects() {
   useEffect(() => {
     const mm = gsap.matchMedia(sectionRef)
 
+    mm.add('(prefers-reduced-motion: reduce)', () => {
+      gsap.set('.freelance-mask', { y: '0%' })
+      gsap.set('.narrative-step, .case-metadata-content', { opacity: 1, y: 0 })
+    })
+
     // Global title animation
-    mm.add('all', () => {
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
       gsap.fromTo('.freelance-mask',
         { y: '100%' },
         {
@@ -106,7 +111,7 @@ export default function FreelanceProjects() {
     })
 
     // Mobile: Simple stacked clean blocks
-    mm.add('(max-width: 1023px)', () => {
+    mm.add('(max-width: 1023px) and (prefers-reduced-motion: no-preference)', () => {
       const cases = gsap.utils.toArray('.freelance-case-wrapper') as HTMLElement[]
       
       cases.forEach((item) => {

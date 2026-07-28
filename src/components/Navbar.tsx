@@ -29,6 +29,8 @@ export default function Navbar() {
         {/* Logo */}
         <a
           href="#inicio"
+          className="nav-logo"
+          aria-label="Marcilio Ortiz — início"
           style={{
             pointerEvents: 'auto', // Re-enable clicks for the logo
             display: 'inline-flex',

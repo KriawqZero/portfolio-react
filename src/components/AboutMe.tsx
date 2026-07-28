@@ -56,7 +56,16 @@ export default function AboutMe() {
       }
     })
 
-    mm.add('all', () => {
+    mm.add('(prefers-reduced-motion: reduce)', () => {
+      gsap.set('.about-mask', { y: '0%' })
+      gsap.set('.about-fade, .stat-item', { opacity: 1, y: 0, scale: 1 })
+      document.querySelectorAll('.stat-number').forEach((el) => {
+        const alvo = el.getAttribute('data-val') || '0'
+        el.innerHTML = (el.getAttribute('data-prefix') || '') + alvo + (el.getAttribute('data-suffix') || '')
+      })
+    })
+
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
       // Reveal text
       gsap.fromTo('.about-mask',
         { y: '100%' },

@@ -17,8 +17,13 @@ export default function Avantis() {
   useEffect(() => {
     const mm = gsap.matchMedia(sectionRef)
 
+    mm.add('(prefers-reduced-motion: reduce)', () => {
+      gsap.set('.avantis-mask', { y: '0%' })
+      gsap.set('.avantis-fade', { opacity: 1, y: 0 })
+    })
+
     // General reveals (both mobile and desktop)
-    mm.add('all', () => {
+    mm.add('(prefers-reduced-motion: no-preference)', () => {
       gsap.fromTo('.avantis-mask',
         { y: '100%' },
         {

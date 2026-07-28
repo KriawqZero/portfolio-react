@@ -120,11 +120,13 @@ export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps)
             <h2 className="text-xl text-primary font-display" style={{ marginBottom: '0.25rem' }}>{headers.title}</h2>
             <p className="text-sm text-secondary">{headers.subtitle}</p>
           </div>
-          <button 
+          <button
             onClick={onClose}
+            aria-label={language === 'en' ? 'Close archive' : 'Fechar arquivo'}
             style={{
-              width: '40px',
-              height: '40px',
+              width: '48px',
+              height: '48px',
+              flexShrink: 0,
               borderRadius: '50%',
               display: 'flex',
               alignItems: 'center',
@@ -271,13 +273,14 @@ function ArchiveRow({ project, isActive, onClick, onRef }: ArchiveRowProps) {
             
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
               {project.links.map((link, j) => (
-                <a 
+                <a
                   key={j}
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ 
-                    padding: '0.5rem 1rem', 
+                  className="archive-link"
+                  style={{
+                    padding: '0.5rem 1rem',
                     fontSize: 'var(--text-xs)',
                     background: 'rgba(255,255,255,0.03)',
                     border: '1px solid rgba(255,255,255,0.1)',
