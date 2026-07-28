@@ -147,7 +147,8 @@ export default function Hero() {
         minHeight: '100dvh', // Responsive height (dvh for Safari)
         display: 'flex',
         alignItems: 'center',
-        paddingTop: 'calc(var(--section-spacing) / 2)',
+        // Var permite que o mobile reserve a altura da navbar fixa sem !important
+        paddingTop: 'var(--hero-padding-top, calc(var(--section-spacing) / 2))',
         paddingBottom: 'calc(var(--section-spacing) / 2)',
         overflow: 'hidden',
       }}
@@ -156,7 +157,7 @@ export default function Hero() {
         <div className="hero-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'clamp(2rem, 5vw, 4rem)', alignItems: 'center', minHeight: '80vh' }}>
 
           {/* Left column */}
-          <div ref={contentRef} style={{ maxWidth: 800, position: 'relative', zIndex: 10 }}>
+          <div ref={contentRef} className="hero-content" style={{ maxWidth: 800, position: 'relative', zIndex: 10 }}>
             <div className="mask-text-container" style={{ marginBottom: '2rem' }}>
               <p className="section-label mask-text hero-mask">{hero.greeting}</p>
             </div>
@@ -181,7 +182,7 @@ export default function Hero() {
               </div>
             </h1>
 
-            <p className="hero-fade" style={{ fontSize: 'var(--text-xl)', color: 'var(--text-muted)', maxWidth: 520, lineHeight: 1.6, marginBottom: '2rem' }}>
+            <p className="hero-fade hero-subtitle">
               {hero.subtitle}
             </p>
 
@@ -249,12 +250,24 @@ export default function Hero() {
               className="hero-fade hero-glow"
             />
             {/* Layer 1: Photo (Bleeding out of bottom) */}
-            <img
-              ref={photoRef}
-              className="hero-fade hero-photo"
-              src="/marcilio-pose.png"
-              alt="Marcilio Ortiz"
-            />
+            {/* Desktop recebe o corpo inteiro; mobile recebe o recorte gerado por `pnpm img:gen`,
+                porque a proporção 1:2.94 do original vira uma silhueta minúscula em telas estreitas. */}
+            <picture>
+              <source media="(min-width: 1024px)" type="image/avif" srcSet="/generated/pose-full.avif" />
+              <source media="(min-width: 1024px)" type="image/webp" srcSet="/generated/pose-full.webp" />
+              <source type="image/avif" srcSet="/generated/pose-crop.avif" />
+              <source type="image/webp" srcSet="/generated/pose-crop.webp" />
+              <img
+                ref={photoRef}
+                className="hero-fade hero-photo"
+                src="/marcilio-pose.png"
+                alt="Marcilio Ortiz"
+                width={472}
+                height={1390}
+                decoding="async"
+                fetchPriority="high"
+              />
+            </picture>
           </div>
         </div>
       </div>
@@ -278,25 +291,111 @@ export default function Hero() {
           position: absolute; bottom: -25%; left: 48%; transform: translateX(-50%); height: 105%; object-fit: contain; user-select: none; filter: drop-shadow(0px 20px 40px rgba(0,0,0,0.4)); z-index: 1;
         }
 
-        @media (min-width: 1024px) { 
-          .hero-grid { grid-template-columns: 1.2fr 0.8fr !important; } 
+        .hero-art-col picture { display: contents; }
+
+        .hero-subtitle {
+          font-size: var(--text-xl);
+          color: var(--text-muted);
+          max-width: 520px;
+          line-height: 1.6;
+          margin-bottom: 2rem;
         }
+
+        @media (min-width: 1024px) {
+          .hero-grid { grid-template-columns: 1.2fr 0.8fr !important; }
+        }
+
+        /* ── Mobile ────────────────────────────────────────────────────
+           A arte deixa de ser um bloco empilhado (onde a foto renderizava com
+           ~109px de largura) e volta a ser camada de fundo: ancorada na base
+           direita, sangrando pela borda, dissolvida por máscara à esquerda e
+           por gradiente na base. O texto ocupa a coluna esquerda por cima. */
         @media (max-width: 1023px) {
-          .hero-art-col {
-            position: relative !important;
-            height: 40vh !important;
-            min-height: 300px;
-            width: 100% !important;
-            margin-top: 2rem;
-            right: auto;
-          }
+          :root { --hero-padding-top: calc(5.5rem + env(safe-area-inset-top, 0px)); }
+
           .hero-grid { display: flex !important; flex-direction: column; }
+
+          .hero-art-col {
+            position: absolute !important;
+            right: 0;
+            bottom: 0;
+            top: auto;
+            height: 58dvh;
+            width: 82vw;
+            max-width: 400px;
+            margin-top: 0;
+            z-index: 1;
+          }
+
+          /* Dissolve o corte inferior do recorte contra o fundo da página */
+          .hero-art-col::after {
+            content: '';
+            position: absolute;
+            inset: auto 0 0 0;
+            height: 26%;
+            background: linear-gradient(to top, var(--bg-deep) 12%, transparent 100%);
+            pointer-events: none;
+            z-index: 3;
+          }
+
           .hero-photo {
             bottom: 0 !important;
+            top: auto;
+            left: auto !important;
+            right: -7%;
             height: 100% !important;
-            max-width: 100vw;
-            left: 50% !important;
+            width: auto;
+            max-width: none;
+            transform: none !important;
+            object-fit: contain;
+            object-position: bottom right;
+            filter: none;
+            -webkit-mask-image: linear-gradient(to left, #000 52%, transparent 96%);
+            mask-image: linear-gradient(to left, #000 52%, transparent 96%);
           }
+
+          .hero-logo {
+            top: auto;
+            bottom: 8%;
+            left: auto;
+            right: -14%;
+            transform: none;
+            width: 68%;
+            opacity: 0.22;
+            filter: blur(16px);
+          }
+
+          .hero-glow {
+            bottom: 14%;
+            left: auto;
+            right: -18%;
+            transform: none;
+            width: 78%;
+            opacity: 0.75;
+          }
+
+          /* Conteúdo por cima da arte. O texto fica contido na coluna esquerda
+             para que só a área já dissolvida pela máscara passe sob ele. */
+          .hero-content {
+            position: relative;
+            z-index: 10;
+            padding-bottom: 4vh;
+          }
+          .hero-subtitle {
+            font-size: 1rem;
+            line-height: 1.65;
+            max-width: 62%;
+          }
+          .hero-content .btn-primary,
+          .hero-content .btn-secondary {
+            max-width: 260px;
+          }
+        }
+
+        @media (max-width: 400px) {
+          .hero-art-col { height: 52dvh; }
+          .hero-subtitle { max-width: 60%; }
+          .hero-photo { right: -14%; }
         }
       `}</style>
     </section>
