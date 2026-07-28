@@ -12,6 +12,13 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#6D4AFF" />
+
+    <!-- A foto do hero é o elemento de LCP. Sem estes preloads ela só é
+         descoberta depois que o JS monta a árvore, o que custava ~1,3s. -->
+    <link rel="preload" as="image" type="image/avif" href="/generated/pose-crop.avif" media="(max-width: 1023px)" fetchpriority="high" />
+    <link rel="preload" as="image" type="image/avif" href="/generated/pose-full.avif" media="(min-width: 1024px)" fetchpriority="high" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     
     <!-- Primary Meta Tags -->
     <title>Marcilio Ortiz — Desenvolvedor Full Stack</title>
