@@ -126,13 +126,25 @@ export default function Avantis() {
 
             {/* Mini Business Card / Links */}
             <div className="avantis-fade" style={{ marginTop: '1.5rem', paddingTop: '1rem', borderTop: '1px solid var(--glass-border)', display: 'flex', flexDirection: 'column', gap: '0.5rem', maxWidth: 400 }}>
-              <div>
-                <span style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: 'var(--text-primary)', display: 'block', marginBottom: '0.25rem' }}>
-                  Avantis
-                </span>
-                <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>
-                  {data.description}
-                </span>
+              <div className="avantis-card-head">
+                {/* No mobile a coluna dedicada do logo é ocultada, então a marca
+                    aparece aqui — junto do nome, com contexto. */}
+                <img
+                  className="avantis-brand-mark"
+                  src="/icone-avantis-com-fundo-redondo.svg"
+                  alt=""
+                  width={56}
+                  height={56}
+                  loading="lazy"
+                />
+                <div>
+                  <span style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: 'var(--text-primary)', display: 'block', marginBottom: '0.25rem' }}>
+                    Avantis
+                  </span>
+                  <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-muted)' }}>
+                    {data.description}
+                  </span>
+                </div>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.5rem' }}>
                 {data.links?.map((link, i) => (
@@ -159,7 +171,7 @@ export default function Avantis() {
           </div>
 
           {/* Right — The Avantis Logo/Identity */}
-          <div className="avantis-logo-col" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+          <div className="avantis-logo-col" style={{ position: 'relative' }}>
             <div 
               ref={logoContainerRef}
               style={{
@@ -182,14 +194,17 @@ export default function Avantis() {
                 pointerEvents: 'none',
               }} />
               
-              <img 
-                src="/avantis-logo.png" 
-                alt="Avantis" 
+              <img
+                src="/icone-avantis-com-fundo-redondo.svg"
+                alt="Avantis"
+                width={400}
+                height={400}
+                loading="lazy"
                 style={{
                   width: '60%',
                   height: 'auto',
                   filter: 'drop-shadow(0px 20px 40px rgba(139, 92, 246, 0.2))',
-                }} 
+                }}
               />
             </div>
           </div>
@@ -200,8 +215,17 @@ export default function Avantis() {
       <style>{`
         .avantis-section { min-height: auto; }
         .avantis-text-col { height: auto; padding-top: 0; padding-bottom: 2rem; }
-        .avantis-logo-col { padding: 4rem 0; }
+        .avantis-logo-col {
+          padding: 4rem 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
         .avantis-grid { grid-template-columns: 1fr; }
+
+        .avantis-card-head { display: flex; align-items: center; gap: 1rem; }
+        /* A marca inline só existe onde a coluna do logo é ocultada */
+        .avantis-brand-mark { display: none; }
 
         @media (min-width: 1024px) {
           .avantis-grid { grid-template-columns: 1fr 1.2fr !important; }
@@ -210,9 +234,18 @@ export default function Avantis() {
           .avantis-logo-col { padding-top: 50dvh; padding-bottom: 50dvh; }
         }
         
-        @media (max-width: 767px) {
-          .avantis-grid { gap: 3rem !important; }
-          .avantis-logo-col { padding: 0 0 4rem 0; }
+        /* Mobile e tablet: o círculo escuro isolado no centro de uma coluna vazia
+           lia como placeholder. A marca passa a viver dentro do cartão de texto. */
+        @media (max-width: 1023px) {
+          .avantis-logo-col { display: none; }
+          .avantis-brand-mark {
+            display: block;
+            width: 56px;
+            height: 56px;
+            flex-shrink: 0;
+            filter: drop-shadow(0 8px 20px rgba(139, 92, 246, 0.25));
+          }
+          .avantis-grid { gap: 0 !important; }
         }
 
         @media (hover: hover) and (pointer: fine) {
