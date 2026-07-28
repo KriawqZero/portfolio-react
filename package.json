@@ -9,7 +9,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "cv:gen": "tsx scripts/generate-cv.ts"
+    "cv:gen": "tsx scripts/generate-cv.ts",
+    "img:gen": "tsx scripts/optimize-images.ts"
   },
   "dependencies": {
     "framer-motion": "^12.35.2",
@@ -31,6 +32,7 @@
     "globals": "^16.2.0",
     "puppeteer": "^25.3.0",
     "qrcode": "^1.5.4",
+    "sharp": "^0.35.3",
     "tsx": "^4.23.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.34.1",
