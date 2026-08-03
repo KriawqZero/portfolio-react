@@ -76,6 +76,7 @@ export default function CaseFrame({ media, openLabel, projectIndex, allowVideo }
           loop
           playsInline
           preload="none"
+          aria-label={media.alt}
           width={1200}
           height={675}
           data-project-index={projectIndex}
