@@ -79,6 +79,10 @@ export const ptContent = {
             stack: 'Laravel 11 · Livewire 3 · Alpine.js · MariaDB',
             links: [{ label: 'Repositório', href: 'https://github.com/KriawqZero/SISCO-IFMS' }],
             stat: { value: '200+', label: 'usuários ativos' },
+            media: {
+              image: '/cases/sisco.webp',
+              alt: 'Painel do SISCO: certificados pendentes de validação e turmas designadas ao professor',
+            },
           },
           {
             name: 'VamoAgendar',
@@ -497,6 +501,10 @@ export const enContent = {
             stack: 'Laravel 11 · Livewire 3 · Alpine.js · MariaDB',
             links: [{ label: 'Repository', href: 'https://github.com/KriawqZero/SISCO-IFMS' }],
             stat: { value: '200+', label: 'active users' },
+            media: {
+              image: '/cases/sisco.webp',
+              alt: 'SISCO dashboard: certificates awaiting validation and the classes assigned to the professor',
+            },
           },
           {
             name: 'VamoAgendar',

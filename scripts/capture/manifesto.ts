@@ -52,7 +52,17 @@ export const CAPTURAS: Captura[] = [
     ],
   },
   // ── Locais (subir com o Marcilio antes de capturar) ──────────────────
-  { slug: 'sisco', origem: 'http://localhost:8000' },
+  {
+    slug: 'sisco',
+    origem: 'http://localhost:8000/login/professor',
+    // Credenciais do seed público do próprio SISCO (dados fictícios de TCC,
+    // banco local em docker) — o login é primeironome.ultimonome.
+    roteiro: [
+      { seletor: 'input[name="login"]', texto: 'lucas.roberto' },
+      { seletor: 'input[name="senha"]', texto: '123456' },
+      { seletor: 'button[type="submit"]', esperaMs: 3500 },
+    ],
+  },
   { slug: 'kyteapp', origem: 'http://localhost:3000' },
   { slug: 'sushi-verao', origem: 'http://localhost:3001' },
   // ── Fase 2 (captura oportunista, fica em capturas/) ──────────────────
