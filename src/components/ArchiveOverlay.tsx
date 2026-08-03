@@ -16,6 +16,7 @@ interface ProjectItem {
   links: { label: string; href: string }[]
   narrative?: string
   details?: string
+  media?: { image: string; alt: string }
 }
 
 export default function ArchiveOverlay({ isOpen, onClose }: ArchiveOverlayProps) {
@@ -266,40 +267,58 @@ function ArchiveRow({ project, isActive, onClick, onRef }: ArchiveRowProps) {
         style={{ height: 0, overflow: 'hidden' }}
       >
         <div style={{ padding: '0 2rem 2rem 2rem' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '800px' }}>
-            <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)', lineHeight: 1.7 }}>
-              {project.narrative || ''}
-            </p>
-            
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              {project.links.map((link, j) => (
-                <a
-                  key={j}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="archive-link"
-                  style={{
-                    padding: '0.5rem 1rem',
-                    fontSize: 'var(--text-xs)',
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    borderRadius: '4px',
-                    color: 'var(--text-primary)',
-                    textDecoration: 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem',
-                    transition: 'background 0.2s',
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.05em'
-                  }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
-                  onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
-                >
-                  {link.label} ↗
-                </a>
-              ))}
+          <div style={{ display: 'flex', gap: '1.5rem', maxWidth: '800px', flexWrap: 'wrap' }}>
+            {project.media && (
+              <img
+                src={project.media.image}
+                alt={project.media.alt}
+                width={320}
+                height={180}
+                loading="lazy"
+                decoding="async"
+                style={{
+                  display: 'block',
+                  borderRadius: '8px',
+                  border: '1px solid var(--glass-border)',
+                  flexShrink: 0,
+                }}
+              />
+            )}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', flex: 1, minWidth: '260px' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)', lineHeight: 1.7 }}>
+                {project.narrative || ''}
+              </p>
+
+              <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+                {project.links.map((link, j) => (
+                  <a
+                    key={j}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="archive-link"
+                    style={{
+                      padding: '0.5rem 1rem',
+                      fontSize: 'var(--text-xs)',
+                      background: 'rgba(255,255,255,0.03)',
+                      border: '1px solid rgba(255,255,255,0.1)',
+                      borderRadius: '4px',
+                      color: 'var(--text-primary)',
+                      textDecoration: 'none',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '0.5rem',
+                      transition: 'background 0.2s',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.05em'
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
+                    onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255,255,255,0.03)'}
+                  >
+                    {link.label} ↗
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
