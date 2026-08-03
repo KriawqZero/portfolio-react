@@ -290,6 +290,24 @@ export default function Trajectory() {
                     viewport={{ once: true, margin: '-10%' }}
                     transition={{ duration: 0.8 }}
                   >
+                    {'media' in project && project.media && (
+                      <img
+                        src={project.media.image}
+                        alt={project.media.alt}
+                        width={1200}
+                        height={675}
+                        loading="lazy"
+                        decoding="async"
+                        style={{
+                          display: 'block',
+                          width: '100%',
+                          height: 'auto',
+                          borderRadius: '12px',
+                          border: '1px solid var(--glass-border)',
+                          marginBottom: '1.25rem',
+                        }}
+                      />
+                    )}
                     {'type' in project && project.type && (
                       <span style={{
                         display: 'inline-block',
