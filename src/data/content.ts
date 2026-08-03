@@ -39,6 +39,13 @@ export const ptContent = {
     titleHighlight: 'até aqui.',
     archiveText: 'Explorar Arquivo Completo',
     scrollText: 'role para avançar',
+    openText: 'Abrir',
+    /**
+     * media por projeto — contrato editorial:
+     * só entra print/vídeo de UI real rodando (produção ou localhost).
+     * `url` só quando o projeto está no ar e abre para qualquer visitante.
+     * `alt` obrigatório e localizado. Paths compartilhados entre pt/en.
+     */
     eras: [
       {
         id: 'surface',
@@ -58,6 +65,11 @@ export const ptContent = {
               { label: 'Repo App', href: 'https://github.com/KriawqZero/app-marciliobarbosa-corretor' }
             ],
             stat: { value: 'Full Stack', label: 'produção + ia' },
+            media: {
+              image: '/cases/catalogo-corretor.webp',
+              alt: 'Home do catálogo do corretor em produção, com busca por cidade e tipo e a contagem de imóveis publicados',
+              url: 'https://marciliobarbosacorretor.com.br/',
+            },
           },
           {
             name: 'SISCO',
@@ -76,6 +88,11 @@ export const ptContent = {
             stack: 'Next.js 16 · Prisma 7 · PostgreSQL · Mercado Pago · better-auth',
             links: [{ label: 'Repositório', href: 'https://github.com/KriawqZero/vamoagendar' }, { label: 'Visitar', href: 'https://vamoagendar.com.br/' }],
             stat: { value: 'SaaS', label: 'infraestrutura temporal' },
+            media: {
+              image: '/cases/vamoagendar.webp',
+              alt: 'Home do VamoAgendar em produção, com o simulador de agendamento na etapa de escolha do serviço',
+              url: 'https://vamoagendar.com.br/',
+            },
           },
         ],
       },
@@ -194,7 +211,8 @@ export const ptContent = {
       narrative: 'Um experimento escolar de renderização e gamificação. O foco técnico foi abandonar engines prontas e gerenciar o game loop, colisões e renderização gráfica diretamente no HTML5 Canvas com TypeScript puro.',
       links: [
         { label: 'Repositório', href: 'https://github.com/KriawqZero/jogo_matematica' }
-      ]
+      ],
+      media: { image: '/cases/thumbs/jogo-matematica.webp', alt: 'Labirinto Geométrico rodando no navegador, com fog of war em Canvas' }
     },
     {
       year: '2024',
@@ -225,7 +243,8 @@ export const ptContent = {
       links: [
         { label: 'Acessar Site', href: 'https://avantis.dev' },
         { label: 'Repositório', href: 'https://github.com/KriawqZero/avantis-porfolio' }
-      ]
+      ],
+      media: { image: '/cases/thumbs/avantis.webp', alt: 'Landing page da Avantis no ar' }
     }
   ],
 
@@ -442,6 +461,7 @@ export const enContent = {
     titleHighlight: 'so far.',
     archiveText: 'Explore Full Archive',
     scrollText: 'scroll to advance',
+    openText: 'Open',
     eras: [
       {
         id: 'surface',
@@ -461,6 +481,11 @@ export const enContent = {
               { label: 'App Repo', href: 'https://github.com/KriawqZero/app-marciliobarbosa-corretor' }
             ],
             stat: { value: 'Full Stack', label: 'production + AI' },
+            media: {
+              image: '/cases/catalogo-corretor.webp',
+              alt: 'Real-estate catalog home page in production, with search by city and type and the count of published listings',
+              url: 'https://marciliobarbosacorretor.com.br/',
+            },
           },
           {
             name: 'SISCO',
@@ -479,6 +504,11 @@ export const enContent = {
             stack: 'Next.js 16 · Prisma 7 · PostgreSQL · Mercado Pago · better-auth',
             links: [{ label: 'Repository', href: 'https://github.com/KriawqZero/vamoagendar' }, { label: 'Visit', href: 'https://vamoagendar.com.br/' }],
             stat: { value: 'SaaS', label: 'temporal infra' },
+            media: {
+              image: '/cases/vamoagendar.webp',
+              alt: 'VamoAgendar home page in production, with the booking simulator on the service selection step',
+              url: 'https://vamoagendar.com.br/',
+            },
           },
         ],
       },
@@ -597,7 +627,8 @@ export const enContent = {
       narrative: 'A school experiment in rendering and gamification. The technical focus was to abandon pre-made engines and manage the game loop, collisions, and graphic rendering directly in HTML5 Canvas with pure TypeScript.',
       links: [
         { label: 'Repository', href: 'https://github.com/KriawqZero/jogo_matematica' }
-      ]
+      ],
+      media: { image: '/cases/thumbs/jogo-matematica.webp', alt: 'Geometric Maze running in the browser, with Canvas fog of war' }
     },
     {
       year: '2024',
@@ -625,6 +656,7 @@ export const enContent = {
       type: 'Landing Page',
       stack: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
       narrative: 'Institutional website developed for my brand as a freelancer. The goal was to create a high-converting page to attract small businesses and micro-entrepreneurs, using Framer Motion for micro-interactions that convey professionalism.',
+      media: { image: '/cases/thumbs/avantis.webp', alt: 'Avantis landing page, live' },
       links: [
         { label: 'Visit Site', href: 'https://avantis.dev' },
         { label: 'Repository', href: 'https://github.com/KriawqZero/avantis-porfolio' }
