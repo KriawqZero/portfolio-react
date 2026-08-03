@@ -1,9 +1,10 @@
 import { useRef, useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+import { motion, useReducedMotion } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useLanguage } from '../hooks/useLanguage'
 import ArchiveOverlay from './ArchiveOverlay'
+import CaseFrame from './CaseFrame'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -16,6 +17,8 @@ export default function Trajectory() {
   const glowRef = useRef<HTMLDivElement>(null)
   const [isDesktop, setIsDesktop] = useState(true)
   const activeEraIdRef = useRef('surface')
+  const lastActiveIndexRef = useRef(0)
+  const reducedMotion = useReducedMotion()
 
   const { t } = useLanguage()
   const { trajectory: data } = t
@@ -42,6 +45,7 @@ export default function Trajectory() {
       const panels = gsap.utils.toArray('.traj-panel') as HTMLElement[]
       const eraLabels = gsap.utils.toArray('.era-label') as HTMLElement[]
       const eraVisuals = gsap.utils.toArray('.era-visual') as HTMLElement[]
+      const shots = gsap.utils.toArray('.traj-shot') as HTMLElement[]
 
       // Set initial states
       panels.forEach((panel, i) => {
@@ -49,6 +53,14 @@ export default function Trajectory() {
           gsap.set(panel, { y: 100, opacity: 0, filter: 'blur(10px)', pointerEvents: 'none' })
         } else {
           gsap.set(panel, { pointerEvents: 'auto' })
+        }
+      })
+
+      shots.forEach((shot, i) => {
+        if (i > 0) {
+          gsap.set(shot, { y: 60, opacity: 0, scale: 0.97, pointerEvents: 'none' })
+        } else {
+          gsap.set(shot, { pointerEvents: 'auto' })
         }
       })
 
@@ -112,6 +124,23 @@ export default function Trajectory() {
             panels.forEach((panel, i) => {
               panel.style.pointerEvents = i === activeIndex ? 'auto' : 'none'
             })
+
+            shots.forEach((shot, i) => {
+              shot.style.pointerEvents = i === activeIndex ? 'auto' : 'none'
+            })
+
+            if (lastActiveIndexRef.current !== activeIndex) {
+              lastActiveIndexRef.current = activeIndex
+              document
+                .querySelectorAll<HTMLVideoElement>('.traj-shot video')
+                .forEach(v => {
+                  if (Number(v.dataset.projectIndex) === activeIndex) {
+                    v.play().catch(() => {})
+                  } else {
+                    v.pause()
+                  }
+                })
+            }
           }
         }
       })
@@ -131,6 +160,20 @@ export default function Trajectory() {
             y: 0,
             opacity: 1,
             filter: 'blur(0px)',
+            ease: 'power2.inOut'
+          }, i)
+
+          // Crossfade da prova visual, sincronizado com o painel
+          tl.to(shots[i], {
+            y: -40,
+            opacity: 0,
+            scale: 0.97,
+            ease: 'power2.inOut'
+          }, i)
+          tl.to(shots[i + 1], {
+            y: 0,
+            opacity: 1,
+            scale: 1,
             ease: 'power2.inOut'
           }, i)
 
@@ -428,7 +471,7 @@ BUILD SUCCESSFUL`}
         {/* LAYER 2: Conteúdo Interativo                              */}
         {/* ========================================================= */}
         <div className="container" style={{ height: '100%', position: 'relative', zIndex: 10 }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '8rem', height: '100%', alignItems: 'center' }}>
+          <div className="traj-grid">
 
             {/* Coluna Esquerda: Títulos e Progresso */}
             <div style={{ display: 'flex', flexDirection: 'column', height: '60vh', justifyContent: 'center' }}>
@@ -568,6 +611,32 @@ BUILD SUCCESSFUL`}
                 Pular trajetória ↓
               </button>*/}
               </div>
+            </div>
+
+            {/* Coluna Central: Prova visual (moldura por projeto, crossfade no timeline) */}
+            <div className="traj-shots" style={{ position: 'relative', height: '60vh', width: '100%' }}>
+              {allProjects.map((project, i) => (
+                <div
+                  key={project.name}
+                  className="traj-shot"
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    display: 'flex',
+                    alignItems: 'center',
+                    willChange: 'transform, opacity',
+                  }}
+                >
+                  {'media' in project && project.media && (
+                    <CaseFrame
+                      media={project.media}
+                      openLabel={data.openText}
+                      projectIndex={i}
+                      allowVideo={isDesktop && !reducedMotion}
+                    />
+                  )}
+                </div>
+              ))}
             </div>
 
             {/* Coluna Direita: Painéis de Projeto */}
