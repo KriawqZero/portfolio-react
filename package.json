@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "cv:gen": "tsx scripts/generate-cv.ts",
-    "img:gen": "tsx scripts/optimize-images.ts"
+    "img:gen": "tsx scripts/optimize-images.ts",
+    "capture": "tsx scripts/capture/capturar.ts"
   },
   "dependencies": {
     "framer-motion": "^12.35.2",
