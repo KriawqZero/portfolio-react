@@ -12,6 +12,7 @@ export type Validacao =
 type Limites = {
   caracteresMensagem: number
   mensagensHistorico: number
+  caracteresHistorico: number
 }
 
 /**
@@ -73,7 +74,7 @@ export function validarCorpo(corpo: unknown, limites: Limites): Validacao {
       if (m.role !== 'user' && m.role !== 'assistant') {
         return { ok: false, status: 400, erro: 'historico_invalido' }
       }
-      if (typeof m.content !== 'string' || m.content.length > limites.caracteresMensagem) {
+      if (typeof m.content !== 'string' || m.content.length > limites.caracteresHistorico) {
         return { ok: false, status: 400, erro: 'historico_invalido' }
       }
     }

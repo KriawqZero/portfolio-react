@@ -24,6 +24,15 @@ type Estado =
   | { fase: 'erro'; pergunta: string; mensagem: string }
 
 const MAX_CARACTERES = 500
+
+/**
+ * Janela de conversa: 10 perguntas e 10 respostas.
+ *
+ * Funciona como fila — quando a 11ª pergunta chega, o par mais antigo sai e
+ * todo o resto permanece. Nunca cortamos no meio de um par, para que a IA não
+ * receba uma pergunta sem a resposta que veio depois dela.
+ */
+const MAX_HISTORICO = 20
 const CHAVE_SESSAO = 'portfolio-ai-session'
 
 function idDeSessao(): string {
@@ -100,7 +109,7 @@ export default function AiChat() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           question: limpo,
-          history: historico.slice(-6),
+          history: historico.slice(-MAX_HISTORICO),
           sessionId: idDeSessao(),
           lang: language,
           context: isFreelanceView ? 'freelance' : 'default',
@@ -127,7 +136,8 @@ export default function AiChat() {
       const resposta = (await r.json()) as AskResponse
       setEstado({ fase: 'respondido', pergunta: limpo, resposta })
       setHistorico(h => [
-        ...h.slice(-4),
+        // Abre espaço para o par novo descartando o par mais antigo.
+        ...h.slice(-(MAX_HISTORICO - 2)),
         { role: 'user', content: limpo },
         { role: 'assistant', content: resposta.answer },
       ])

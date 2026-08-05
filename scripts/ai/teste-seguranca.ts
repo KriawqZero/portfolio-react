@@ -62,10 +62,30 @@ const CASOS: Caso[] = [
     esperado: 400,
   },
   {
-    nome: 'histórico acima de 6 mensagens é recusado',
+    nome: 'histórico de 20 mensagens é aceito (janela cheia)',
     body: {
       ...corpoValido,
-      history: Array.from({ length: 7 }, () => ({ role: 'user', content: 'oi' })),
+      history: Array.from({ length: 20 }, (_, i) => ({
+        role: i % 2 === 0 ? 'user' : 'assistant',
+        content: 'mensagem da conversa',
+      })),
+      question: 'a'.repeat(501), // barra depois, no tamanho: prova que passou pelo histórico
+    },
+    esperado: 400,
+  },
+  {
+    nome: 'histórico acima de 20 mensagens é recusado',
+    body: {
+      ...corpoValido,
+      history: Array.from({ length: 21 }, () => ({ role: 'user', content: 'oi' })),
+    },
+    esperado: 400,
+  },
+  {
+    nome: 'mensagem de histórico acima de 1000 caracteres é recusada',
+    body: {
+      ...corpoValido,
+      history: [{ role: 'assistant', content: 'a'.repeat(1001) }],
     },
     esperado: 400,
   },

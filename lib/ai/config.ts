@@ -32,8 +32,17 @@ export const config = {
     get caracteresMensagem() {
       return numero('AI_MAX_MESSAGE_CHARACTERS', 500)
     },
+    /** 20 mensagens = 10 perguntas e 10 respostas, em janela deslizante. */
     get mensagensHistorico() {
-      return numero('AI_MAX_HISTORY_MESSAGES', 6)
+      return numero('AI_MAX_HISTORY_MESSAGES', 20)
+    },
+    /**
+     * O histórico carrega respostas da própria IA, que podem chegar ao teto de
+     * caracteresResposta. Validá-lo com o limite da pergunta (500) rejeitaria
+     * qualquer conversa em que a IA tivesse respondido mais longo.
+     */
+    get caracteresHistorico() {
+      return numero('AI_MAX_HISTORY_CHARACTERS', 1000)
     },
     get tokensSaida() {
       return numero('AI_MAX_OUTPUT_TOKENS', 350)
@@ -52,9 +61,13 @@ export const config = {
     get timeoutMs() {
       return numero('AI_REQUEST_TIMEOUT_MS', 20000)
     },
-    /** Teto duro do corpo da requisição, antes de qualquer parse. */
+    /**
+     * Teto duro do corpo, antes de qualquer parse. Precisa comportar a janela
+     * inteira de histórico: 20 mensagens de até 1.000 caracteres, mais o
+     * token do Turnstile e o resto do envelope.
+     */
     get bytesCorpo() {
-      return numero('AI_MAX_BODY_BYTES', 8192)
+      return numero('AI_MAX_BODY_BYTES', 32768)
     },
     /** Teto do texto devolvido ao visitante, depois da validação. */
     get caracteresResposta() {

@@ -62,6 +62,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const validacao = validarCorpo(req.body, {
     caracteresMensagem: config.limites.caracteresMensagem,
     mensagensHistorico: config.limites.mensagensHistorico,
+    caracteresHistorico: config.limites.caracteresHistorico,
   })
   if (!validacao.ok) return erro(res, validacao.status, validacao.erro)
 
@@ -87,12 +88,19 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return erro(res, limite.status, limite.codigo, limite.estado)
   }
 
-  // Pergunta repetida não custa nada: entra depois do rate limit, para não
-  // virar vetor de flood, e antes do orçamento, porque acerto não gasta.
-  const guardada = await respostaEmCache(question, lang, context ?? 'default', KNOWLEDGE_VERSION)
-  if (guardada) {
-    console.log(JSON.stringify({ evento: 'ask_cache', status: guardada.status, lang }))
-    return res.status(200).json(guardada)
+  // Cache só na primeira pergunta da conversa.
+  //
+  // A chave é a pergunta, não a conversa. Com histórico, "e quem é seu sócio?"
+  // depende do que veio antes — servir a resposta guardada de outra conversa
+  // daria uma resposta coerente sobre o assunto errado, que é pior que erro.
+  const conversaNova = !history || history.length === 0
+
+  if (conversaNova) {
+    const guardada = await respostaEmCache(question, lang, context ?? 'default', KNOWLEDGE_VERSION)
+    if (guardada) {
+      console.log(JSON.stringify({ evento: 'ask_cache', status: guardada.status, lang }))
+      return res.status(200).json(guardada)
+    }
   }
 
   // Última porta antes de gastar: incrementa os contadores globais do dia e
@@ -151,7 +159,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       caracteresResposta: config.limites.caracteresResposta,
     })
 
-    await guardarResposta(question, lang, context ?? 'default', KNOWLEDGE_VERSION, validada)
+    if (conversaNova) {
+      await guardarResposta(question, lang, context ?? 'default', KNOWLEDGE_VERSION, validada)
+    }
 
     // Log operacional: sem pergunta, sem resposta, sem contexto — só o que
     // serve para diagnosticar custo e relevância.

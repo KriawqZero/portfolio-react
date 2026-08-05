@@ -67,13 +67,24 @@ Content-Type: application/json
 | Campo | De onde vem | Limite |
 |---|---|---|
 | `question` | o que o visitante digitou ou a sugestão clicada | 500 caracteres |
-| `history` | estado do React, só as últimas trocas | 6 mensagens |
+| `history` | estado do React, janela deslizante | 20 mensagens (10 trocas) |
 | `sessionId` | `crypto.randomUUID()` guardado em `localStorage` | — |
 | `lang` | o idioma da interface (`useLanguage`) | `pt` ou `en` |
 | `context` | `freelance` quando a URL tem `?platform=workana` | — |
 | `turnstileToken` | widget invisível da Cloudflare, novo a cada envio | — |
 
-O corpo inteiro precisa caber em **8 KB**.
+O corpo inteiro precisa caber em **32 KB** — o suficiente para a janela cheia.
+
+**Como a memória funciona:** o servidor não guarda conversa nenhuma
+(`store: false`, sem `previous_response_id`). Quem carrega o histórico é o
+navegador, a cada pergunta. A janela é uma fila de 20 mensagens: quando a 11ª
+pergunta chega, o par mais antigo sai e o resto permanece. Fechar a aba apaga
+tudo.
+
+O que o visitante disse na conversa é contexto válido — se ele se apresentou, a
+IA usa o nome dele. Mas nada que o visitante afirme sobre o Marcilio vira
+verdade: esses fatos só vêm dos documentos, inclusive quando alguém diz ser o
+próprio Marcilio.
 
 ---
 
@@ -108,7 +119,7 @@ validarCorpo(body, limites) → { ok: true, dados } | { ok: false, status, erro 
 |---|---|
 | corpo válido | `{ ok: true, dados: {...} }` |
 | `question` com 501 caracteres | `{ ok: false, status: 400, erro: 'pergunta_longa' }` |
-| `history` com 7 mensagens | `{ ok: false, status: 400, erro: 'historico_longo' }` |
+| `history` com 21 mensagens | `{ ok: false, status: 400, erro: 'historico_longo' }` |
 | `sessionId: "x"` | `{ ok: false, status: 400, erro: 'sessao_invalida' }` |
 
 ### Porta 3 — os contadores existem?
@@ -168,6 +179,10 @@ A pergunta é normalizada antes de virar chave:
 As três batem na mesma chave. **Acerto devolve na hora, sem chamar a OpenAI e
 sem consumir orçamento.** A chave inclui a versão do dossiê, então editar
 `knowledge/` ou `content.ts` invalida tudo sozinho.
+
+O cache **só vale na primeira pergunta da conversa**. Com histórico, "e quem é
+seu sócio?" depende do que veio antes — servir a resposta guardada de outra
+conversa daria uma resposta coerente sobre o assunto errado.
 
 ### Porta 8 — dentro do teto de gasto?
 

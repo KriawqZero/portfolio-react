@@ -19,7 +19,8 @@
     "ai:shot": "tsx scripts/ai/capturar-secao.ts",
     "ai:stats": "tsx scripts/ai/consumo.ts",
     "ai:seguranca": "tsx scripts/ai/teste-seguranca.ts",
-    "ai:custo": "tsx scripts/ai/medir-custo.ts"
+    "ai:custo": "tsx scripts/ai/medir-custo.ts",
+    "ai:conversa": "tsx scripts/ai/teste-conversa.ts"
   },
   "dependencies": {
     "@upstash/ratelimit": "^2.0.8",
