@@ -427,6 +427,33 @@ input, textarea {
   }
 }
 
+/* ── Trajetória: grid da cena pinada ───────────────────────────── */
+/* Duas colunas até 1279px — a moldura de prova visual não cabe sem
+   espremer o título e cortar os botões do painel. A partir de 1280px
+   entra a coluna do meio com o screenshot do projeto ativo. */
+.traj-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 8rem;
+  height: 100%;
+  align-items: center;
+}
+
+.traj-shots {
+  display: none;
+}
+
+@media (min-width: 1280px) {
+  .traj-grid {
+    grid-template-columns: 1fr 0.8fr 1.15fr;
+    gap: 2.5rem;
+  }
+
+  .traj-shots {
+    display: block;
+  }
+}
+
 /* ── Responsive ────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   :root {
