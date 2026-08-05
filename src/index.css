@@ -484,3 +484,371 @@ input, textarea {
     --text-hero: clamp(2.5rem, 10vw, 3.5rem);
   }
 }
+/* ================================================================
+   MARCILIO IA — seção de conversa
+   Altura estável de propósito: a seção fica entre dois ScrollTriggers
+   pinados, então a conversa rola dentro do painel, nunca empurra a página.
+   ================================================================ */
+
+.ai-section {
+  padding: var(--section-spacing) 0;
+  position: relative;
+}
+
+.ai-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 400px) 1fr;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: start;
+}
+
+/* ── Coluna editorial ─────────────────────────────────────────── */
+
+.ai-title {
+  margin: 1.25rem 0 1.25rem;
+  /* Menor que o text-display das outras seções: aqui ele divide espaço com
+     um painel interativo, e um título de 6rem engoliria a coluna inteira. */
+  font-size: clamp(2.25rem, 3.4vw, 3.25rem);
+  line-height: 1.05;
+}
+
+.ai-title-accent {
+  color: var(--accent-text);
+}
+
+.ai-description {
+  font-size: var(--text-base);
+  color: var(--text-body);
+  max-width: min(42ch, 100%);
+}
+
+.ai-disclaimer {
+  position: relative;
+  margin: 2rem 0;
+  padding-left: 1.25rem;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--text-body);
+  max-width: min(44ch, 100%);
+}
+
+.ai-disclaimer-mark {
+  position: absolute;
+  left: 0;
+  top: 0.35em;
+  bottom: 0.35em;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent-light), transparent);
+}
+
+.ai-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+}
+
+.ai-chip {
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-body);
+  font-size: var(--text-xs);
+  line-height: 1.3;
+  text-align: left;
+  transition: border-color var(--duration-fast) var(--ease-cinematic),
+              color var(--duration-fast) var(--ease-cinematic),
+              transform var(--duration-fast) var(--ease-cinematic);
+}
+
+.ai-chip:hover:not(:disabled) {
+  border-color: var(--glass-border-hover);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.ai-chip:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ai-chip-ghost {
+  border-style: dashed;
+}
+
+/* ── Painel ───────────────────────────────────────────────────── */
+
+.ai-panel {
+  display: flex;
+  flex-direction: column;
+  /* Alta o bastante para equilibrar a coluna editorial ao lado e para caber
+     resposta, fontes e continuações sem que nada mude de altura. */
+  min-height: 520px;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  border-radius: 20px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+}
+
+.ai-stream {
+  flex: 1;
+  min-height: 0;
+  max-height: 360px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+  /* Esmaece a última linha quando há mais conteúdo: sem isso, no mobile, as
+     fontes e as continuações ficam escondidas sem nenhuma pista. */
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 2rem), transparent 100%);
+}
+
+.ai-stream:not(:has(.ai-answer)) {
+  mask-image: none;
+}
+
+.ai-empty,
+.ai-question,
+.ai-answer,
+.ai-error {
+  font-size: var(--text-base);
+  line-height: 1.75;
+}
+
+/* Vazio ocupa o painel inteiro e fica centrado: sem isso o estado inicial
+   é um retângulo com uma linha de texto no topo e muito nada embaixo. */
+.ai-empty {
+  margin: auto;
+  max-width: 32ch;
+  text-align: center;
+  color: var(--text-body);
+}
+
+.ai-question {
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  margin-bottom: 1.25rem;
+}
+
+.ai-question span {
+  color: var(--accent-text);
+}
+
+.ai-answer {
+  color: var(--text-secondary);
+}
+
+.ai-error {
+  color: var(--text-body);
+}
+
+/* Espera: uma linha varrendo, na mesma linguagem da barra do Processo. */
+
+.ai-loading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.ai-scan {
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--accent-light) 45%,
+    var(--accent-text) 50%,
+    var(--accent-light) 55%,
+    transparent 100%
+  );
+  background-size: 220% 100%;
+  animation: ai-scan 1.6s var(--ease-cinematic) infinite;
+}
+
+@keyframes ai-scan {
+  from { background-position: 120% 0; }
+  to   { background-position: -120% 0; }
+}
+
+.ai-loading-text {
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.ai-answer-region:focus {
+  outline: none;
+}
+
+/* ── Fontes, contato e continuações ───────────────────────────── */
+
+.ai-sources {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.ai-sources-label,
+.ai-followups-label {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+}
+
+.ai-sources a {
+  color: var(--accent-text);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--duration-fast) var(--ease-cinematic);
+}
+
+.ai-sources a:hover {
+  border-bottom-color: var(--accent-text);
+}
+
+.ai-contact {
+  display: inline-block;
+  margin-top: 1.25rem;
+  font-size: var(--text-sm);
+  color: var(--accent-text);
+  border-bottom: 1px solid rgba(139, 107, 255, 0.35);
+}
+
+.ai-followups {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.75rem;
+  font-size: var(--text-xs);
+}
+
+/* ── Entrada ──────────────────────────────────────────────────── */
+
+.ai-form {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--glass-border);
+}
+
+.ai-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.65rem 0;
+  border: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+}
+
+.ai-input::placeholder {
+  color: var(--text-muted);
+}
+
+.ai-input:focus {
+  outline: none;
+}
+
+.ai-counter {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.ai-send {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  font-size: var(--text-lg);
+  transition: border-color var(--duration-fast) var(--ease-cinematic),
+              background var(--duration-fast) var(--ease-cinematic);
+}
+
+.ai-send:hover:not(:disabled) {
+  border-color: var(--glass-border-hover);
+  background: var(--accent-glow);
+}
+
+.ai-send:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.ai-clear {
+  align-self: flex-start;
+  margin-top: 1rem;
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color var(--duration-fast) var(--ease-cinematic);
+}
+
+.ai-clear:hover {
+  color: var(--text-body);
+}
+
+/* ── Acessibilidade e responsivo ──────────────────────────────── */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.ai-input:focus-visible,
+.ai-chip:focus-visible,
+.ai-send:focus-visible,
+.ai-clear:focus-visible,
+.ai-sources a:focus-visible,
+.ai-contact:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (max-width: 1024px) {
+  .ai-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-panel {
+    min-height: 400px;
+  }
+
+  .ai-stream {
+    max-height: 280px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-scan {
+    animation: none;
+    background: var(--accent-light);
+    opacity: 0.4;
+  }
+}
