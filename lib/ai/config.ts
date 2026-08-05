@@ -38,11 +38,16 @@ export const config = {
     get tokensSaida() {
       return numero('AI_MAX_OUTPUT_TOKENS', 350)
     },
+    /**
+     * Reduzidos depois de medir: com o perfil e o índice de projetos já nas
+     * instruções, quatro documentos cobrem as perguntas reais. Cada documento
+     * a mais era ~250 tokens de entrada por pergunta que não mudavam a resposta.
+     */
     get caracteresContexto() {
-      return numero('AI_MAX_CONTEXT_CHARACTERS', 9000)
+      return numero('AI_MAX_CONTEXT_CHARACTERS', 6000)
     },
     get documentos() {
-      return numero('AI_MAX_DOCUMENTS', 6)
+      return numero('AI_MAX_DOCUMENTS', 4)
     },
     get timeoutMs() {
       return numero('AI_REQUEST_TIMEOUT_MS', 20000)

@@ -16,8 +16,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import OpenAI from 'openai'
 
+import { respostaEmCache, guardarResposta } from '../lib/ai/cache'
 import { config } from '../lib/ai/config'
-import { KNOWLEDGE, POLICIES } from '../lib/ai/generated/knowledge-index'
+import { KNOWLEDGE, KNOWLEDGE_VERSION, POLICIES } from '../lib/ai/generated/knowledge-index'
 import {
   chaveAnonima,
   dentroDoOrcamento,
@@ -27,7 +28,7 @@ import {
   ipDaRequisicao,
 } from '../lib/ai/limits'
 import { montarBlocoDocumentos, montarInstrucoes } from '../lib/ai/prompt'
-import { selecionarDocumentos } from '../lib/ai/retrieval'
+import { documentosFixos, selecionarDocumentos } from '../lib/ai/retrieval'
 import { verificarTurnstile } from '../lib/ai/turnstile'
 import { ANSWER_JSON_SCHEMA } from '../lib/ai/types'
 import { validarResposta } from '../lib/ai/validate-answer'
@@ -86,6 +87,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return erro(res, limite.status, limite.codigo, limite.estado)
   }
 
+  // Pergunta repetida não custa nada: entra depois do rate limit, para não
+  // virar vetor de flood, e antes do orçamento, porque acerto não gasta.
+  const guardada = await respostaEmCache(question, lang, context ?? 'default', KNOWLEDGE_VERSION)
+  if (guardada) {
+    console.log(JSON.stringify({ evento: 'ask_cache', status: guardada.status, lang }))
+    return res.status(200).json(guardada)
+  }
+
   // Última porta antes de gastar: incrementa os contadores globais do dia e
   // do mês. Se estourou, a OpenAI não é chamada.
   const orcamento = await dentroDoOrcamento()
@@ -105,7 +114,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const resposta = await client.responses.create(
       {
         model: config.modelo,
-        instructions: montarInstrucoes(POLICIES, lang),
+        instructions: montarInstrucoes(POLICIES, lang, documentosFixos(KNOWLEDGE)),
+        // Roteia perguntas semelhantes para o mesmo cache de prefixo da OpenAI,
+        // que é onde o desconto de entrada acontece.
+        prompt_cache_key: `marcilio-ia-${lang}-${KNOWLEDGE_VERSION}`,
         input: [
           ...(history ?? []).map(m => ({ role: m.role, content: m.content })),
           { role: 'developer' as const, content: montarBlocoDocumentos(documentos) },
@@ -135,9 +147,11 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       bruto = null
     }
 
-    const validada = validarResposta(bruto, documentos, {
+    const validada = validarResposta(bruto, [...documentos, ...documentosFixos(KNOWLEDGE)], {
       caracteresResposta: config.limites.caracteresResposta,
     })
+
+    await guardarResposta(question, lang, context ?? 'default', KNOWLEDGE_VERSION, validada)
 
     // Log operacional: sem pergunta, sem resposta, sem contexto — só o que
     // serve para diagnosticar custo e relevância.
@@ -148,6 +162,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         modelo: config.modelo,
         docs: documentos.map(d => d.id),
         tokensEntrada: resposta.usage?.input_tokens ?? null,
+        tokensCacheados: resposta.usage?.input_tokens_details?.cached_tokens ?? null,
         tokensSaida: resposta.usage?.output_tokens ?? null,
         latenciaMs: Date.now() - inicio,
         lang,

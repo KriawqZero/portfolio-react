@@ -14,8 +14,19 @@ const STOPWORDS = new Set([
   'does', 'did', 'you', 'your', 'yours', 'he', 'she', 'it', 'what', 'which', 'when', 'how', 'where',
 ])
 
-/** Sempre no contexto: sem eles o modelo não sabe nem quem está representando. */
-const FIXOS = ['profile-core', 'projects-overview']
+/**
+ * Sempre no contexto — mas entregues pelas instruções, não pelo bloco de
+ * documentos. Como não mudam de uma pergunta para outra, ficam no prefixo
+ * estático do prompt, que é a parte que a OpenAI cobra com desconto quando
+ * está em cache.
+ */
+export const FIXOS = ['profile-core', 'projects-overview']
+
+export function documentosFixos(documentos: KnowledgeDoc[]): KnowledgeDoc[] {
+  return FIXOS.map(id => documentos.find(d => d.id === id)).filter(
+    (d): d is KnowledgeDoc => Boolean(d),
+  )
+}
 
 export function tokenizar(texto: string): string[] {
   return texto
@@ -62,13 +73,8 @@ export function selecionarDocumentos(
   opcoes: OpcoesBusca,
 ): KnowledgeDoc[] {
   const termos = tokenizar(pergunta)
-  const porId = new Map(documentos.map(d => [d.id, d]))
 
   const selecionados: KnowledgeDoc[] = []
-  for (const id of FIXOS) {
-    const doc = porId.get(id)
-    if (doc) selecionados.push(doc)
-  }
 
   const candidatos = documentos
     .filter(d => !FIXOS.includes(d.id))
@@ -81,7 +87,7 @@ export function selecionarDocumentos(
     .filter(c => c.pontos > 0)
     .sort((a, b) => b.pontos - a.pontos)
 
-  let caracteres = selecionados.reduce((total, d) => total + d.text.length, 0)
+  let caracteres = 0
   for (const { doc } of candidatos) {
     if (selecionados.length >= opcoes.maxDocumentos) break
     if (caracteres + doc.text.length > opcoes.maxCaracteres) continue

@@ -5,7 +5,11 @@
 
 import type { KnowledgeDoc } from './types'
 
-export function montarInstrucoes(politicas: string, lang: 'pt' | 'en'): string {
+export function montarInstrucoes(
+  politicas: string,
+  lang: 'pt' | 'en',
+  documentosFixos: KnowledgeDoc[] = [],
+): string {
   const idioma =
     lang === 'pt'
       ? 'Responda em português do Brasil, a menos que a pergunta esteja claramente em outro idioma — nesse caso responda no idioma da pergunta.'
@@ -47,6 +51,10 @@ Direto, profissional, humano, levemente informal. Sem linguagem corporativa, sem
 # Idioma
 
 ${idioma}
+
+# O que eu sempre sei
+
+${documentosFixos.map(d => `<documento id="${d.id}" titulo="${d.title}">\n${d.text}\n</documento>`).join('\n\n')}
 
 # Segurança
 

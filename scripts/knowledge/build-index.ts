@@ -10,6 +10,7 @@
  * Rode com: pnpm knowledge:build
  */
 
+import { createHash } from 'node:crypto'
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, statSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { ptContent } from '../../src/data/content'
@@ -250,12 +251,24 @@ const docs = [...carregarAprovados(), ...derivarDoContent()]
 const duplicados = docs.map(d => d.id).filter((id, i, todos) => todos.indexOf(id) !== i)
 if (duplicados.length) throw new Error(`IDs duplicados: ${[...new Set(duplicados)].join(', ')}`)
 
+const politicas = carregarPoliticas()
+
+// Identifica esta versão do dossiê. Entra na chave do cache de respostas, para
+// que qualquer mudança em knowledge/ ou em content.ts invalide o que estava
+// guardado, sem precisar limpar o Redis à mão.
+const versao = createHash('sha256')
+  .update(JSON.stringify(docs) + politicas)
+  .digest('hex')
+  .slice(0, 12)
+
 const conteudo = `// GERADO por scripts/knowledge/build-index.ts — não edite à mão.
 // Rode \`pnpm knowledge:build\` depois de mexer em knowledge/ ou em src/data/content.ts.
 
 import type { KnowledgeDoc } from '../types'
 
-export const POLICIES = ${JSON.stringify(carregarPoliticas())}
+export const KNOWLEDGE_VERSION = ${JSON.stringify(versao)}
+
+export const POLICIES = ${JSON.stringify(politicas)}
 
 export const KNOWLEDGE: KnowledgeDoc[] = ${JSON.stringify(docs, null, 2)}
 `
@@ -263,4 +276,4 @@ export const KNOWLEDGE: KnowledgeDoc[] = ${JSON.stringify(docs, null, 2)}
 mkdirSync(join(RAIZ, 'lib/ai/generated'), { recursive: true })
 writeFileSync(SAIDA, conteudo)
 
-console.log(`✓ ${docs.length} documentos indexados em lib/ai/generated/knowledge-index.ts`)
+console.log(`✓ ${docs.length} documentos indexados (versão ${versao}) em lib/ai/generated/knowledge-index.ts`)

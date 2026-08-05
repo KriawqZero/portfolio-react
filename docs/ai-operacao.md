@@ -115,6 +115,28 @@ Cada resposta usa ~2.100 tokens de entrada e ~140 de saída, com latência
 mediana de 2,1s. Confira o valor real no painel da OpenAI depois da primeira
 semana — a estimativa em reais só vale depois disso.
 
+### O que já foi otimizado
+
+Medido com `pnpm ai:custo`, que mostra a composição real de uma resposta:
+
+- **Raciocínio: zero tokens.** Com `AI_REASONING_EFFORT=low` o modelo não gasta
+  tokens invisíveis de raciocínio, que seriam cobrados como saída. Subir esse
+  valor é a forma mais rápida de dobrar a conta sem melhorar a resposta.
+- **Entrada caiu de 2.162 para 1.420 tokens** por pergunta (−34%): o perfil e o
+  índice de projetos saíram do bloco variável e foram para as instruções, e o
+  limite passou de 6 para 4 documentos. A matriz continuou passando.
+- **Prefixo em cache:** com `prompt_cache_key`, chamadas seguidas reaproveitam o
+  prefixo — na medição, 1.417 dos 1.420 tokens vieram cacheados, com desconto.
+  Só vale quando há chamadas próximas no tempo; o cache expira em minutos.
+- **Cache de respostas no Redis:** pergunta repetida não chega na OpenAI. Como
+  as seis sugestões da interface concentram a maior parte do volume, esse é o
+  corte que mais pesa em produção.
+
+Se precisar cortar mais, na ordem de melhor retorno: trocar `OPENAI_MODEL` para
+`gpt-5.6-luna`, reduzir `AI_MAX_DOCUMENTS` para 3, e baixar
+`AI_MAX_OUTPUT_TOKENS`. Rode `pnpm ai:matriz` depois de cada mudança — economia
+que piora a resposta não é economia.
+
 Quanto já foi consumido dos tetos:
 
 ```bash
