@@ -27,3 +27,6 @@ dist-ssr
 capturas/
 # Configuração local do Obsidian
 .obsidian/
+
+# Rascunhos de conhecimento ainda não revisados — nunca versionar
+knowledge/inbox/
