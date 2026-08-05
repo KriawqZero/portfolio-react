@@ -25,3 +25,5 @@ dist-ssr
 /readmes/*
 /cv-output/
 capturas/
+# Configuração local do Obsidian
+.obsidian/
