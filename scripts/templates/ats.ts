@@ -13,8 +13,6 @@ type Entrada = {
   year: string | number
   type: string
   stack: string
-  links: Array<{ label: string; href: string }>
-  linkDisplay: string
   bullets: string[]
 }
 
@@ -37,9 +35,24 @@ function renderEntrada(p: Entrada): string {
     </div>`
 }
 
+function renderExpFreelance(exp: DadosCv['experienciaFreelance']): string {
+  const linhaMae = `${esc(exp.cargo)} · ${esc(exp.vinculo)} · ${esc(exp.periodo)}`
+
+  const filhosHtml = exp.projetos
+    .map(p => renderEntrada(p as Entrada))
+    .join('')
+
+  return `
+    <div class="entrada-mae-ats">
+      <div class="entrada-mae-linha">${linhaMae}</div>
+      <div class="entrada-mae-filhos">${filhosHtml}</div>
+    </div>`
+}
+
 export function renderAts(dados: DadosCv): string {
   const contatosLinha = [
     dados.contatos.email.display,
+    dados.contatos.telefone.display,
     dados.contatos.linkedin.display,
     dados.contatos.github.display,
     dados.portfolio.replace('https://', ''),
@@ -52,16 +65,14 @@ export function renderAts(dados: DadosCv): string {
     )
     .join('\n    ')
 
-  const clientWorkHtml = dados.clientWork
-    .map(p => renderEntrada(p as Entrada))
-    .join('')
+  const expFreelanceHtml = renderExpFreelance(dados.experienciaFreelance)
 
   const projetosHtml = dados.projetos
     .map(p => renderEntrada(p as Entrada))
     .join('')
 
   return `<!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="${dados.labels.lang}">
 <head>
   <meta charset="UTF-8">
   <title>Currículo ATS — ${esc(dados.nome)}</title>
@@ -142,9 +153,18 @@ export function renderAts(dados: DadosCv): string {
     .skill-linha { font-size: 8.5pt; margin-bottom: 3px; }
     .skill-cat   { font-weight: 700; }
 
-    /* ─── Idiomas ─────────────────────────────────────────────────────── */
+    /* ─── Entrada guarda-chuva (experiência freelance) ─────────────────── */
 
-    .idioma-linha { font-size: 8.5pt; margin-bottom: 3px; }
+    .entrada-mae-ats { margin-bottom: 4px; }
+
+    .entrada-mae-linha {
+      font-size: 9.5pt;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 4px;
+    }
+
+    .entrada-mae-filhos { margin-left: 14px; }
 
     /* ─── Entradas de projeto / experiência ───────────────────────────── */
 
@@ -177,7 +197,6 @@ export function renderAts(dados: DadosCv): string {
 
     .formacao-inst    { font-size: 9pt; font-weight: 700; }
     .formacao-detalhe { font-size: 8.5pt; color: #333; }
-    .formacao-proximo { font-size: 8pt; color: #555; font-style: italic; margin-top: 3px; }
   </style>
 </head>
 <body>
@@ -186,24 +205,23 @@ export function renderAts(dados: DadosCv): string {
   <div class="header-cargo">${esc(dados.cargo)}</div>
   <div class="header-contatos">${esc(contatosLinha)}</div>
 
-  <div class="secao-titulo">Resumo</div>
+  <div class="secao-titulo">${esc(dados.labels.resumo)}</div>
   <p class="resumo">${esc(dados.resumo)}</p>
 
-  <div class="secao-titulo">Habilidades</div>
+  <div class="secao-titulo">${esc(dados.labels.habilidades)}</div>
   ${habilidadesHtml}
-  <div class="skill-linha"><span class="skill-cat">Idiomas:</span> ${dados.idiomas.map(i => `${esc(i.idioma)} (${esc(i.nivel)})`).join(' · ')}</div>
+  <div class="skill-linha"><span class="skill-cat">${esc(dados.labels.idiomas)}:</span> ${dados.idiomas.map(i => `${esc(i.idioma)} (${esc(i.nivel)})`).join(' · ')}</div>
 
-  <div class="secao-titulo">Experiência Freelance</div>
-  ${clientWorkHtml}
+  <div class="secao-titulo">${esc(dados.experienciaFreelance.tituloAts)}</div>
+  ${expFreelanceHtml}
 
-  <div class="secao-titulo">Projetos Próprios</div>
+  <div class="secao-titulo">${esc(dados.labels.projetosProprios)}</div>
   ${projetosHtml}
 
-  <div class="secao-titulo">Formação</div>
+  <div class="secao-titulo">${esc(dados.labels.formacao)}</div>
   <div class="entrada" style="break-inside: avoid">
     <div class="formacao-inst">${esc(dados.formacao.instituicao)}</div>
     <div class="formacao-detalhe">${esc(dados.formacao.curso)} · ${esc(dados.formacao.periodo)}</div>
-    <div class="formacao-proximo">${esc(dados.formacao.proximo)}</div>
   </div>
 
 </body>

@@ -40,6 +40,40 @@ function renderEntrada(p: Entrada): string {
     </div>`
 }
 
+function renderEntradaMae(exp: DadosCv['experienciaFreelance']): string {
+  const filhosHtml = exp.projetos
+    .map(p => `
+    <div class="entrada-filho">
+      <div class="entrada-cabecalho">
+        <span class="entrada-nome">${esc(p.name)}</span>
+        <span class="entrada-ano">${esc(String(p.year))}</span>
+      </div>
+      <div class="entrada-meta">
+        <span class="entrada-tipo">${esc(p.type)}</span>
+        <a href="${esc(p.links[0]?.href ?? '#')}" class="entrada-link">${esc(p.linkDisplay)}</a>
+      </div>
+      <div class="entrada-stack">${esc(p.stack)}</div>
+      <ul class="entrada-bullets">
+          ${p.bullets.map(b => `<li>${esc(b)}</li>`).join('\n          ')}
+      </ul>
+    </div>`)
+    .join('')
+
+  return `
+    <div class="entrada-mae">
+      <div class="entrada-mae-header">
+        <div class="entrada-cabecalho">
+          <span class="entrada-nome entrada-mae-nome">${esc(exp.cargo)}</span>
+          <span class="entrada-ano">${esc(exp.periodo)}</span>
+        </div>
+        <div class="entrada-meta">
+          <span class="entrada-tipo">${esc(exp.vinculo)}</span>
+        </div>
+      </div>
+      ${filhosHtml}
+    </div>`
+}
+
 export function renderEstagio(dados: DadosCv, qrDataUrl: string): string {
   const habilidadesHtml = Object.entries(dados.habilidades)
     .map(([cat, techs]) => `
@@ -60,9 +94,7 @@ export function renderEstagio(dados: DadosCv, qrDataUrl: string): string {
       </div>`)
     .join('')
 
-  const clientWorkHtml = dados.clientWork
-    .map(p => renderEntrada(p as Entrada))
-    .join('')
+  const expFreelanceHtml = renderEntradaMae(dados.experienciaFreelance)
 
   const projetosHtml = dados.projetos
     .map(p => renderEntrada(p as Entrada))
@@ -71,7 +103,7 @@ export function renderEstagio(dados: DadosCv, qrDataUrl: string): string {
   const portfolioClean = dados.portfolio.replace('https://', '')
 
   return `<!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="${dados.labels.lang}">
 <head>
   <meta charset="UTF-8">
   <title>Currículo — ${esc(dados.nome)}</title>
@@ -95,7 +127,7 @@ export function renderEstagio(dados: DadosCv, qrDataUrl: string): string {
       color: #1a1a2e;
       background: #fff;
       width: 210mm;
-      min-height: 297mm;
+      min-height: 296mm;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -153,7 +185,7 @@ export function renderEstagio(dados: DadosCv, qrDataUrl: string): string {
       display: grid;
       grid-template-columns: 64mm 1fr;
       align-items: stretch;
-      min-height: 260mm;
+      min-height: 253mm;
     }
 
     .sidebar {
@@ -225,15 +257,6 @@ export function renderEstagio(dados: DadosCv, qrDataUrl: string): string {
       color: #6d4aff;
       font-weight: 600;
       margin-top: 2px;
-    }
-
-    .formacao-proximo {
-      font-size: 6.5pt;
-      color: #888899;
-      margin-top: 6px;
-      font-style: italic;
-      border-top: 1px dashed #ddd8ff;
-      padding-top: 5px;
     }
 
     /* ─── Idiomas ─────────────────────────────────────────────────────── */
@@ -329,6 +352,25 @@ export function renderEstagio(dados: DadosCv, qrDataUrl: string): string {
       font-size: 7pt;
     }
 
+    /* ─── Entrada guarda-chuva ────────────────────────────────────────── */
+
+    .entrada-mae { margin-bottom: 6mm; }
+
+    .entrada-mae-header { break-after: avoid; margin-bottom: 3px; }
+
+    .entrada-mae-nome { font-size: 9.5pt; }
+
+    .entrada-filho {
+      break-inside: avoid;
+      margin-left: 10px;
+      padding-left: 8px;
+      border-left: 1.5px solid #e8e4ff;
+      margin-top: 5px;
+      margin-bottom: 4mm;
+    }
+
+    .entrada-filho:last-child { margin-bottom: 0; }
+
     /* ─── QR Code ────────────────────────────────────────────────────── */
 
     .qr-wrapper {
@@ -361,6 +403,7 @@ export function renderEstagio(dados: DadosCv, qrDataUrl: string): string {
     </div>
     <div class="header-contatos">
       <a href="${esc(dados.contatos.email.href)}"    class="contato-item">${esc(dados.contatos.email.display)}</a>
+      <a href="${esc(dados.contatos.telefone.href)}" class="contato-item">${esc(dados.contatos.telefone.display)}</a>
       <a href="${esc(dados.contatos.linkedin.href)}" class="contato-item">${esc(dados.contatos.linkedin.display)}</a>
       <a href="${esc(dados.contatos.github.href)}"   class="contato-item">${esc(dados.contatos.github.display)}</a>
       <a href="${esc(dados.portfolio)}"              class="contato-item">${esc(portfolioClean)}</a>
@@ -372,26 +415,25 @@ export function renderEstagio(dados: DadosCv, qrDataUrl: string): string {
     <aside class="sidebar">
 
       <div class="secao">
-        <div class="secao-titulo">Habilidades</div>
+        <div class="secao-titulo">${esc(dados.labels.habilidades)}</div>
         ${habilidadesHtml}
       </div>
 
       <div class="secao">
-        <div class="secao-titulo">Formação</div>
+        <div class="secao-titulo">${esc(dados.labels.formacao)}</div>
         <div class="formacao-inst">${esc(dados.formacao.instituicao)}</div>
         <div class="formacao-curso">${esc(dados.formacao.curso)}</div>
         <div class="formacao-periodo">${esc(dados.formacao.periodo)}</div>
-        <div class="formacao-proximo">${esc(dados.formacao.proximo)}</div>
       </div>
 
       <div class="secao">
-        <div class="secao-titulo">Idiomas</div>
+        <div class="secao-titulo">${esc(dados.labels.idiomas)}</div>
         ${idiomasHtml}
       </div>
 
       <div class="secao qr-wrapper">
-        <img class="qr-img" src="${qrDataUrl}" alt="QR Code portfólio">
-        <div class="qr-label">Portfólio online<br>${esc(portfolioClean)}</div>
+        <img class="qr-img" src="${qrDataUrl}" alt="QR Code">
+        <div class="qr-label">${esc(dados.labels.portfolioLabel)}<br>${esc(portfolioClean)}</div>
       </div>
 
     </aside>
@@ -401,12 +443,12 @@ export function renderEstagio(dados: DadosCv, qrDataUrl: string): string {
       <p class="resumo">${esc(dados.resumo)}</p>
 
       <div class="secao">
-        <div class="secao-titulo">Experiência Freelance</div>
-        ${clientWorkHtml}
+        <div class="secao-titulo">${esc(dados.experienciaFreelance.tituloEstagio)}</div>
+        ${expFreelanceHtml}
       </div>
 
       <div class="secao">
-        <div class="secao-titulo">Projetos Próprios</div>
+        <div class="secao-titulo">${esc(dados.labels.projetosProprios)}</div>
         ${projetosHtml}
       </div>
 
