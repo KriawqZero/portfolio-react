@@ -16,7 +16,9 @@
     "capture": "tsx scripts/capture/capturar.ts",
     "ai:ask": "tsx scripts/ai/perguntar.ts",
     "ai:matriz": "tsx scripts/ai/matriz.ts",
-    "ai:shot": "tsx scripts/ai/capturar-secao.ts"
+    "ai:shot": "tsx scripts/ai/capturar-secao.ts",
+    "ai:stats": "tsx scripts/ai/consumo.ts",
+    "ai:seguranca": "tsx scripts/ai/teste-seguranca.ts"
   },
   "dependencies": {
     "framer-motion": "^12.35.2",

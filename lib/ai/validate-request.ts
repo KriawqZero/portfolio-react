@@ -52,6 +52,13 @@ export function validarCorpo(corpo: unknown, limites: Limites): Validacao {
   const lang = c.lang === 'en' ? 'en' : 'pt'
   const context = c.context === 'freelance' ? 'freelance' : 'default'
 
+  // Token do Turnstile: só conferimos formato aqui. Quem diz se vale é a
+  // Cloudflare, no servidor.
+  const turnstileToken =
+    typeof c.turnstileToken === 'string' && c.turnstileToken.length <= 2048
+      ? c.turnstileToken
+      : undefined
+
   let history: AskRequest['history'] = []
   if (c.history !== undefined) {
     if (!Array.isArray(c.history)) return { ok: false, status: 400, erro: 'historico_invalido' }
@@ -75,6 +82,6 @@ export function validarCorpo(corpo: unknown, limites: Limites): Validacao {
 
   return {
     ok: true,
-    dados: { question, history, sessionId: c.sessionId, lang, context },
+    dados: { question, history, sessionId: c.sessionId, lang, context, turnstileToken },
   }
 }

@@ -44,6 +44,8 @@ export type AskRequest = {
   sessionId: string
   lang: 'pt' | 'en'
   context?: 'default' | 'freelance'
+  /** Token do Cloudflare Turnstile; quem valida é o servidor, a cada pergunta. */
+  turnstileToken?: string
 }
 
 /**

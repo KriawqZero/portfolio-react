@@ -1,30 +1,40 @@
 /**
  * POST /api/ask — a única peça server-side da seção "Marcilio IA".
  *
- * Ordem deliberada: tudo que é barato roda antes do que custa dinheiro.
- * Nesta fatia ainda não existem Turnstile, Redis nem teto global de gasto —
- * por isso ela só deve viver em preview, com AI_CHAT_ENABLED controlando.
+ * A ordem das verificações é deliberada: o que é barato roda antes do que
+ * custa dinheiro, e nada alcança a OpenAI sem passar por todas.
+ *
+ *   forma da requisição → origem → tamanho → schema
+ *   → dependências de contagem → kill switch → Turnstile
+ *   → rate limit → teto de gasto → OpenAI
+ *
+ * Em produção tudo falha fechado. A única camada que não depende deste código
+ * é o limite de gasto configurado no projeto da OpenAI — e é ela que garante
+ * que o pior caso seja um teto, não uma surpresa.
  */
 
-import { createHash } from 'node:crypto'
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import OpenAI from 'openai'
 
 import { config } from '../lib/ai/config'
 import { KNOWLEDGE, POLICIES } from '../lib/ai/generated/knowledge-index'
+import {
+  chaveAnonima,
+  dentroDoOrcamento,
+  dentroDoRateLimit,
+  dependenciasOk,
+  desligadaNoRedis,
+  ipDaRequisicao,
+} from '../lib/ai/limits'
 import { montarBlocoDocumentos, montarInstrucoes } from '../lib/ai/prompt'
 import { selecionarDocumentos } from '../lib/ai/retrieval'
+import { verificarTurnstile } from '../lib/ai/turnstile'
 import { ANSWER_JSON_SCHEMA } from '../lib/ai/types'
 import { validarResposta } from '../lib/ai/validate-answer'
 import { origemPermitida, validarCorpo } from '../lib/ai/validate-request'
 
 function erro(res: VercelResponse, status: number, codigo: string, estado?: string) {
   return res.status(status).json({ error: codigo, ...(estado ? { state: estado } : {}) })
-}
-
-function identificadorAnonimo(sessionId: string): string {
-  const segredo = process.env.RATE_LIMIT_HASH_SECRET ?? ''
-  return createHash('sha256').update(`${sessionId}${segredo}`).digest('hex').slice(0, 32)
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -54,10 +64,32 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   })
   if (!validacao.ok) return erro(res, validacao.status, validacao.erro)
 
+  const { question, history, sessionId, lang, context, turnstileToken } = validacao.dados
+
+  // Sem contadores confiáveis não existe teto de gasto — em produção isso
+  // barra a requisição em vez de virar modo degradado silencioso.
+  const dependencias = dependenciasOk(config.producao)
+  if (!dependencias.ok) return erro(res, dependencias.status, dependencias.codigo, dependencias.estado)
+
   if (!config.habilitado) return erro(res, 503, 'desativado', 'disabled')
   if (!process.env.OPENAI_API_KEY) return erro(res, 503, 'sem_credencial', 'disabled')
+  if (await desligadaNoRedis()) return erro(res, 503, 'desativado', 'disabled')
 
-  const { question, history, sessionId, lang, context } = validacao.dados
+  const ip = ipDaRequisicao(req.headers)
+
+  const verificacao = await verificarTurnstile(turnstileToken, ip, config.producao)
+  if (!verificacao.ok) return erro(res, verificacao.status, verificacao.codigo, verificacao.estado)
+
+  const limite = await dentroDoRateLimit(sessionId, ip)
+  if (!limite.ok) {
+    if (limite.tentarEm) res.setHeader('Retry-After', String(limite.tentarEm))
+    return erro(res, limite.status, limite.codigo, limite.estado)
+  }
+
+  // Última porta antes de gastar: incrementa os contadores globais do dia e
+  // do mês. Se estourou, a OpenAI não é chamada.
+  const orcamento = await dentroDoOrcamento()
+  if (!orcamento.ok) return erro(res, orcamento.status, orcamento.codigo, orcamento.estado)
 
   const documentos = selecionarDocumentos(question, KNOWLEDGE, {
     maxDocumentos: config.limites.documentos,
@@ -91,7 +123,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             schema: ANSWER_JSON_SCHEMA,
           },
         },
-        safety_identifier: identificadorAnonimo(sessionId),
+        safety_identifier: chaveAnonima(sessionId),
       },
       { timeout: config.limites.timeoutMs },
     )

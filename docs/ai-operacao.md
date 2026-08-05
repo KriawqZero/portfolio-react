@@ -1,8 +1,36 @@
 # Marcilio IA — operação
 
-Estado atual: **fatia vertical**. Funciona de ponta a ponta, mas ainda **não tem
-Turnstile, Redis nem teto global de gasto**. Por isso ela só deve rodar em
-preview. Não ligue no domínio público antes da próxima fase.
+## A camada mais importante não está neste código
+
+Antes de qualquer coisa, configure no painel da OpenAI, no projeto isolado do
+portfólio: **um limite de gasto (spend limit) e um alerta por e-mail**.
+
+Todas as proteções abaixo são código meu, e código falha. O limite de gasto da
+OpenAI é a única camada que continua valendo se tudo aqui der errado ao mesmo
+tempo. Com ele, o pior caso possível é o valor que você escolheu — nunca uma
+surpresa na fatura.
+
+## As cinco camadas antes de gastar um centavo
+
+Nesta ordem, e nada chega na OpenAI sem passar por todas:
+
+1. **Forma da requisição** — só POST, só JSON, só origem conhecida, corpo até
+   8 KB, pergunta até 500 caracteres, histórico até 6 mensagens.
+2. **Kill switch** — variável de ambiente ou chave no Redis.
+3. **Turnstile** — token verificado com a Cloudflare a cada pergunta.
+4. **Rate limit** — 8 perguntas por 10 minutos, 15 por sessão/dia, 30 por
+   IP/dia. IP nunca é gravado em claro: vira hash com segredo do servidor.
+5. **Teto global** — 100 perguntas/dia e 1000/mês somando todos os visitantes.
+
+Em produção, **falta de Redis ou de Turnstile bloqueia a IA**. Não existe modo
+degradado que gaste dinheiro: sem contador confiável não há teto, e sem teto a
+resposta correta é não chamar a OpenAI.
+
+Conferir tudo isso, de graça, sem chamar a OpenAI:
+
+```bash
+pnpm ai:seguranca
+```
 
 ## Como ligar e desligar
 
@@ -25,8 +53,14 @@ vercel firewall attack-mode enable --duration 1h
 vercel firewall attack-mode disable --yes
 ```
 
-O desligamento instantâneo por chave no Redis entra junto com o Redis, na
-próxima fase.
+Desligamento **instantâneo**, sem esperar deploy:
+
+```bash
+# desliga
+curl -X POST "$UPSTASH_REDIS_REST_URL/set/ai:kill/1" -H "Authorization: Bearer $UPSTASH_REDIS_REST_TOKEN"
+# religa
+curl -X POST "$UPSTASH_REDIS_REST_URL/del/ai:kill"   -H "Authorization: Bearer $UPSTASH_REDIS_REST_TOKEN"
+```
 
 ## Rodar local
 
@@ -80,6 +114,28 @@ encaminhamento para contato humano). Tom e factualidade são julgamento seu.
 Cada resposta usa ~2.100 tokens de entrada e ~140 de saída, com latência
 mediana de 2,1s. Confira o valor real no painel da OpenAI depois da primeira
 semana — a estimativa em reais só vale depois disso.
+
+Quanto já foi consumido dos tetos:
+
+```bash
+pnpm ai:stats
+```
+
+Se o teto do dia estourar e você quiser reabrir antes da virada:
+
+```bash
+curl -X POST "$UPSTASH_REDIS_REST_URL/del/ai:orcamento:d:$(date -u +%F)" -H "Authorization: Bearer $UPSTASH_REDIS_REST_TOKEN"
+```
+
+## Antes de ligar no domínio público
+
+- [ ] limite de gasto e alerta configurados no projeto da OpenAI
+- [ ] banco Upstash criado e as duas variáveis na Vercel
+- [ ] widget Turnstile criado, domínio registrado, as duas chaves na Vercel
+- [ ] `RATE_LIMIT_HASH_SECRET` gerado (`openssl rand -hex 32`)
+- [ ] `pnpm ai:seguranca` passando
+- [ ] `pnpm ai:matriz` revisado por você
+- [ ] `AI_CHAT_ENABLED=true`
 
 ## O que este sistema não é
 

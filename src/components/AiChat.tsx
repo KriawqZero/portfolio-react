@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useLanguage } from '../hooks/useLanguage'
+import { useTurnstile } from '../hooks/useTurnstile'
 import type { AskResponse } from '../../lib/ai/types'
 
 /**
@@ -49,6 +50,28 @@ export default function AiChat() {
   const inputRef = useRef<HTMLInputElement>(null)
   const respostaRef = useRef<HTMLDivElement>(null)
   const streamRef = useRef<HTMLDivElement>(null)
+  const secaoRef = useRef<HTMLElement>(null)
+
+  // O script da Cloudflare só entra quando a seção chega perto da tela: ele não
+  // tem por que disputar banda com a foto do Hero, que é o LCP da página.
+  const [visivel, setVisivel] = useState(false)
+  const { containerRef: turnstileRef, obterToken } = useTurnstile(visivel)
+
+  useEffect(() => {
+    const alvo = secaoRef.current
+    if (!alvo || visivel) return
+    const observador = new IntersectionObserver(
+      entradas => {
+        if (entradas.some(e => e.isIntersecting)) {
+          setVisivel(true)
+          observador.disconnect()
+        }
+      },
+      { rootMargin: '400px' },
+    )
+    observador.observe(alvo)
+    return () => observador.disconnect()
+  }, [visivel])
 
   const sugestoes = isFreelanceView ? data.suggestionsFreelance : data.suggestions
   const carregando = estado.fase === 'perguntando'
@@ -70,6 +93,8 @@ export default function AiChat() {
     setEstado({ fase: 'perguntando', pergunta: limpo })
 
     try {
+      const turnstileToken = await obterToken()
+
       const r = await fetch('/api/ask', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -79,6 +104,7 @@ export default function AiChat() {
           sessionId: idDeSessao(),
           lang: language,
           context: isFreelanceView ? 'freelance' : 'default',
+          turnstileToken,
         }),
       })
 
@@ -118,7 +144,7 @@ export default function AiChat() {
   }
 
   return (
-    <section id="ia" className="ai-section">
+    <section id="ia" className="ai-section" ref={secaoRef}>
       <div className="container ai-grid">
         {/* ── Coluna editorial ───────────────────────────────────────────── */}
         <div className="ai-intro">
@@ -287,6 +313,9 @@ export default function AiChat() {
               {data.clear}
             </button>
           )}
+
+          {/* Âncora do widget invisível do Turnstile. */}
+          <div ref={turnstileRef} aria-hidden="true" />
         </div>
       </div>
     </section>
