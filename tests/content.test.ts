@@ -29,6 +29,20 @@ describe('conteúdo pt e en', () => {
     expect(forma(enContent.aiChat)).toEqual(forma(ptContent.aiChat))
   })
 
+  /**
+   * A frase de espera é sorteada pelo id do turno, com módulo sobre o tamanho
+   * da lista. Se um idioma perder uma frase, o outro passa a sortear de um
+   * conjunto diferente — e uma entrada vazia vira um rótulo em branco na tela
+   * durante toda a espera, que é justamente o momento em que ele importa.
+   */
+  it('as frases de espera existem nos dois idiomas, na mesma quantidade e sem vazio', () => {
+    expect(ptContent.aiChat.thinking).toHaveLength(enContent.aiChat.thinking.length)
+    expect(ptContent.aiChat.thinking.length).toBeGreaterThanOrEqual(4)
+    for (const frase of [...ptContent.aiChat.thinking, ...enContent.aiChat.thinking]) {
+      expect(frase.trim()).not.toBe('')
+    }
+  })
+
   it('as duas listas de sugestões continuam com o mesmo tamanho', () => {
     expect(enContent.aiChat.suggestions).toHaveLength(ptContent.aiChat.suggestions.length)
     expect(enContent.aiChat.suggestionsFreelance).toHaveLength(

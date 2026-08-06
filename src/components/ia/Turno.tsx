@@ -8,6 +8,19 @@ function frases(texto: string): string[] {
   return texto.split(/(?<=[.!?])\s+/).filter(Boolean)
 }
 
+/**
+ * Qual frase de espera este turno usa.
+ *
+ * Derivada do id, e não sorteada com Math.random(), porque o componente
+ * re-renderiza enquanto a resposta é revelada — sorteio a cada render trocaria
+ * a frase na frente do visitante. Vindo do id, ela nasce com o turno e fica.
+ */
+function fraseDeEspera(id: string, opcoes: readonly string[]): string {
+  let soma = 0
+  for (let i = 0; i < id.length; i++) soma += id.charCodeAt(i)
+  return opcoes[soma % opcoes.length]
+}
+
 function Seta() {
   return (
     <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.5" aria-hidden="true">
@@ -79,7 +92,9 @@ export default function Turno({ turno, ehOUltimo, aoPerguntar, aoEscolherPreEscr
           {estado.fase === 'perguntando' && (
             <div className="ai-loading">
               <span className="ai-scan" aria-hidden="true" />
-              <span className="ai-loading-text">{data.thinking}</span>
+              <span className="ai-loading-text">
+                {fraseDeEspera(turno.id, data.thinking)}
+              </span>
             </div>
           )}
 

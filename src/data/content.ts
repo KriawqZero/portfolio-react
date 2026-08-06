@@ -341,7 +341,22 @@ export const ptContent = {
     sendLabel: 'Enviar pergunta',
     inputLabel: 'Sua pergunta para a IA do Marcilio',
     clear: 'limpar conversa',
-    thinking: 'consultando o que eu já contei',
+    /**
+     * Uma delas é sorteada por pergunta, a partir do id do turno — não muda
+     * enquanto a resposta não chega. Sem tom de quem está se justificando pelo
+     * que pode ou não pode dizer: isso já está no disclaimer, e repetir a cada
+     * espera soa defensivo.
+     */
+    thinking: [
+      'puxando da memória',
+      'consultando minhas anotações',
+      'procurando onde falei disso',
+      'juntando as peças',
+      'revendo os projetos',
+      'organizando a resposta',
+      'buscando o contexto',
+      'pensando um pouco',
+    ],
     sourcesLabel: 'fontes',
     followUpsLabel: 'continue por aqui',
     contactCta: 'falar com o Marcilio',
@@ -836,7 +851,17 @@ export const enContent = {
     sendLabel: 'Send question',
     inputLabel: 'Your question for Marcilio\'s AI',
     clear: 'clear conversation',
-    thinking: 'checking what I already told it',
+    /** Ver a nota no bloco em português. */
+    thinking: [
+      'pulling from memory',
+      'checking my notes',
+      'finding where I said this',
+      'putting the pieces together',
+      'going back over the projects',
+      'shaping the answer',
+      'getting the context',
+      'thinking for a second',
+    ],
     sourcesLabel: 'sources',
     followUpsLabel: 'keep going',
     contactCta: 'talk to Marcilio',
