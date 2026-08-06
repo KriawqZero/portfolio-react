@@ -81,6 +81,26 @@ intended. Never mock `/api/ask` to work around a missing key — ask for the key
 
 Editing these looks like it works and is silently reverted on the next build.
 
+## Git workflow — branches, not worktrees
+
+**Use a plain branch. Do not create a git worktree in this repository.**
+
+```bash
+git checkout -b <branch>   # yes
+# EnterWorktree / git worktree add — no
+```
+
+This is a single-app repo with no parallel-agent workflow, so a worktree buys nothing and
+costs real friction: it starts detached from the branch you actually work on, needs its own
+`pnpm install`, and its commits are invisible in your normal checkout until someone
+remembers to merge. A branch avoids all of that.
+
+Never commit directly to `main`. Work on a branch, push the branch, and let the merge to
+`main` be an explicit decision.
+
+If you find yourself in a worktree anyway, do not leave work stranded there: push the branch
+before the session ends.
+
 ## Architecture
 
 **Single-page React + Vite + TypeScript portfolio.** No routing. `src/App.tsx` composes all sections in narrative order: Hero → FreelanceProjects (conditional) → AboutMe → Trajectory → Avantis → DevProcess → AiChat → Contact.
