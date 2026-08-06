@@ -44,3 +44,5 @@ knowledge/inbox/
 .claude/worktrees/
 .claude/scheduled_tasks.lock
 .agents/skills/
+.vercel
+.env*
