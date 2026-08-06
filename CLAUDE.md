@@ -21,9 +21,11 @@ Work fronts, as of this date:
   suite are done; what remains is analytics/PostHog, the JSON-LD and pre-render of §19, and
   the mock-based handler tests. `DRIFT-DOCS.md` has the itemised state and the author may
   still change it.
-  **Awaiting the author's review:** the fallback texts in `content.ts` and the three new
-  documents in `knowledge/approved/` are agent-written drafts derived from existing
-  material. They speak in his first person — do not treat them as approved copy.
+  **The dossier is now 21 documents, reviewed one by one by the author** (2026-08-06),
+  built from the 24 project readmes in `readmes/` and his 11 profile documents. Do not
+  rewrite this copy on your own initiative: it speaks in his first person and every
+  sentence was approved individually. The only text still unreviewed is the curated
+  fallback in `content.ts`.
 - **Case images and mobile-first — closed.** Their remaining scope was deliberately dropped.
   The code differing from those plans is a decision, not a regression. Do not "fix" it and do
   not turn it into backlog.

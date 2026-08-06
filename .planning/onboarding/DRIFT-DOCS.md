@@ -108,7 +108,13 @@ Em 2026-08-06 fecharam-se: fallback curado, anti-replay do Turnstile, três docu
 
 **Continua aberto:** analytics/PostHog (opcional), JSON-LD e pré-render do §19, testes do handler com mocks e do parser de frontmatter.
 
-**Precisa de revisão humana antes do merge:** os textos do fallback (`aiChat.fallback`, pt e en) e os três documentos novos de `knowledge/approved/` são rascunho derivado do material existente, escritos por agente. São a voz do autor em primeira pessoa e ninguém além dele pode aprová-los.
+**Dossiê fechado em 2026-08-06.** São 21 documentos, escritos a partir dos 24 readmes de `readmes/` e dos 11 documentos de perfil do autor, e revisados um a um por ele. Não reescrever essa cópia por iniciativa própria.
+
+Três correções de fato saíram dessa revisão e valem registro, porque o site afirmava o contrário: o autor é freelancer desde **março de 2025** (não 2024), **não tem frente preferida** (o site dizia que a paixão era backend), e o sistema do Sushi do Verão **nunca entrou em produção** — havia inclusive um depoimento assinado pelo proprietário elogiando esse sistema, que foi removido.
+
+**Ainda sem revisão do autor:** apenas o fallback curado (`aiChat.fallback`, pt e en).
+
+**Divergências conhecidas, deixadas por decisão:** o README do SISCO diz que ele começou a atuar como freelancer em fevereiro de 2025, e o dossiê diz março — o autor escolheu março. E o site ainda cita a plataforma "KyteApp" pelo nome no arquivo de projetos, enquanto o dossiê a descreve sem nomear.
 
 As duas frentes abaixo foram **encerradas por decisão do autor (2026-08-05)**. O escopo remanescente descrito nos documentos foi descartado — não é pendência, não deve virar item de roadmap, e o código estar diferente do plano não é defeito. Registrado aqui apenas para que uma leitura futura do código não interprete a diferença como regressão.
 
