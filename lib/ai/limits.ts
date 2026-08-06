@@ -79,6 +79,39 @@ export async function desligadaNoRedis(): Promise<boolean> {
   }
 }
 
+// ─── Uso único do token do Turnstile ──────────────────────────────────────────
+
+/**
+ * Queima o token do Turnstile na primeira vez que ele aparece.
+ *
+ * A Cloudflare já resgata cada token uma única vez, então isto é defesa em
+ * profundidade, e vale por duas coisas que ela não cobre: fecha a janela em
+ * que duas requisições com o mesmo token chegam juntas, antes de o resgate ser
+ * registrado lá; e evita pagar uma ida à rede para um replay que já dá para
+ * recusar aqui.
+ *
+ * O TTL acompanha a validade do próprio token — 300s. Guardar por mais tempo
+ * seria ocupar memória para vigiar um token que já expirou sozinho.
+ *
+ * O token nunca é gravado em claro: a chave é o mesmo hash com segredo usado
+ * para IP e sessão.
+ */
+export async function registrarTokenTurnstile(token: string): Promise<Veredito> {
+  if (!configurado()) return { ok: true }
+
+  try {
+    const primeiroUso = await cliente().set(`ai:turnstile:${chaveAnonima(token)}`, 1, {
+      nx: true,
+      ex: 300,
+    })
+    if (primeiroUso === null) return { ok: false, status: 403, codigo: 'verificacao_repetida' }
+    return { ok: true }
+  } catch {
+    // Mesma regra do resto do arquivo: sem contador confiável, não passa.
+    return { ok: false, status: 503, codigo: 'verificacao_indisponivel', estado: 'upstream' }
+  }
+}
+
 // ─── Rate limit ───────────────────────────────────────────────────────────────
 
 type Limitadores = { janela: Ratelimit; sessaoDia: Ratelimit; ipDia: Ratelimit }

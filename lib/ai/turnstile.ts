@@ -8,7 +8,7 @@
  * ou Cloudflare fora do ar, a requisição para antes da OpenAI.
  */
 
-import type { Veredito } from './limits'
+import { registrarTokenTurnstile, type Veredito } from './limits'
 
 const ENDPOINT = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
 
@@ -39,6 +39,10 @@ export async function verificarTurnstile(
   if (!token) {
     return { ok: false, status: 403, codigo: 'verificacao_ausente' }
   }
+
+  // Antes da ida à rede: um token repetido é recusado sem custo nenhum.
+  const primeiroUso = await registrarTokenTurnstile(token)
+  if (!primeiroUso.ok) return primeiroUso
 
   const corpo = new URLSearchParams({
     secret: process.env.TURNSTILE_SECRET_KEY as string,
