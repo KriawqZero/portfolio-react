@@ -24,6 +24,22 @@ Diagnostics for the AI section (`scripts/ai/`, each is a standalone tsx script, 
 
 Use `pnpm` exclusively — never npm or yarn. There is no test suite.
 
+### Running the AI section locally
+
+`pnpm dev` is enough — do **not** reach for `vercel dev`. `vite.config.ts` registers an
+`apiDev()` plugin that mounts `POST /api/ask` on the Vite dev server, so the same handler
+in `api/ask.ts` runs locally. It needs the environment variables from `.env.example` in a
+local `.env.local`; without them the endpoint fails closed instead of degrading, which is
+intended. Never mock `/api/ask` to work around a missing key — ask for the key instead.
+
+### Generated files — never edit by hand
+
+- `lib/ai/generated/knowledge-index.ts` — regenerate with `pnpm knowledge:build`
+- `public/generated/` — regenerate with `pnpm img:gen`
+- `cv-output/` — regenerate with `pnpm cv:gen <variant>`
+
+Editing these looks like it works and is silently reverted on the next build.
+
 ## Architecture
 
 **Single-page React + Vite + TypeScript portfolio.** No routing. `src/App.tsx` composes all sections in narrative order: Hero → FreelanceProjects (conditional) → AboutMe → Trajectory → Avantis → DevProcess → AiChat → Contact.
@@ -90,6 +106,33 @@ Rules that must be followed for every GSAP animation:
 **TypeScript throughout.** Domain names in Portuguese when natural (e.g., `Trajetória`, `conteudo`).
 
 **Simplicity over abstraction.** Do not create structure for hypothetical future needs.
+
+### Styling — where CSS actually lives
+
+There is no CSS-in-JS library, no CSS modules, no Tailwind. Three approaches coexist for
+historical reasons. Know which one you are in before writing a rule:
+
+1. **`src/index.css`** (854 lines) — the design system and global utilities: `:root` custom
+   properties (colours, spacing, type scale), `.btn-*`, `.container`, `.section-*`,
+   `.glass`, `.sr-only`, and the `@media` envelopes for `prefers-reduced-motion` and
+   `pointer: coarse`. Also holds the whole `.ai-*` block (lines 487+, ~367 lines) for the
+   Marcilio IA section — an exception, not the pattern.
+2. **`<style>{\`...\`}</style>` inside the component** — `Hero`, `AboutMe`, `Avantis`,
+   `Contact`, `FreelanceProjects`. This is where component CSS belongs.
+3. **`style={{}}` inline objects** — heavily used in `Trajectory` (75), `DevProcess`,
+   `ArchiveOverlay`, `CaseFrame`, `Navbar`. Fine for values computed from React state or
+   animation, useless for anything needing a media query, pseudo-class or `:hover`.
+
+Rules when adding styles:
+
+- **Follow the approach the component already uses.** Local consistency beats global
+  uniformity; do not migrate a component to another approach as a side effect of an
+  unrelated change.
+- **New component:** use approach 2, reading values from the `:root` custom properties.
+  Never hardcode a colour that already exists as a variable.
+- Anything needing `@media`, `:hover` or `:focus-visible` must be real CSS (1 or 2), not
+  an inline object.
+- Do not "unify" the three approaches unless that refactor is the explicit task.
 
 ## CV generation
 
