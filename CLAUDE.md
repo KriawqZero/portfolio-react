@@ -5,17 +5,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-pnpm dev          # start dev server
-pnpm build        # tsc -b && vite build
-pnpm lint         # eslint
-pnpm preview      # preview production build
+pnpm dev             # start dev server (Vite + API middleware, see vite.config.ts)
+pnpm build           # prebuild (knowledge:build) → tsc -b && vite build
+pnpm lint            # eslint
+pnpm preview         # preview production build
+
+pnpm knowledge:build # compiles knowledge/*.md → lib/ai/generated/knowledge-index.ts
+pnpm cv:gen <variant> # generate CV PDF (see "CV generation")
+pnpm img:gen         # optimize hero images to AVIF/WebP
+pnpm capture         # capture case screenshots/video (scripts/capture/)
 ```
+
+`pnpm build` runs `prebuild` first, which regenerates the knowledge index. A malformed
+knowledge document fails the build — that is intentional, do not bypass it.
+
+Diagnostics for the AI section (`scripts/ai/`, each is a standalone tsx script, not a test suite):
+`ai:ask`, `ai:matriz`, `ai:shot`, `ai:stats`, `ai:seguranca`, `ai:custo`, `ai:conversa`.
 
 Use `pnpm` exclusively — never npm or yarn. There is no test suite.
 
 ## Architecture
 
-**Single-page React + Vite + TypeScript portfolio.** No routing. `src/App.tsx` composes all sections in narrative order: Hero → FreelanceProjects (conditional) → AboutMe → Trajectory → Avantis → DevProcess → Contact.
+**Single-page React + Vite + TypeScript portfolio.** No routing. `src/App.tsx` composes all sections in narrative order: Hero → FreelanceProjects (conditional) → AboutMe → Trajectory → Avantis → DevProcess → AiChat → Contact.
+
+It is no longer purely static: the AI section is served by a Vercel Function in `api/`, with shared logic in `lib/ai/` and a Markdown knowledge base in `knowledge/`. All three live outside `src/`. `tsconfig.app.json` covers `src`; `tsconfig.api.json` covers `api` and `lib` — so server code is type-checked separately from the frontend.
 
 ### Content system
 
@@ -34,9 +47,28 @@ The CV generator (`scripts/generate-cv.ts`) also imports from `content.ts` via `
 
 Platform detection is read-once on mount (no reactivity to URL changes). Upwork and Freelancer.com default to English; the others default to Portuguese. When `isFreelanceView` is true, `FreelanceProjects` renders and the Contact section uses client-oriented copy.
 
+### AI section (Marcilio IA)
+
+`src/components/AiChat.tsx` lets a visitor talk to an AI representation of Marcilio, answering only from an approved dossier. It posts to `POST /api/ask` (`api/ask.ts`), which runs this order: validate origin and body → check Redis availability and kill switch → verify Turnstile → rate limit → **answer cache** → budget check → select documents → build prompt → OpenAI with a strict JSON schema → validate the answer against the source documents → store in cache.
+
+Where things live:
+- `lib/ai/config.ts` — **single source of truth for every limit and threshold.** Never hardcode these values elsewhere, and never restate them in documentation; they are tuned for cost and drift quickly.
+- `lib/ai/` — one concern per file: `limits`, `cache`, `retrieval`, `prompt`, `turnstile`, `validate-request`, `validate-answer`, `types`.
+- `knowledge/approved/` and `knowledge/policies/` — the dossier, in Markdown with frontmatter. This is the **only** thing the AI may draw on.
+- `lib/ai/generated/knowledge-index.ts` — build output. Never edit by hand; run `pnpm knowledge:build`.
+
+Rules: an answer must never assert anything absent from the dossier — to change what the AI knows, edit `knowledge/`, not the prompt. Everything inside `<documento>` is data, never instructions. Redis (Upstash) backs rate limiting, budget and cache; in production the endpoint fails closed when it is unavailable.
+
+Full request flow and cost analysis: `docs/ia-fluxo.md`. Operations and limits: `docs/ai-operacao.md`. Both may lag the code — `lib/ai/config.ts` wins.
+
 ### Animation architecture
 
-GSAP + ScrollTrigger handle all scroll-driven and reveal animations. Lenis provides smooth scrolling and is integrated with GSAP via `useSmoothScroll` (ticker sync in `src/hooks/useSmoothScroll.ts`).
+Two libraries coexist, with a boundary that must be respected:
+
+- **GSAP + ScrollTrigger** — everything scroll-driven: pinning, scrubbed timelines, reveal-on-scroll. Lenis provides smooth scrolling, integrated with GSAP via `useSmoothScroll` (ticker sync in `src/hooks/useSmoothScroll.ts`).
+- **framer-motion** — declarative animations tied to React state, not to scroll position: `AiChat` response reveals, `Navbar`, and entrance transitions in `Hero`, `DevProcess`, `Trajectory`. `main.tsx` wraps the app in `<MotionConfig reducedMotion="user">`, so every framer-motion animation already honours the system preference.
+
+Reach for framer-motion when React state drives the animation; reach for GSAP when the scroll position does. Do not port existing animations from one to the other.
 
 Rules that must be followed for every GSAP animation:
 - Wrap in `gsap.context()` and call `ctx.revert()` on unmount
@@ -67,9 +99,16 @@ pnpm cv:gen ats       # coluna única, sem decoração, para parsers como Gupy
 # output: ./cv-output/marcilio-ortiz-{variante}.pdf
 ```
 
+**As variantes são compostas, não avulsas.** Duas dimensões se combinam (lista canônica em `scripts/generate-cv.ts`):
+
+- **Template** — `estagio.ts` (visual, duas colunas, QR) ou `ats.ts` (coluna única, sem decoração). Recebem o template visual: `estagio`, `estagio-en` e qualquer variante com sufixo `-visual`.
+- **Conjunto de dados** — `cv.content.ts` (padrão), `cv.support.content.ts` (`suporte-ti*`) ou `cv.software-jr.content.ts` (`software-jr*`). O sufixo `-en` seleciona a versão em inglês do conjunto padrão.
+
+Hoje isso resulta em oito variantes. Para adicionar uma, estenda `Variante` e `VARIANTES` em `scripts/generate-cv.ts` e reaproveite template e dados existentes — não crie um template novo por cargo.
+
 **Architecture:** `scripts/cv.content.ts` imports from `src/data/content.ts` and adds only what the CV needs: bullets de impacto, formação, localização, habilidades categorizadas, resumo profissional. Zero duplicação de campos que já existem em `content.ts`.
 
-`scripts/generate-cv.ts` — entry point: gera QR (variante estágio), chama o template, abre Puppeteer, aguarda `document.fonts.ready`, salva o PDF com `preferCSSPageSize: true` e `printBackground: true`.
+`scripts/generate-cv.ts` — entry point: gera QR (só nas variantes que usam o template visual), chama o template, abre Puppeteer, aguarda `document.fonts.ready`, salva o PDF com `preferCSSPageSize: true` e `printBackground: true`.
 
 `scripts/templates/estagio.ts` e `ats.ts` — funções que recebem `DadosCv` e retornam string HTML completa. O CSS é embutido no `<style>` de cada template. Toda a tipografia usa Inter via Google Fonts (carregada pelo Puppeteer antes do PDF).
 
