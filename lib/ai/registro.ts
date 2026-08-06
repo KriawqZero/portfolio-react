@@ -69,6 +69,8 @@ export type RegistroDePergunta = {
   status?: string | null
   /** Ids do dossiê que entraram no prompt. Nulo quando veio do cache. */
   documentos?: string[] | null
+  /** As continuações oferecidas: é por elas que se julga se melhoraram. */
+  continuacoes?: string[] | null
   erro?: string | null
   ms?: number | null
   cache?: boolean
@@ -81,8 +83,9 @@ export async function registrarPergunta(registro: RegistroDePergunta): Promise<v
   try {
     await banco.query(
       `insert into perguntas
-         (sessao, origem, idioma, contexto, pergunta, resposta, status, documentos, erro, ms, cache)
-       values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
+         (sessao, origem, idioma, contexto, pergunta, resposta, status,
+          documentos, continuacoes, erro, ms, cache)
+       values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
       [
         registro.sessao,
         registro.origem,
@@ -92,6 +95,7 @@ export async function registrarPergunta(registro: RegistroDePergunta): Promise<v
         registro.resposta ?? null,
         registro.status ?? null,
         registro.documentos ?? null,
+        registro.continuacoes ?? null,
         registro.erro ?? null,
         registro.ms ?? null,
         registro.cache ?? false,

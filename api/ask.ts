@@ -19,6 +19,7 @@ import OpenAI from 'openai'
 
 import { respostaEmCache, guardarResposta } from '../lib/ai/cache.js'
 import { config } from '../lib/ai/config.js'
+import { completarContinuacoes } from '../lib/ai/continuacoes.js'
 import { KNOWLEDGE, KNOWLEDGE_VERSION, POLICIES } from '../lib/ai/generated/knowledge-index.js'
 import {
   chaveAnonima,
@@ -142,6 +143,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         ...registroBase,
         resposta: guardada.answer,
         status: guardada.status,
+        continuacoes: guardada.followUps,
         ms: Date.now() - recebidoEm,
         cache: true,
       })
@@ -201,9 +203,31 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       bruto = null
     }
 
-    const validada = validarResposta(bruto, [...documentos, ...documentosFixos(KNOWLEDGE)], {
+    const validado = validarResposta(bruto, [...documentos, ...documentosFixos(KNOWLEDGE)], {
       caracteresResposta: config.limites.caracteresResposta,
+      maxFollowUps: config.limites.continuacoes,
+      caracteresFollowUp: config.limites.caracteresContinuacao,
     })
+
+    /**
+     * Piso das continuações. O modelo devolver menos de três não é raro —
+     * acontece com mais frequência justamente quando ele não sabe responder,
+     * que é quando o visitante mais precisa de um caminho adiante.
+     *
+     * Isto entra antes do cache de propósito: assim a resposta guardada também
+     * carrega o piso, em vez de a garantia valer só na primeira vez.
+     */
+    const validada: typeof validado = {
+      ...validado,
+      followUps: completarContinuacoes({
+        atuais: validado.followUps,
+        perguntaAtual: question,
+        historico: history,
+        documentos,
+        lang,
+        minimo: config.limites.continuacoes,
+      }),
+    }
 
     if (conversaNova) {
       await guardarResposta(question, lang, context ?? 'default', KNOWLEDGE_VERSION, validada)
@@ -230,6 +254,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       resposta: validada.answer,
       status: validada.status,
       documentos: documentos.map(d => d.id),
+      continuacoes: validada.followUps,
       ms: Date.now() - recebidoEm,
     })
 

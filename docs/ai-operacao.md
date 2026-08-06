@@ -254,6 +254,19 @@ from perguntas
 where cache = false and coalesce(array_length(documentos, 1), 0) = 0
 order by criado_em desc;
 
+-- As continuações oferecidas, para julgar se estão boas
+select criado_em, pergunta, continuacoes
+from perguntas
+where continuacoes is not null
+order by criado_em desc
+limit 30;
+
+-- Quantas continuações vieram por resposta (o piso do servidor garante 3)
+select coalesce(array_length(continuacoes, 1), 0) as quantas, count(*)
+from perguntas
+group by 1
+order by 1;
+
 -- Documentos mais usados: mostra o que sustenta as respostas na prática
 select doc, count(*) as vezes
 from perguntas, unnest(documentos) as doc

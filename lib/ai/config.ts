@@ -79,6 +79,21 @@ export const config = {
     get caracteresResposta() {
       return numero('AI_MAX_ANSWER_CHARACTERS', 900)
     },
+    /** Quantas continuações aparecem como botão depois de uma resposta. */
+    get continuacoes() {
+      return numero('AI_FOLLOW_UPS', 3)
+    },
+    /**
+     * Teto de uma continuação. O validador descarta a que passar daqui — e
+     * descartar é certo, porque cortar uma pergunta ao meio produz outra
+     * pergunta. Estava em 80, e nesse valor uma resposta cujas três sugestões
+     * fossem longas chegava ao visitante sem sugestão nenhuma, em silêncio. O
+     * prompt pede setenta caracteres; a folga até cem existe para o descarte
+     * ser exceção, não rotina.
+     */
+    get caracteresContinuacao() {
+      return numero('AI_MAX_FOLLOW_UP_CHARACTERS', 100)
+    },
   },
   /** Origens que podem chamar o endpoint. Em preview a Vercel usa *.vercel.app. */
   origensPermitidas(): string[] {
