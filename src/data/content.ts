@@ -361,6 +361,34 @@ export const ptContent = {
       'Quais trabalhos são parecidos com o meu?',
       'Como você usa IA nos projetos de clientes?',
     ],
+    // Quando a IA está fora, é isto que o visitante lê. Escrito à mão, sem
+    // modelo nenhum no meio — por isso o rótulo diz exatamente o que é.
+    fallback: {
+      intro: 'Enquanto a IA não responde, ficam aqui algumas respostas que eu já tinha escrito.',
+      label: 'resposta pré-escrita — a IA está indisponível agora',
+      items: [
+        {
+          question: 'O que você já construiu em produção?',
+          answer: 'Sistemas com usuário real usando: o SISCO, que hoje organiza as horas complementares de mais de 200 alunos e coordenadores no IFMS; um worker que consolida o faturamento diário de uma rede de lojas cujo sistema de vendas não tem API; um cardápio digital com painel próprio para um restaurante de alto volume; e o VamoAgendar, um SaaS de agendamento que desenvolvo com um sócio investidor.',
+        },
+        {
+          question: 'Como você usa IA sem depender dela?',
+          answer: 'Uso todos os dias para acelerar a parte mecânica: esqueleto de módulo, achar onde algo acontece num repositório grande, revisar o que escrevi. O que continua meu é arquitetura, decisão e revisão. Leio tudo antes de aceitar, confiro assinatura de biblioteca na documentação oficial, e o que eu não consigo explicar não entra. Sem IA fica mais lento, não fica travado — aprendi a programar antes de ter isso à mão.',
+        },
+        {
+          question: 'Você está disponível para estágio?',
+          answer: 'Estou aberto a estágio, primeira vaga formal e projetos freelance, e é justamente a primeira experiência em ambiente corporativo que eu procuro. Agenda, prazo e valor eu não trato por aqui: para isso, o contato direto está logo abaixo, no e-mail ou no LinkedIn.',
+        },
+        {
+          question: 'Como funciona um projeto com você?',
+          answer: 'Começa por entender o problema, não por escolher tecnologia. Depois vem escopo por escrito, arquitetura, implementação e entrega em produção. Já aconteceu de o pedido inicial não ser o que resolvia o problema — no Sushi do Verão a ideia foi refinada junto com o proprietário antes de virar código. Quando algo atrasa ou muda de escopo, o cliente sabe quando eu percebo, não na data da entrega.',
+        },
+        {
+          question: 'O que você ainda está aprendendo?',
+          answer: 'Trabalhar dentro de um time de engenharia é o que me falta, e é o que eu procuro: revisar código com gente mais experiente, mexer em base grande com decisões tomadas antes de eu chegar, e lidar com consequência real quando algo quebra. No lado técnico, o que tenho estudado vem do VamoAgendar — o motor de horários, e a parte de cobrança e assinatura.',
+        },
+      ],
+    },
   },
 
   contact: {
@@ -824,6 +852,32 @@ export const enContent = {
       'Which past jobs are similar to mine?',
       'How do you use AI on client projects?',
     ],
+    fallback: {
+      intro: 'While the AI is not answering, here are a few answers I had already written.',
+      label: 'pre-written answer — the AI is unavailable right now',
+      items: [
+        {
+          question: 'What have you built in production?',
+          answer: 'Systems with real users on them: SISCO, which now handles the complementary-hours records of more than 200 students and coordinators at IFMS; a worker that consolidates daily revenue for a retail chain whose sales system has no public API; a digital menu with its own admin panel for a high-volume restaurant; and VamoAgendar, a scheduling SaaS I build with an investing partner.',
+        },
+        {
+          question: 'How do you use AI without depending on it?',
+          answer: 'Every day, for the mechanical part: scaffolding a module, finding where something happens in a large repository, reviewing what I wrote. What stays mine is architecture, decisions and review. I read everything before accepting it, I check library signatures against the official docs, and what I cannot explain does not ship. Without AI I am slower, not stuck — I learned to program before it was around.',
+        },
+        {
+          question: 'Are you available for an internship?',
+          answer: 'I am open to an internship, a first formal role and freelance projects, and a first corporate environment is exactly what I am looking for. Schedule, deadlines and rates are not something I handle here: for that, the direct contact is right below, by email or LinkedIn.',
+        },
+        {
+          question: 'How does a project with you work?',
+          answer: 'It starts by understanding the problem, not by picking technology. Then written scope, architecture, implementation and delivery to production. It has happened that the initial request was not what solved the problem — at Sushi do Verão the idea was refined together with the owner before it became code. When something slips or the scope changes, the client hears it when I notice, not on the delivery date.',
+        },
+        {
+          question: 'What are you still learning?',
+          answer: 'Working inside an engineering team is what I am missing, and what I am after: reviewing code with more experienced people, working on a large codebase with decisions made before I arrived, and dealing with real consequences when something breaks. On the technical side, what I have been studying comes from VamoAgendar — the scheduling engine, and the billing and subscription side.',
+        },
+      ],
+    },
   },
 
   contact: {

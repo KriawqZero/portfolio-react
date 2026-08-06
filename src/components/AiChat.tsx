@@ -21,7 +21,9 @@ type Estado =
   | { fase: 'ocioso' }
   | { fase: 'perguntando'; pergunta: string }
   | { fase: 'respondido'; pergunta: string; resposta: AskResponse }
-  | { fase: 'erro'; pergunta: string; mensagem: string }
+  /** `curado` é true quando a IA está fora e há resposta pré-escrita para oferecer. */
+  | { fase: 'erro'; pergunta: string; mensagem: string; curado: boolean }
+  | { fase: 'pre-escrito'; pergunta: string; resposta: string }
 
 const MAX_CARACTERES = 500
 
@@ -89,7 +91,7 @@ export default function AiChat() {
   // continua de onde a leitura está. preventScroll é obrigatório aqui — sem ele
   // o navegador rola o painel para o elemento focado e a pergunta some de vista.
   useEffect(() => {
-    if (estado.fase !== 'respondido') return
+    if (estado.fase !== 'respondido' && estado.fase !== 'pre-escrito') return
     respostaRef.current?.focus({ preventScroll: true })
     streamRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
   }, [estado.fase])
@@ -129,7 +131,10 @@ export default function AiChat() {
                 : r.status === 504
                   ? data.errors.timeout
                   : data.errors.generic
-        setEstado({ fase: 'erro', pergunta: limpo, mensagem })
+        // Rate limit é o único caso em que a IA está de pé — o visitante é que
+        // passou do limite. Oferecer resposta pré-escrita ali soaria como
+        // castigo disfarçado de ajuda.
+        setEstado({ fase: 'erro', pergunta: limpo, mensagem, curado: r.status !== 429 })
         return
       }
 
@@ -142,7 +147,7 @@ export default function AiChat() {
         { role: 'assistant', content: resposta.answer },
       ])
     } catch {
-      setEstado({ fase: 'erro', pergunta: limpo, mensagem: data.errors.generic })
+      setEstado({ fase: 'erro', pergunta: limpo, mensagem: data.errors.generic, curado: true })
     }
   }
 
@@ -275,7 +280,55 @@ export default function AiChat() {
                 </>
               )}
 
+              {/* A IA está fora: a resposta pré-escrita ocupa o lugar dela, com
+                  a mesma aparência de uma resposta real e um rótulo que não
+                  deixa dúvida sobre a origem. */}
+              {estado.fase === 'pre-escrito' && (
+                <>
+                  <p className="ai-fallback-label">{data.fallback.label}</p>
+                  <p className="ai-answer">
+                    {frases(estado.resposta).map((frase, i) => (
+                      <motion.span
+                        key={i}
+                        initial={{ opacity: 0, y: 8, filter: 'blur(6px)' }}
+                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                        transition={{ duration: 0.45, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        {frase}{' '}
+                      </motion.span>
+                    ))}
+                  </p>
+                  <a href="#contato" className="ai-contact">
+                    {data.contactCta} →
+                  </a>
+                </>
+              )}
+
               {estado.fase === 'erro' && <p className="ai-error">{estado.mensagem}</p>}
+
+              {((estado.fase === 'erro' && estado.curado) || estado.fase === 'pre-escrito') && (
+                <div className="ai-followups">
+                  <span className="ai-fallback-intro">{data.fallback.intro}</span>
+                  {data.fallback.items
+                    .filter(item => item.question !== estado.pergunta)
+                    .map(item => (
+                      <button
+                        key={item.question}
+                        type="button"
+                        className="ai-chip ai-chip-ghost"
+                        onClick={() =>
+                          setEstado({
+                            fase: 'pre-escrito',
+                            pergunta: item.question,
+                            resposta: item.answer,
+                          })
+                        }
+                      >
+                        {item.question}
+                      </button>
+                    ))}
+                </div>
+              )}
             </div>
           </div>
 
