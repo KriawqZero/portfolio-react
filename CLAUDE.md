@@ -2,6 +2,31 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Start here — project state (2026-08-06)
+
+Read these before planning anything. They exist because this repository was built without a
+planning system, and its Markdown documents drifted badly from the code.
+
+- **`.planning/codebase/`** — evidence-backed map of the codebase (stack, architecture,
+  structure, conventions, testing, integrations, concerns). Written against commit `60dd85a`.
+- **`.planning/onboarding/DRIFT-DOCS.md`** — **which documents you may trust.** Every `.md`
+  under `docs/` was audited against the code. It records what is a factual error, what is
+  open scope, and what was silently replaced. Do not treat any document in `docs/` as a
+  decision without checking here first.
+
+Work fronts, as of this date:
+
+- **Marcilio IA — open.** The only unfinished front. Remaining scope (analytics, curated
+  fallback, Turnstile anti-replay, 4 missing dossier documents) is listed in `DRIFT-DOCS.md`
+  and the author may still change it.
+- **Case images and mobile-first — closed.** Their remaining scope was deliberately dropped.
+  The code differing from those plans is a decision, not a regression. Do not "fix" it and do
+  not turn it into backlog.
+
+GSD is not initialised: there is no `PROJECT.md`, `REQUIREMENTS.md`, `ROADMAP.md` or
+`STATE.md`. The pending next step is `/gsd-ingest-docs` — but only after applying the
+corrections listed in `DRIFT-DOCS.md`, otherwise stale values get recorded as locked decisions.
+
 ## Commands
 
 ```bash
