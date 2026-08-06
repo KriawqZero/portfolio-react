@@ -28,13 +28,41 @@ export function documentosFixos(documentos: KnowledgeDoc[]): KnowledgeDoc[] {
   )
 }
 
+/**
+ * Nomes de tecnologia que o separador destruiria: `c++` e `c#` viram `c`, que o
+ * corte de tamanho descarta em seguida. Sem isto, "voc\u00ea sabe C++?" chega ao
+ * scorer como a palavra "sabe" \u2014 e traz de volta qualquer documento que a
+ * contenha, menos o de C++.
+ */
+const SIMBOLOS: ReadonlyArray<[RegExp, string]> = [
+  [/\bc\+\+/g, 'cpp'],
+  [/\bc#/g, 'csharp'],
+  [/\bf#/g, 'fsharp'],
+  [/\.net\b/g, 'dotnet'],
+  [/\bnode\.js/g, 'nodejs'],
+  [/\bnext\.js/g, 'nextjs'],
+  [/\bnest\.js/g, 'nestjs'],
+  [/\bvue\.js/g, 'vuejs'],
+]
+
+/**
+ * O piso de tamanho \u00e9 2, n\u00e3o 3: siglas de duas letras s\u00e3o justamente os termos
+ * mais discriminativos que uma pergunta t\u00e9cnica carrega \u2014 ia, ai, ux, qa, go,
+ * bd. Ru\u00eddo de duas letras j\u00e1 \u00e9 barrado pela lista de stopwords.
+ */
 export function tokenizar(texto: string): string[] {
-  return texto
+  let normalizado = texto
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
     .toLowerCase()
+
+  for (const [padrao, substituto] of SIMBOLOS) {
+    normalizado = normalizado.replace(padrao, substituto)
+  }
+
+  return normalizado
     .split(/[^a-z0-9]+/)
-    .filter(t => t.length > 2 && !STOPWORDS.has(t))
+    .filter(t => t.length > 1 && !STOPWORDS.has(t))
 }
 
 /**

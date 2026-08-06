@@ -23,12 +23,31 @@ describe('tokenizar', () => {
     expect(tokenizar('Programação Ágil')).toEqual(['programacao', 'agil'])
   })
 
-  it('descarta stopwords e tokens de até 2 caracteres', () => {
+  it('descarta stopwords e tokens de uma letra', () => {
     expect(tokenizar('o que você fez com a API')).toEqual(['fez', 'api'])
   })
 
   it('quebra em qualquer não-alfanumérico', () => {
-    expect(tokenizar('node.js, react-native')).toEqual(['node', 'react', 'native'])
+    expect(tokenizar('react-native, spring boot')).toEqual([
+      'react', 'native', 'spring', 'boot',
+    ])
+  })
+
+  /**
+   * "você sabe C++?" chegava ao scorer como a palavra "sabe": o separador
+   * transformava `c++` em `c`, e o corte de tamanho descartava em seguida. A
+   * pergunta trazia de volta qualquer documento com "sabe" no corpo, menos o
+   * de C++.
+   */
+  it('preserva nomes de tecnologia que o separador destruiria', () => {
+    expect(tokenizar('você sabe C++?')).toEqual(['sabe', 'cpp'])
+    expect(tokenizar('trabalha com C#?')).toEqual(['trabalha', 'csharp'])
+    expect(tokenizar('node.js e next.js')).toEqual(['nodejs', 'nextjs'])
+  })
+
+  it('mantém siglas de duas letras, que costumam ser o termo mais específico', () => {
+    expect(tokenizar('você usa IA no trabalho')).toContain('ia')
+    expect(tokenizar('faz QA e UX')).toEqual(['faz', 'qa', 'ux'])
   })
 
   it('devolve lista vazia para entrada sem termos úteis', () => {

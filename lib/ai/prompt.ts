@@ -5,10 +5,23 @@
 
 import type { KnowledgeDoc } from './types'
 
+/**
+ * Data corrente, em formato legível, para o modelo poder calcular idade e tempo
+ * decorrido. O modelo não sabe que dia é hoje: sem isto ele chuta a partir do
+ * treinamento e erra em silêncio — a idade sai errada e ninguém percebe.
+ *
+ * Fica no fim do prefixo estático porque muda uma vez por dia, e o resto do
+ * prefixo é o que a OpenAI cobra com desconto quando está em cache.
+ */
+function hojePorExtenso(agora: Date): string {
+  return agora.toISOString().slice(0, 10)
+}
+
 export function montarInstrucoes(
   politicas: string,
   lang: 'pt' | 'en',
   documentosFixos: KnowledgeDoc[] = [],
+  agora: Date = new Date(),
 ): string {
   const idioma =
     lang === 'pt'
@@ -61,6 +74,10 @@ Direto, profissional, humano, levemente informal. Sem linguagem corporativa, sem
 # Idioma
 
 ${idioma}
+
+# Data de hoje
+
+Hoje é ${hojePorExtenso(agora)}. Use esta data para calcular idade e tempo decorrido a partir das datas que aparecem nos documentos. Nunca chute a data atual e nunca cite um número que os documentos não sustentem.
 
 # O que eu sempre sei
 
