@@ -11,9 +11,9 @@ export const ptContent = {
   hero: {
     greeting: 'OLÁ, EU SOU',
     name: 'Marcilio Ortiz',
-    role: ['Desenvolvedor', 'Full Stack'],
+    role: ['Fullstack', 'AI Developer'],
     subtitle:
-      'Estudante Técnico em Informática com experiência real em projetos freelancer. Atuo de ponta a ponta: da arquitetura de banco de dados e APIs robustas até a interface final, pois um produto de verdade não vive apenas de respostas JSON.',
+      'Estudante Técnico em Informática com experiência real em projetos freelancer. Atuo de ponta a ponta: banco de dados, API, interface e o que mais o projeto pedir — inclusive testes e infraestrutura.',
     availability: {
       defaultStatus: 'Disponível para oportunidades',
       defaultTypes: ['Estágio', 'Emprego', 'Projetos'],
@@ -202,7 +202,7 @@ export const ptContent = {
       name: 'Sushi do Verão (Ecossistema)',
       type: 'Sistema Comercial',
       stack: ['NestJS', 'Next.js', 'Expo', 'PostgreSQL'],
-      narrative: 'Desenvolvido para dar autonomia real à operação do restaurante. O desafio central foi modelar a API e gerenciar o estado no cliente para que a equipe pudesse alterar preços e pratos durante o horário de pico sem intervenção técnica.',
+      narrative: 'Projetado para dar autonomia à operação do restaurante: a API e o painel foram modelados para que a equipe alterasse preços e pratos no horário de pico sem intervenção técnica. A base foi construída, mas o sistema não chegou a ser aprovado para produção — do escopo original, o que está no ar é o site institucional.',
       links: [
         { label: 'API', href: 'https://github.com/KriawqZero/rv-api' },
         { label: 'Admin', href: 'https://github.com/KriawqZero/rv-admin' },
@@ -259,17 +259,17 @@ export const ptContent = {
     label: 'SOBRE MIM',
     title: 'Mais que código,',
     titleHighlight: 'propósito.',
-    text: 'Ainda no Ensino Técnico, atuo como freelancer há mais de um ano entregando soluções reais. Como desenvolvedor independente, domino o ciclo completo do produto. Minha paixão é projetar arquiteturas no Backend, mas sei que o usuário consome interfaces. Busco minha primeira oportunidade corporativa para transformar essa vivência Full Stack em valor real para uma grande equipe.',
+    text: 'Ainda no Ensino Técnico, atuo como freelancer desde março de 2025 entregando soluções reais. Como desenvolvedor independente, domino o ciclo completo do produto e não me prendo a uma camada: pego backend, frontend, testes ou infraestrutura conforme o projeto precisa. Busco minha primeira oportunidade corporativa para transformar essa vivência em valor real para uma equipe.',
     cta: 'Conhecer minha jornada',
     stats: [
       { value: '+1', label: 'ano', sublabel: 'De imersão diária em programação' },
-      { value: '+30', label: 'projetos', sublabel: 'Aplicações web e desafios práticos' },
+      { value: '+50', label: 'projetos', sublabel: 'Aplicações web e desafios práticos' },
       { value: '+10', label: 'clientes', sublabel: 'Atendidos com soluções em produção' },
-      { value: '+500', label: 'commits', sublabel: 'Registrados no GitHub no último ano' },
+      { value: '+1200', label: 'commits', sublabel: 'Registrados no GitHub no último ano' },
       { value: '+5', label: 'tecnologias', sublabel: 'Dominadas na stack principal' },
       { value: '100%', label: 'foco', sublabel: 'Em construir sistemas robustos e escaláveis' },
       { value: '+1000', label: 'horas', sublabel: 'Lendo documentação oficial' },
-      { value: '+20k', label: 'linhas', sublabel: 'De código escritas ou refatoradas' },
+      { value: '+200k', label: 'linhas', sublabel: 'De código escritas ou refatoradas' },
       { value: '∞', label: 'bugs', sublabel: 'Resolvidos com muita paciência' },
       { value: '∞', label: 'vontade', sublabel: 'Vontade de aprender e evoluir' },
     ],
@@ -369,7 +369,7 @@ export const ptContent = {
       items: [
         {
           question: 'O que você já construiu em produção?',
-          answer: 'Sistemas com usuário real usando: o SISCO, que hoje organiza as horas complementares de mais de 200 alunos e coordenadores no IFMS; um worker que consolida o faturamento diário de uma rede de lojas cujo sistema de vendas não tem API; um cardápio digital com painel próprio para um restaurante de alto volume; e o VamoAgendar, um SaaS de agendamento que desenvolvo com um sócio investidor.',
+          answer: 'Sistemas com usuário real usando: o SISCO, que hoje organiza as horas complementares de mais de 200 alunos e coordenadores no IFMS; um worker que consolida o faturamento diário de uma rede de lojas cujo sistema de vendas não tem API; o site institucional de um restaurante da minha cidade; e o VamoAgendar, um SaaS de agendamento que desenvolvo com um sócio investidor.',
         },
         {
           question: 'Como você usa IA sem depender dela?',
@@ -471,7 +471,7 @@ export const ptContent = {
         name: 'Sushi do Verão',
         type: 'Empresa local',
         problem: 'Um restaurante de alto volume da minha cidade sofria com cardápios online genéricos e lentos, que não permitiam atualizar preços e indisponibilidades em tempo real durante os picos de pedidos.',
-        solution: 'Levei uma proposta inicial para o proprietário e refinamos a ideia juntos. A solução não foi usar um template, mas construir uma API extremamente performática (NestJS) com um painel administrativo. O cardápio agora é um PWA super rápido que reage instantaneamente a mudanças de estoque.',
+        solution: 'Levei uma proposta inicial ao proprietário e refinamos a ideia juntos: em vez de um template, uma API própria em NestJS com painel administrativo e cardápio em PWA. Construí a base do sistema, mas ele não foi aprovado para produção. O que está no ar hoje é o site institucional que desenvolvi para eles.',
         stack: 'NestJS · Next.js · Expo · PostgreSQL',
         year: '2026'
       }
@@ -481,16 +481,12 @@ export const ptContent = {
     reviewsTitleHighlight: 'dizem.',
     reviews: [
       {
-        name: 'Rodrigo M. (Gerente de Operações)',
+        name: 'Fernando (Gerente de Operações)',
         project: 'Automação KyteApp',
         quote: 'O Marcilio conseguiu contornar a falta de API oficial que estava travando nossa operação. A automação está rodando sem problemas e poupando muito tempo de toda a equipe.'
       },
       null,
-      {
-        name: 'Proprietário do Sushi do Verão',
-        project: 'Sistema Delivery Sushi',
-        quote: 'Trabalhar junto na solução fez toda a diferença. O sistema não trava de jeito nenhum nos fins de semana e conseguimos alterar os preços na hora que precisamos.'
-      }
+      null
     ]
   }
 };
@@ -508,9 +504,9 @@ export const enContent = {
   hero: {
     greeting: 'HELLO, I AM',
     name: 'Marcilio Ortiz',
-    role: ['Full Stack', 'Developer'],
+    role: ['Fullstack', 'AI Developer'],
     subtitle:
-      'Technical IT Student with real experience in freelance projects. I act from end to end: from database architecture and robust APIs to the final interface, because a real product does not live on JSON responses alone.',
+      'Technical IT Student with real experience in freelance projects. I work end to end: database, API, interface and whatever else the project needs — testing and infrastructure included.',
     availability: {
       defaultStatus: 'Available for opportunities',
       defaultTypes: ['Internship', 'Full-time', 'Projects'],
@@ -750,17 +746,17 @@ export const enContent = {
     label: 'ABOUT ME',
     title: 'More than code,',
     titleHighlight: 'purpose.',
-    text: 'Still in Technical High School, I have been working as a freelancer for over a year delivering real solutions. As an independent developer, I master the entire product cycle. My passion is designing Backend architectures, but I know that users consume interfaces. I am seeking my first corporate opportunity to transform this Full Stack experience into real value for a great team.',
+    text: 'Still in Technical High School, I have been freelancing since March 2025, delivering real solutions. As an independent developer, I own the entire product cycle and I do not stick to one layer: backend, frontend, testing or infrastructure, whatever the project needs. I am seeking my first corporate opportunity to turn that experience into real value for a team.',
     cta: 'Explore my journey',
     stats: [
       { value: '+1', label: 'year', sublabel: 'Of daily programming immersion' },
-      { value: '+30', label: 'projects', sublabel: 'Web apps and practical challenges' },
+      { value: '+50', label: 'projects', sublabel: 'Web apps and practical challenges' },
       { value: '+10', label: 'clients', sublabel: 'Served with solutions in production' },
-      { value: '+500', label: 'commits', sublabel: 'Recorded on GitHub in the last year' },
+      { value: '+1200', label: 'commits', sublabel: 'Recorded on GitHub in the last year' },
       { value: '+5', label: 'technologies', sublabel: 'Mastered in the main tech stack' },
       { value: '100%', label: 'focus', sublabel: 'On building robust and scalable systems' },
       { value: '+1000', label: 'hours', sublabel: 'Reading official documentation' },
-      { value: '+20k', label: 'lines', sublabel: 'Of code written or refactored' },
+      { value: '+200k', label: 'lines', sublabel: 'Of code written or refactored' },
       { value: '∞', label: 'bugs', sublabel: 'Solved with a lot of patience' },
       { value: '∞', label: 'drive', sublabel: 'Drive to learn and evolve' },
     ],
@@ -858,7 +854,7 @@ export const enContent = {
       items: [
         {
           question: 'What have you built in production?',
-          answer: 'Systems with real users on them: SISCO, which now handles the complementary-hours records of more than 200 students and coordinators at IFMS; a worker that consolidates daily revenue for a retail chain whose sales system has no public API; a digital menu with its own admin panel for a high-volume restaurant; and VamoAgendar, a scheduling SaaS I build with an investing partner.',
+          answer: 'Systems with real users on them: SISCO, which now handles the complementary-hours records of more than 200 students and coordinators at IFMS; a worker that consolidates daily revenue for a retail chain whose sales system has no public API; the institutional site of a restaurant in my city; and VamoAgendar, a scheduling SaaS I build with an investing partner.',
         },
         {
           question: 'How do you use AI without depending on it?',
@@ -960,7 +956,7 @@ export const enContent = {
         name: 'Sushi do Verão',
         type: 'Local Business',
         problem: 'A high-volume restaurant in my city suffered from slow, generic online menus that didn\'t allow them to update prices and out-of-stock items in real-time during peak delivery hours.',
-        solution: 'I brought an initial proposal to the owner and we refined the idea together. The solution wasn\'t to use a template, but to build a highly performant API (NestJS) and an admin panel. The menu is now a lightning-fast PWA that reacts instantly to stock changes.',
+        solution: 'I brought an initial proposal to the owner and we refined the idea together: instead of a template, a NestJS API with an admin panel and a PWA menu. I built the base of the system, but it was not approved for production. What is live today is the institutional site I built for them.',
         stack: 'NestJS · Next.js · Expo · PostgreSQL',
         year: '2026'
       }
@@ -970,16 +966,12 @@ export const enContent = {
     reviewsTitleHighlight: 'are saying.',
     reviews: [
       {
-        name: 'Rodrigo M. (Operations Manager)',
+        name: 'Fernando (Operations Manager)',
         project: 'KyteApp Automation',
         quote: 'Marcilio managed to bypass the lack of an official API that was stalling our operation. The automation has been running flawlessly and saving the entire team a lot of time.'
       },
       null,
-      {
-        name: 'Sushi do Verão Owner',
-        project: 'Sushi Delivery System',
-        quote: 'Working together on the solution made all the difference. The system never crashes on weekends, and we can change prices the moment we need to.'
-      }
+      null
     ]
   }
 };
