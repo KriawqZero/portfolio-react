@@ -38,10 +38,22 @@ function numero(nome: string, padrao: number): number {
   return Number.isFinite(valor) && valor > 0 ? valor : padrao
 }
 
-/** Nunca guardamos IP em claro: a chave é um hash com segredo do servidor. */
+/**
+ * Nunca guardamos IP em claro: a chave é um hash com segredo do servidor.
+ *
+ * O segredo não é decoração. Sem ele isto vira `sha256(ip)`, e o espaço inteiro
+ * de IPv4 são 4 bilhões de entradas — qualquer um que leia o Redis reverte a
+ * tabela toda em minutos e o "anônimo" deixa de existir. Por isso produção sem
+ * `RATE_LIMIT_HASH_SECRET` é barrada em dependenciasOk, e não silenciosamente
+ * aceita aqui.
+ */
 export function chaveAnonima(valor: string): string {
   const segredo = process.env.RATE_LIMIT_HASH_SECRET ?? ''
   return createHash('sha256').update(`${valor}${segredo}`).digest('hex').slice(0, 32)
+}
+
+export function segredoDeHashConfigurado(): boolean {
+  return Boolean(process.env.RATE_LIMIT_HASH_SECRET)
 }
 
 export function ipDaRequisicao(headers: Record<string, string | string[] | undefined>): string {
@@ -58,8 +70,14 @@ export function ipDaRequisicao(headers: Record<string, string | string[] | undef
  * seria exatamente o cenário em que uma conta cara acontece sem ninguém ver.
  */
 export function dependenciasOk(producao: boolean): Veredito {
-  if (configurado() || !producao) return { ok: true }
-  return { ok: false, status: 503, codigo: 'sem_contadores', estado: 'upstream' }
+  if (!producao) return { ok: true }
+  if (!configurado()) return { ok: false, status: 503, codigo: 'sem_contadores', estado: 'upstream' }
+  // Sem sal, o hash de IP é reversível e a promessa de anonimato do resto do
+  // arquivo deixa de valer. Erro de configuração, não modo degradado.
+  if (!segredoDeHashConfigurado()) {
+    return { ok: false, status: 503, codigo: 'sem_segredo_hash', estado: 'upstream' }
+  }
+  return { ok: true }
 }
 
 // ─── Kill switch ──────────────────────────────────────────────────────────────

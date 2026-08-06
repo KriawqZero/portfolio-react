@@ -158,13 +158,40 @@ curl -X POST "$UPSTASH_REDIS_REST_URL/del/ai:orcamento:d:$(date -u +%F)" -H "Aut
 
 ## Antes de ligar no domínio público
 
+Rode primeiro `pnpm ai:prontidao`, que confere a lista de variáveis e explica o
+que cada ausência provoca. Para conferir produção, traga as variáveis antes com
+`vercel env pull .env.local`; para conferir o que já está no ar,
+`pnpm ai:prontidao https://www.marciliortiz.dev.br` — ele envia uma requisição
+sem token do Turnstile, que morre antes da OpenAI e por isso não custa nada.
+
 - [ ] limite de gasto e alerta configurados no projeto da OpenAI
 - [ ] banco Upstash criado e as duas variáveis na Vercel
 - [ ] widget Turnstile criado, domínio registrado, as duas chaves na Vercel
 - [ ] `RATE_LIMIT_HASH_SECRET` gerado (`openssl rand -hex 32`)
 - [ ] `pnpm ai:seguranca` passando
 - [ ] `pnpm ai:matriz` revisado por você
-- [ ] `AI_CHAT_ENABLED=true`
+- [ ] `AI_CHAT_ENABLED=true` — exatamente essa string; qualquer outro valor
+      mantém a IA desligada, e é o erro de deploy mais silencioso da lista
+- [ ] `VITE_TURNSTILE_SITE_KEY` presente **no build**, não só no runtime: ela
+      entra no bundle do navegador, então adicioná-la depois exige um build
+      novo, não apenas um redeploy
+
+### O que barra sozinho em produção
+
+Estas três não degradam, param a requisição — é decisão, não bug:
+
+| Ausência | Resposta | Por quê |
+|---|---|---|
+| Redis | `503 sem_contadores` | sem contador não existe teto de gasto |
+| `RATE_LIMIT_HASH_SECRET` | `503 sem_segredo_hash` | sem sal, `sha256(ip)` é reversível: o espaço de IPv4 inteiro são 4 bilhões de entradas, e o "anônimo" do rate limit deixa de existir |
+| `TURNSTILE_SECRET_KEY` | `503 verificacao_indisponivel` | sem verificação, qualquer script bate no endpoint pago |
+
+### Origens aceitas
+
+Em produção, apenas `marciliortiz.dev.br` e `www.marciliortiz.dev.br`. Previews
+da Vercel e `localhost` só passam fora de produção — criar um projeto em
+`*.vercel.app` é gratuito, e aceitá-los no ambiente que gasta dinheiro seria
+deixar qualquer pessoa embutir esta IA no próprio site com a conta correndo aqui.
 
 ## O que este sistema não é
 

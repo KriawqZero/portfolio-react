@@ -30,26 +30,40 @@ describe('origemPermitida', () => {
     expect(origemPermitida(undefined, PERMITIDAS)).toBe(false)
   })
 
-  it('aceita previews da Vercel', () => {
-    expect(origemPermitida('https://portfolio-abc123.vercel.app', PERMITIDAS)).toBe(true)
+  it('aceita previews da Vercel fora de produção', () => {
+    expect(origemPermitida('https://portfolio-abc123.vercel.app', PERMITIDAS, true)).toBe(true)
+  })
+
+  /**
+   * Criar um projeto em `*.vercel.app` é gratuito e leva minutos. Aceitar esse
+   * padrão no ambiente que gasta dinheiro seria publicar o endpoint para
+   * qualquer um embutir esta IA no próprio site — com a conta correndo aqui.
+   */
+  it('recusa preview da Vercel em produção', () => {
+    expect(origemPermitida('https://portfolio-abc123.vercel.app', PERMITIDAS)).toBe(false)
+    expect(origemPermitida('https://site-do-atacante.vercel.app', PERMITIDAS)).toBe(false)
   })
 
   // O regex de preview é ancorado (^...$). Sem isso, um atacante registraria
   // um domínio que apenas *contém* vercel.app e passaria.
   it('recusa domínio que só imita um preview da Vercel', () => {
-    expect(origemPermitida('https://x.vercel.app.atacante.com', PERMITIDAS)).toBe(false)
-    expect(origemPermitida('https://atacante.com/https://x.vercel.app', PERMITIDAS)).toBe(false)
-    expect(origemPermitida('http://x.vercel.app', PERMITIDAS)).toBe(false)
+    expect(origemPermitida('https://x.vercel.app.atacante.com', PERMITIDAS, true)).toBe(false)
+    expect(origemPermitida('https://atacante.com/https://x.vercel.app', PERMITIDAS, true)).toBe(false)
+    expect(origemPermitida('http://x.vercel.app', PERMITIDAS, true)).toBe(false)
   })
 
-  it('só aceita localhost quando permitirLocal está ligado', () => {
+  it('só aceita localhost fora de produção', () => {
     expect(origemPermitida('http://localhost:5173', PERMITIDAS)).toBe(false)
     expect(origemPermitida('http://localhost:5173', PERMITIDAS, true)).toBe(true)
     expect(origemPermitida('http://127.0.0.1:3000', PERMITIDAS, true)).toBe(true)
   })
 
-  it('não aceita subdomínio de localhost forjado nem com permitirLocal', () => {
+  it('não aceita subdomínio de localhost forjado nem fora de produção', () => {
     expect(origemPermitida('http://localhost.atacante.com', PERMITIDAS, true)).toBe(false)
+  })
+
+  it('o domínio real continua passando em produção', () => {
+    expect(origemPermitida('https://www.marciliortiz.dev.br', PERMITIDAS)).toBe(true)
   })
 })
 

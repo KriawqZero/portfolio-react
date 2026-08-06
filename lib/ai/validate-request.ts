@@ -18,18 +18,25 @@ type Limites = {
 /**
  * Origin ausente acontece em requisição que não vem de browser. Tratamos como
  * não permitida — é higiene, não segurança: um cliente forja o header à vontade.
+ *
+ * `foraDeProducao` libera as origens efêmeras: localhost e os previews da
+ * Vercel. Em produção nenhuma das duas passa, e a razão é concreta: qualquer
+ * pessoa cria um projeto gratuito em `*.vercel.app`, então aceitar esse padrão
+ * no ambiente que gasta dinheiro é publicar o endpoint para quem quiser
+ * embutir esta IA no próprio site.
  */
 export function origemPermitida(
   origin: string | undefined,
   permitidas: string[],
-  permitirLocal = false,
+  foraDeProducao = false,
 ): boolean {
   if (!origin) return false
   if (permitidas.includes(origin)) return true
-  // Previews da Vercel: https://<algo>.vercel.app
-  if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(origin)) return true
-  // Fora de produção, qualquer porta local serve — dev server, preview, teste.
-  return permitirLocal && /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)
+  if (!foraDeProducao) return false
+
+  const preview = /^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(origin)
+  const local = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin)
+  return preview || local
 }
 
 export function validarCorpo(corpo: unknown, limites: Limites): Validacao {
