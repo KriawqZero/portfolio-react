@@ -672,11 +672,18 @@ input, textarea {
    ScrollTriggers não permitia — e era daí que vinha a cara de widget.
    ================================================================ */
 
+/* A página ocupa exatamente a tela e não rola: o ambiente é o quarto inteiro.
+   Quem rola é só o fio da conversa, lá embaixo. Por isso tudo daqui para
+   dentro é uma coluna flex com `min-height: 0` nos filhos — sem isso um item
+   de flex se recusa a encolher abaixo do próprio conteúdo e o scroll interno
+   nunca aparece, ele vaza para fora da tela. */
 .ia-pagina {
   position: relative;
-  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
   background: var(--bg-deep);
-  overflow-x: clip;
+  overflow: hidden;
 }
 
 /* Mesma atmosfera do portfólio: a página precisa parecer o mesmo lugar. */
@@ -701,14 +708,13 @@ input, textarea {
   background: radial-gradient(ellipse 60% 40% at 85% 70%, rgba(63, 24, 171, 0.05), transparent);
 }
 
+/* Não precisa mais ser sticky: nada passa por baixo dele, porque a página
+   não rola. É o cabeçalho fixo de uma coluna flex. */
 .ia-topo {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 40;
+  flex-shrink: 0;
   padding: 1.25rem 0;
-  background: linear-gradient(to bottom, rgba(9, 9, 11, 0.92) 40%, transparent);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
 }
 
 .ia-topo-interno {
@@ -721,21 +727,29 @@ input, textarea {
 .ia-grid {
   position: relative;
   z-index: 10;
+  flex: 1;
+  min-height: 0;
   display: grid;
   grid-template-columns: minmax(300px, 420px) 1fr;
   gap: clamp(3rem, 6vw, 7rem);
-  padding-top: clamp(2.5rem, 6vw, 5rem);
-  padding-bottom: 3rem;
-  align-items: start;
+  padding-top: clamp(1.5rem, 4vw, 3.5rem);
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  align-items: stretch;
 }
 
 /* ── Coluna editorial ─────────────────────────────────────────── */
 
-/* Fica presa enquanto a conversa rola: o visitante nunca perde de vista o
-   que essa IA é e o que ela não é. */
+/* Não sai da tela em momento nenhum — o visitante nunca perde de vista o que
+   essa IA é e o que ela não é. Rola por dentro apenas se a tela for baixa
+   demais para o texto, o que é rede de segurança, não comportamento normal. */
 .ia-editorial {
-  position: sticky;
-  top: 7.5rem;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.ia-editorial::-webkit-scrollbar {
+  display: none;
 }
 
 /* O número fantasma que já estava escrito em content.ts desde sempre e nunca
@@ -821,14 +835,30 @@ input, textarea {
 .ai-conversa {
   display: flex;
   flex-direction: column;
-  min-height: calc(100dvh - 12rem);
+  min-height: 0;
+  height: 100%;
 }
 
+/* O único lugar da página que rola. */
 .ai-fio {
   flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   gap: clamp(3rem, 5vw, 4.5rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+  /* Espaço para a máscara não comer a última linha do texto. */
+  padding-bottom: 2rem;
+}
+
+/* Esmaece o fim do fio quando ainda há conversa abaixo: sem isso, nada na
+   tela diz que dá para rolar ali dentro — e agora que a página não rola, é a
+   única pista disponível. */
+.ai-fio-rolavel {
+  mask-image: linear-gradient(to bottom, #000 calc(100% - 2.5rem), transparent 100%);
 }
 
 /* Estado inicial: a página não pode abrir com um retângulo vazio, então o
@@ -849,9 +879,10 @@ input, textarea {
 
 /* ── Um turno ─────────────────────────────────────────────────── */
 
-/* Compensa o cabeçalho fixo quando a pergunta nova é trazida para a tela. */
+/* Quem rola agora é o próprio fio, e não há cabeçalho dentro dele — a folga
+   é só para a pergunta não encostar na borda de cima. */
 .ai-turno {
-  scroll-margin-top: 7rem;
+  scroll-margin-top: 0.5rem;
 }
 
 .ai-turno-corpo {
@@ -1046,25 +1077,13 @@ input, textarea {
    texto para ler. Vidro com desfoque de 20px e sombra, como o cartão do
    Processo, para não ser mais um retângulo de borda fina. */
 
+/* Rodapé da coluna: não é sticky nem fixed, é o último item de uma coluna
+   flex de altura conhecida. Fica sempre no mesmo lugar da tela e nunca
+   passa por cima do fio, porque o fio encolhe para caber. */
 .ai-entrada {
-  position: sticky;
-  bottom: 0;
+  flex-shrink: 0;
   z-index: 20;
-  padding: 1.5rem 0;
-  background: linear-gradient(to top, var(--bg-deep) 55%, transparent);
-}
-
-/* Antes da primeira pergunta não há nada para rolar, então grudar a entrada no
-   rodapé só produzia dano: no mobile ela cobria as próprias sugestões, e no
-   desktop abria meia tela de vazio entre elas e o campo. */
-.ai-conversa-vazia {
-  min-height: 0;
-}
-
-.ai-conversa-vazia .ai-entrada {
-  position: static;
-  padding: 2rem 0 0;
-  background: none;
+  padding-top: 1.25rem;
 }
 
 .ai-form {
@@ -1188,26 +1207,51 @@ input, textarea {
   }
 }
 
+/* Empilhado, a tela vira duas faixas: a editorial ocupa o que precisa e a
+   conversa fica com todo o resto. `1fr` na segunda linha, e não `auto`, é o
+   que faz o fio herdar altura definida — sem isso ele cresce com o conteúdo
+   e volta a empurrar a página. */
 @media (max-width: 1023px) {
   .ia-grid {
     grid-template-columns: 1fr;
-    gap: 2.5rem;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 1.5rem;
   }
 
   .ia-editorial {
-    position: static;
+    overflow: visible;
   }
 
   .ia-numero {
     top: -1rem;
   }
 
-  .ai-conversa {
-    min-height: 0;
+  .ia-titulo {
+    margin: 0.75rem 0;
+    font-size: clamp(1.9rem, 8vw, 2.5rem);
   }
 
   .ai-fio {
     gap: 2.75rem;
+  }
+
+  .ai-vazio {
+    padding-top: 0;
+    gap: 1.25rem;
+  }
+}
+
+/* Tela baixa e estreita ao mesmo tempo: a descrição é a única parte do bloco
+   editorial que o visitante pode perder sem prejuízo — o disclaimer diz que
+   ele fala com uma IA, e isso fica. Sem este corte, sobra menos de um terço
+   da tela para a conversa, que é o motivo de a página existir. */
+@media (max-width: 1023px) and (max-height: 780px) {
+  .ia-editorial .ai-description {
+    display: none;
+  }
+
+  .ia-editorial .ai-disclaimer {
+    margin-top: 1rem;
   }
 }
 

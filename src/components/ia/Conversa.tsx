@@ -27,6 +27,41 @@ export default function Conversa() {
   const ultimo = turnos.at(-1)
   const quantidade = turnos.length
 
+  /**
+   * Há conversa abaixo do que está visível?
+   *
+   * Agora que a página não rola, a barra do fio é a única pista de que existe
+   * mais coisa ali — e barra fina em fundo escuro é fácil de não ver. Daí o
+   * esmaecimento no pé, que só aparece quando há mesmo o que revelar: aplicado
+   * sempre, ele apagaria a última linha de uma resposta curta.
+   *
+   * O observador cobre os turnos além do próprio fio porque a resposta cresce
+   * depois de chegar — ela é revelada frase a frase.
+   */
+  const [temMais, setTemMais] = useState(false)
+
+  useEffect(() => {
+    const fio = fioRef.current
+    if (!fio) return
+
+    const avaliar = () => {
+      const restante = fio.scrollHeight - fio.scrollTop - fio.clientHeight
+      setTemMais(restante > 24)
+    }
+
+    avaliar()
+    fio.addEventListener('scroll', avaliar, { passive: true })
+
+    const observador = new ResizeObserver(avaliar)
+    observador.observe(fio)
+    fio.querySelectorAll('.ai-turno').forEach(turno => observador.observe(turno))
+
+    return () => {
+      fio.removeEventListener('scroll', avaliar)
+      observador.disconnect()
+    }
+  }, [quantidade])
+
   // Pergunta nova entra em cena: a tela acompanha em vez de deixar o visitante
   // procurando onde a resposta vai aparecer.
   useEffect(() => {
@@ -52,11 +87,8 @@ export default function Conversa() {
   const sugestoes = isFreelanceView ? data.suggestionsFreelance : data.suggestions
 
   return (
-    /* Sem conversa, a entrada não gruda no rodapé: ela desce logo depois das
-       sugestões. Grudada, sobrepunha as próprias sugestões no mobile e abria
-       um vão vazio de meia tela no desktop. */
-    <div className={`ai-conversa${quantidade === 0 ? ' ai-conversa-vazia' : ''}`}>
-      <div className="ai-fio" ref={fioRef}>
+    <div className="ai-conversa">
+      <div className={`ai-fio${temMais ? ' ai-fio-rolavel' : ''}`} ref={fioRef}>
         {quantidade === 0 ? (
           <div className="ai-vazio">
             <p className="ai-empty">{data.emptyState}</p>

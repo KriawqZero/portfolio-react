@@ -43,8 +43,19 @@ export default function PaginaIA() {
   const { t, language } = useLanguage()
   const data = t.aiChat
 
+  /**
+   * A página ocupa a tela e não rola — quem rola é o fio da conversa. O
+   * `overflow: hidden` no `.ia-pagina` já impede o vazamento, mas travar o
+   * body também corta o arrasto elástico do mobile, que faz o ambiente inteiro
+   * descolar da borda da tela. Reaproveita a classe que o arquivo do portfólio
+   * já define, e devolve o estado ao sair para não sequestrar o scroll de lá.
+   */
   useEffect(() => {
     window.scrollTo(0, 0)
+    document.body.classList.add('no-scroll')
+    return () => {
+      document.body.classList.remove('no-scroll')
+    }
   }, [])
 
   // O título do documento é o que aparece na aba e no histórico. Guardar e
