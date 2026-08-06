@@ -15,12 +15,19 @@ surpresa na fatura.
 Nesta ordem, e nada chega na OpenAI sem passar por todas:
 
 1. **Forma da requisição** — só POST, só JSON, só origem conhecida, corpo até
-   8 KB, pergunta até 500 caracteres, histórico até 6 mensagens.
+   32 KB, pergunta até 500 caracteres, histórico até 20 mensagens.
 2. **Kill switch** — variável de ambiente ou chave no Redis.
-3. **Turnstile** — token verificado com a Cloudflare a cada pergunta.
+3. **Turnstile** — token verificado com a Cloudflare a cada pergunta, e queimado
+   no Redis antes disso: token repetido é recusado sem ida à rede.
 4. **Rate limit** — 8 perguntas por 10 minutos, 15 por sessão/dia, 30 por
    IP/dia. IP nunca é gravado em claro: vira hash com segredo do servidor.
 5. **Teto global** — 100 perguntas/dia e 1000/mês somando todos os visitantes.
+
+Uma sexta camada não protege dinheiro, protege a conversa: o **cache** devolve
+na hora a resposta já dada para a mesma primeira pergunta, sem chamar a OpenAI.
+
+Os valores acima são os padrões de `lib/ai/config.ts`, que é quem manda — este
+documento é leitura, não fonte.
 
 Em produção, **falta de Redis ou de Turnstile bloqueia a IA**. Não existe modo
 degradado que gaste dinheiro: sem contador confiável não há teto, e sem teto a

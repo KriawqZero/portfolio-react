@@ -6,7 +6,7 @@ visibility: public
 approved: true
 last_reviewed: 2026-08-06
 topics: [freelance, freelancer, cliente, clientes, workana, projeto, projetos, entrega, prazo, orcamento, proposta, sistemas]
-aliases: [trabalha como freelancer, freelance, freelancer, projeto com cliente, projetos para clientes, sistemas para clientes, entregou sistemas, como funciona um projeto, contratar voce, hire you, client work, real clients, quanto tempo demora, entrega]
+aliases: [trabalha como freelancer, freelance, freelancer, projeto com cliente, projetos para clientes, sistemas para clientes, entregou sistemas, trabalhos parecidos, projetos parecidos, trabalhos similares, similar work, como funciona um projeto, contratar voce, hire you, client work, real clients, quanto tempo demora, entrega]
 ---
 
 ## Desde quando

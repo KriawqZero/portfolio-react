@@ -16,7 +16,7 @@ flowchart TD
     D --> E{"api/ask.ts<br/>9 portas em sequência"}
 
     E -->|"1. método, tipo, origem, tamanho"| F["validate-request.ts"]
-    F -->|"2. schema do corpo"| G["limites: 500 chars, 6 mensagens"]
+    F -->|"2. schema do corpo"| G["limites: 500 chars, 20 mensagens"]
     G -->|"3. Redis existe?"| H["limits.ts · dependenciasOk"]
     H -->|"4. está ligada?"| I["config + Redis ai:kill"]
     I -->|"5. é humano?"| J["turnstile.ts · Cloudflare"]
@@ -107,7 +107,7 @@ origemPermitida(origin, permitidas, permitirLocal) → boolean
 | `undefined` | `false` → **403** |
 
 Também barra aqui: método diferente de POST (**405**), `Content-Type` que não
-seja JSON (**415**), corpo acima de 8 KB (**413**).
+seja JSON (**415**), corpo acima de 32 KB (**413**).
 
 ### Porta 2 — schema do corpo
 
@@ -144,8 +144,14 @@ Devolve **503** com `state: "disabled"`.
 verificarTurnstile(token, ip, producao) → Veredito
 ```
 
-Troca o token com a Cloudflare. Token ausente ou inválido: **403**. Cloudflare
-fora do ar em produção: **503** — falha fechado.
+Antes de qualquer ida à rede, o token é queimado no Redis com `SETNX` e TTL de
+300s, que é a validade dele. Token repetido: **403**, sem custo nenhum. A
+Cloudflare já resgata cada token uma vez só — isto fecha a janela em que duas
+requisições com o mesmo token chegam juntas, antes de o resgate ser registrado
+lá.
+
+Depois disso, troca o token com a Cloudflare. Token ausente ou inválido:
+**403**. Cloudflare fora do ar em produção: **503** — falha fechado.
 
 ### Porta 6 — não é flood?
 
@@ -210,19 +216,35 @@ Pontuação por documento, sem IA, sem banco vetorial:
 
 ```
 título    peso 5
-aliases   peso 4
+aliases   peso 4   ← curadoria: não é dividida por nada
 topics    peso 3
-corpo     peso 1
-           ÷ raiz do tamanho do documento
+corpo     peso 1   ÷ raiz do tamanho do documento
 ```
+
+Só a parte vinda do corpo é normalizada pelo tamanho. Dividir o score inteiro
+punia o documento detalhado pelo próprio detalhe, e fazia o ranking depender do
+tamanho do texto sempre que ninguém casava metadado.
+
+Dois filtros decidem quem fica de fora:
+
+- **cobertura mínima** — sem acerto de metadado, o documento precisa casar pelo
+  menos um terço dos termos da pergunta. Um termo em comum é coincidência de
+  vocabulário, não relevância.
+- **corte relativo** — quem fica abaixo de 15% do melhor candidato sai. O teto
+  de 4 documentos é um limite, não uma cota a preencher.
 
 | Entra | Sai |
 |---|---|
 | `"como você usa IA?"` | `['practice-ai-workflow']` |
 | `"o que é o SISCO?"` | `['project-sisco']` |
-| `"qual a stack do SISCO?"` | `['project-sisco', 'archive-simple-machines', ...]` ← traz lixo |
+| `"qual a stack do SISCO?"` | `['project-sisco']` |
+| `"quais projetos mostram melhor seu nível técnico?"` | `[]` — nada casa; responde com os fixos |
 
 Teto de 4 documentos e 6.000 caracteres.
+
+Quando nenhum documento passa, a resposta sai só com os fixos (`profile-core` e
+`projects-overview`). É o comportamento certo: sem base, o certo é dizer que
+não sabe — e é mais barato.
 
 ---
 
@@ -397,10 +419,10 @@ da OpenAI.
 
 ```mermaid
 flowchart LR
-    A["knowledge/approved/*.md<br/>5 documentos escritos à mão"] --> C["build-index.ts"]
+    A["knowledge/approved/*.md<br/>8 documentos escritos à mão"] --> C["build-index.ts"]
     B["src/data/content.ts<br/>20 projetos do site"] --> C
     D["knowledge/policies/*.md<br/>regras de recusa"] --> C
-    C --> E["lib/ai/generated/knowledge-index.ts<br/>27 documentos + versão"]
+    C --> E["lib/ai/generated/knowledge-index.ts<br/>30 documentos + versão"]
     E --> F["retrieval.ts"]
     E --> G["prompt.ts"]
     H["knowledge/inbox/<br/>fora do Git"] -.->|"só depois de revisão humana"| A

@@ -111,8 +111,20 @@ export function selecionarDocumentos(
     .filter(c => c.pontos > 0)
     .sort((a, b) => b.pontos - a.pontos)
 
+  /**
+   * O teto de documentos não é uma cota a preencher. Quando existe um candidato
+   * claramente melhor, quem fica muito abaixo dele entra só porque sobrou vaga.
+   *
+   * O caso que motivou o corte: "qual a stack do SISCO?" trazia três projetos
+   * de arquivo junto com o SISCO, porque todo documento derivado do
+   * `content.ts` termina com uma linha "Stack: ...". A palavra casa em quase
+   * todo mundo e por isso não distingue ninguém.
+   */
+  const melhor = candidatos[0]?.pontos ?? 0
+  const relevantes = candidatos.filter(c => c.pontos >= melhor * 0.15)
+
   let caracteres = 0
-  for (const { doc } of candidatos) {
+  for (const { doc } of relevantes) {
     if (selecionados.length >= opcoes.maxDocumentos) break
     if (caracteres + doc.text.length > opcoes.maxCaracteres) continue
     selecionados.push(doc)

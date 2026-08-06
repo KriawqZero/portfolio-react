@@ -167,6 +167,36 @@ describe('selecionarDocumentos', () => {
     expect(r).toEqual([])
   })
 
+  /**
+   * "qual a stack do SISCO?" trazia três projetos de arquivo junto com o
+   * SISCO: todo documento derivado do content.ts termina com "Stack: ...", e a
+   * vaga sobrando no teto era preenchida com quem casava só essa palavra.
+   */
+  it('não completa o teto com candidato muito abaixo do melhor', () => {
+    const acervoMisto = [
+      doc('sisco', { title: 'SISCO', topics: ['stack'], text: 'sistema academico. Stack: Laravel' }),
+      doc('outro-1', { title: 'labirinto', text: 'jogo em java. Stack: Java' }),
+      doc('outro-2', { title: 'crates', text: 'mod de minecraft. Stack: Java' }),
+    ]
+    const r = selecionarDocumentos('stack sisco', acervoMisto, {
+      maxDocumentos: 4,
+      maxCaracteres: 99999,
+    })
+    expect(r.map(d => d.id)).toEqual(['sisco'])
+  })
+
+  it('mantém empatados quando ninguém se destaca', () => {
+    const acervoEmpatado = [
+      doc('a', { title: 'agendamento', text: 'um' }),
+      doc('b', { title: 'agendamento', text: 'dois' }),
+    ]
+    const r = selecionarDocumentos('agendamento', acervoEmpatado, {
+      maxDocumentos: 4,
+      maxCaracteres: 99999,
+    })
+    expect(r).toHaveLength(2)
+  })
+
   it('mantém o documento que casa poucos termos, mas por metadado', () => {
     const acervoAlias = [
       doc('certo', { aliases: ['nivel tecnico'], text: 'texto qualquer sem os termos' }),
