@@ -10,6 +10,7 @@
 
 import { describe, it, expect } from 'vitest'
 import { ptContent, enContent } from '../src/data/content'
+import { config } from '../lib/ai/config'
 
 function forma(valor: unknown): unknown {
   if (Array.isArray(valor)) return valor.map(forma)
@@ -72,6 +73,19 @@ describe('fallback curado', () => {
   it.each(idiomas)('%s não tem URL solta no texto', (_lang, fallback) => {
     for (const item of fallback.items) {
       expect(item.answer, item.question).not.toMatch(/https?:\/\//)
+    }
+  })
+
+  /**
+   * O fallback ocupa o mesmo lugar da resposta real, com a mesma tipografia.
+   * Passar do teto que a IA respeita entrega o disfarce e estoura o painel de
+   * altura fixa, que é o que segura os ScrollTriggers vizinhos.
+   */
+  it.each(idiomas)('%s cabe no mesmo espaço de uma resposta real', (_lang, fallback) => {
+    for (const item of fallback.items) {
+      expect(item.answer.length, item.question).toBeLessThanOrEqual(
+        config.limites.caracteresResposta,
+      )
     }
   })
 })

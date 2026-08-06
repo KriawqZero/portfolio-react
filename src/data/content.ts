@@ -369,23 +369,23 @@ export const ptContent = {
       items: [
         {
           question: 'O que você já construiu em produção?',
-          answer: 'Sistemas com usuário real usando: o SISCO, que hoje organiza as horas complementares de mais de 200 alunos e coordenadores no IFMS; um worker que consolida o faturamento diário de uma rede de lojas cujo sistema de vendas não tem API; o site institucional de um restaurante da minha cidade; e o VamoAgendar, um SaaS de agendamento que desenvolvo com um sócio investidor.',
+          answer: 'Sistemas com usuário real usando. O SISCO, que organiza as horas complementares de mais de 200 alunos e coordenadores no IFMS — era planilha em grupo de WhatsApp antes. Uma automação que consolida o faturamento diário de uma rede de lojas em São Paulo, cujo sistema de vendas não tem API pública: entrou no ar em abril de 2025 e roda todos os dias nas três filiais até hoje. Uma plataforma imobiliária com app próprio, onde a IA transforma foto e áudio gravados em campo em anúncio pronto. E o VamoAgendar, um SaaS de agendamento que desenvolvo com um sócio investidor.',
         },
         {
           question: 'Como você usa IA sem depender dela?',
-          answer: 'Uso todos os dias para acelerar a parte mecânica: esqueleto de módulo, achar onde algo acontece num repositório grande, revisar o que escrevi. O que continua meu é arquitetura, decisão e revisão. Leio tudo antes de aceitar, confiro assinatura de biblioteca na documentação oficial, e o que eu não consigo explicar não entra. Sem IA fica mais lento, não fica travado — aprendi a programar antes de ter isso à mão.',
+          answer: 'Uso todos os dias para acelerar a parte mecânica: esqueleto de módulo, achar onde algo acontece num repositório grande, revisar o que escrevi. O que continua meu é arquitetura, decisão e revisão — leio tudo antes de aceitar, confiro assinatura de biblioteca na documentação oficial, e o que eu não consigo explicar não entra. A prova de que isso não é discurso é um projeto onde ela me atrapalhou: no voxel engine em C++ que fiz em 2024, cada tentativa de usar IA quebrava o que já funcionava, principalmente na matemática de matriz. Parei de usar e terminei à mão. Só passei a usar IA de verdade em junho de 2025 — antes disso eu já programava havia seis anos.',
         },
         {
           question: 'Você está disponível para estágio?',
-          answer: 'Estou aberto a estágio, primeira vaga formal e projetos freelance, e é justamente a primeira experiência em ambiente corporativo que eu procuro. Agenda, prazo e valor eu não trato por aqui: para isso, o contato direto está logo abaixo, no e-mail ou no LinkedIn.',
+          answer: 'Estou. E tem um motivo a mais do que carreira: já cumpri todas as disciplinas do técnico em Informática no IFMS, e o estágio obrigatório é o que falta para eu concluir o curso — a previsão é fechar isso ainda em 2026. É também a experiência que me falta, porque nunca trabalhei dentro de um time de engenharia: minha experiência toda veio de cliente direto. Agenda, prazo e valor eu não trato por aqui — para isso, o contato direto está logo abaixo, no e-mail ou no LinkedIn.',
         },
         {
           question: 'Como funciona um projeto com você?',
-          answer: 'Começa por entender o problema, não por escolher tecnologia. Depois vem escopo por escrito, arquitetura, implementação e entrega em produção. Já aconteceu de o pedido inicial não ser o que resolvia o problema — no Sushi do Verão a ideia foi refinada junto com o proprietário antes de virar código. Quando algo atrasa ou muda de escopo, o cliente sabe quando eu percebo, não na data da entrega.',
+          answer: 'Começa por entender o problema, não por escolher tecnologia: a primeira conversa é sobre o que está doendo hoje e quanto isso custa. Depois vem escopo por escrito, arquitetura, implementação e entrega em produção. Já aconteceu de o pedido inicial não ser o que resolvia o problema, e nesses casos eu digo — a decisão continua sendo do cliente, mas não entrego calado uma coisa que eu acho errada. Sobre acompanhamento: eu aprendi do jeito caro que entregar bem não substitui manter quem contratou informado, então hoje eu gero briefing automático de andamento em vez de depender da minha memória.',
         },
         {
           question: 'O que você ainda está aprendendo?',
-          answer: 'Trabalhar dentro de um time de engenharia é o que me falta, e é o que eu procuro: revisar código com gente mais experiente, mexer em base grande com decisões tomadas antes de eu chegar, e lidar com consequência real quando algo quebra. No lado técnico, o que tenho estudado vem do VamoAgendar — o motor de horários, e a parte de cobrança e assinatura.',
+          answer: 'Trabalhar dentro de um time de engenharia, que é o que eu nunca fiz: revisar código com gente mais experiente, mexer em base grande com decisões tomadas antes de eu chegar, e lidar com consequência real quando algo quebra. No lado técnico, o que tenho estudado vem do VamoAgendar — o motor que calcula horários livres e a parte de cobrança e assinatura, que é onde estão as decisões que eu ainda não tinha enfrentado. E aprender a usar IA melhor, que é trabalho contínuo: comecei a usar a sério faz pouco mais de um ano.',
         },
       ],
     },
@@ -854,23 +854,23 @@ export const enContent = {
       items: [
         {
           question: 'What have you built in production?',
-          answer: 'Systems with real users on them: SISCO, which now handles the complementary-hours records of more than 200 students and coordinators at IFMS; a worker that consolidates daily revenue for a retail chain whose sales system has no public API; the institutional site of a restaurant in my city; and VamoAgendar, a scheduling SaaS I build with an investing partner.',
+          answer: 'Systems with real users on them. SISCO, which handles the complementary-hours records of more than 200 students and coordinators at IFMS — it used to be a spreadsheet passed around a WhatsApp group. An automation that consolidates daily revenue for a retail chain in São Paulo whose sales system has no public API: it went live in April 2025 and still runs every day across their three stores. A real estate platform with its own app, where AI turns photos and voice notes recorded on site into a finished listing. And VamoAgendar, a scheduling SaaS I build with an investing partner.',
         },
         {
           question: 'How do you use AI without depending on it?',
-          answer: 'Every day, for the mechanical part: scaffolding a module, finding where something happens in a large repository, reviewing what I wrote. What stays mine is architecture, decisions and review. I read everything before accepting it, I check library signatures against the official docs, and what I cannot explain does not ship. Without AI I am slower, not stuck — I learned to program before it was around.',
+          answer: 'Every day, for the mechanical part: scaffolding a module, finding where something happens in a large repository, reviewing what I wrote. What stays mine is architecture, decisions and review — I read everything before accepting it, I check library signatures against the official docs, and what I cannot explain does not ship. The proof that this is not just talk is a project where AI got in my way: on the C++ voxel engine I built in 2024, every attempt to use it broke what already worked, mostly on matrix math. I stopped and finished by hand. I only started using AI seriously in June 2025 — by then I had been programming for six years.',
         },
         {
           question: 'Are you available for an internship?',
-          answer: 'I am open to an internship, a first formal role and freelance projects, and a first corporate environment is exactly what I am looking for. Schedule, deadlines and rates are not something I handle here: for that, the direct contact is right below, by email or LinkedIn.',
+          answer: 'I am. And there is a reason beyond career: I have completed every course of my technical degree in IT at IFMS, and the mandatory internship is what is left for me to graduate — the plan is to close that in 2026. It is also the experience I lack, because I have never worked inside an engineering team: all of my experience came from direct clients. Schedule, deadlines and rates are not something I handle here — for that, the direct contact is right below, by email or LinkedIn.',
         },
         {
           question: 'How does a project with you work?',
-          answer: 'It starts by understanding the problem, not by picking technology. Then written scope, architecture, implementation and delivery to production. It has happened that the initial request was not what solved the problem — at Sushi do Verão the idea was refined together with the owner before it became code. When something slips or the scope changes, the client hears it when I notice, not on the delivery date.',
+          answer: 'It starts by understanding the problem, not by picking technology: the first conversation is about what hurts today and what it costs. Then written scope, architecture, implementation and delivery to production. It has happened that the initial request was not what solved the problem, and in those cases I say so — the decision stays with the client, but I do not quietly ship something I believe is wrong. On follow-up: I learned the expensive way that delivering well does not replace keeping the client informed, so today I generate automatic progress briefings instead of relying on my memory.',
         },
         {
           question: 'What are you still learning?',
-          answer: 'Working inside an engineering team is what I am missing, and what I am after: reviewing code with more experienced people, working on a large codebase with decisions made before I arrived, and dealing with real consequences when something breaks. On the technical side, what I have been studying comes from VamoAgendar — the scheduling engine, and the billing and subscription side.',
+          answer: 'Working inside an engineering team, which I have never done: reviewing code with more experienced people, working on a large codebase with decisions made before I arrived, and dealing with real consequences when something breaks. On the technical side, what I have been studying comes from VamoAgendar — the engine that computes free slots and the billing and subscription side, where the decisions I had not faced before are. And learning to use AI better, which is ongoing: I only started using it seriously a little over a year ago.',
         },
       ],
     },
