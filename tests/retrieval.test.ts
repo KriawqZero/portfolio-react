@@ -132,4 +132,49 @@ describe('selecionarDocumentos', () => {
     })
     expect(r[0].id).toBe('direto')
   })
+
+  /**
+   * O caso que motivou o piso: o dossiê escrito à mão tem ~1000 caracteres e os
+   * documentos derivados do `content.ts` têm ~280. Com a normalização aplicada
+   * ao score inteiro, uma coincidência de vocabulário num stub curto vencia o
+   * documento curado, e o ranking virava função do tamanho do texto.
+   */
+  it('metadado curado não é diluído pelo tamanho do corpo', () => {
+    const acervoCurado = [
+      doc('stub-curto', { title: 'projeto antigo', text: 'lembro que era tecnico' }),
+      doc('dossie-longo', {
+        title: 'nivel tecnico',
+        topics: ['tecnico'],
+        text: `explicacao detalhada ${'contexto '.repeat(150)}`,
+      }),
+    ]
+    const r = selecionarDocumentos('nivel tecnico', acervoCurado, {
+      maxDocumentos: 1,
+      maxCaracteres: 99999,
+    })
+    expect(r[0].id).toBe('dossie-longo')
+  })
+
+  it('descarta documento que casa poucos termos só no corpo', () => {
+    const acervoRuido = [
+      doc('tangente', { title: 'labirinto', text: 'projeto tecnico de faculdade' }),
+    ]
+    // 1 termo de 5 casado, e só no corpo: é coincidência de vocabulário.
+    const r = selecionarDocumentos('projetos mostram melhor nivel tecnico', acervoRuido, {
+      maxDocumentos: 4,
+      maxCaracteres: 99999,
+    })
+    expect(r).toEqual([])
+  })
+
+  it('mantém o documento que casa poucos termos, mas por metadado', () => {
+    const acervoAlias = [
+      doc('certo', { aliases: ['nivel tecnico'], text: 'texto qualquer sem os termos' }),
+    ]
+    const r = selecionarDocumentos('projetos mostram melhor nivel tecnico', acervoAlias, {
+      maxDocumentos: 4,
+      maxCaracteres: 99999,
+    })
+    expect(r.map(d => d.id)).toEqual(['certo'])
+  })
 })

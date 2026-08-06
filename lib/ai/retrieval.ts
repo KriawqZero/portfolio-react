@@ -37,7 +37,21 @@ export function tokenizar(texto: string): string[] {
     .filter(t => t.length > 2 && !STOPWORDS.has(t))
 }
 
-function pontuar(doc: KnowledgeDoc, termos: string[]): number {
+/**
+ * Fração mínima dos termos da pergunta que um documento precisa casar para
+ * entrar no contexto, quando não casa nenhum metadado.
+ *
+ * Sem esse piso, um único termo em comum bastava, e o desempate acabava sendo
+ * o tamanho do texto — documentos curtos derivados do `content.ts` venciam os
+ * escritos à mão por uma coincidência de vocabulário. Documento irrelevante no
+ * prompt não é neutro: custa token e dá ao modelo material para divagar.
+ *
+ * Quando nada passa no piso, a resposta sai só com os documentos fixos. É o
+ * comportamento certo: sem base, o certo é dizer que não sabe.
+ */
+const COBERTURA_MINIMA = 1 / 3
+
+export function pontuar(doc: KnowledgeDoc, termos: string[]): number {
   const campo = (texto: string) => new Set(tokenizar(texto))
   const titulo = campo(doc.title)
   const aliases = campo(doc.aliases.join(' '))
@@ -45,16 +59,26 @@ function pontuar(doc: KnowledgeDoc, termos: string[]): number {
   const corpo = tokenizar(doc.text)
   const corpoSet = new Set(corpo)
 
-  let pontos = 0
+  let metadados = 0
+  let ocorrencias = 0
+  let casados = 0
   for (const termo of termos) {
-    if (titulo.has(termo)) pontos += 5
-    if (aliases.has(termo)) pontos += 4
-    if (topicos.has(termo)) pontos += 3
-    if (corpoSet.has(termo)) pontos += 1
+    let casou = false
+    if (titulo.has(termo)) { metadados += 5; casou = true }
+    if (aliases.has(termo)) { metadados += 4; casou = true }
+    if (topicos.has(termo)) { metadados += 3; casou = true }
+    if (corpoSet.has(termo)) { ocorrencias += 1; casou = true }
+    if (casou) casados += 1
   }
 
-  // Normaliza pelo tamanho para que um documento longo não vença por volume.
-  return pontos / Math.sqrt(Math.max(corpo.length, 1))
+  if (casados === 0) return 0
+  if (metadados === 0 && casados / termos.length < COBERTURA_MINIMA) return 0
+
+  // Só o corpo é normalizado pelo tamanho, para que um documento longo não
+  // vença por volume. Título, alias e tópico são curadoria — foram escritos
+  // justamente para rotear a pergunta — e diluí-los pelo tamanho do texto
+  // punia o documento detalhado pelo próprio detalhe.
+  return metadados + ocorrencias / Math.sqrt(Math.max(corpo.length, 1))
 }
 
 export type OpcoesBusca = {
