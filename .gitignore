@@ -30,3 +30,11 @@ capturas/
 
 # Rascunhos de conhecimento ainda não revisados — nunca versionar
 knowledge/inbox/
+
+# Ferramentas de IA: conteúdo instalado e estado local.
+# Seletivo de propósito — .claude/settings.json É versionado (ver abaixo).
+# skills-lock.json também fica: é o manifesto que permite reinstalar as skills.
+.claude/skills/
+.claude/worktrees/
+.claude/scheduled_tasks.lock
+.agents/skills/
