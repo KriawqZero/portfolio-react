@@ -29,9 +29,15 @@ Work fronts, as of this date:
   **It stopped being a section and became a page** (2026-08-06, branch
   `feat/marcilio-ia-pagina-propria`): the visitor reaches it from a two-door navbar, from
   the Hero and from the epilogue. The design record is
-  `docs/superpowers/specs/2026-08-06-marcilio-ia-pagina-propria-design.md`. Still open from
-  that work: OG image and JSON-LD of their own for `/ia`, which need pre-render — today the
-  route only sets `document.title`.
+  `docs/superpowers/specs/2026-08-06-marcilio-ia-pagina-propria-design.md`. The page is locked
+  to the viewport: it never scrolls, only `.ai-fio` does. Still open from that work: OG image
+  and JSON-LD of their own for `/ia`, which need pre-render — today the route only sets
+  `document.title`.
+  Two things there are settled, not pending. **Where the Turnstile challenge appears** — under
+  the input, after "limpar conversa" — was reviewed by the author on 2026-08-06 and approved
+  as is; do not move it. And on screens narrower than 1024px **and** shorter than 780px the
+  editorial description is hidden on purpose, so the conversation keeps more than a third of
+  the screen; the disclaimer stays in every case.
 - **Case images and mobile-first — closed.** Their remaining scope was deliberately dropped.
   The code differing from those plans is a decision, not a regression. Do not "fix" it and do
   not turn it into backlog.
