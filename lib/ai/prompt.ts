@@ -3,7 +3,7 @@
  * prompt inteiro vazar, o pior que acontece é alguém ler as regras.
  */
 
-import type { KnowledgeDoc } from './types'
+import type { KnowledgeDoc } from './types.js'
 
 /**
  * Data corrente, em formato legível, para o modelo poder calcular idade e tempo

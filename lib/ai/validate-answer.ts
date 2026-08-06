@@ -7,7 +7,7 @@
  *   - nenhum sourceId que não esteja no contexto vira citação.
  */
 
-import type { AnswerStatus, AskResponse, KnowledgeDoc } from './types'
+import type { AnswerStatus, AskResponse, KnowledgeDoc } from './types.js'
 
 const STATUS_VALIDOS: AnswerStatus[] = ['answered', 'unknown', 'out_of_scope']
 

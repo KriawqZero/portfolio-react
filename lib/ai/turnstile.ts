@@ -8,7 +8,7 @@
  * ou Cloudflare fora do ar, a requisição para antes da OpenAI.
  */
 
-import { registrarTokenTurnstile, type Veredito } from './limits'
+import { registrarTokenTurnstile, type Veredito } from './limits.js'
 
 const ENDPOINT = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
 

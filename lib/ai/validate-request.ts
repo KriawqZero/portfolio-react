@@ -3,7 +3,7 @@
  * OpenAI sem passar por aqui.
  */
 
-import type { AskRequest } from './types'
+import type { AskRequest } from './types.js'
 
 export type Validacao =
   | { ok: true; dados: AskRequest }

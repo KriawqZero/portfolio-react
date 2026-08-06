@@ -16,9 +16,9 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import OpenAI from 'openai'
 
-import { respostaEmCache, guardarResposta } from '../lib/ai/cache'
-import { config } from '../lib/ai/config'
-import { KNOWLEDGE, KNOWLEDGE_VERSION, POLICIES } from '../lib/ai/generated/knowledge-index'
+import { respostaEmCache, guardarResposta } from '../lib/ai/cache.js'
+import { config } from '../lib/ai/config.js'
+import { KNOWLEDGE, KNOWLEDGE_VERSION, POLICIES } from '../lib/ai/generated/knowledge-index.js'
 import {
   chaveAnonima,
   dentroDoOrcamento,
@@ -26,13 +26,13 @@ import {
   dependenciasOk,
   desligadaNoRedis,
   ipDaRequisicao,
-} from '../lib/ai/limits'
-import { montarBlocoDocumentos, montarInstrucoes } from '../lib/ai/prompt'
-import { documentosFixos, selecionarDocumentos } from '../lib/ai/retrieval'
-import { verificarTurnstile } from '../lib/ai/turnstile'
-import { ANSWER_JSON_SCHEMA } from '../lib/ai/types'
-import { validarResposta } from '../lib/ai/validate-answer'
-import { origemPermitida, validarCorpo } from '../lib/ai/validate-request'
+} from '../lib/ai/limits.js'
+import { montarBlocoDocumentos, montarInstrucoes } from '../lib/ai/prompt.js'
+import { documentosFixos, selecionarDocumentos } from '../lib/ai/retrieval.js'
+import { verificarTurnstile } from '../lib/ai/turnstile.js'
+import { ANSWER_JSON_SCHEMA } from '../lib/ai/types.js'
+import { validarResposta } from '../lib/ai/validate-answer.js'
+import { origemPermitida, validarCorpo } from '../lib/ai/validate-request.js'
 
 function erro(res: VercelResponse, status: number, codigo: string, estado?: string) {
   return res.status(status).json({ error: codigo, ...(estado ? { state: estado } : {}) })

@@ -3,12 +3,15 @@
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.api.tsbuildinfo",
     "target": "ES2023",
     "lib": ["ES2023"],
-    "module": "ESNext",
     "types": ["node"],
     "skipLibCheck": true,
 
-    /* Bundler mode — a Vercel empacota as funções com esbuild */
-    "moduleResolution": "bundler",
+    /* A Vercel compila cada arquivo, mas NÃO os empacota: em runtime quem
+       resolve os imports é o Node, em ESM, e ESM exige a extensão. `nodenext`
+       faz o compilador cobrar isso aqui, em vez de a produção descobrir com
+       ERR_MODULE_NOT_FOUND na primeira requisição. */
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     "noEmit": true,

@@ -1,7 +1,7 @@
 // GERADO por scripts/knowledge/build-index.ts — não edite à mão.
 // Rode `pnpm knowledge:build` depois de mexer em knowledge/ ou em src/data/content.ts.
 
-import type { KnowledgeDoc } from '../types'
+import type { KnowledgeDoc } from '../types.js'
 
 export const KNOWLEDGE_VERSION = "9ad1ec30b0ba"
 

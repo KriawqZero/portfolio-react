@@ -4,7 +4,7 @@
  * depurável e não adiciona dependência.
  */
 
-import type { KnowledgeDoc } from './types'
+import type { KnowledgeDoc } from './types.js'
 
 const STOPWORDS = new Set([
   'a', 'o', 'as', 'os', 'um', 'uma', 'de', 'do', 'da', 'dos', 'das', 'em', 'no', 'na', 'nos', 'nas',
