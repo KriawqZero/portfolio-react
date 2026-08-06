@@ -8,6 +8,7 @@
     "dev": "vite",
     "prebuild": "pnpm knowledge:build",
     "build": "tsc -b && vite build",
+    "postbuild": "tsx scripts/verificar-bundle.ts",
     "knowledge:build": "tsx scripts/knowledge/build-index.ts",
     "lint": "eslint .",
     "test": "vitest run",
