@@ -107,6 +107,13 @@ export default function PaginaIA() {
             <span className="ia-aviso-curto">{data.compactNotice}</span>
           </div>
 
+          {/* Tudo daqui para baixo recolhe no celular quando a conversa começa.
+              As duas camadas existem para a altura poder ser animada: a de fora
+              vai de `1fr` a `0fr`, a de dentro corta o que sobra. Animar
+              `height: auto` não é possível, e `max-height` chutado ou corta
+              texto ou deixa a transição com um trecho morto no fim. */}
+          <div className="ia-editorial-expansivel">
+            <div className="ia-editorial-conteudo">
           <h1 className="text-display ia-titulo">
             <Revela atraso={0.08}>{data.title}</Revela>
             <Revela atraso={0.16} className="gradient-text">
@@ -131,6 +138,8 @@ export default function PaginaIA() {
                 pergunta fica registrada é obrigação de contar, não manchete. */}
             <p className="ai-privacidade">{data.privacy}</p>
           </motion.div>
+            </div>
+          </div>
         </div>
 
         <Conversa />

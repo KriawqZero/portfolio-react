@@ -1288,17 +1288,61 @@ input, textarea {
    levantar esse estado só para o CSS reagir seria prop atravessando dois
    componentes para dizer o que o seletor já enxerga. */
 @media (max-width: 1023px) {
-  .ia-grid:has(.ai-turno) .ia-numero,
-  .ia-grid:has(.ai-turno) .ia-titulo,
-  .ia-grid:has(.ai-turno) .ia-editorial .ai-description,
-  .ia-grid:has(.ai-turno) .ia-editorial .ai-disclaimer,
-  .ia-grid:has(.ai-turno) .ia-editorial .ai-privacidade {
-    display: none;
+  /* `1fr` → `0fr` é o que torna a altura animável: `height: auto` não
+     interpola, e `max-height` chutado ou corta texto num aparelho estreito ou
+     gasta metade da transição percorrendo espaço que não existe. */
+  /* Curva diferente do resto do site, de propósito. `--ease-cinematic` é um
+     ease-out forte: serve para o que chega e assenta, e aqui produzia queda de
+     220px para 10px em 120ms de uma transição de 600ms — animação no papel,
+     corte seco no olho. Um ease-in-out gasta tempo no meio do percurso, que é
+     onde o movimento é percebido.
+
+     O atraso de 120ms é coreografia: a pergunta entra primeiro, a dobra vem
+     depois. Assim ela lê como consequência do envio, e não como um susto
+     simultâneo. */
+  .ia-editorial-expansivel {
+    display: grid;
+    grid-template-rows: 1fr;
+    opacity: 1;
+    transition: grid-template-rows 0.45s cubic-bezier(0.65, 0, 0.35, 1) 0.12s,
+                opacity 0.3s cubic-bezier(0.65, 0, 0.35, 1);
   }
 
-  /* O aviso não desaparece com o disclaimer — só para de ocupar meia tela. */
+  .ia-editorial-conteudo {
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .ia-grid:has(.ai-turno) .ia-editorial-expansivel {
+    grid-template-rows: 0fr;
+    opacity: 0;
+  }
+
+  .ia-numero {
+    transition: opacity 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .ia-grid:has(.ai-turno) .ia-numero {
+    opacity: 0;
+  }
+
+  /* O aviso não desaparece com o disclaimer — só para de ocupar meia tela.
+     Entra por `animation`, e não por `transition` de opacidade, porque ele sai
+     de `display: none`: fosse transição, precisaria estar sempre no fluxo e
+     reservaria largura ao lado do rótulo mesmo invisível, empurrando a faixa
+     para duas linhas num aparelho estreito. */
   .ia-grid:has(.ai-turno) .ia-aviso-curto {
     display: inline;
+    animation: ia-aviso-entra 0.45s var(--ease-cinematic) 0.18s both;
+  }
+
+  @keyframes ia-aviso-entra {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .ia-grid {
+    transition: gap 0.45s cubic-bezier(0.65, 0, 0.35, 1) 0.12s;
   }
 
   .ia-grid:has(.ai-turno) {

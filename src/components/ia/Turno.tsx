@@ -75,12 +75,20 @@ export default function Turno({ turno, ehOUltimo, aoPerguntar, aoEscolherPreEscr
 
   return (
     <article className="ai-turno">
-      <h3 className="ai-question">
+      {/* A pergunta entra animada porque ela é o recibo: entre apertar enviar e
+          a resposta começar a aparecer existe um vão, e sem nada se movendo ali
+          o envio parece não ter acontecido. */}
+      <motion.h3
+        className="ai-question"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+      >
         <span className="ai-question-mark">
           <MarcaDePergunta />
         </span>
         {turno.pergunta}
-      </h3>
+      </motion.h3>
 
       <div className="ai-turno-corpo">
         <div
