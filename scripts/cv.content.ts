@@ -18,7 +18,7 @@ function projetoPorNome(
 
 const pt          = ptContent.trajectory.eras
 const catalogo    = projetoPorNome(pt, 'surface', 'Catálogo & App Imobiliário')
-const kyte        = projetoPorNome(pt, 'infra',   'KyteApp Scrapper')
+const kyte        = projetoPorNome(pt, 'infra',   'Ecossistema de Coleta')
 const sisco       = projetoPorNome(pt, 'surface', 'SISCO')
 const vamoAgendar = projetoPorNome(pt, 'surface', 'VamoAgendar')
 
@@ -26,7 +26,7 @@ const vamoAgendar = projetoPorNome(pt, 'surface', 'VamoAgendar')
 
 const en            = enContent.trajectory.eras
 const catalogoEn    = projetoPorNome(en, 'surface', 'Real Estate Catalog & App')
-const kyteEn        = projetoPorNome(en, 'infra',   'KyteApp Scrapper')
+const kyteEn        = projetoPorNome(en, 'infra',   'Data Collection Ecosystem')
 const siscoEn       = projetoPorNome(en, 'surface', 'SISCO')
 const vamoAgendarEn = projetoPorNome(en, 'surface', 'VamoAgendar')
 
@@ -106,7 +106,7 @@ export const dadosCv = {
       },
       {
         ...kyte,
-        name: 'KyteApp Scraper',
+        name: 'Ecossistema de Coleta',
         links: [{ label: 'Repo API', href: 'https://github.com/KriawqZero/scrapper-api' }, ...kyte.links],
         linkDisplay: 'github.com/KriawqZero/scrapper-api',
         bullets: [
@@ -219,7 +219,7 @@ export const dadosCvEn: DadosCv = {
       },
       {
         ...kyteEn,
-        name: 'KyteApp Scraper',
+        name: 'Data Collection Ecosystem',
         links: [{ label: 'API Repo', href: 'https://github.com/KriawqZero/scrapper-api' }, ...kyteEn.links],
         linkDisplay: 'github.com/KriawqZero/scrapper-api',
         bullets: [

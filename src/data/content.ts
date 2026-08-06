@@ -109,10 +109,10 @@ export const ptContent = {
         glowColor: 'rgba(16, 185, 129, 0.10)',
         projects: [
           {
-            name: 'KyteApp Scrapper',
+            name: 'Ecossistema de Coleta',
             type: 'Solução sob Medida / B2B',
             year: '2025',
-            narrative: 'Desenvolvi um ecossistema distribuído para um cliente corporativo de grande porte em São Paulo que precisava centralizar dados financeiros de dezenas de lojas no KyteApp, plataforma que não possui uma API oficial. A solução foi criar um worker autônomo em Playwright que navega em lote através de instâncias de navegadores estéreis, isolando cookies e sessões para extrair as métricas de faturamento direto do DOM e centralizá-las em uma API própria.',
+            narrative: 'Desenvolvi um ecossistema distribuído para um cliente corporativo de grande porte em São Paulo que precisava centralizar dados financeiros de dezenas de lojas a partir de um sistema de vendas que não possui API oficial. A solução foi criar um worker autônomo em Playwright que navega em lote através de instâncias de navegadores estéreis, isolando cookies e sessões para extrair as métricas de faturamento direto do DOM e centralizá-las em uma API própria.',
             stack: 'Node.js · Playwright · Express · Prisma · Docker',
             links: [
               { label: 'Repo Worker', href: 'https://github.com/KriawqZero/scrapper-scrapper' },
@@ -451,7 +451,7 @@ export const ptContent = {
     epilogue: 'Uma fração da minha experiência. Além dos cases selecionados, dezenas de outros sistemas complexos foram entregues e permanecem sob confidencialidade.',
     projects: [
       {
-        name: 'KyteApp Financial Worker',
+        name: 'Ecossistema de Coleta e Metas',
         type: 'Cliente Workana',
         problem: 'Uma rede de lojas precisava consolidar o faturamento diário de suas filiais. O grande obstáculo era que o sistema de vendas utilizado não possuía API pública, o que obrigava a equipe a extrair os dados manualmente todos os dias.',
         solution: 'Para contornar a falta de API, desenvolvi um worker autônomo em Node.js com Playwright rodando em instâncias isoladas via Docker. O script acessa os portais com segurança, raspa os dados do DOM de forma resiliente e os centraliza em um dashboard.',
@@ -482,7 +482,7 @@ export const ptContent = {
     reviews: [
       {
         name: 'Fernando (Gerente de Operações)',
-        project: 'Automação KyteApp',
+        project: 'Ecossistema de Coleta',
         quote: 'O Marcilio conseguiu contornar a falta de API oficial que estava travando nossa operação. A automação está rodando sem problemas e poupando muito tempo de toda a equipe.'
       },
       null,
@@ -596,10 +596,10 @@ export const enContent = {
         glowColor: 'rgba(16, 185, 129, 0.10)',
         projects: [
           {
-            name: 'KyteApp Scrapper',
+            name: 'Data Collection Ecosystem',
             type: 'Custom Solution / B2B',
             year: '2025',
-            narrative: 'I developed a distributed ecosystem for a large corporate client in São Paulo who needed to centralize financial data from dozens of stores on KyteApp, a platform that does not have an official API. The solution was to create an autonomous worker in Playwright that navigates through headless browser instances in batches, isolating cookies and sessions to extract billing metrics directly from the DOM and centralize them in a proprietary API.',
+            narrative: 'I developed a distributed ecosystem for a large corporate client in São Paulo who needed to centralize financial data from dozens of stores out of a sales system with no official API. The solution was to create an autonomous worker in Playwright that navigates through headless browser instances in batches, isolating cookies and sessions to extract billing metrics directly from the DOM and centralize them in a proprietary API.',
             stack: 'Node.js · Playwright · Express · Prisma · Docker',
             links: [
               { label: 'Worker Repo', href: 'https://github.com/KriawqZero/scrapper-scrapper' },
@@ -936,7 +936,7 @@ export const enContent = {
     epilogue: 'A fraction of my experience. Beyond the selected cases, dozens of other complex systems have been delivered and remain under confidentiality.',
     projects: [
       {
-        name: 'KyteApp Financial Worker',
+        name: 'Data Collection & Goals Ecosystem',
         type: 'Workana Client',
         problem: 'A retail chain needed to consolidate daily billing data from their branches. The main obstacle was that their POS system didn\'t have a public API, forcing the team to extract data manually every single day.',
         solution: 'To bypass the lack of an API, I developed an autonomous worker in Node.js using Playwright, running on isolated Docker instances. The script securely accesses the portals, scrapes the DOM resiliently, and centralizes everything in a dashboard.',
@@ -967,7 +967,7 @@ export const enContent = {
     reviews: [
       {
         name: 'Fernando (Operations Manager)',
-        project: 'KyteApp Automation',
+        project: 'Data Collection Ecosystem',
         quote: 'Marcilio managed to bypass the lack of an official API that was stalling our operation. The automation has been running flawlessly and saving the entire team a lot of time.'
       },
       null,
