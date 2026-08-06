@@ -1,26 +1,15 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { ptContent, enContent } from '../data/content';
+import { LanguageContext, type Language, type Platform } from './useLanguage';
 
-type Language = 'pt' | 'en';
-type Platform = 'workana' | 'upwork' | '99freelas' | 'freelancer' | null;
-
-interface LanguageContextType {
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  platform: Platform;
-  t: typeof ptContent;
-  personalizedMessage: string | null;
-  isFreelanceView: boolean;
-}
-
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const PLATAFORMAS: readonly string[] = ['workana', 'upwork', '99freelas', 'freelancer'];
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [platform] = useState<Platform>(() => {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const platParam = params.get('platform')?.toLowerCase();
-      if (platParam && ['workana', 'upwork', '99freelas', 'freelancer'].includes(platParam)) {
+      if (platParam && PLATAFORMAS.includes(platParam)) {
         return platParam as Platform;
       }
     }
@@ -31,7 +20,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     if (typeof window !== 'undefined') {
       const params = new URLSearchParams(window.location.search);
       const platParam = params.get('platform')?.toLowerCase();
-      if (platParam && ['workana', 'upwork', '99freelas', 'freelancer'].includes(platParam)) {
+      if (platParam && PLATAFORMAS.includes(platParam)) {
         if (platParam === 'upwork' || platParam === 'freelancer') {
           return 'en';
         }
@@ -53,12 +42,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const t = language === 'pt' ? ptContent : enContent;
 
   // Determine personalized message based on platform
-  let personalizedMessage: string | null = null;
-  if (platform) {
-    if (t.personalization && platform in t.personalization) {
-      personalizedMessage = (t.personalization as any)[platform];
-    }
-  }
+  const personalizedMessage: string | null = platform
+    ? t.personalization?.[platform] ?? null
+    : null;
 
   const isFreelanceView = platform !== null;
 
@@ -67,12 +53,4 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       {children}
     </LanguageContext.Provider>
   );
-}
-
-export function useLanguage() {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return context;
 }

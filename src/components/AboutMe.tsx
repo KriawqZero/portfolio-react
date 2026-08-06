@@ -84,7 +84,7 @@ export default function AboutMe() {
       )
 
       // Stats Micro-animations
-      gsap.utils.toArray('.stat-item').forEach((item: any) => {
+      gsap.utils.toArray<HTMLElement>('.stat-item').forEach((item) => {
         gsap.fromTo(item,
           { opacity: 0, y: 50, scale: 0.9 },
           {

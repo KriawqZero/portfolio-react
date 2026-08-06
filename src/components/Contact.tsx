@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useMemo } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useLanguage } from '../hooks/useLanguage'
@@ -19,8 +19,16 @@ export default function Contact() {
 
   const { t, isFreelanceView } = useLanguage()
   const { contact: data } = t
-  const links = Object.entries(data.links) as [string, { label: string; value: string; href: string }][]
-  const phrases = isFreelanceView && data.narrativePhrasesClient ? data.narrativePhrasesClient : data.narrativePhrases
+  // Memoizados porque o efeito do GSAP depende deles: sem isso, cada render
+  // criaria novos arrays e o ScrollTrigger seria recriado à toa.
+  const links = useMemo(
+    () => Object.entries(data.links) as [string, { label: string; value: string; href: string }][],
+    [data.links]
+  )
+  const phrases = useMemo(
+    () => (isFreelanceView && data.narrativePhrasesClient ? data.narrativePhrasesClient : data.narrativePhrases),
+    [isFreelanceView, data.narrativePhrasesClient, data.narrativePhrases]
+  )
 
   useEffect(() => {
     if (!pinRef.current) return
@@ -137,7 +145,7 @@ export default function Contact() {
     }, sectionRef)
 
     return () => ctx.revert()
-  }, [data, phrases])
+  }, [data, phrases, links])
 
   return (
     <section ref={sectionRef} id="contato" style={{ position: 'relative' }}>

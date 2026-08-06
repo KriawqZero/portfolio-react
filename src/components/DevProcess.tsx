@@ -69,7 +69,7 @@ export default function DevProcess() {
       }
 
       // Parallax inner items slightly as they scroll horizontally
-      gsap.utils.toArray('.process-card').forEach((card: any) => {
+      gsap.utils.toArray<HTMLElement>('.process-card').forEach((card) => {
         gsap.to(card, {
           y: () => -50 + Math.random() * 100, // Float up/down slightly
           rotation: () => -5 + Math.random() * 10,

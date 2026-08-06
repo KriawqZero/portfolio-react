@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { MotionConfig } from 'framer-motion'
 import './index.css'
 import App from './App.tsx'
-import { LanguageProvider } from './hooks/useLanguage'
+import { LanguageProvider } from './hooks/LanguageProvider'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
