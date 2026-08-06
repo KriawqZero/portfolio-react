@@ -11,8 +11,14 @@ function numero(nome: string, padrao: number): number {
 }
 
 export const config = {
+  /**
+   * Luna em vez de Terra: a tarefa aqui é responder pergunta curta a partir de
+   * um contexto que chega pronto e já filtrado, com o formato imposto por JSON
+   * Schema. Não há raciocínio longo a fazer, e o modelo mais caro cobraria por
+   * uma capacidade que este caminho não usa.
+   */
   get modelo(): string {
-    return process.env.OPENAI_MODEL || 'gpt-5.6-terra'
+    return process.env.OPENAI_MODEL || 'gpt-5.6-luna'
   },
   /**
    * Esforço de raciocínio. As perguntas aqui são curtas e o contexto vem

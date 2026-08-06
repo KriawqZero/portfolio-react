@@ -309,7 +309,7 @@ fixo em toda pergunta: 81%
 
 ```ts
 client.responses.create({
-  model: 'gpt-5.6-terra',           // OPENAI_MODEL
+  model: 'gpt-5.6-luna',            // OPENAI_MODEL
   instructions: <parte fixa>,
   prompt_cache_key: 'marcilio-ia-pt-6c23311836ff',
   input: [ ...histórico, {developer: documentos}, {user: pergunta} ],
