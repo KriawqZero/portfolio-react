@@ -114,11 +114,7 @@ export const ptContent = {
             year: '2025',
             narrative: 'Desenvolvi um ecossistema distribuído para um cliente corporativo de grande porte em São Paulo que precisava centralizar dados financeiros de dezenas de lojas a partir de um sistema de vendas que não possui API oficial. A solução foi criar um worker autônomo em Playwright que navega em lote através de instâncias de navegadores estéreis, isolando cookies e sessões para extrair as métricas de faturamento direto do DOM e centralizá-las em uma API própria.',
             stack: 'Node.js · Playwright · Express · Prisma · Docker',
-            links: [
-              { label: 'Repo Worker', href: 'https://github.com/KriawqZero/scrapper-scrapper' },
-              { label: 'Repo API', href: 'https://github.com/KriawqZero/scrapper-api' },
-              { label: 'Repo Dashboard', href: 'https://github.com/KriawqZero/scrapper-frontend' }
-            ],
+            links: [],
             stat: { value: '3 Serviços', label: 'arquitetura distribuída' },
           },
         ],
@@ -601,11 +597,7 @@ export const enContent = {
             year: '2025',
             narrative: 'I developed a distributed ecosystem for a large corporate client in São Paulo who needed to centralize financial data from dozens of stores out of a sales system with no official API. The solution was to create an autonomous worker in Playwright that navigates through headless browser instances in batches, isolating cookies and sessions to extract billing metrics directly from the DOM and centralize them in a proprietary API.',
             stack: 'Node.js · Playwright · Express · Prisma · Docker',
-            links: [
-              { label: 'Worker Repo', href: 'https://github.com/KriawqZero/scrapper-scrapper' },
-              { label: 'API Repo', href: 'https://github.com/KriawqZero/scrapper-api' },
-              { label: 'Dashboard Repo', href: 'https://github.com/KriawqZero/scrapper-frontend' }
-            ],
+            links: [],
             stat: { value: '3 Services', label: 'distributed architecture' },
           },
         ],

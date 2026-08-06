@@ -107,8 +107,7 @@ export const dadosCv = {
       {
         ...kyte,
         name: 'Ecossistema de Coleta',
-        links: [{ label: 'Repo API', href: 'https://github.com/KriawqZero/scrapper-api' }, ...kyte.links],
-        linkDisplay: 'github.com/KriawqZero/scrapper-api',
+        links: [...kyte.links],
         bullets: [
           'Worker autônomo com Playwright que extrai métricas de faturamento de dezenas de lojas sem API oficial disponível',
           'Sessões e cookies isolados por instância de browser; orquestração e deploy via Docker',
@@ -220,8 +219,7 @@ export const dadosCvEn: DadosCv = {
       {
         ...kyteEn,
         name: 'Data Collection Ecosystem',
-        links: [{ label: 'API Repo', href: 'https://github.com/KriawqZero/scrapper-api' }, ...kyteEn.links],
-        linkDisplay: 'github.com/KriawqZero/scrapper-api',
+        links: [...kyteEn.links],
         bullets: [
           'Autonomous Playwright worker that extracts billing metrics from dozens of stores with no official API available',
           'Isolated browser sessions and cookies per instance; orchestration and deployment via Docker',
