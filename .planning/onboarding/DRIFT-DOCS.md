@@ -23,11 +23,11 @@ A distinção importa porque a spec da Marcilio IA é um **plano ainda em aberto
 |---|---|---|
 | `docs/superpowers/specs/2026-08-05-marcilio-ia-design.md` | **PLANO ATIVO**, parcialmente implementado | Corrigir só os números e o status do cabeçalho; preservar o escopo não construído como backlog aberto |
 | `docs/ai-operacao.md` | MUITO DEFASADO | Corrigir a lista das "cinco camadas" |
-| `docs/PLANO-MOBILE-FIRST.md` | PARCIALMENTE DEFASADO (~25–30% executado) | Marcar o que já foi feito antes de replanejar |
+| `docs/PLANO-MOBILE-FIRST.md` | **ENCERRADO** — escopo restante descartado | Arquivar. Não gerar backlog a partir dele |
 | `docs/ia-fluxo.md` | PARCIALMENTE DEFASADO | Corrigir 3 números; resolver inconsistência interna |
-| `docs/superpowers/plans/2026-08-02-imagens-cases.md` | PARCIALMENTE DEFASADO | Tasks 1–8 feitas; só Task 9 é pendência real |
-| `docs/superpowers/specs/2026-07-30-imagens-cases-design.md` | PARCIALMENTE DEFASADO | Anotar entrega parcial na tabela de escopo |
-| `docs/superpowers/handoff-antigravity.md` | OBSOLETO | Arquivar o texto; preservar a pendência residual |
+| `docs/superpowers/plans/2026-08-02-imagens-cases.md` | **ENCERRADO** — Task 9 descartada | Arquivar. Não gerar backlog a partir dele |
+| `docs/superpowers/specs/2026-07-30-imagens-cases-design.md` | **ENCERRADO** | Arquivar |
+| `docs/superpowers/handoff-antigravity.md` | OBSOLETO | Arquivar. A pendência que ele descrevia foi descartada junto |
 | `CLAUDE.md` | PARCIALMENTE DEFASADO | Corrigir com prioridade (ver abaixo) |
 | `README.md` | PARCIALMENTE DEFASADO | Corrigir quando conveniente |
 
@@ -101,11 +101,17 @@ O cache Redis (`lib/ai/cache.ts`, TTL 7 dias, acionado só na primeira pergunta 
 
 ## Trabalho real ainda pendente (não é drift — é backlog)
 
-**Marcilio IA — frente aberta.** É a única das três com o autor declarando explicitamente que ainda não finalizou. Ver a seção da spec acima: o escopo em aberto (analytics, fallback curado, testes, anti-replay, 4 documentos do dossiê) segue válido como plano e pode ser revisto.
+**Marcilio IA — ÚNICA FRENTE ABERTA.** O autor declarou explicitamente que ainda não finalizou. Ver a seção da spec acima: o escopo em aberto (analytics, fallback curado, testes, anti-replay, 4 documentos do dossiê) segue válido como plano e pode ser revisto.
 
-**Imagens dos cases (Task 9 do plano de 2026-08-02).** Tasks 1–8 estão feitas: pipeline de captura, `CaseFrame.tsx`, contrato `media` pt/en, coluna de shots no desktop, thumb no `ArchiveOverlay`, vídeo do VamoAgendar. Da Task 9, só o SISCO foi integrado. Faltam campos `media` e assets para: Sushi do Verão, KyteApp Scrapper, Storage Crates, Simple Machines, Voxel Engine ("mine").
+As duas frentes abaixo foram **encerradas por decisão do autor (2026-08-05)**. O escopo remanescente descrito nos documentos foi descartado — não é pendência, não deve virar item de roadmap, e o código estar diferente do plano não é defeito. Registrado aqui apenas para que uma leitura futura do código não interprete a diferença como regressão.
 
-**Plano mobile-first.** Boa parte do P0 foi feita (colisão navbar/hero, foto do hero como camada de fundo, alvos de toque ≥48px, `prefers-reduced-motion`, imagens responsivas com `<picture>`). O núcleo P1 — o ritmo mobile — segue inteiro pendente: barra de ação fixa, cartão compacto com "ler a história", chips de era roláveis, seletor de idioma visível, reordenação do caso freelance. Persistem também o breakpoint inconsistente (`Contact.tsx` e `DevProcess.tsx` cortam em 767/768 enquanto o resto usa 1023/1024), `window.location.href` no reload do Arquivo, `lang="pt-BR"` fixo, e `public/icone-avantis-2.png` (1,6 MB) órfão.
+**Imagens dos cases — ENCERRADO.** Entregue: pipeline de captura, `CaseFrame.tsx`, contrato `media` pt/en, coluna de shots no desktop, thumb no `ArchiveOverlay`, vídeo do VamoAgendar, e integração de 5 casos (`vamoagendar`, `catalogo-corretor`, `sisco`, thumbs de `avantis` e `jogo-matematica` — 10 ocorrências de `media:` em `content.ts`, 5 projetos × pt/en).
+
+Descartado: campos `media` e assets para Sushi do Verão, KyteApp Scrapper, Storage Crates, Simple Machines e Voxel Engine ("mine"). Não há arquivos correspondentes em `public/cases/`, e isso é intencional.
+
+**Mobile-first — ENCERRADO.** Entregue do P0: colisão navbar/hero (`Hero.tsx:157`), foto do hero como camada de fundo (`Hero.tsx:262-275`), alvos de toque ≥48px em `pointer: coarse` (`index.css:391-411`), envelope `prefers-reduced-motion` (`index.css:419-426` + `gsap.matchMedia` por componente), imagens responsivas `<picture>` AVIF/WebP com `preload`.
+
+Descartado: todo o bloco P1 (barra de ação fixa, cartão compacto com "ler a história", chips de era roláveis, seletor de idioma visível, reordenação do caso freelance) e os itens P0 residuais. Consequências que permanecem no código **por decisão, não por esquecimento**: breakpoint inconsistente — `Contact.tsx:32,121,338` e `DevProcess.tsx:26` cortam em 767/768 enquanto o resto usa 1023/1024; `setLanguage` nunca é chamado por nenhum componente, logo não há troca de idioma na UI; `ArchiveOverlay.tsx:70` recarrega via `window.location.href`; `index.html:2` tem `lang="pt-BR"` fixo; `public/icone-avantis-2.png` (1,6 MB) segue órfão.
 
 ---
 
