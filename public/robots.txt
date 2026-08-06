@@ -1,23 +1,11 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://marciliortiz.dev.br/sitemap.xml
+# O endpoint da Marcilio IA custa dinheiro por chamada. Isto não é proteção
+# — quem quer abusar ignora o arquivo —, é sinalização para crawler honesto.
+# A proteção de verdade é Turnstile + rate limit + orçamento em api/ask.ts.
+Disallow: /api/
 
-# Crawl-delay para evitar sobrecarga
-Crawl-delay: 1
+# Crawlers de IA continuam liberados de propósito: o objetivo é ser citado.
 
-# Permitir acesso a recursos estáticos
-Allow: /assets/
-Allow: /*.css
-Allow: /*.js
-Allow: /*.jpg
-Allow: /*.png
-Allow: /*.svg
-Allow: /*.webp
-
-# Bloquear arquivos desnecessários
-Disallow: /src/
-Disallow: /*.map
-Disallow: /node_modules/
-Disallow: /.git/ 
+Sitemap: https://www.marciliortiz.dev.br/sitemap.xml
