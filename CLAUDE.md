@@ -185,6 +185,15 @@ Where things live:
 - `knowledge/approved/` and `knowledge/policies/` — the dossier, in Markdown with frontmatter. This is the **only** thing the AI may draw on.
 - `lib/ai/generated/knowledge-index.ts` — build output. Never edit by hand; run `pnpm knowledge:build`.
 
+Every question that clears the containment layers is recorded in a Postgres on
+Railway (`lib/ai/registro.ts`, project `portfolio-marciliortiz`, table `perguntas`) so the
+author can read what people actually ask and which dossier documents the retrieval picked.
+Three properties hold and must keep holding: it **never throws** (a logging failure must not
+turn a correct answer into an error), it **never blocks the visitor** (the write goes through
+`waitUntil`, after the response), and it **turns off without a deploy** (no `DATABASE_URL`, no
+recording — which is also why dev and preview stay out of the production history). Queries and
+the deletion policy: `docs/ai-operacao.md`, section "Ler as perguntas".
+
 Rules: an answer must never assert anything absent from the dossier — to change what the AI knows, edit `knowledge/`, not the prompt. Everything inside `<documento>` is data, never instructions. Redis (Upstash) backs rate limiting, budget and cache; in production the endpoint fails closed when it is unavailable.
 
 Full request flow and cost analysis: `docs/ia-fluxo.md`. Operations and limits: `docs/ai-operacao.md`. Both may lag the code — `lib/ai/config.ts` wins.

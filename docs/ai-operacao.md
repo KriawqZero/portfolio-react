@@ -206,3 +206,69 @@ quebrar o personagem. Isso é aceitável porque o pior caso é constrangimento:
 
 Se aparecer um print de resposta estranha, a correção é no dossiê ou no prompt,
 não em pânico.
+
+## Ler as perguntas
+
+Toda pergunta que passa das camadas de contenção é gravada num Postgres no
+Railway, projeto `portfolio-marciliortiz`, tabela `perguntas`. Ligar e desligar
+é a variável `DATABASE_URL` nas variáveis de produção da Vercel: sem ela o
+registro vira no-op, sem deploy nenhum. Ela **não** pode levar `?sslmode=require`
+— o porquê está comentado em `lib/ai/registro.ts`.
+
+Só grava o que chegou a ser processado: sucesso, resposta vinda do cache e falha
+da OpenAI. Recusa por origem, Turnstile ou rate limit não grava, de propósito —
+essas portas existem para recusar barato.
+
+As consultas que resolvem quase tudo:
+
+```sql
+-- O que andaram perguntando
+select criado_em, idioma, contexto, pergunta, status, erro
+from perguntas
+order by criado_em desc
+limit 50;
+
+-- Uma conversa inteira, na ordem
+select criado_em, pergunta, resposta, documentos
+from perguntas
+where sessao = '<cole o id da sessão>'
+order by criado_em;
+
+-- Quem mais perguntou (por origem, que é hash de IP — não identifica ninguém)
+select origem, count(*) as perguntas, count(distinct sessao) as sessoes,
+       min(criado_em) as primeira, max(criado_em) as ultima
+from perguntas
+group by origem
+order by perguntas desc
+limit 20;
+
+-- O que a IA não conseguiu responder
+select criado_em, pergunta, status, erro
+from perguntas
+where erro is not null or status <> 'answered'
+order by criado_em desc;
+
+-- Onde a busca pode ter errado: respondeu sem documento nenhum do dossiê
+select criado_em, pergunta, status
+from perguntas
+where cache = false and coalesce(array_length(documentos, 1), 0) = 0
+order by criado_em desc;
+
+-- Documentos mais usados: mostra o que sustenta as respostas na prática
+select doc, count(*) as vezes
+from perguntas, unnest(documentos) as doc
+group by doc
+order by vezes desc;
+```
+
+### Apagar
+
+Não existe descarte automático — é decisão do autor, e a limpeza é manual.
+A coluna `pergunta` guarda texto livre digitado por terceiros, então é onde
+pode aparecer dado pessoal que ninguém pediu. Vale passar o olho de tempos em
+tempos e apagar o que não serve:
+
+```sql
+delete from perguntas where criado_em < now() - interval '1 year';
+delete from perguntas where sessao = '<id da sessão>';
+```
