@@ -20,7 +20,18 @@ type TurnstileApi = {
     container: HTMLElement,
     opcoes: {
       sitekey: string
-      size: 'invisible'
+      /**
+       * `interaction-only` mantém o widget fora da tela até que a Cloudflare
+       * decida que aquele visitante precisa interagir. Não existe `size:
+       * 'invisible'` — o modo invisível é um tipo de widget escolhido no painel
+       * da Cloudflare, e passar isso em `size` derruba o render inteiro.
+       */
+      appearance?: 'always' | 'execute' | 'interaction-only'
+      /**
+       * Sem `execute`, o desafio dispara junto com o render e a chamada manual
+       * a `execute()` reclama que o widget já está executando.
+       */
+      execution?: 'render' | 'execute'
       /** Rótulo do widget nas análises da Cloudflare. */
       action?: string
       callback: (token: string) => void
@@ -76,7 +87,8 @@ export function useTurnstile(ativo: boolean) {
         if (cancelado || !containerRef.current || !window.turnstile) return
         widgetRef.current = window.turnstile.render(containerRef.current, {
           sitekey: SITE_KEY,
-          size: 'invisible',
+          appearance: 'interaction-only',
+          execution: 'execute',
           // Equivalente ao data-action que a Cloudflare pede em widgets
           // declarados por div: aqui o widget é criado por render(), então o
           // rótulo vai como opção.
@@ -110,10 +122,17 @@ export function useTurnstile(ativo: boolean) {
     }
   }, [ativo])
 
+  /** Um token já foi emitido nesta sessão do widget? Só então o reset é devido. */
+  const usadoRef = useRef(false)
+
   const obterToken = useCallback(async (): Promise<string | undefined> => {
     if (!SITE_KEY || !widgetRef.current || !window.turnstile) return undefined
 
-    window.turnstile.reset(widgetRef.current)
+    // Cada token vale uma vez só, então da segunda pergunta em diante o widget
+    // precisa ser rearmado. Na primeira, resetar um widget que nunca executou é
+    // o que fazia a Cloudflare reclamar de execução concorrente.
+    if (usadoRef.current) window.turnstile.reset(widgetRef.current)
+    usadoRef.current = true
 
     return new Promise<string | undefined>(resolver => {
       pendenteRef.current = { resolver }
