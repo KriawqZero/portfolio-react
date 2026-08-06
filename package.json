@@ -10,6 +10,8 @@
     "build": "tsc -b && vite build",
     "knowledge:build": "tsx scripts/knowledge/build-index.ts",
     "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "preview": "vite preview",
     "cv:gen": "tsx scripts/generate-cv.ts",
     "img:gen": "tsx scripts/optimize-images.ts",
@@ -51,6 +53,7 @@
     "tsx": "^4.23.0",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.34.1",
-    "vite": "^7.0.0"
+    "vite": "^7.0.0",
+    "vitest": "^4.1.10"
   }
 }

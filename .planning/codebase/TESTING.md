@@ -1,12 +1,29 @@
 # Testing Patterns
 
 **Analysis Date:** 2026-08-05
+**Updated:** 2026-08-06 — a narrow test suite was introduced; the section below was rewritten.
 
 ## Current Testing Setup
 
-**No automated test suite exists in this codebase.**
+**Vitest 4.1, scoped deliberately to the pure functions of `lib/ai/`.**
 
-There is no Jest, Vitest, Testing Library, or any other testing framework configured. The project uses manual testing and static analysis only.
+- `pnpm test` → `vitest run` | `pnpm test:watch` → `vitest`
+- Location: `tests/` at the repo root — outside `tsconfig.app.json` (`src`) and
+  `tsconfig.api.json` (`api`, `lib`), so test files are not part of either build.
+- 46 tests across 3 files, all passing:
+  - `tests/validate-request.test.ts` — origin allowlist (including forged Vercel-preview
+    and localhost subdomains), body/session/history limits
+  - `tests/validate-answer.test.ts` — URL and HTML stripping, rejection of source IDs that
+    were never in context, label de-duplication, truncation, follow-up caps
+  - `tests/retrieval.test.ts` — tokenizer, fixed documents, document and character caps,
+    freelance boost, length normalisation
+- Verified by mutation: deliberately breaking the URL-stripping and the character cap made
+  exactly 4 tests fail, so these assertions have real detection power.
+
+**What is deliberately NOT tested:** components, GSAP/ScrollTrigger animation, and E2E
+flows. Animation is validated by eye — see the "Animations are part of the product" rule in
+`CLAUDE.md`. This is a scoping decision, not an oversight: the tested surface is the code
+where a silent regression costs money (OpenAI spend) or publishes a hallucination.
 
 ## Quality Assurance Strategy
 

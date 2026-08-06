@@ -7,7 +7,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ```bash
 pnpm dev             # start dev server (Vite + API middleware, see vite.config.ts)
 pnpm build           # prebuild (knowledge:build) → tsc -b && vite build
-pnpm lint            # eslint
+pnpm lint            # eslint — deve ficar limpo; se falhar, foi você
+pnpm test            # vitest run — funções puras de lib/ai/
+pnpm test:watch      # vitest em watch
 pnpm preview         # preview production build
 
 pnpm knowledge:build # compiles knowledge/*.md → lib/ai/generated/knowledge-index.ts
@@ -22,7 +24,21 @@ knowledge document fails the build — that is intentional, do not bypass it.
 Diagnostics for the AI section (`scripts/ai/`, each is a standalone tsx script, not a test suite):
 `ai:ask`, `ai:matriz`, `ai:shot`, `ai:stats`, `ai:seguranca`, `ai:custo`, `ai:conversa`.
 
-Use `pnpm` exclusively — never npm or yarn. There is no test suite.
+Use `pnpm` exclusively — never npm or yarn.
+
+### Verification — run these before claiming anything works
+
+`pnpm lint` and `pnpm test` are both green on a clean tree. If either fails, the change
+under your hands caused it — do not silence a rule or delete an assertion to get past it.
+
+Test coverage is deliberately narrow: `tests/` covers the **pure functions of `lib/ai/`**
+(`validate-request`, `validate-answer`, `retrieval`) and nothing else. Those guard money
+and correctness — request limits, the ban on model-invented URLs reaching the screen, the
+ban on citing a document that was never in context, and the caps that bound prompt size.
+
+There are no component, animation or E2E tests, and that is a decision, not a gap:
+animation is judged by eye (see "Animations are part of the product"). When you touch
+`lib/ai/`, add or update a test. When you touch a component, verify it in the browser.
 
 ### Running the AI section locally
 
