@@ -1,63 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
-  <!-- Página Principal -->
+<!--
+  Uma rota só: o site é uma SPA sem router. Fragmentos (#sobre, #projetos)
+  não são URLs para o Google e por isso saíram daqui.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://avantis.dev/</loc>
-    <lastmod>2025-11-03</lastmod>
-    <changefreq>weekly</changefreq>
+    <loc>https://www.marciliortiz.dev.br/</loc>
+    <lastmod>2026-08-06</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- Seção Sobre -->
-  <url>
-    <loc>https://avantis.dev/#sobre</loc>
-    <lastmod>2025-11-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Seção Habilidades -->
-  <url>
-    <loc>https://avantis.dev/#especialidades</loc>
-    <lastmod>2025-11-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Seção Projetos -->
-  <url>
-    <loc>https://avantis.dev/#projetos</loc>
-    <lastmod>2025-11-03</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <!-- Seção Resultados -->
-  <url>
-    <loc>https://avantis.dev/#resultados</loc>
-    <lastmod>2025-11-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Seção Experiência -->
-  <url>
-    <loc>https://avantis.dev/#experiencia</loc>
-    <lastmod>2025-11-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Seção Contato -->
-  <url>
-    <loc>https://avantis.dev/#contato</loc>
-    <lastmod>2025-11-03</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-</urlset> 
+</urlset>

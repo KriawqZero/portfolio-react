@@ -11,9 +11,9 @@ export const ptContent = {
   hero: {
     greeting: 'OLÁ, EU SOU',
     name: 'Marcilio Ortiz',
-    role: ['Desenvolvedor', 'Full Stack'],
+    role: ['Fullstack', 'AI Developer'],
     subtitle:
-      'Estudante Técnico em Informática com experiência real em projetos freelancer. Atuo de ponta a ponta: da arquitetura de banco de dados e APIs robustas até a interface final, pois um produto de verdade não vive apenas de respostas JSON.',
+      'Estudante Técnico em Informática com experiência real em projetos freelancer. Atuo de ponta a ponta: banco de dados, API, interface e o que mais o projeto pedir — inclusive testes e infraestrutura.',
     availability: {
       defaultStatus: 'Disponível para oportunidades',
       defaultTypes: ['Estágio', 'Emprego', 'Projetos'],
@@ -109,16 +109,12 @@ export const ptContent = {
         glowColor: 'rgba(16, 185, 129, 0.10)',
         projects: [
           {
-            name: 'KyteApp Scrapper',
+            name: 'Ecossistema de Coleta',
             type: 'Solução sob Medida / B2B',
             year: '2025',
-            narrative: 'Desenvolvi um ecossistema distribuído para um cliente corporativo de grande porte em São Paulo que precisava centralizar dados financeiros de dezenas de lojas no KyteApp, plataforma que não possui uma API oficial. A solução foi criar um worker autônomo em Playwright que navega em lote através de instâncias de navegadores estéreis, isolando cookies e sessões para extrair as métricas de faturamento direto do DOM e centralizá-las em uma API própria.',
+            narrative: 'Desenvolvi um ecossistema distribuído para um cliente corporativo de grande porte em São Paulo que precisava centralizar dados financeiros de dezenas de lojas a partir de um sistema de vendas que não possui API oficial. A solução foi criar um worker autônomo em Playwright que navega em lote através de instâncias de navegadores estéreis, isolando cookies e sessões para extrair as métricas de faturamento direto do DOM e centralizá-las em uma API própria.',
             stack: 'Node.js · Playwright · Express · Prisma · Docker',
-            links: [
-              { label: 'Repo Worker', href: 'https://github.com/KriawqZero/scrapper-scrapper' },
-              { label: 'Repo API', href: 'https://github.com/KriawqZero/scrapper-api' },
-              { label: 'Repo Dashboard', href: 'https://github.com/KriawqZero/scrapper-frontend' }
-            ],
+            links: [],
             stat: { value: '3 Serviços', label: 'arquitetura distribuída' },
           },
         ],
@@ -202,7 +198,7 @@ export const ptContent = {
       name: 'Sushi do Verão (Ecossistema)',
       type: 'Sistema Comercial',
       stack: ['NestJS', 'Next.js', 'Expo', 'PostgreSQL'],
-      narrative: 'Desenvolvido para dar autonomia real à operação do restaurante. O desafio central foi modelar a API e gerenciar o estado no cliente para que a equipe pudesse alterar preços e pratos durante o horário de pico sem intervenção técnica.',
+      narrative: 'Projetado para dar autonomia à operação do restaurante: a API e o painel foram modelados para que a equipe alterasse preços e pratos no horário de pico sem intervenção técnica. A base foi construída, mas o sistema não chegou a ser aprovado para produção — do escopo original, o que está no ar é o site institucional.',
       links: [
         { label: 'API', href: 'https://github.com/KriawqZero/rv-api' },
         { label: 'Admin', href: 'https://github.com/KriawqZero/rv-admin' },
@@ -259,17 +255,17 @@ export const ptContent = {
     label: 'SOBRE MIM',
     title: 'Mais que código,',
     titleHighlight: 'propósito.',
-    text: 'Ainda no Ensino Técnico, atuo como freelancer há mais de um ano entregando soluções reais. Como desenvolvedor independente, domino o ciclo completo do produto. Minha paixão é projetar arquiteturas no Backend, mas sei que o usuário consome interfaces. Busco minha primeira oportunidade corporativa para transformar essa vivência Full Stack em valor real para uma grande equipe.',
+    text: 'Ainda no Ensino Técnico, atuo como freelancer desde março de 2025 entregando soluções reais. Como desenvolvedor independente, domino o ciclo completo do produto e não me prendo a uma camada: pego backend, frontend, testes ou infraestrutura conforme o projeto precisa. Busco minha primeira oportunidade corporativa para transformar essa vivência em valor real para uma equipe.',
     cta: 'Conhecer minha jornada',
     stats: [
       { value: '+1', label: 'ano', sublabel: 'De imersão diária em programação' },
-      { value: '+30', label: 'projetos', sublabel: 'Aplicações web e desafios práticos' },
+      { value: '+50', label: 'projetos', sublabel: 'Aplicações web e desafios práticos' },
       { value: '+10', label: 'clientes', sublabel: 'Atendidos com soluções em produção' },
-      { value: '+500', label: 'commits', sublabel: 'Registrados no GitHub no último ano' },
+      { value: '+1200', label: 'commits', sublabel: 'Registrados no GitHub no último ano' },
       { value: '+5', label: 'tecnologias', sublabel: 'Dominadas na stack principal' },
       { value: '100%', label: 'foco', sublabel: 'Em construir sistemas robustos e escaláveis' },
       { value: '+1000', label: 'horas', sublabel: 'Lendo documentação oficial' },
-      { value: '+20k', label: 'linhas', sublabel: 'De código escritas ou refatoradas' },
+      { value: '+200k', label: 'linhas', sublabel: 'De código escritas ou refatoradas' },
       { value: '∞', label: 'bugs', sublabel: 'Resolvidos com muita paciência' },
       { value: '∞', label: 'vontade', sublabel: 'Vontade de aprender e evoluir' },
     ],
@@ -322,8 +318,77 @@ export const ptContent = {
     ],
   },
 
-  contact: {
+  aiChat: {
     number: '05',
+    label: 'MARCILIO IA',
+    title: 'Pergunte',
+    titleHighlight: 'à minha IA.',
+    description: 'Uma representação treinada com informações profissionais que eu mesmo revisei. Ela responde sobre projetos, stack e forma de trabalhar.',
+    disclaimer: 'Você está falando com uma IA, não comigo. Ela explica meu trabalho, mas não decide nem assume compromissos por mim.',
+    placeholder: 'pergunte sobre projetos, stack, forma de trabalhar…',
+    sendLabel: 'Enviar pergunta',
+    inputLabel: 'Sua pergunta para a IA do Marcilio',
+    clear: 'limpar conversa',
+    thinking: 'consultando o que eu já contei',
+    sourcesLabel: 'fontes',
+    followUpsLabel: 'continue por aqui',
+    contactCta: 'falar com o Marcilio',
+    emptyState: 'Escolha uma pergunta ao lado ou escreva a sua.',
+    errors: {
+      generic: 'Deu problema aqui do meu lado. Tenta de novo em instantes.',
+      timeout: 'Demorei demais para responder. Tenta perguntar de novo.',
+      disabled: 'A IA está desligada no momento. As respostas abaixo são do próprio Marcilio.',
+      rateLimit: 'Você fez muitas perguntas seguidas. Espere um pouco antes da próxima.',
+      budget: 'A IA atingiu o limite de uso de hoje. Volte amanhã ou fale direto com o Marcilio.',
+    },
+    suggestions: [
+      'O que você já construiu em produção?',
+      'Como você usa IA sem depender dela?',
+      'Como você trabalha em equipe?',
+      'Por que você seria uma boa contratação para estágio?',
+      'Quais projetos mostram melhor seu nível técnico?',
+      'O que você ainda está aprendendo?',
+    ],
+    suggestionsFreelance: [
+      'Você já entregou sistemas para clientes reais?',
+      'Como funciona um projeto com você?',
+      'Você cuida do frontend e do backend?',
+      'Como você comunica prazo e andamento?',
+      'Quais trabalhos são parecidos com o meu?',
+      'Como você usa IA nos projetos de clientes?',
+    ],
+    // Quando a IA está fora, é isto que o visitante lê. Escrito à mão, sem
+    // modelo nenhum no meio — por isso o rótulo diz exatamente o que é.
+    fallback: {
+      intro: 'Enquanto a IA não responde, ficam aqui algumas respostas que eu já tinha escrito.',
+      label: 'resposta pré-escrita — a IA está indisponível agora',
+      items: [
+        {
+          question: 'O que você já construiu em produção?',
+          answer: 'Sistemas com usuário real usando. O SISCO, que organiza as horas complementares de mais de 200 alunos e coordenadores no IFMS — era planilha em grupo de WhatsApp antes. Uma automação que consolida o faturamento diário de uma rede de lojas em São Paulo, cujo sistema de vendas não tem API pública: entrou no ar em abril de 2025 e roda todos os dias nas três filiais até hoje. Uma plataforma imobiliária com app próprio, onde a IA transforma foto e áudio gravados em campo em anúncio pronto. E o VamoAgendar, um SaaS de agendamento que desenvolvo com um sócio investidor.',
+        },
+        {
+          question: 'Como você usa IA sem depender dela?',
+          answer: 'Uso todos os dias para acelerar a parte mecânica: esqueleto de módulo, achar onde algo acontece num repositório grande, revisar o que escrevi. O que continua meu é arquitetura, decisão e revisão — leio tudo antes de aceitar, confiro assinatura de biblioteca na documentação oficial, e o que eu não consigo explicar não entra. A prova de que isso não é discurso é um projeto onde ela me atrapalhou: no voxel engine em C++ que fiz em 2024, cada tentativa de usar IA quebrava o que já funcionava, principalmente na matemática de matriz. Parei de usar e terminei à mão. Só passei a usar IA de verdade em junho de 2025 — antes disso eu já programava havia seis anos.',
+        },
+        {
+          question: 'Você está disponível para estágio?',
+          answer: 'Estou. E tem um motivo a mais do que carreira: já cumpri todas as disciplinas do técnico em Informática no IFMS, e o estágio obrigatório é o que falta para eu concluir o curso — a previsão é fechar isso ainda em 2026. É também a experiência que me falta, porque nunca trabalhei dentro de um time de engenharia: minha experiência toda veio de cliente direto. Agenda, prazo e valor eu não trato por aqui — para isso, o contato direto está logo abaixo, no e-mail ou no LinkedIn.',
+        },
+        {
+          question: 'Como funciona um projeto com você?',
+          answer: 'Começa por entender o problema, não por escolher tecnologia: a primeira conversa é sobre o que está doendo hoje e quanto isso custa. Depois vem escopo por escrito, arquitetura, implementação e entrega em produção. Já aconteceu de o pedido inicial não ser o que resolvia o problema, e nesses casos eu digo — a decisão continua sendo do cliente, mas não entrego calado uma coisa que eu acho errada. Sobre acompanhamento: eu aprendi do jeito caro que entregar bem não substitui manter quem contratou informado, então hoje eu gero briefing automático de andamento em vez de depender da minha memória.',
+        },
+        {
+          question: 'O que você ainda está aprendendo?',
+          answer: 'Trabalhar dentro de um time de engenharia, que é o que eu nunca fiz: revisar código com gente mais experiente, mexer em base grande com decisões tomadas antes de eu chegar, e lidar com consequência real quando algo quebra. No lado técnico, o que tenho estudado vem do VamoAgendar — o motor que calcula horários livres e a parte de cobrança e assinatura, que é onde estão as decisões que eu ainda não tinha enfrentado. E aprender a usar IA melhor, que é trabalho contínuo: comecei a usar a sério faz pouco mais de um ano.',
+        },
+      ],
+    },
+  },
+
+  contact: {
+    number: '06',
     label: 'PRÓXIMO CAPÍTULO',
     title: 'Vamos construir',
     titleHighlight: 'juntos.',
@@ -382,7 +447,7 @@ export const ptContent = {
     epilogue: 'Uma fração da minha experiência. Além dos cases selecionados, dezenas de outros sistemas complexos foram entregues e permanecem sob confidencialidade.',
     projects: [
       {
-        name: 'KyteApp Financial Worker',
+        name: 'Ecossistema de Coleta e Metas',
         type: 'Cliente Workana',
         problem: 'Uma rede de lojas precisava consolidar o faturamento diário de suas filiais. O grande obstáculo era que o sistema de vendas utilizado não possuía API pública, o que obrigava a equipe a extrair os dados manualmente todos os dias.',
         solution: 'Para contornar a falta de API, desenvolvi um worker autônomo em Node.js com Playwright rodando em instâncias isoladas via Docker. O script acessa os portais com segurança, raspa os dados do DOM de forma resiliente e os centraliza em um dashboard.',
@@ -402,7 +467,7 @@ export const ptContent = {
         name: 'Sushi do Verão',
         type: 'Empresa local',
         problem: 'Um restaurante de alto volume da minha cidade sofria com cardápios online genéricos e lentos, que não permitiam atualizar preços e indisponibilidades em tempo real durante os picos de pedidos.',
-        solution: 'Levei uma proposta inicial para o proprietário e refinamos a ideia juntos. A solução não foi usar um template, mas construir uma API extremamente performática (NestJS) com um painel administrativo. O cardápio agora é um PWA super rápido que reage instantaneamente a mudanças de estoque.',
+        solution: 'Levei uma proposta inicial ao proprietário e refinamos a ideia juntos: em vez de um template, uma API própria em NestJS com painel administrativo e cardápio em PWA. Construí a base do sistema, mas ele não foi aprovado para produção. O que está no ar hoje é o site institucional que desenvolvi para eles.',
         stack: 'NestJS · Next.js · Expo · PostgreSQL',
         year: '2026'
       }
@@ -412,16 +477,12 @@ export const ptContent = {
     reviewsTitleHighlight: 'dizem.',
     reviews: [
       {
-        name: 'Rodrigo M. (Gerente de Operações)',
-        project: 'Automação KyteApp',
+        name: 'Fernando (Gerente de Operações)',
+        project: 'Ecossistema de Coleta',
         quote: 'O Marcilio conseguiu contornar a falta de API oficial que estava travando nossa operação. A automação está rodando sem problemas e poupando muito tempo de toda a equipe.'
       },
       null,
-      {
-        name: 'Proprietário do Sushi do Verão',
-        project: 'Sistema Delivery Sushi',
-        quote: 'Trabalhar junto na solução fez toda a diferença. O sistema não trava de jeito nenhum nos fins de semana e conseguimos alterar os preços na hora que precisamos.'
-      }
+      null
     ]
   }
 };
@@ -439,9 +500,9 @@ export const enContent = {
   hero: {
     greeting: 'HELLO, I AM',
     name: 'Marcilio Ortiz',
-    role: ['Full Stack', 'Developer'],
+    role: ['Fullstack', 'AI Developer'],
     subtitle:
-      'Technical IT Student with real experience in freelance projects. I act from end to end: from database architecture and robust APIs to the final interface, because a real product does not live on JSON responses alone.',
+      'Technical IT Student with real experience in freelance projects. I work end to end: database, API, interface and whatever else the project needs — testing and infrastructure included.',
     availability: {
       defaultStatus: 'Available for opportunities',
       defaultTypes: ['Internship', 'Full-time', 'Projects'],
@@ -531,16 +592,12 @@ export const enContent = {
         glowColor: 'rgba(16, 185, 129, 0.10)',
         projects: [
           {
-            name: 'KyteApp Scrapper',
+            name: 'Data Collection Ecosystem',
             type: 'Custom Solution / B2B',
             year: '2025',
-            narrative: 'I developed a distributed ecosystem for a large corporate client in São Paulo who needed to centralize financial data from dozens of stores on KyteApp, a platform that does not have an official API. The solution was to create an autonomous worker in Playwright that navigates through headless browser instances in batches, isolating cookies and sessions to extract billing metrics directly from the DOM and centralize them in a proprietary API.',
+            narrative: 'I developed a distributed ecosystem for a large corporate client in São Paulo who needed to centralize financial data from dozens of stores out of a sales system with no official API. The solution was to create an autonomous worker in Playwright that navigates through headless browser instances in batches, isolating cookies and sessions to extract billing metrics directly from the DOM and centralize them in a proprietary API.',
             stack: 'Node.js · Playwright · Express · Prisma · Docker',
-            links: [
-              { label: 'Worker Repo', href: 'https://github.com/KriawqZero/scrapper-scrapper' },
-              { label: 'API Repo', href: 'https://github.com/KriawqZero/scrapper-api' },
-              { label: 'Dashboard Repo', href: 'https://github.com/KriawqZero/scrapper-frontend' }
-            ],
+            links: [],
             stat: { value: '3 Services', label: 'distributed architecture' },
           },
         ],
@@ -681,17 +738,17 @@ export const enContent = {
     label: 'ABOUT ME',
     title: 'More than code,',
     titleHighlight: 'purpose.',
-    text: 'Still in Technical High School, I have been working as a freelancer for over a year delivering real solutions. As an independent developer, I master the entire product cycle. My passion is designing Backend architectures, but I know that users consume interfaces. I am seeking my first corporate opportunity to transform this Full Stack experience into real value for a great team.',
+    text: 'Still in Technical High School, I have been freelancing since March 2025, delivering real solutions. As an independent developer, I own the entire product cycle and I do not stick to one layer: backend, frontend, testing or infrastructure, whatever the project needs. I am seeking my first corporate opportunity to turn that experience into real value for a team.',
     cta: 'Explore my journey',
     stats: [
       { value: '+1', label: 'year', sublabel: 'Of daily programming immersion' },
-      { value: '+30', label: 'projects', sublabel: 'Web apps and practical challenges' },
+      { value: '+50', label: 'projects', sublabel: 'Web apps and practical challenges' },
       { value: '+10', label: 'clients', sublabel: 'Served with solutions in production' },
-      { value: '+500', label: 'commits', sublabel: 'Recorded on GitHub in the last year' },
+      { value: '+1200', label: 'commits', sublabel: 'Recorded on GitHub in the last year' },
       { value: '+5', label: 'technologies', sublabel: 'Mastered in the main tech stack' },
       { value: '100%', label: 'focus', sublabel: 'On building robust and scalable systems' },
       { value: '+1000', label: 'hours', sublabel: 'Reading official documentation' },
-      { value: '+20k', label: 'lines', sublabel: 'Of code written or refactored' },
+      { value: '+200k', label: 'lines', sublabel: 'Of code written or refactored' },
       { value: '∞', label: 'bugs', sublabel: 'Solved with a lot of patience' },
       { value: '∞', label: 'drive', sublabel: 'Drive to learn and evolve' },
     ],
@@ -744,8 +801,75 @@ export const enContent = {
     ],
   },
 
-  contact: {
+  aiChat: {
     number: '05',
+    label: 'MARCILIO AI',
+    title: 'Ask',
+    titleHighlight: 'my AI.',
+    description: 'A representation built from professional information I reviewed myself. It answers about projects, stack and how I work.',
+    disclaimer: 'You are talking to an AI, not to me. It explains my work, but it does not decide anything or commit to anything on my behalf.',
+    placeholder: 'ask about projects, stack, how I work…',
+    sendLabel: 'Send question',
+    inputLabel: 'Your question for Marcilio\'s AI',
+    clear: 'clear conversation',
+    thinking: 'checking what I already told it',
+    sourcesLabel: 'sources',
+    followUpsLabel: 'keep going',
+    contactCta: 'talk to Marcilio',
+    emptyState: 'Pick a question from the list or write your own.',
+    errors: {
+      generic: 'Something broke on my side. Try again in a moment.',
+      timeout: 'I took too long to answer. Try asking again.',
+      disabled: 'The AI is switched off right now. The answers below come from Marcilio himself.',
+      rateLimit: 'That was a lot of questions in a row. Give it a minute before the next one.',
+      budget: 'The AI hit today\'s usage limit. Come back tomorrow or talk to Marcilio directly.',
+    },
+    suggestions: [
+      'What have you built in production?',
+      'How do you use AI without depending on it?',
+      'How do you work in a team?',
+      'Why would you be a good hire for an internship?',
+      'Which projects best show your technical level?',
+      'What are you still learning?',
+    ],
+    suggestionsFreelance: [
+      'Have you delivered systems for real clients?',
+      'How does a project with you work?',
+      'Do you handle both frontend and backend?',
+      'How do you communicate deadlines and progress?',
+      'Which past jobs are similar to mine?',
+      'How do you use AI on client projects?',
+    ],
+    fallback: {
+      intro: 'While the AI is not answering, here are a few answers I had already written.',
+      label: 'pre-written answer — the AI is unavailable right now',
+      items: [
+        {
+          question: 'What have you built in production?',
+          answer: 'Systems with real users on them. SISCO, which handles the complementary-hours records of more than 200 students and coordinators at IFMS — it used to be a spreadsheet passed around a WhatsApp group. An automation that consolidates daily revenue for a retail chain in São Paulo whose sales system has no public API: it went live in April 2025 and still runs every day across their three stores. A real estate platform with its own app, where AI turns photos and voice notes recorded on site into a finished listing. And VamoAgendar, a scheduling SaaS I build with an investing partner.',
+        },
+        {
+          question: 'How do you use AI without depending on it?',
+          answer: 'Every day, for the mechanical part: scaffolding a module, finding where something happens in a large repository, reviewing what I wrote. What stays mine is architecture, decisions and review — I read everything before accepting it, I check library signatures against the official docs, and what I cannot explain does not ship. The proof that this is not just talk is a project where AI got in my way: on the C++ voxel engine I built in 2024, every attempt to use it broke what already worked, mostly on matrix math. I stopped and finished by hand. I only started using AI seriously in June 2025 — by then I had been programming for six years.',
+        },
+        {
+          question: 'Are you available for an internship?',
+          answer: 'I am. And there is a reason beyond career: I have completed every course of my technical degree in IT at IFMS, and the mandatory internship is what is left for me to graduate — the plan is to close that in 2026. It is also the experience I lack, because I have never worked inside an engineering team: all of my experience came from direct clients. Schedule, deadlines and rates are not something I handle here — for that, the direct contact is right below, by email or LinkedIn.',
+        },
+        {
+          question: 'How does a project with you work?',
+          answer: 'It starts by understanding the problem, not by picking technology: the first conversation is about what hurts today and what it costs. Then written scope, architecture, implementation and delivery to production. It has happened that the initial request was not what solved the problem, and in those cases I say so — the decision stays with the client, but I do not quietly ship something I believe is wrong. On follow-up: I learned the expensive way that delivering well does not replace keeping the client informed, so today I generate automatic progress briefings instead of relying on my memory.',
+        },
+        {
+          question: 'What are you still learning?',
+          answer: 'Working inside an engineering team, which I have never done: reviewing code with more experienced people, working on a large codebase with decisions made before I arrived, and dealing with real consequences when something breaks. On the technical side, what I have been studying comes from VamoAgendar — the engine that computes free slots and the billing and subscription side, where the decisions I had not faced before are. And learning to use AI better, which is ongoing: I only started using it seriously a little over a year ago.',
+        },
+      ],
+    },
+  },
+
+  contact: {
+    number: '06',
     label: 'NEXT CHAPTER',
     title: 'Let\'s build',
     titleHighlight: 'together.',
@@ -804,7 +928,7 @@ export const enContent = {
     epilogue: 'A fraction of my experience. Beyond the selected cases, dozens of other complex systems have been delivered and remain under confidentiality.',
     projects: [
       {
-        name: 'KyteApp Financial Worker',
+        name: 'Data Collection & Goals Ecosystem',
         type: 'Workana Client',
         problem: 'A retail chain needed to consolidate daily billing data from their branches. The main obstacle was that their POS system didn\'t have a public API, forcing the team to extract data manually every single day.',
         solution: 'To bypass the lack of an API, I developed an autonomous worker in Node.js using Playwright, running on isolated Docker instances. The script securely accesses the portals, scrapes the DOM resiliently, and centralizes everything in a dashboard.',
@@ -824,7 +948,7 @@ export const enContent = {
         name: 'Sushi do Verão',
         type: 'Local Business',
         problem: 'A high-volume restaurant in my city suffered from slow, generic online menus that didn\'t allow them to update prices and out-of-stock items in real-time during peak delivery hours.',
-        solution: 'I brought an initial proposal to the owner and we refined the idea together. The solution wasn\'t to use a template, but to build a highly performant API (NestJS) and an admin panel. The menu is now a lightning-fast PWA that reacts instantly to stock changes.',
+        solution: 'I brought an initial proposal to the owner and we refined the idea together: instead of a template, a NestJS API with an admin panel and a PWA menu. I built the base of the system, but it was not approved for production. What is live today is the institutional site I built for them.',
         stack: 'NestJS · Next.js · Expo · PostgreSQL',
         year: '2026'
       }
@@ -834,16 +958,12 @@ export const enContent = {
     reviewsTitleHighlight: 'are saying.',
     reviews: [
       {
-        name: 'Rodrigo M. (Operations Manager)',
-        project: 'KyteApp Automation',
+        name: 'Fernando (Operations Manager)',
+        project: 'Data Collection Ecosystem',
         quote: 'Marcilio managed to bypass the lack of an official API that was stalling our operation. The automation has been running flawlessly and saving the entire team a lot of time.'
       },
       null,
-      {
-        name: 'Sushi do Verão Owner',
-        project: 'Sushi Delivery System',
-        quote: 'Working together on the solution made all the difference. The system never crashes on weekends, and we can change prices the moment we need to.'
-      }
+      null
     ]
   }
 };

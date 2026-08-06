@@ -18,6 +18,7 @@ A arquitetura de todo o site foi pensada em torno de uma jornada narrativa cont�
 - **Consistência:** *Esse nível de entrega se mantém em outros projetos?*
 - **Mercado:** *Tenho experiência real solucionando problemas de clientes?*
 - **Contexto Humano:** *Quem é a pessoa por trás do código?*
+- **Conversa:** *E o que ficou de fora — o que você mesmo quer perguntar?*
 - **Epílogo:** *Qual é o nosso próximo passo?*
 
 Decisões difíceis foram tomadas durante o desenvolvimento para proteger essa narrativa. Seções clássicas, como "Minhas Habilidades" (aquelas listas intermináveis de logos) ou formulários de contato genéricos, foram completamente descartadas. A ideia é mostrar competência construindo algo maduro, e não apenas listando o que sei usar.
@@ -31,6 +32,7 @@ A jornada é dividida em atos interconectados, muitas vezes utilizando ancoragem
 * **O Processo:** Uma linha do tempo horizontal que exige do usuário uma rolagem física controlada, cadenciando a leitura do meu método de trabalho.
 * **O Catálogo:** Outros projetos apresentados através de um *scrubbing* contínuo, onde o tempo da transição é ditado diretamente pela velocidade do scroll do usuário.
 * **A Vida Real (Avantis):** Um respiro visual focado no mercado e na entrega de valor via consultoria e negócios.
+* **Marcilio IA:** Uma seção onde o visitante pergunta o que quiser e recebe resposta em primeira pessoa. A IA responde apenas a partir de um dossiê que eu revisei e aprovei, deixa claro o tempo inteiro que não é o Marcilio humano, e não tem acesso a nada além desse dossiê. Nenhuma pergunta é antecipada por mim — é a única parte do site que eu não roteirizei.
 * **Epílogo:** O substituto do clássico "Contato". Uma seção travada na tela que evolui como os créditos de um filme, terminando com convites (e não botões) para iniciar uma conversa.
 
 ## Sob o Capô: Tecnologias e Arquitetura
@@ -40,7 +42,9 @@ O projeto não utiliza bibliotecas pesadas de UI. Tudo foi desenhado para manter
 * **React + Vite:** A fundação. O Vite garante um ambiente de desenvolvimento instantâneo e um *build* final extremamente otimizado.
 * **TypeScript:** Segurança e previsibilidade na base de código. Todo o conteúdo textual do site é isolado em um arquivo de dados (`content.ts`) fortemente tipado, separando estritamente a narrativa da camada de apresentação (componentes).
 * **GSAP (GreenSock) + ScrollTrigger:** O coração das interações. Em vez de basear animações pesadas em estados do React (o que causaria gargalos de renderização), o GSAP manipula diretamente o DOM para manter os 60 FPS, gerenciando revelações por scroll e pinagem de seções.
+* **Framer Motion:** Convive com o GSAP com uma fronteira clara: o GSAP cuida de tudo que é ditado pelo scroll (pinagem, timelines, revelações), o Framer Motion cuida do que é ditado por estado do React — as revelações da conversa com a IA, a navbar, transições de entrada. Cada um na parte em que é melhor.
 * **CSS Puro (Variáveis CSS):** Todo o design system (tipografia, cores, responsividade) vive em CSS Vanilla. O layout mobile, inclusive, desativa as complexas ancoragens cinematográficas para entregar uma experiência vertical clássica, sólida e hiper-fluida em celulares.
+* **Vercel Functions + OpenAI:** A seção de IA deixou de ser um site puramente estático. Há um endpoint serverless que monta o prompt a partir do dossiê aprovado, valida a resposta contra os documentos de origem antes de devolvê-la, e passa por camadas de verificação (Turnstile), limite de uso e orçamento — porque cada pergunta custa dinheiro de verdade e o site é público.
 
 ## Principais Aprendizados
 
@@ -64,3 +68,5 @@ Se você quiser explorar a estrutura, o CSS ou entender como as animações fora
    ```bash
    pnpm dev
    ```
+
+O site sobe inteiro assim. A única parte que não funciona sem configuração é a seção de IA: ela depende de chaves próprias (OpenAI, Redis, Turnstile), listadas em `.env.example`. Sem elas o endpoint recusa a requisição em vez de responder qualquer coisa — o que é proposital, e não um erro de setup.

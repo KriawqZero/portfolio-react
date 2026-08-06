@@ -18,7 +18,7 @@ function projetoPorNome(
 
 const pt          = ptContent.trajectory.eras
 const catalogo    = projetoPorNome(pt, 'surface', 'Catálogo & App Imobiliário')
-const kyte        = projetoPorNome(pt, 'infra',   'KyteApp Scrapper')
+const kyte        = projetoPorNome(pt, 'infra',   'Ecossistema de Coleta')
 const sisco       = projetoPorNome(pt, 'surface', 'SISCO')
 const vamoAgendar = projetoPorNome(pt, 'surface', 'VamoAgendar')
 
@@ -26,7 +26,7 @@ const vamoAgendar = projetoPorNome(pt, 'surface', 'VamoAgendar')
 
 const en            = enContent.trajectory.eras
 const catalogoEn    = projetoPorNome(en, 'surface', 'Real Estate Catalog & App')
-const kyteEn        = projetoPorNome(en, 'infra',   'KyteApp Scrapper')
+const kyteEn        = projetoPorNome(en, 'infra',   'Data Collection Ecosystem')
 const siscoEn       = projetoPorNome(en, 'surface', 'SISCO')
 const vamoAgendarEn = projetoPorNome(en, 'surface', 'VamoAgendar')
 
@@ -106,9 +106,8 @@ export const dadosCv = {
       },
       {
         ...kyte,
-        name: 'KyteApp Scraper',
-        links: [{ label: 'Repo API', href: 'https://github.com/KriawqZero/scrapper-api' }, ...kyte.links],
-        linkDisplay: 'github.com/KriawqZero/scrapper-api',
+        name: 'Ecossistema de Coleta',
+        links: [...kyte.links],
         bullets: [
           'Worker autônomo com Playwright que extrai métricas de faturamento de dezenas de lojas sem API oficial disponível',
           'Sessões e cookies isolados por instância de browser; orquestração e deploy via Docker',
@@ -219,9 +218,8 @@ export const dadosCvEn: DadosCv = {
       },
       {
         ...kyteEn,
-        name: 'KyteApp Scraper',
-        links: [{ label: 'API Repo', href: 'https://github.com/KriawqZero/scrapper-api' }, ...kyteEn.links],
-        linkDisplay: 'github.com/KriawqZero/scrapper-api',
+        name: 'Data Collection Ecosystem',
+        links: [...kyteEn.links],
         bullets: [
           'Autonomous Playwright worker that extracts billing metrics from dozens of stores with no official API available',
           'Isolated browser sessions and cookies per instance; orchestration and deployment via Docker',

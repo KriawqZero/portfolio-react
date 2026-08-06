@@ -12,6 +12,12 @@ dist
 dist-ssr
 *.local
 
+# Segredos. `.env.local` só escapava por causa de *.local acima — um `.env`,
+# que é o nome mais comum, entraria no commit sem nada barrar.
+.env
+.env.*
+!.env.example
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -27,3 +33,16 @@ dist-ssr
 capturas/
 # Configuração local do Obsidian
 .obsidian/
+
+# Rascunhos de conhecimento ainda não revisados — nunca versionar
+knowledge/inbox/
+
+# Ferramentas de IA: conteúdo instalado e estado local.
+# Seletivo de propósito — .claude/settings.json É versionado (ver abaixo).
+# skills-lock.json também fica: é o manifesto que permite reinstalar as skills.
+.claude/skills/
+.claude/worktrees/
+.claude/scheduled_tasks.lock
+.agents/skills/
+.vercel
+.env*

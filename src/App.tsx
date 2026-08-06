@@ -11,6 +11,7 @@ import FreelanceProjects from './components/FreelanceProjects'
 import Avantis from './components/Avantis'
 import AboutMe from './components/AboutMe'
 import DevProcess from './components/DevProcess'
+import AiChat from './components/AiChat'
 import Contact from './components/Contact'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -95,6 +96,7 @@ export default function App() {
         <Trajectory />
         <Avantis />
         <DevProcess />
+        <AiChat />
         <Contact />
       </main>
     </div>
