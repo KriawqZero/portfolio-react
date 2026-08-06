@@ -12,8 +12,18 @@ import { registrarTokenTurnstile, type Veredito } from './limits.js'
 
 const ENDPOINT = 'https://challenges.cloudflare.com/turnstile/v0/siteverify'
 
+/**
+ * O painel da Cloudflare instrui a expor o segredo como `TURNSTILE_SECRET`.
+ * Aceitamos os dois nomes: renomear a variável já configurada em algum
+ * ambiente derrubaria a verificação sem aviso, e falhar por nome de variável
+ * é o tipo de erro que só aparece em produção.
+ */
+function segredo(): string | undefined {
+  return process.env.TURNSTILE_SECRET ?? process.env.TURNSTILE_SECRET_KEY
+}
+
 export function turnstileConfigurado(): boolean {
-  return Boolean(process.env.TURNSTILE_SECRET_KEY)
+  return Boolean(segredo())
 }
 
 /**
@@ -45,7 +55,7 @@ export async function verificarTurnstile(
   if (!primeiroUso.ok) return primeiroUso
 
   const corpo = new URLSearchParams({
-    secret: process.env.TURNSTILE_SECRET_KEY as string,
+    secret: segredo() as string,
     response: token,
   })
   if (ip && ip !== 'desconhecido') corpo.set('remoteip', ip)

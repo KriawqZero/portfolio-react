@@ -66,12 +66,28 @@ export function ipDaRequisicao(headers: Record<string, string | string[] | undef
 // ─── Disponibilidade ──────────────────────────────────────────────────────────
 
 /**
- * Produção sem Redis configurado é erro de configuração, não modo degradado:
- * seria exatamente o cenário em que uma conta cara acontece sem ninguém ver.
+ * Sem Redis não existe contador compartilhado entre as instâncias da função, e
+ * portanto não existe teto de gasto próprio nem rate limit confiável. O padrão
+ * é barrar: é exatamente o cenário em que uma conta cara acontece sem ninguém
+ * ver.
+ *
+ * `AI_NO_REDIS=true` assume esse risco de propósito, para quem prefere manter o
+ * teto de gasto na própria plataforma do modelo em vez de operar mais um
+ * serviço. A flag precisa ser explícita porque a diferença entre "decidi operar
+ * assim" e "esqueci de configurar" é grande demais para ser inferida do
+ * silêncio — e quando ela está ligada, o que sobra de proteção é o Turnstile,
+ * o limite em memória por instância e o teto configurado no provedor.
  */
+export function semRedisPorDecisao(): boolean {
+  return process.env.AI_NO_REDIS === 'true'
+}
+
 export function dependenciasOk(producao: boolean): Veredito {
   if (!producao) return { ok: true }
-  if (!configurado()) return { ok: false, status: 503, codigo: 'sem_contadores', estado: 'upstream' }
+
+  if (!configurado() && !semRedisPorDecisao()) {
+    return { ok: false, status: 503, codigo: 'sem_contadores', estado: 'upstream' }
+  }
   // Sem sal, o hash de IP é reversível e a promessa de anonimato do resto do
   // arquivo deixa de valer. Erro de configuração, não modo degradado.
   if (!segredoDeHashConfigurado()) {
@@ -132,6 +148,42 @@ export async function registrarTokenTurnstile(token: string): Promise<Veredito> 
 
 // ─── Rate limit ───────────────────────────────────────────────────────────────
 
+/**
+ * Limite de emergência para quando não há Redis.
+ *
+ * Vive na memória da instância da função, então não é confiável: a plataforma
+ * cria instâncias novas sob carga, e cada uma começa com o contador zerado.
+ * Quem quiser passar por cima consegue.
+ *
+ * Ainda assim vale mais que nada. Ele barra o caso comum — um laço batendo no
+ * endpoint da mesma origem — que é justamente o que esvaziaria o teto de gasto
+ * do provedor numa tarde. Só entra em cena com AI_NO_REDIS=true.
+ */
+const memoria = new Map<string, number[]>()
+
+function dentroDoLimiteEmMemoria(chave: string, teto: number, janelaMs: number): boolean {
+  const agora = Date.now()
+  const recentes = (memoria.get(chave) ?? []).filter(t => agora - t < janelaMs)
+
+  if (recentes.length >= teto) {
+    memoria.set(chave, recentes)
+    return false
+  }
+
+  recentes.push(agora)
+  memoria.set(chave, recentes)
+
+  // A instância pode viver horas: sem esta poda o mapa cresce com cada
+  // visitante que passou por aqui e nunca mais voltou.
+  if (memoria.size > 5000) {
+    for (const [k, marcas] of memoria) {
+      if (marcas.every(t => agora - t >= janelaMs)) memoria.delete(k)
+    }
+  }
+
+  return true
+}
+
 type Limitadores = { janela: Ratelimit; sessaoDia: Ratelimit; ipDia: Ratelimit }
 let limitadoresCache: Limitadores | null = null
 
@@ -166,7 +218,19 @@ function limitadores(): Limitadores {
 }
 
 export async function dentroDoRateLimit(sessionId: string, ip: string): Promise<Veredito> {
-  if (!configurado()) return { ok: true }
+  if (!configurado()) {
+    if (!semRedisPorDecisao()) return { ok: true } // desenvolvimento: passa
+
+    const janelaSegundos = numero('AI_RATE_LIMIT_WINDOW_SECONDS', 600)
+    const teto = numero('AI_RATE_LIMIT_REQUESTS', 8)
+    const passou =
+      dentroDoLimiteEmMemoria(`s:${chaveAnonima(sessionId)}`, teto, janelaSegundos * 1000) &&
+      dentroDoLimiteEmMemoria(`i:${chaveAnonima(ip)}`, teto * 2, janelaSegundos * 1000)
+
+    return passou
+      ? { ok: true }
+      : { ok: false, status: 429, codigo: 'muitas_perguntas', tentarEm: janelaSegundos }
+  }
 
   const chaveSessao = chaveAnonima(sessionId)
   const chaveIp = chaveAnonima(ip)

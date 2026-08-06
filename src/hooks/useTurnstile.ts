@@ -21,6 +21,8 @@ type TurnstileApi = {
     opcoes: {
       sitekey: string
       size: 'invisible'
+      /** Rótulo do widget nas análises da Cloudflare. */
+      action?: string
       callback: (token: string) => void
       'error-callback': () => void
       'expired-callback': () => void
@@ -75,6 +77,10 @@ export function useTurnstile(ativo: boolean) {
         widgetRef.current = window.turnstile.render(containerRef.current, {
           sitekey: SITE_KEY,
           size: 'invisible',
+          // Equivalente ao data-action que a Cloudflare pede em widgets
+          // declarados por div: aqui o widget é criado por render(), então o
+          // rótulo vai como opção.
+          action: 'turnstile-spin-v2',
           callback: token => {
             pendenteRef.current?.resolver(token)
             pendenteRef.current = null

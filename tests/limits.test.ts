@@ -6,7 +6,12 @@
  */
 
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
-import { dependenciasOk, chaveAnonima, ipDaRequisicao } from '../lib/ai/limits'
+import {
+  dependenciasOk,
+  chaveAnonima,
+  ipDaRequisicao,
+  dentroDoRateLimit,
+} from '../lib/ai/limits'
 
 const AMBIENTE = { ...process.env }
 
@@ -61,6 +66,77 @@ describe('dependenciasOk', () => {
   it('em produção com tudo configurado, libera', () => {
     comEnv({ ...REDIS_OK, RATE_LIMIT_HASH_SECRET: 'segredo-longo-de-teste' })
     expect(dependenciasOk(true)).toEqual({ ok: true })
+  })
+})
+
+describe('operação sem Redis (AI_NO_REDIS)', () => {
+  it('sem a flag, produção sem Redis continua barrada', () => {
+    const v = dependenciasOk(true)
+    expect(v.ok).toBe(false)
+    if (!v.ok) expect(v.codigo).toBe('sem_contadores')
+  })
+
+  it('com a flag e o segredo de hash, produção passa', () => {
+    comEnv({ AI_NO_REDIS: 'true', RATE_LIMIT_HASH_SECRET: 'segredo-de-teste' })
+    expect(dependenciasOk(true)).toEqual({ ok: true })
+  })
+
+  /**
+   * A flag assume o risco de não ter contador distribuído; ela não autoriza
+   * abrir mão do sal, que é o que mantém o IP irreversível no que sobrou.
+   */
+  it('a flag não dispensa o segredo de hash', () => {
+    comEnv({ AI_NO_REDIS: 'true' })
+    const v = dependenciasOk(true)
+    expect(v.ok).toBe(false)
+    if (!v.ok) expect(v.codigo).toBe('sem_segredo_hash')
+  })
+
+  it('o limite em memória barra depois do teto configurado', async () => {
+    comEnv({
+      AI_NO_REDIS: 'true',
+      RATE_LIMIT_HASH_SECRET: 'segredo-de-teste',
+      AI_RATE_LIMIT_REQUESTS: '3',
+      AI_RATE_LIMIT_WINDOW_SECONDS: '600',
+    })
+    const sessao = `sessao-${Math.random()}`
+    const ip = `10.0.0.${Math.floor(Math.random() * 250) + 1}`
+
+    for (let i = 0; i < 3; i++) {
+      expect((await dentroDoRateLimit(sessao, ip)).ok, `pergunta ${i + 1}`).toBe(true)
+    }
+
+    const quarta = await dentroDoRateLimit(sessao, ip)
+    expect(quarta.ok).toBe(false)
+    if (!quarta.ok) {
+      expect(quarta.status).toBe(429)
+      expect(quarta.codigo).toBe('muitas_perguntas')
+    }
+  })
+
+  it('uma sessão que estourou não derruba outra', async () => {
+    comEnv({
+      AI_NO_REDIS: 'true',
+      RATE_LIMIT_HASH_SECRET: 'segredo-de-teste',
+      AI_RATE_LIMIT_REQUESTS: '2',
+      AI_RATE_LIMIT_WINDOW_SECONDS: '600',
+    })
+    const ip = `10.1.0.${Math.floor(Math.random() * 250) + 1}`
+    const a = `sessao-a-${Math.random()}`
+    const b = `sessao-b-${Math.random()}`
+
+    await dentroDoRateLimit(a, ip)
+    await dentroDoRateLimit(a, ip)
+    expect((await dentroDoRateLimit(a, ip)).ok).toBe(false)
+    expect((await dentroDoRateLimit(b, ip)).ok).toBe(true)
+  })
+
+  it('sem a flag e fora de produção, não limita nada', async () => {
+    const sessao = `livre-${Math.random()}`
+    const ip = '10.2.0.1'
+    for (let i = 0; i < 20; i++) {
+      expect((await dentroDoRateLimit(sessao, ip)).ok).toBe(true)
+    }
   })
 })
 
