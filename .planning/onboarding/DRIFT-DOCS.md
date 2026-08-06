@@ -6,13 +6,22 @@
 
 **Regra de uso:** nenhum documento abaixo deve ser ingerido como decisão travada sem aplicar as correções listadas. Ingerir cru grava como "decidido" aquilo que já foi mudado.
 
+## Duas categorias distintas — não confundir
+
+Esta auditoria separa dois tipos de divergência, que exigem tratamentos opostos:
+
+- **ERRO FACTUAL** — o documento afirma algo sobre o código que é falso hoje (ex.: "janela de 6 mensagens" quando são 20). Precisa ser corrigido no documento. Não é decisão, é descrição errada.
+- **ESCOPO ABERTO** — o documento planeja algo que ainda não foi construído. Não é erro: é backlog válido, e o autor pode mudar de ideia. Deve ser preservado como intenção, nunca "corrigido" para fora do documento nem tratado como decisão fechada.
+
+A distinção importa porque a spec da Marcilio IA é um **plano ainda em aberto**, não um registro do que foi entregue.
+
 ---
 
 ## Veredito por documento
 
 | Documento | Veredito | Ação antes de ingerir |
 |---|---|---|
-| `docs/superpowers/specs/2026-08-05-marcilio-ia-design.md` | MUITO DEFASADO | Corrigir números; marcar 3 seções como nunca construídas |
+| `docs/superpowers/specs/2026-08-05-marcilio-ia-design.md` | **PLANO ATIVO**, parcialmente implementado | Corrigir só os números e o status do cabeçalho; preservar o escopo não construído como backlog aberto |
 | `docs/ai-operacao.md` | MUITO DEFASADO | Corrigir a lista das "cinco camadas" |
 | `docs/PLANO-MOBILE-FIRST.md` | PARCIALMENTE DEFASADO (~25–30% executado) | Marcar o que já foi feito antes de replanejar |
 | `docs/ia-fluxo.md` | PARCIALMENTE DEFASADO | Corrigir 3 números; resolver inconsistência interna |
@@ -41,25 +50,37 @@ Esses valores mudaram nos commits `48b8ea9` ("corta 34% da entrada por pergunta"
 
 ---
 
-## Spec da Marcilio IA — o que nunca foi construído
+## Spec da Marcilio IA — plano ativo, não finalizado
 
-O documento descreve como decidido três blocos que não existem no código:
+**Status confirmado pelo autor (2026-08-05): a feature não está finalizada. O escopo planejado continua valendo, e ainda pode mudar.**
+
+Portanto este documento **não** deve ser tratado como registro do que foi entregue, nem ter seu escopo pendente removido. As três categorias abaixo são diferentes.
+
+### ERRO FACTUAL — corrigir no documento
+
+Só isto está errado: os números da tabela acima (janela de histórico, corpo da requisição, contexto, documentos, projetos indexados, origin allowlist) e o cabeçalho, que ainda diz *"Nenhuma linha de implementação escrita"* quando a feature está em produção na branch `feat/marcilio-ia`.
+
+### ESCOPO ABERTO — preservar como backlog, sujeito a mudança
+
+Planejado, ainda não construído. Não é falha do documento:
 
 - **§16 Analytics/PostHog** — não há `lib/ai/analytics.ts` nem chamada PostHog em `api/ask.ts`.
-- **§18 Fallback curado** (5 pares pt/en em `content.ts`) — `aiChat` só tem mensagens de erro genéricas.
-- **§20 Testes** (`vitest`, `tests/`, `pnpm test`, `pnpm ai:eval`) — nenhum framework de teste instalado.
+- **§18 Fallback curado** (5 pares pt/en) — `aiChat` em `content.ts` só tem mensagens de erro genéricas.
+- **§20 Testes** (`vitest`, `tests/`, `pnpm test`) — nenhum framework instalado. Os scripts `pnpm ai:matriz`, `ai:seguranca` e `ai:conversa` existem e cobrem parte da intenção, mas de forma avulsa; não está claro se substituem a suíte ou são um passo intermediário — **decisão em aberto do autor**.
+- **Anti-replay do Turnstile** (`SETNX turnstile:<sha256(token)>`, TTL 300s) — ausente em `lib/ai/turnstile.ts`.
+- **Dossiê** — planejado com 9 arquivos em `knowledge/approved/`, existem 5 (`core-profile`, `ai-workflow`, `career-goals`, `without-ai`, `projects/vamoagendar`). Faltam: `education`, `freelance-work`, `teamwork`, `availability`, `projects/avantis`.
 
-Substituído por outra solução (o doc não registra a troca):
+### DIVERGÊNCIA DE IMPLEMENTAÇÃO — confirmar intenção antes de agir
+
+O código resolveu de outro jeito e **já funciona**. Não sabemos se foi decisão consciente ou desvio; o documento não registra a troca. Não "consertar" nenhum destes sem confirmar com o autor:
 
 - `lib/ai/sources.ts` (allowlist id→label/href) → label e href vivem por documento em `scripts/knowledge/build-index.ts`.
 - `lib/ai/openai.ts` como módulo dedicado → a chamada ficou inline em `api/ask.ts`.
-- `tests/adversarial.ts` + `pnpm ai:eval` → scripts avulsos `pnpm ai:matriz`, `ai:seguranca`, `ai:conversa`.
 - Índice `knowledge-index.json` commitado → gerado como `.ts`.
-- Anti-replay do Turnstile (`SETNX turnstile:<sha256>`) → não implementado.
 
-Dossiê planejado com 9 arquivos em `knowledge/approved/`; existem 5 (`core-profile`, `ai-workflow`, `career-goals`, `without-ai`, `projects/vamoagendar`).
+### NÃO PREVISTO NO DOC — incorporar ao plano
 
-Uma camada inteira nasceu depois do doc e não aparece nele: o cache Redis (`lib/ai/cache.ts`, TTL 7 dias, só na primeira pergunta da conversa).
+O cache Redis (`lib/ai/cache.ts`, TTL 7 dias, acionado só na primeira pergunta da conversa) nasceu depois do documento e não aparece em lugar nenhum dele — inclusive o diagrama de fluxo de 11 passos o ignora. Como a feature segue em aberto, vale adicioná-lo ao plano em vez de deixá-lo como conhecimento tácito do código.
 
 ---
 
@@ -79,6 +100,8 @@ Uma camada inteira nasceu depois do doc e não aparece nele: o cache Redis (`lib
 ---
 
 ## Trabalho real ainda pendente (não é drift — é backlog)
+
+**Marcilio IA — frente aberta.** É a única das três com o autor declarando explicitamente que ainda não finalizou. Ver a seção da spec acima: o escopo em aberto (analytics, fallback curado, testes, anti-replay, 4 documentos do dossiê) segue válido como plano e pode ser revisto.
 
 **Imagens dos cases (Task 9 do plano de 2026-08-02).** Tasks 1–8 estão feitas: pipeline de captura, `CaseFrame.tsx`, contrato `media` pt/en, coluna de shots no desktop, thumb no `ArchiveOverlay`, vídeo do VamoAgendar. Da Task 9, só o SISCO foi integrado. Faltam campos `media` e assets para: Sushi do Verão, KyteApp Scrapper, Storage Crates, Simple Machines, Voxel Engine ("mine").
 
