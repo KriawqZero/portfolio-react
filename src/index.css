@@ -792,6 +792,20 @@ input, textarea {
   background: linear-gradient(180deg, var(--accent-light), transparent);
 }
 
+.ia-topo-editorial {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.7rem;
+}
+
+/* Só entra em cena no celular, com a conversa aberta — ver o bloco responsivo. */
+.ia-aviso-curto {
+  display: none;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
 .ai-privacidade {
   margin-top: 1.25rem;
   font-size: var(--text-xs);
@@ -1259,10 +1273,43 @@ input, textarea {
   }
 }
 
-/* Tela baixa e estreita ao mesmo tempo: a descrição é a única parte do bloco
-   editorial que o visitante pode perder sem prejuízo — o disclaimer diz que
-   ele fala com uma IA, e isso fica. Sem este corte, sobra menos de um terço
-   da tela para a conversa, que é o motivo de a página existir. */
+/* ── Celular: apresentação e conversa não disputam a mesma tela ──────
+   Empilhado e com a página travada, o bloco editorial come ~440px e sobra
+   coisa de 100px para a conversa — medido num webview do Instagram, que ainda
+   rouba barra em cima e embaixo. Cortar parágrafo não resolve um problema que
+   é de estrutura.
+
+   O que resolve é notar que os dois momentos não coexistem: a apresentação
+   importa antes de perguntar, a conversa importa depois. Então, na hora em que
+   o primeiro turno entra em cena, o bloco recolhe para uma faixa de uma linha
+   e devolve ~380px para a leitura. Volta inteiro no "limpar conversa".
+
+   `:has()` em vez de estado no React: quem sabe se existe conversa é o DOM, e
+   levantar esse estado só para o CSS reagir seria prop atravessando dois
+   componentes para dizer o que o seletor já enxerga. */
+@media (max-width: 1023px) {
+  .ia-grid:has(.ai-turno) .ia-numero,
+  .ia-grid:has(.ai-turno) .ia-titulo,
+  .ia-grid:has(.ai-turno) .ia-editorial .ai-description,
+  .ia-grid:has(.ai-turno) .ia-editorial .ai-disclaimer,
+  .ia-grid:has(.ai-turno) .ia-editorial .ai-privacidade {
+    display: none;
+  }
+
+  /* O aviso não desaparece com o disclaimer — só para de ocupar meia tela. */
+  .ia-grid:has(.ai-turno) .ia-aviso-curto {
+    display: inline;
+  }
+
+  .ia-grid:has(.ai-turno) {
+    gap: 0.85rem;
+  }
+}
+
+/* Tela baixa e estreita ao mesmo tempo: mesmo antes da primeira pergunta, a
+   descrição é a única parte do bloco editorial que o visitante pode perder sem
+   prejuízo — o disclaimer diz que ele fala com uma IA, e isso fica. Sem este
+   corte, sobra menos de um terço da tela para a conversa, que é o motivo de a página existir. */
 @media (max-width: 1023px) and (max-height: 780px) {
   .ia-editorial .ai-description {
     display: none;

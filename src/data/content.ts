@@ -342,6 +342,12 @@ export const ptContent = {
      * de transparência, e é o que separa um registro legítimo de um silencioso.
      */
     privacy: 'As perguntas ficam registradas comigo, para eu acompanhar o que perguntam e melhorar as respostas.',
+    /**
+     * No celular, quando a conversa começa, o bloco de apresentação recolhe
+     * para a conversa caber. O aviso não pode sumir junto: ele encolhe para
+     * esta linha, que fica ao lado do rótulo.
+     */
+    compactNotice: 'você está falando com uma IA',
     placeholder: 'pergunte sobre projetos, stack, forma de trabalhar…',
     sendLabel: 'Enviar pergunta',
     inputLabel: 'Sua pergunta para a IA do Marcilio',
@@ -854,6 +860,8 @@ export const enContent = {
     disclaimer: 'You are talking to an AI, not to me. It explains my work, but it does not decide anything or commit to anything on my behalf.',
     /** Ver a nota no bloco em português. */
     privacy: 'Questions are recorded on my side, so I can follow what people ask and improve the answers.',
+    /** Ver a nota no bloco em português. */
+    compactNotice: 'you are talking to an AI',
     placeholder: 'ask about projects, stack, how I work…',
     sendLabel: 'Send question',
     inputLabel: 'Your question for Marcilio\'s AI',

@@ -98,7 +98,14 @@ export default function PaginaIA() {
         </span>
 
         <div className="ia-editorial">
-          <Revela className="section-label">{data.label}</Revela>
+          {/* O rótulo e o aviso curto são o que sobra do bloco editorial no
+              celular depois que a conversa começa. O aviso fica escondido até
+              lá — enquanto o disclaimer inteiro está na tela, repeti-lo seria
+              redundância. */}
+          <div className="ia-topo-editorial">
+            <Revela className="section-label">{data.label}</Revela>
+            <span className="ia-aviso-curto">{data.compactNotice}</span>
+          </div>
 
           <h1 className="text-display ia-titulo">
             <Revela atraso={0.08}>{data.title}</Revela>
