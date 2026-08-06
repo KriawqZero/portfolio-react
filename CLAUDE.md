@@ -16,9 +16,14 @@ planning system, and its Markdown documents drifted badly from the code.
 
 Work fronts, as of this date:
 
-- **Marcilio IA — open.** The only unfinished front. Remaining scope (analytics, curated
-  fallback, Turnstile anti-replay, 4 missing dossier documents) is listed in `DRIFT-DOCS.md`
-  and the author may still change it.
+- **Marcilio IA — open.** The only unfinished front. As of 2026-08-06 the curated fallback,
+  the Turnstile anti-replay, three dossier documents, the SEO hygiene and most of the test
+  suite are done; what remains is analytics/PostHog, the JSON-LD and pre-render of §19, and
+  the mock-based handler tests. `DRIFT-DOCS.md` has the itemised state and the author may
+  still change it.
+  **Awaiting the author's review:** the fallback texts in `content.ts` and the three new
+  documents in `knowledge/approved/` are agent-written drafts derived from existing
+  material. They speak in his first person — do not treat them as approved copy.
 - **Case images and mobile-first — closed.** Their remaining scope was deliberately dropped.
   The code differing from those plans is a decision, not a regression. Do not "fix" it and do
   not turn it into backlog.
@@ -56,10 +61,24 @@ Use `pnpm` exclusively — never npm or yarn.
 `pnpm lint` and `pnpm test` are both green on a clean tree. If either fails, the change
 under your hands caused it — do not silence a rule or delete an assertion to get past it.
 
-Test coverage is deliberately narrow: `tests/` covers the **pure functions of `lib/ai/`**
-(`validate-request`, `validate-answer`, `retrieval`) and nothing else. Those guard money
-and correctness — request limits, the ban on model-invented URLs reaching the screen, the
-ban on citing a document that was never in context, and the caps that bound prompt size.
+Test coverage is deliberately narrow and targets what guards money and correctness:
+
+- the **pure functions of `lib/ai/`** (`validate-request`, `validate-answer`, `retrieval`) —
+  request limits, the ban on model-invented URLs reaching the screen, the ban on citing a
+  document that was never in context, the caps that bound prompt size, and the retrieval
+  floor that keeps a document out of the prompt when it merely shares one word with the
+  question;
+- the **generated index** (`tests/knowledge-index.test.ts`) — every approved document is
+  in it (a stale index fails silently: build and lint stay green and the AI just says it
+  does not know), no duplicate ids, every source has a valid https href;
+- the **`aiChat` content** (`tests/content.test.ts`) — pt/en have the same shape, and the
+  hand-written fallback answers carry no URL. Neither is covered by `tsc`: `enContent` is
+  not declared as `typeof ptContent`, and the fallback text never passes through
+  `validate-answer`.
+
+The endpoint handler itself has no tests yet — the mock-based cases from §20 of the spec
+(Turnstile, rate limit, budget, kill switch, Redis down, OpenAI down, timeout) are the
+main remaining gap.
 
 There are no component, animation or E2E tests, and that is a decision, not a gap:
 animation is judged by eye (see "Animations are part of the product"). When you touch

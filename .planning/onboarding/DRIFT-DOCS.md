@@ -62,13 +62,14 @@ Só isto está errado: os números da tabela acima (janela de histórico, corpo 
 
 ### ESCOPO ABERTO — preservar como backlog, sujeito a mudança
 
-Planejado, ainda não construído. Não é falha do documento:
+**Atualizado em 2026-08-06.** Boa parte desta lista foi fechada; o que sobrou está marcado.
 
-- **§16 Analytics/PostHog** — não há `lib/ai/analytics.ts` nem chamada PostHog em `api/ask.ts`.
-- **§18 Fallback curado** (5 pares pt/en) — `aiChat` em `content.ts` só tem mensagens de erro genéricas.
-- **§20 Testes** (`vitest`, `tests/`, `pnpm test`) — nenhum framework instalado. Os scripts `pnpm ai:matriz`, `ai:seguranca` e `ai:conversa` existem e cobrem parte da intenção, mas de forma avulsa; não está claro se substituem a suíte ou são um passo intermediário — **decisão em aberto do autor**.
-- **Anti-replay do Turnstile** (`SETNX turnstile:<sha256(token)>`, TTL 300s) — ausente em `lib/ai/turnstile.ts`.
-- **Dossiê** — planejado com 9 arquivos em `knowledge/approved/`, existem 5 (`core-profile`, `ai-workflow`, `career-goals`, `without-ai`, `projects/vamoagendar`). Faltam: `education`, `freelance-work`, `teamwork`, `availability`, `projects/avantis`.
+- **§16 Analytics/PostHog** — **ainda aberto.** Não há `lib/ai/analytics.ts` nem chamada PostHog em `api/ask.ts`. É opcional na própria especificação e não muda nada para o visitante.
+- **§18 Fallback curado** — **fechado.** `aiChat.fallback` existe em pt e en com 5 pares, e `AiChat` os oferece quando a IA cai (menos em rate limit, de propósito). Os textos são **rascunho derivado do dossiê e ainda não revisados pelo autor**.
+- **§19 GEO/SEO** — **parcialmente fechado.** Higiene feita: `sitemap.xml` (era do `avantis.dev`), `robots.txt` com `Disallow: /api/`, canonical/og/twitter apontando para `www`, que é o destino real do 308. **Continuam abertos**: JSON-LD `Person`/`ProfilePage`/`WebSite` gerado do `content.ts`, e o pré-render com Puppeteer.
+- **§20 Testes** — **em grande parte fechado.** `vitest` instalado, `pnpm test` com 65 testes em 5 arquivos: as três funções puras de `lib/ai/`, a integridade do índice gerado, a allowlist de fontes e a simetria pt/en do `aiChat`. **Continua aberto**: o handler com mocks (Turnstile inválido, rate limit, orçamento, kill switch, Redis fora, OpenAI fora, timeout) e o parser de frontmatter. Os scripts `ai:matriz`, `ai:seguranca` e `ai:conversa` seguem sendo a trilha que gasta dinheiro, rodada à mão.
+- **Anti-replay do Turnstile** — **fechado.** `registrarTokenTurnstile` em `lib/ai/limits.ts`, `SETNX` com TTL 300s, chamado por `verificarTurnstile` antes da ida à Cloudflare.
+- **Dossiê** — **fechado, com decisão.** Existem 8 arquivos: os 5 originais mais `teamwork`, `freelance-work` e `projects/avantis` (**rascunho não revisado pelo autor**). `education` e `availability` **não foram criados de propósito**: `core-profile` já tem a seção de formação e `career-goals` a de disponibilidade, ambos com os aliases certos, e um documento redundante competiria no ranking sem trazer informação nova. Se o autor quiser separá-los, é decisão dele — não é pendência esquecida.
 
 ### DIVERGÊNCIA DE IMPLEMENTAÇÃO — confirmar intenção antes de agir
 
@@ -101,7 +102,13 @@ O cache Redis (`lib/ai/cache.ts`, TTL 7 dias, acionado só na primeira pergunta 
 
 ## Trabalho real ainda pendente (não é drift — é backlog)
 
-**Marcilio IA — ÚNICA FRENTE ABERTA.** O autor declarou explicitamente que ainda não finalizou. Ver a seção da spec acima: o escopo em aberto (analytics, fallback curado, testes, anti-replay, 4 documentos do dossiê) segue válido como plano e pode ser revisto.
+**Marcilio IA — ÚNICA FRENTE ABERTA.** O autor declarou explicitamente que ainda não finalizou.
+
+Em 2026-08-06 fecharam-se: fallback curado, anti-replay do Turnstile, três documentos do dossiê, a higiene de SEO e a maior parte da suíte de testes. Também se corrigiu o ranqueamento da busca, que ordenava candidatos pelo tamanho do texto quando nenhum casava metadado.
+
+**Continua aberto:** analytics/PostHog (opcional), JSON-LD e pré-render do §19, testes do handler com mocks e do parser de frontmatter.
+
+**Precisa de revisão humana antes do merge:** os textos do fallback (`aiChat.fallback`, pt e en) e os três documentos novos de `knowledge/approved/` são rascunho derivado do material existente, escritos por agente. São a voz do autor em primeira pessoa e ninguém além dele pode aprová-los.
 
 As duas frentes abaixo foram **encerradas por decisão do autor (2026-08-05)**. O escopo remanescente descrito nos documentos foi descartado — não é pendência, não deve virar item de roadmap, e o código estar diferente do plano não é defeito. Registrado aqui apenas para que uma leitura futura do código não interprete a diferença como regressão.
 
