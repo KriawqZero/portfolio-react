@@ -48,9 +48,9 @@ AI_CHAT_ENABLED=true    # liga
 AI_CHAT_ENABLED=false   # desliga
 ```
 
-Mudar a variável exige um redeploy para valer. Com a IA desligada, a seção
-continua na página: o visitante vê a apresentação e as perguntas sugeridas, e
-recebe um aviso discreto se tentar perguntar.
+Mudar a variável exige um redeploy para valer. Com a IA desligada, a página `/ia`
+continua no ar: o visitante vê a apresentação e as perguntas sugeridas, e ao
+perguntar recebe o aviso mais as respostas pré-escritas do fallback curado.
 
 Para desligar de imediato, sem esperar deploy, o caminho é o Attack Challenge
 Mode do firewall (afeta o site inteiro, use só em incidente):
@@ -110,7 +110,7 @@ chega ao modelo.
 ```bash
 pnpm ai:matriz            # 30+ perguntas adversariais, custa dinheiro
 pnpm ai:matriz injecao    # só um grupo
-pnpm ai:shot              # capturas da seção em desktop e mobile
+pnpm ai:shot              # capturas da página /ia em desktop e mobile
 ```
 
 A matriz confere o que dá para conferir por programa (status, ausência de link,

@@ -9,7 +9,7 @@ Documento de leitura, não de operação. Para ligar, desligar e configurar, vej
 
 ```mermaid
 flowchart TD
-    A["Visitante clica numa sugestão<br/>ou digita a pergunta"] --> B["AiChat.tsx<br/>monta o corpo JSON"]
+    A["Visitante clica numa sugestão<br/>ou digita a pergunta em /ia"] --> B["useConversaIA.ts<br/>monta o corpo JSON"]
     B --> C["Turnstile gera um token<br/>useTurnstile.ts"]
     C --> D["POST /api/ask"]
 
@@ -31,7 +31,7 @@ flowchart TD
     R --> S["cache.ts guarda"]
     S --> T["JSON para o navegador"]
     M --> T
-    T --> U["AiChat.tsx revela<br/>frase por frase"]
+    T --> U["Turno.tsx revela<br/>frase por frase"]
 
     style M fill:#1a3a1a,color:#fff
     style Q fill:#3a1a3a,color:#fff
@@ -45,7 +45,7 @@ depois que todas passaram.
 
 ## 2. O que sai do navegador
 
-`src/components/AiChat.tsx`, função `enviar()`:
+`src/hooks/useConversaIA.ts`, função `enviar()`:
 
 ```json
 POST /api/ask
@@ -384,14 +384,17 @@ Os `sourceIds` viram links pela allowlist — o servidor é quem monta o endere�
 }
 ```
 
-O `AiChat.tsx` então:
+O `src/components/ia/Turno.tsx` então:
 
 1. quebra `answer` em frases;
 2. revela cada frase com fade, 80 ms de intervalo — a resposta inteira já está
    ali, o efeito só embala a leitura;
-3. mostra `sources` como links (só os da allowlist);
-4. mostra `followUps` como botões clicáveis;
-5. se `requiresHumanContact` for `true`, mostra o atalho para a seção de contato.
+3. mostra `sources` como marginália ao lado do texto, numerada, com link só para
+   as da allowlist;
+4. mostra `followUps` como botões clicáveis, no último turno da conversa;
+5. se `requiresHumanContact` for `true`, oferece o atalho que leva ao epílogo do
+   portfólio — que agora é outra página, então a navegação passa pelo roteador
+   (`navegarParaSecao`), não por uma âncora.
 
 O texto é renderizado como **texto puro** dentro de um `<p>`. Nunca
 `dangerouslySetInnerHTML`, nunca parser de Markdown.
