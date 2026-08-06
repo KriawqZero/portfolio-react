@@ -78,15 +78,18 @@ if (build.length) {
   console.log('          Se você adicionou na Vercel agora, um redeploy sem novo build não resolve.')
 }
 
+const alvo = process.argv[2]
+
 console.log(
   faltando === 0
     ? `\n${ok('Nenhuma variável obrigatória faltando neste ambiente.')}\n`
-    : `\n${erro(`${faltando} variável(is) obrigatória(s) faltando.`)}\n`,
+    : `\n${erro(`${faltando} variável(is) obrigatória(s) faltando neste ambiente.`)}${
+        alvo ? ` ${alerta('(não diz nada sobre o site publicado — a Vercel tem as dela)')}` : ''
+      }\n`,
 )
 
 // ─── Verificação remota, opcional ─────────────────────────────────────────────
 
-const alvo = process.argv[2]
 if (!alvo) {
   console.log('Para checar o que está no ar: pnpm ai:prontidao https://www.marciliortiz.dev.br\n')
   process.exit(faltando === 0 ? 0 : 1)
@@ -127,5 +130,11 @@ const LEITURA: Record<string, string> = {
 console.log(`  HTTP ${resposta.status} · ${corpo.error ?? 'sem código'}`)
 console.log(`  ${LEITURA[corpo.error ?? ''] ?? `${alerta('resposta inesperada')} — ${JSON.stringify(corpo)}`}\n`)
 
+/**
+ * Quando há alvo remoto, quem manda no código de saída é o site publicado.
+ * Misturar com o resultado local fazia o script imprimir "saudável" em verde e
+ * sair com erro assim mesmo — porque a máquina do desenvolvedor não precisa
+ * ter as credenciais de produção.
+ */
 const saudavel = corpo.error === 'verificacao_ausente' || corpo.error === 'verificacao_invalida'
-process.exit(faltando === 0 && saudavel ? 0 : 1)
+process.exit(saudavel ? 0 : 1)
