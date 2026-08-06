@@ -40,8 +40,11 @@ export default function App() {
       requestAnimationFrame(() => {
         if (cancelado) return
         ScrollTrigger.refresh()
-        if (ancora) {
-          document.getElementById(ancora)?.scrollIntoView({ behavior: 'smooth' })
+        const alvo = ancora ? document.getElementById(ancora) : null
+        if (alvo) {
+          // Pelo Lenis, e não por scrollIntoView: quem manda na rolagem desta
+          // página é ele, e é o mesmo caminho que as âncoras normais usam.
+          lenisRef.current?.scrollTo(alvo, { offset: -80 })
         } else {
           lenisRef.current?.scrollTo(posicao, { immediate: true })
         }
