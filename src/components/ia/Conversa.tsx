@@ -175,8 +175,14 @@ export default function Conversa() {
         )}
       </div>
 
-      {/* Âncora do widget invisível do Turnstile. */}
-      <div ref={turnstileRef} aria-hidden="true" />
+      {/* Âncora do Turnstile.
+          Não leva `aria-hidden`: o widget fica invisível na maior parte do
+          tempo, mas quando a Cloudflare decide desafiar ele vira um checkbox
+          de verdade — dentro de um contêiner escondido, um usuário de leitor
+          de tela não teria como saber que existe algo bloqueando a pergunta
+          dele. `flex-shrink: 0` garante que, ao aparecer, ele não seja
+          espremido pela coluna de altura fixa. */}
+      <div ref={turnstileRef} className="ai-turnstile" />
     </div>
   )
 }

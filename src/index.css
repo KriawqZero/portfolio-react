@@ -1155,6 +1155,16 @@ input, textarea {
   cursor: not-allowed;
 }
 
+/* Vazio na maior parte do tempo. Quando a Cloudflare desafia, o widget ocupa
+   altura de verdade — e é a conversa que encolhe para caber, não ele. */
+.ai-turnstile {
+  flex-shrink: 0;
+}
+
+.ai-turnstile:not(:empty) {
+  margin-top: 1rem;
+}
+
 .ai-clear {
   margin-top: 1rem;
   font-size: var(--text-xs);
