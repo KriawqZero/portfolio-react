@@ -118,6 +118,11 @@ export default function PaginaIA() {
               <span aria-hidden="true" className="ai-disclaimer-mark" />
               {data.disclaimer}
             </p>
+
+            {/* Mais discreto que o disclaimer de propósito: o que importa saber
+                antes de perguntar é que do outro lado tem uma IA. Que a
+                pergunta fica registrada é obrigação de contar, não manchete. */}
+            <p className="ai-privacidade">{data.privacy}</p>
           </motion.div>
         </div>
 

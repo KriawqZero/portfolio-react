@@ -337,6 +337,11 @@ export const ptContent = {
     },
     description: 'Uma representação treinada com informações profissionais que eu mesmo revisei. Ela responde sobre projetos, stack e forma de trabalhar.',
     disclaimer: 'Você está falando com uma IA, não comigo. Ela explica meu trabalho, mas não decide nem assume compromissos por mim.',
+    /**
+     * As perguntas são gravadas. Avisar não é gentileza: é o que a LGPD chama
+     * de transparência, e é o que separa um registro legítimo de um silencioso.
+     */
+    privacy: 'As perguntas ficam registradas comigo, para eu acompanhar o que perguntam e melhorar as respostas.',
     placeholder: 'pergunte sobre projetos, stack, forma de trabalhar…',
     sendLabel: 'Enviar pergunta',
     inputLabel: 'Sua pergunta para a IA do Marcilio',
@@ -847,6 +852,8 @@ export const enContent = {
     },
     description: 'A representation built from professional information I reviewed myself. It answers about projects, stack and how I work.',
     disclaimer: 'You are talking to an AI, not to me. It explains my work, but it does not decide anything or commit to anything on my behalf.',
+    /** Ver a nota no bloco em português. */
+    privacy: 'Questions are recorded on my side, so I can follow what people ask and improve the answers.',
     placeholder: 'ask about projects, stack, how I work…',
     sendLabel: 'Send question',
     inputLabel: 'Your question for Marcilio\'s AI',

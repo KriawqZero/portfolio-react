@@ -14,6 +14,7 @@
  */
 
 import type { VercelRequest, VercelResponse } from '@vercel/node'
+import { waitUntil } from '@vercel/functions'
 import OpenAI from 'openai'
 
 import { respostaEmCache, guardarResposta } from '../lib/ai/cache.js'
@@ -33,9 +34,28 @@ import { verificarTurnstile } from '../lib/ai/turnstile.js'
 import { ANSWER_JSON_SCHEMA } from '../lib/ai/types.js'
 import { validarResposta } from '../lib/ai/validate-answer.js'
 import { origemPermitida, validarCorpo } from '../lib/ai/validate-request.js'
+import { registrarPergunta, type RegistroDePergunta } from '../lib/ai/registro.js'
 
 function erro(res: VercelResponse, status: number, codigo: string, estado?: string) {
   return res.status(status).json({ error: codigo, ...(estado ? { state: estado } : {}) })
+}
+
+/**
+ * Grava depois de a resposta já ter saído.
+ *
+ * `waitUntil` é o que mantém a instância viva até a escrita terminar sem
+ * segurar o visitante. Fora da Vercel — no `pnpm dev`, onde o handler roda
+ * dentro do Vite — não existe contexto de requisição e a chamada lança; ali a
+ * promessa fica solta mesmo, e quem impede rejeição não tratada é o try/catch
+ * dentro de `registrarPergunta`, que nunca deixa nada escapar.
+ */
+function registrarEmSegundoPlano(registro: RegistroDePergunta) {
+  const tarefa = registrarPergunta(registro)
+  try {
+    waitUntil(tarefa)
+  } catch {
+    void tarefa
+  }
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -88,6 +108,23 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return erro(res, limite.status, limite.codigo, limite.estado)
   }
 
+  /**
+   * Campos que todo registro carrega, montados uma vez.
+   *
+   * As portas anteriores a esta — origem, Turnstile, rate limit — não gravam
+   * nada de propósito: elas existem justamente para recusar barato, e escrever
+   * no Postgres a cada recusa entregaria de graça o custo que elas evitam. O
+   * que passou daqui é pergunta de verdade, e é isso que vai para a tabela.
+   */
+  const recebidoEm = Date.now()
+  const registroBase = {
+    sessao: sessionId,
+    origem: chaveAnonima(ip),
+    idioma: lang,
+    contexto: context ?? 'default',
+    pergunta: question,
+  }
+
   // Cache só na primeira pergunta da conversa.
   //
   // A chave é a pergunta, não a conversa. Com histórico, "e quem é seu sócio?"
@@ -99,6 +136,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const guardada = await respostaEmCache(question, lang, context ?? 'default', KNOWLEDGE_VERSION)
     if (guardada) {
       console.log(JSON.stringify({ evento: 'ask_cache', status: guardada.status, lang }))
+      // `documentos` fica nulo: o cache guarda a resposta, não a seleção que a
+      // produziu. A coluna `cache` é o que impede ler isso como falha da busca.
+      registrarEmSegundoPlano({
+        ...registroBase,
+        resposta: guardada.answer,
+        status: guardada.status,
+        ms: Date.now() - recebidoEm,
+        cache: true,
+      })
       return res.status(200).json(guardada)
     }
   }
@@ -179,6 +225,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       }),
     )
 
+    registrarEmSegundoPlano({
+      ...registroBase,
+      resposta: validada.answer,
+      status: validada.status,
+      documentos: documentos.map(d => d.id),
+      ms: Date.now() - recebidoEm,
+    })
+
     return res.status(200).json(validada)
   } catch (e) {
     const nome = e instanceof Error ? e.name : 'desconhecido'
@@ -191,6 +245,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         latenciaMs: Date.now() - inicio,
       }),
     )
+
+    // A pergunta que falhou vale tanto quanto a que deu certo: é ela que
+    // mostra o que a IA não conseguiu responder, e quando.
+    registrarEmSegundoPlano({
+      ...registroBase,
+      documentos: documentos.map(d => d.id),
+      erro: timeout ? 'tempo_esgotado' : nome,
+      ms: Date.now() - recebidoEm,
+    })
 
     return timeout
       ? erro(res, 504, 'tempo_esgotado', 'upstream')
