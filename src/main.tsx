@@ -2,7 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { MotionConfig } from 'framer-motion'
 import './index.css'
-import App from './App.tsx'
+import Rotas from './Rotas'
 import { LanguageProvider } from './hooks/LanguageProvider'
 
 createRoot(document.getElementById('root')!).render(
@@ -11,7 +11,7 @@ createRoot(document.getElementById('root')!).render(
         do sistema — cobre as revelações de Trajectory e DevProcess no mobile. */}
     <MotionConfig reducedMotion="user">
       <LanguageProvider>
-        <App />
+        <Rotas />
       </LanguageProvider>
     </MotionConfig>
   </StrictMode>,

@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useLayoutEffect, useRef } from 'react'
 import { useSmoothScroll } from './hooks/useSmoothScroll'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useLanguage } from './hooks/useLanguage'
+import { consumirAncoraPendente, ultimaPosicaoDoPortfolio } from './hooks/useRota'
 import CursorGlow from './components/CursorGlow'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -11,17 +12,47 @@ import FreelanceProjects from './components/FreelanceProjects'
 import Avantis from './components/Avantis'
 import AboutMe from './components/AboutMe'
 import DevProcess from './components/DevProcess'
-import AiChat from './components/AiChat'
 import Contact from './components/Contact'
 
 gsap.registerPlugin(ScrollTrigger)
 
 export default function App() {
-  useSmoothScroll()
+  const lenisRef = useSmoothScroll()
   const bgRef = useRef<HTMLDivElement>(null)
   const lineRef = useRef<HTMLDivElement>(null)
 
   const { isFreelanceView, language } = useLanguage()
+
+  /**
+   * Voltando da Marcilio IA, o portfólio remonta do zero — inclusive os cinco
+   * ScrollTriggers pinados. Devolver o visitante ao ponto onde ele estava exige
+   * esperar os pin-spacers existirem, senão a página ainda não tem a altura
+   * final e o salto cai no lugar errado.
+   */
+  useLayoutEffect(() => {
+    const ancora = consumirAncoraPendente()
+    const posicao = ultimaPosicaoDoPortfolio()
+    if (!ancora && posicao <= 0) return
+
+    let cancelado = false
+    requestAnimationFrame(() => {
+      if (cancelado) return
+      requestAnimationFrame(() => {
+        if (cancelado) return
+        ScrollTrigger.refresh()
+        if (ancora) {
+          document.getElementById(ancora)?.scrollIntoView({ behavior: 'smooth' })
+        } else {
+          lenisRef.current?.scrollTo(posicao, { immediate: true })
+        }
+        ScrollTrigger.refresh()
+      })
+    })
+
+    return () => {
+      cancelado = true
+    }
+  }, [lenisRef])
 
   // Refresh GSAP scroll triggers when language or freelance view changes to prevent layout offset bugs
   useEffect(() => {
@@ -96,7 +127,6 @@ export default function App() {
         <Trajectory />
         <Avantis />
         <DevProcess />
-        <AiChat />
         <Contact />
       </main>
     </div>

@@ -2,6 +2,7 @@ import { useRef, useEffect, useMemo } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useLanguage } from '../hooks/useLanguage'
+import ConviteIA from './ConviteIA'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -80,6 +81,13 @@ export default function Contact() {
         // Keep last phrase fully visible
         tl.to(`.ep-phrase-${phrasesList.length - 1}`, { opacity: 1, duration: 0.1 }, 0.35 + phrasesList.length * 0.08)
 
+        // ── O convite para a IA entra entre as frases e os links ──
+        tl.fromTo('.ep-ia',
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.35, ease: 'power2.out' },
+          0.66
+        )
+
         // ── Act 4: Contact links appear one by one (0.65 → 0.85) ──
         links.forEach((_, i) => {
           tl.fromTo(`.ep-link-${i}`,
@@ -120,7 +128,7 @@ export default function Contact() {
 
       // ─── Sem movimento: estado final direto ───
       mm.add('(prefers-reduced-motion: reduce)', () => {
-        gsap.set('.ep-label, .ep-title, .ep-text, .ep-copyright, .ep-separator', { opacity: 1, y: 0 })
+        gsap.set('.ep-label, .ep-title, .ep-text, .ep-copyright, .ep-separator, .ep-ia', { opacity: 1, y: 0 })
         phrases.forEach((_, i) => gsap.set(`.ep-phrase-${i}`, { opacity: 1, y: 0 }))
         links.forEach((_, i) => gsap.set(`.ep-link-${i}`, { opacity: 1, y: 0 }))
       })
@@ -134,6 +142,8 @@ export default function Contact() {
         phrases.forEach((_, i) => {
           gsap.fromTo(`.ep-phrase-${i}`, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power2.out', scrollTrigger: { trigger: `.ep-phrase-${i}`, start: 'top 90%' } })
         })
+
+        gsap.fromTo('.ep-ia', { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: '.ep-ia', start: 'top 90%' } })
 
         links.forEach((_, i) => {
           gsap.fromTo(`.ep-link-${i}`, { y: 15, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: 'power2.out', scrollTrigger: { trigger: `.ep-link-${i}`, start: 'top 90%' } })
@@ -249,6 +259,14 @@ export default function Contact() {
                   {phrase}
                 </span>
               ))}
+            </div>
+
+            {/* Última chance de perguntar antes de escrever. Quem chegou até o
+                epílogo já se interessou — e uma dúvida respondida agora vale
+                mais do que um e-mail que talvez não seja enviado. */}
+            <div className="ep-ia" style={{ marginBottom: '2.5rem', opacity: 0 }}>
+              <p className="ep-ia-prompt">{t.aiChat.invite.contactPrompt}</p>
+              <ConviteIA rotulo={t.aiChat.invite.contactCta} />
             </div>
 
             {/* Contact Links */}

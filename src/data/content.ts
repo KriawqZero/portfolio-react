@@ -323,6 +323,18 @@ export const ptContent = {
     label: 'MARCILIO IA',
     title: 'Pergunte',
     titleHighlight: 'à minha IA.',
+    /** Título da aba na página própria da IA. */
+    pageTitle: 'Marcilio IA — pergunte sobre o meu trabalho',
+    nav: {
+      label: 'Navegação principal',
+      portfolio: 'O portfólio',
+      ia: 'Converse com minha IA',
+    },
+    invite: {
+      hero: 'Converse com minha IA',
+      contactPrompt: 'Prefere perguntar antes de escrever?',
+      contactCta: 'Converse com minha IA',
+    },
     description: 'Uma representação treinada com informações profissionais que eu mesmo revisei. Ela responde sobre projetos, stack e forma de trabalhar.',
     disclaimer: 'Você está falando com uma IA, não comigo. Ela explica meu trabalho, mas não decide nem assume compromissos por mim.',
     placeholder: 'pergunte sobre projetos, stack, forma de trabalhar…',
@@ -333,7 +345,7 @@ export const ptContent = {
     sourcesLabel: 'fontes',
     followUpsLabel: 'continue por aqui',
     contactCta: 'falar com o Marcilio',
-    emptyState: 'Escolha uma pergunta ao lado ou escreva a sua.',
+    emptyState: 'Escolha uma pergunta abaixo ou escreva a sua.',
     errors: {
       generic: 'Deu problema aqui do meu lado. Tenta de novo em instantes.',
       timeout: 'Demorei demais para responder. Tenta perguntar de novo.',
@@ -806,6 +818,18 @@ export const enContent = {
     label: 'MARCILIO AI',
     title: 'Ask',
     titleHighlight: 'my AI.',
+    /** Título da aba na página própria da IA. */
+    pageTitle: 'Marcilio AI — ask about my work',
+    nav: {
+      label: 'Main navigation',
+      portfolio: 'The portfolio',
+      ia: 'Talk to my AI',
+    },
+    invite: {
+      hero: 'Talk to my AI',
+      contactPrompt: 'Rather ask before writing?',
+      contactCta: 'Talk to my AI',
+    },
     description: 'A representation built from professional information I reviewed myself. It answers about projects, stack and how I work.',
     disclaimer: 'You are talking to an AI, not to me. It explains my work, but it does not decide anything or commit to anything on my behalf.',
     placeholder: 'ask about projects, stack, how I work…',

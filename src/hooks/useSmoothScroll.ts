@@ -19,9 +19,14 @@ export function useSmoothScroll() {
     // Sync Lenis with GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update)
 
-    gsap.ticker.add((time) => {
+    // Guardado numa variável porque quem entra no ticker é este wrapper, não
+    // `lenis.raf` — remover a referência errada na limpeza deixava o callback
+    // vivo chamando um Lenis já destruído a cada troca de rota.
+    const avancarLenis = (time: number) => {
       lenis.raf(time * 1000)
-    })
+    }
+
+    gsap.ticker.add(avancarLenis)
 
     gsap.ticker.lagSmoothing(0)
 
@@ -45,7 +50,7 @@ export function useSmoothScroll() {
 
     return () => {
       document.removeEventListener('click', handleAnchorClick)
-      gsap.ticker.remove(lenis.raf)
+      gsap.ticker.remove(avancarLenis)
       lenis.destroy()
     }
   }, [])

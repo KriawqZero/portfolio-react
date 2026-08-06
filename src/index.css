@@ -484,36 +484,273 @@ input, textarea {
     --text-hero: clamp(2.5rem, 10vw, 3.5rem);
   }
 }
+
 /* ================================================================
-   MARCILIO IA — seção de conversa
-   Altura estável de propósito: a seção fica entre dois ScrollTriggers
-   pinados, então a conversa rola dentro do painel, nunca empurra a página.
+   TROCA DE PÁGINA — dissolve com desfoque
+   O navegador congela um retrato de cada lado e dissolve os dois. Como são
+   imagens, e não DOM vivo, nada aqui esbarra nos cinco ScrollTriggers pinados
+   do portfólio nem nas camadas `position: fixed`.
+
+   O gesto é o mesmo que o site já usa: o logo da Avantis entra saindo de
+   blur(20px), e cada frase da resposta entra saindo de blur(6px).
    ================================================================ */
 
-.ai-section {
-  padding: var(--section-spacing) 0;
-  position: relative;
+::view-transition-old(root) {
+  animation: 500ms var(--ease-cinematic) both ia-transicao-sai;
 }
 
-.ai-grid {
+::view-transition-new(root) {
+  animation: 500ms var(--ease-cinematic) both ia-transicao-entra;
+}
+
+@keyframes ia-transicao-sai {
+  to {
+    opacity: 0;
+    transform: scale(0.98);
+    filter: blur(8px);
+  }
+}
+
+@keyframes ia-transicao-entra {
+  from {
+    opacity: 0;
+    transform: scale(1.02);
+    filter: blur(8px);
+  }
+}
+
+/* Sem movimento, corte seco: o destino é o mesmo, muda só o caminho. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+/* ================================================================
+   AS DUAS PORTAS — navegação entre portfólio e Marcilio IA
+   ================================================================ */
+
+.portas {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2.25rem);
+}
+
+.porta {
+  position: relative;
+  padding: 0.5rem 0;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-body);
+  transition: color var(--duration-fast) var(--ease-cinematic);
+}
+
+/* Mesma sublinha que cresce do `.link-underline` — a porta ativa já nasce
+   com ela desenhada, esmaecendo à direita. */
+.porta::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 0.15rem;
+  height: 1px;
+  background: var(--accent-text);
+  transition: right var(--duration-normal) var(--ease-cinematic);
+}
+
+.porta:hover {
+  color: var(--text-primary);
+}
+
+.porta:hover::after {
+  right: 0;
+}
+
+.porta-ativa {
+  color: var(--text-primary);
+}
+
+.porta-ativa::after {
+  right: 0;
+  background: linear-gradient(90deg, var(--accent-light), transparent);
+}
+
+.porta:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* ── Convite dentro do portfólio (Hero e epílogo) ─────────────── */
+
+.convite-ia {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1.15rem 0.7rem 0.95rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  background: var(--glass-bg);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  transition: border-color var(--duration-normal) var(--ease-cinematic),
+              color var(--duration-normal) var(--ease-cinematic),
+              background var(--duration-normal) var(--ease-cinematic);
+}
+
+.convite-ia:hover {
+  border-color: var(--glass-border-hover);
+  background: rgba(109, 74, 255, 0.06);
+  color: var(--text-primary);
+}
+
+.convite-ia svg {
+  transition: transform var(--duration-normal) var(--ease-cinematic);
+}
+
+.convite-ia:hover svg {
+  transform: translateX(3px);
+}
+
+/* O ponto pulsante é o mesmo da disponibilidade, em roxo: sinaliza que do
+   outro lado tem alguém (algo) de pé, não uma página estática. */
+.convite-ia-ponto {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--accent-text);
+  box-shadow: 0 0 10px var(--accent-text);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+.convite-ia:focus-visible {
+  outline: 2px solid var(--accent-text);
+  outline-offset: 3px;
+}
+
+.ep-ia-prompt {
+  margin-bottom: 0.9rem;
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-style: italic;
+  color: var(--text-body);
+}
+
+@media (pointer: coarse) {
+  .porta,
+  .convite-ia {
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* "Converse com minha IA" tem 21 caracteres. No tamanho normal ele quebra em
+   duas linhas num aparelho de 390px e a navbar vira um bloco de texto. */
+@media (max-width: 640px) {
+  .portas {
+    gap: 0.9rem;
+  }
+
+  .porta {
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+  }
+}
+
+/* ================================================================
+   MARCILIO IA — página própria
+
+   Aqui não há Lenis, não há pin e não há altura travada. A conversa cresce
+   à vontade, que era exatamente o que o painel de 520px entre dois
+   ScrollTriggers não permitia — e era daí que vinha a cara de widget.
+   ================================================================ */
+
+.ia-pagina {
+  position: relative;
+  min-height: 100dvh;
+  background: var(--bg-deep);
+  overflow-x: clip;
+}
+
+/* Mesma atmosfera do portfólio: a página precisa parecer o mesmo lugar. */
+.ia-ambiente {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ia-ambiente-alto,
+.ia-ambiente-baixo {
+  position: absolute;
+  inset: 0;
+}
+
+.ia-ambiente-alto {
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(63, 24, 171, 0.1), transparent);
+}
+
+.ia-ambiente-baixo {
+  background: radial-gradient(ellipse 60% 40% at 85% 70%, rgba(63, 24, 171, 0.05), transparent);
+}
+
+.ia-topo {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  padding: 1.25rem 0;
+  background: linear-gradient(to bottom, rgba(9, 9, 11, 0.92) 40%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.ia-topo-interno {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.ia-grid {
+  position: relative;
+  z-index: 10;
   display: grid;
-  grid-template-columns: minmax(280px, 400px) 1fr;
-  gap: clamp(2.5rem, 6vw, 6rem);
+  grid-template-columns: minmax(300px, 420px) 1fr;
+  gap: clamp(3rem, 6vw, 7rem);
+  padding-top: clamp(2.5rem, 6vw, 5rem);
+  padding-bottom: 3rem;
   align-items: start;
 }
 
 /* ── Coluna editorial ─────────────────────────────────────────── */
 
-.ai-title {
-  margin: 1.25rem 0 1.25rem;
-  /* Menor que o text-display das outras seções: aqui ele divide espaço com
-     um painel interativo, e um título de 6rem engoliria a coluna inteira. */
-  font-size: clamp(2.25rem, 3.4vw, 3.25rem);
-  line-height: 1.05;
+/* Fica presa enquanto a conversa rola: o visitante nunca perde de vista o
+   que essa IA é e o que ela não é. */
+.ia-editorial {
+  position: sticky;
+  top: 7.5rem;
 }
 
-.ai-title-accent {
-  color: var(--accent-text);
+/* O número fantasma que já estava escrito em content.ts desde sempre e nunca
+   tinha sido renderizado — a seção antiga era a única do site sem ele. */
+.ia-numero {
+  position: absolute;
+  top: -3rem;
+  right: 0;
+  z-index: -1;
+}
+
+.ia-titulo {
+  margin: 1.25rem 0;
+  font-size: clamp(2.5rem, 4.5vw, 4rem);
+  line-height: 1.02;
 }
 
 .ai-description {
@@ -524,7 +761,7 @@ input, textarea {
 
 .ai-disclaimer {
   position: relative;
-  margin: 2rem 0;
+  margin: 2rem 0 0;
   padding-left: 1.25rem;
   font-size: var(--text-sm);
   line-height: 1.6;
@@ -541,6 +778,8 @@ input, textarea {
   background: linear-gradient(180deg, var(--accent-light), transparent);
 }
 
+/* ── Sugestões e continuações ─────────────────────────────────── */
+
 .ai-suggestions {
   display: flex;
   flex-wrap: wrap;
@@ -549,7 +788,7 @@ input, textarea {
 }
 
 .ai-chip {
-  padding: 0.5rem 0.9rem;
+  padding: 0.55rem 0.95rem;
   border-radius: 999px;
   border: 1px solid var(--glass-border);
   background: var(--glass-bg);
@@ -577,74 +816,86 @@ input, textarea {
   border-style: dashed;
 }
 
-/* ── Painel ───────────────────────────────────────────────────── */
+/* ── Coluna da conversa ───────────────────────────────────────── */
 
-.ai-panel {
+.ai-conversa {
   display: flex;
   flex-direction: column;
-  /* Alta o bastante para equilibrar a coluna editorial ao lado e para caber
-     resposta, fontes e continuações sem que nada mude de altura. */
-  min-height: 520px;
-  padding: clamp(1.25rem, 2.5vw, 2rem);
-  border-radius: 20px;
-  border: 1px solid var(--glass-border);
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
+  min-height: calc(100dvh - 12rem);
 }
 
-.ai-stream {
+.ai-fio {
   flex: 1;
-  min-height: 0;
-  max-height: 360px;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
-  /* Esmaece a última linha quando há mais conteúdo: sem isso, no mobile, as
-     fontes e as continuações ficam escondidas sem nenhuma pista. */
-  mask-image: linear-gradient(to bottom, #000 calc(100% - 2rem), transparent 100%);
+  gap: clamp(3rem, 5vw, 4.5rem);
 }
 
-.ai-stream:not(:has(.ai-answer)) {
-  mask-image: none;
+/* Estado inicial: a página não pode abrir com um retângulo vazio, então o
+   convite e as perguntas prontas ocupam o lugar da primeira resposta. */
+.ai-vazio {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  max-width: 46ch;
+  padding-top: clamp(1rem, 4vw, 3rem);
 }
 
-.ai-empty,
-.ai-question,
-.ai-answer,
-.ai-error {
-  font-size: var(--text-base);
-  line-height: 1.75;
-}
-
-/* Vazio ocupa o painel inteiro e fica centrado: sem isso o estado inicial
-   é um retângulo com uma linha de texto no topo e muito nada embaixo. */
 .ai-empty {
-  margin: auto;
-  max-width: 32ch;
-  text-align: center;
+  font-size: var(--text-lg);
+  line-height: 1.6;
   color: var(--text-body);
 }
 
-.ai-question {
-  color: var(--text-primary);
-  font-family: var(--font-display);
-  font-size: var(--text-lg);
-  margin-bottom: 1.25rem;
+/* ── Um turno ─────────────────────────────────────────────────── */
+
+/* Compensa o cabeçalho fixo quando a pergunta nova é trazida para a tela. */
+.ai-turno {
+  scroll-margin-top: 7rem;
 }
 
-.ai-question span {
+.ai-turno-corpo {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 190px;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: start;
+}
+
+.ai-question {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--text-primary);
+}
+
+.ai-question-mark {
+  flex-shrink: 0;
   color: var(--accent-text);
+  transform: translateY(0.15em);
+}
+
+.ai-answer,
+.ai-error {
+  font-size: var(--text-base);
+  line-height: 1.8;
 }
 
 .ai-answer {
   color: var(--text-secondary);
+  max-width: 68ch;
 }
 
 .ai-error {
   color: var(--text-body);
+}
+
+.ai-answer-region:focus {
+  outline: none;
 }
 
 /* Resposta pré-escrita: parece uma resposta de verdade porque é uma resposta
@@ -671,13 +922,13 @@ input, textarea {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  margin-bottom: 1rem;
 }
 
 .ai-scan {
   display: block;
   height: 1px;
   width: 100%;
+  max-width: 420px;
   background: linear-gradient(
     90deg,
     transparent 0%,
@@ -702,45 +953,83 @@ input, textarea {
   color: var(--text-muted);
 }
 
-.ai-answer-region:focus {
-  outline: none;
-}
+/* ── Marginália de procedência ────────────────────────────────────
+   O único dispositivo que só existe nesta página. A resposta sai de um
+   dossiê escrito e revisado à mão, e é isso que a página tem de mais seu —
+   na seção antiga isso vivia como uma linha de links cinza no rodapé.
+   O fio de 1px é o mesmo do disclaimer, girado para servir de lombada. */
 
-/* ── Fontes, contato e continuações ───────────────────────────── */
-
-.ai-sources {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
+.ai-fontes {
+  position: relative;
+  padding-left: 1.25rem;
   font-size: var(--text-xs);
   color: var(--text-muted);
 }
 
+.ai-fontes::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.4em;
+  bottom: 0.4em;
+  width: 1px;
+  background: linear-gradient(180deg, var(--accent-light), transparent);
+}
+
 .ai-sources-label,
 .ai-followups-label {
+  display: block;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: var(--text-muted);
 }
 
-.ai-sources a {
+.ai-fontes-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 1rem;
+}
+
+.ai-fontes-lista li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  line-height: 1.5;
+}
+
+.ai-fonte-indice {
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, 0.12);
+}
+
+.ai-fontes-lista a {
   color: var(--accent-text);
   border-bottom: 1px solid transparent;
   transition: border-color var(--duration-fast) var(--ease-cinematic);
 }
 
-.ai-sources a:hover {
+.ai-fontes-lista a:hover {
   border-bottom-color: var(--accent-text);
 }
 
+/* ── Contato e continuações ───────────────────────────────────── */
+
 .ai-contact {
-  display: inline-block;
-  margin-top: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
   font-size: var(--text-sm);
   color: var(--accent-text);
   border-bottom: 1px solid rgba(139, 107, 255, 0.35);
+  padding-bottom: 2px;
+  transition: border-color var(--duration-fast) var(--ease-cinematic);
+}
+
+.ai-contact:hover {
+  border-bottom-color: var(--accent-text);
 }
 
 .ai-followups {
@@ -752,21 +1041,56 @@ input, textarea {
   font-size: var(--text-xs);
 }
 
-/* ── Entrada ──────────────────────────────────────────────────── */
+/* ── Entrada ──────────────────────────────────────────────────────
+   Único objeto com cara de objeto na página: é o que se opera. O resto é
+   texto para ler. Vidro com desfoque de 20px e sombra, como o cartão do
+   Processo, para não ser mais um retângulo de borda fina. */
+
+.ai-entrada {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+  padding: 1.5rem 0;
+  background: linear-gradient(to top, var(--bg-deep) 55%, transparent);
+}
+
+/* Antes da primeira pergunta não há nada para rolar, então grudar a entrada no
+   rodapé só produzia dano: no mobile ela cobria as próprias sugestões, e no
+   desktop abria meia tela de vazio entre elas e o campo. */
+.ai-conversa-vazia {
+  min-height: 0;
+}
+
+.ai-conversa-vazia .ai-entrada {
+  position: static;
+  padding: 2rem 0 0;
+  background: none;
+}
 
 .ai-form {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-top: 1.5rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--glass-border);
+  padding: 0.5rem 0.6rem 0.5rem 1.25rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.025);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  transition: border-color var(--duration-normal) var(--ease-cinematic),
+              box-shadow var(--duration-normal) var(--ease-cinematic);
+}
+
+.ai-form:focus-within {
+  border-color: var(--glass-border-hover);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35), 0 0 40px rgba(109, 74, 255, 0.08);
 }
 
 .ai-input {
   flex: 1;
   min-width: 0;
-  padding: 0.65rem 0;
+  padding: 0.7rem 0;
   border: none;
   background: transparent;
   color: var(--text-primary);
@@ -789,13 +1113,15 @@ input, textarea {
 }
 
 .ai-send {
-  width: 40px;
-  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
   flex-shrink: 0;
   border-radius: 50%;
   border: 1px solid var(--glass-border);
   color: var(--text-primary);
-  font-size: var(--text-lg);
   transition: border-color var(--duration-fast) var(--ease-cinematic),
               background var(--duration-fast) var(--ease-cinematic);
 }
@@ -811,7 +1137,6 @@ input, textarea {
 }
 
 .ai-clear {
-  align-self: flex-start;
   margin-top: 1rem;
   font-size: var(--text-xs);
   letter-spacing: 0.1em;
@@ -842,24 +1167,47 @@ input, textarea {
 .ai-chip:focus-visible,
 .ai-send:focus-visible,
 .ai-clear:focus-visible,
-.ai-sources a:focus-visible,
+.ai-fontes-lista a:focus-visible,
 .ai-contact:focus-visible {
   outline: 2px solid var(--accent-text);
   outline-offset: 3px;
   border-radius: 4px;
 }
 
-@media (max-width: 1024px) {
-  .ai-grid {
+/* A marginália só cabe ao lado do texto quando há largura de sobra. Abaixo
+   disso ela desce, mantendo o fio à esquerda — vira nota de rodapé com
+   lombada, e não uma coluna espremida em 90px. */
+@media (max-width: 1279px) {
+  .ai-turno-corpo {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+
+  .ai-fontes {
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  .ia-grid {
     grid-template-columns: 1fr;
+    gap: 2.5rem;
   }
 
-  .ai-panel {
-    min-height: 400px;
+  .ia-editorial {
+    position: static;
   }
 
-  .ai-stream {
-    max-height: 280px;
+  .ia-numero {
+    top: -1rem;
+  }
+
+  .ai-conversa {
+    min-height: 0;
+  }
+
+  .ai-fio {
+    gap: 2.75rem;
   }
 }
 
@@ -868,5 +1216,9 @@ input, textarea {
     animation: none;
     background: var(--accent-light);
     opacity: 0.4;
+  }
+
+  .convite-ia-ponto {
+    animation: none;
   }
 }

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useLanguage } from '../hooks/useLanguage'
+import ConviteIA from './ConviteIA'
 import { SiReact, SiTypescript, SiNestjs, SiNodedotjs, SiPostgresql, SiDocker } from 'react-icons/si'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -219,6 +220,12 @@ export default function Hero() {
                 {hero.ctaPrimary}
               </a>
               <a href="#sobre" className="btn-secondary">{hero.ctaSecondary}</a>
+              {/* A outra porta, oferecida antes de qualquer rolagem: quem chega
+                  com pressa vai direto perguntar em vez de ligar os pontos
+                  sozinho. Fica na mesma linha dos CTAs porque abaixo dela caía
+                  fora da dobra em telas de 900px, que é onde ela menos serve.
+                  O ponto pulsante é o que a separa de um terceiro botão igual. */}
+              <ConviteIA rotulo={t.aiChat.invite.hero} />
             </div>
 
             <div className="hero-fade">

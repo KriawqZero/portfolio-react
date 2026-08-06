@@ -4,5 +4,11 @@
     "api/ask.ts": {
       "maxDuration": 30
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/ia",
+      "destination": "/index.html"
+    }
+  ]
 }

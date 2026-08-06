@@ -26,6 +26,12 @@ Work fronts, as of this date:
   rewrite this copy on your own initiative: it speaks in his first person and every
   sentence was approved individually. The only text still unreviewed is the curated
   fallback in `content.ts`.
+  **It stopped being a section and became a page** (2026-08-06, branch
+  `feat/marcilio-ia-pagina-propria`): the visitor reaches it from a two-door navbar, from
+  the Hero and from the epilogue. The design record is
+  `docs/superpowers/specs/2026-08-06-marcilio-ia-pagina-propria-design.md`. Still open from
+  that work: OG image and JSON-LD of their own for `/ia`, which need pre-render — today the
+  route only sets `document.title`.
 - **Case images and mobile-first — closed.** Their remaining scope was deliberately dropped.
   The code differing from those plans is a decision, not a regression. Do not "fix" it and do
   not turn it into backlog.
@@ -86,9 +92,9 @@ There are no component, animation or E2E tests, and that is a decision, not a ga
 animation is judged by eye (see "Animations are part of the product"). When you touch
 `lib/ai/`, add or update a test. When you touch a component, verify it in the browser.
 
-### Running the AI section locally
+### Running the AI page locally
 
-`pnpm dev` is enough — do **not** reach for `vercel dev`. `vite.config.ts` registers an
+`pnpm dev` and open `/ia` — do **not** reach for `vercel dev`. `vite.config.ts` registers an
 `apiDev()` plugin that mounts `POST /api/ask` on the Vite dev server, so the same handler
 in `api/ask.ts` runs locally. It needs the environment variables from `.env.example` in a
 local `.env.local`; without them the endpoint fails closed instead of degrading, which is
@@ -124,7 +130,25 @@ before the session ends.
 
 ## Architecture
 
-**Single-page React + Vite + TypeScript portfolio.** No routing. `src/App.tsx` composes all sections in narrative order: Hero → FreelanceProjects (conditional) → AboutMe → Trajectory → Avantis → DevProcess → AiChat → Contact.
+**React + Vite + TypeScript, two pages.** `src/Rotas.tsx` picks between them and each is a
+lazy chunk of its own:
+
+- **`/` — the portfolio** (`src/App.tsx`), which composes the sections in narrative order:
+  Hero → FreelanceProjects (conditional) → AboutMe → Trajectory → Avantis → DevProcess →
+  Contact.
+- **`/ia` — Marcilio IA** (`src/PaginaIA.tsx`), the conversation, as a destination of its own.
+
+Routing is `src/hooks/useRota.ts`, roughly 80 lines over the History API — deliberately not a
+library, because there are two routes with no params, no nesting and no per-route data. The
+split is what keeps `/ia` light: landing there does not download GSAP, Lenis or the eight
+sections (~78 kB gzip of the portfolio chunk).
+
+Switching pages runs through `document.startViewTransition` and dissolves with a blur, in the
+same gesture the site already uses for reveals. The browser snapshots each side as a bitmap,
+which is why a `transform` in the animation never disturbs the five pinned ScrollTriggers or
+the fixed layers. Without support, or under `prefers-reduced-motion`, the swap is a hard cut.
+
+`vercel.json` rewrites `/ia` to `/index.html` — narrowly, so it can never shadow `/api/*`.
 
 It is no longer purely static: the AI section is served by a Vercel Function in `api/`, with shared logic in `lib/ai/` and a Markdown knowledge base in `knowledge/`. All three live outside `src/`. `tsconfig.app.json` covers `src`; `tsconfig.api.json` covers `api` and `lib` — so server code is type-checked separately from the frontend.
 
@@ -147,7 +171,7 @@ Platform detection is read-once on mount (no reactivity to URL changes). Upwork 
 
 ### AI section (Marcilio IA)
 
-`src/components/AiChat.tsx` lets a visitor talk to an AI representation of Marcilio, answering only from an approved dossier. It posts to `POST /api/ask` (`api/ask.ts`), which runs this order: validate origin and body → check Redis availability and kill switch → verify Turnstile → rate limit → **answer cache** → budget check → select documents → build prompt → OpenAI with a strict JSON schema → validate the answer against the source documents → store in cache.
+`/ia` lets a visitor talk to an AI representation of Marcilio, answering only from an approved dossier. The page is `src/PaginaIA.tsx` (the room: editorial column, ghost section number, reveals); `src/components/ia/Conversa.tsx` holds the thread and the input; `src/components/ia/Turno.tsx` renders one question/answer pair with its sources as a margin rail; `src/hooks/useConversaIA.ts` holds the state and the call. The conversation is a **list of turns** — the old single-turn-at-a-time behaviour was forced by a fixed-height panel that no longer exists. It posts to `POST /api/ask` (`api/ask.ts`), which runs this order: validate origin and body → check Redis availability and kill switch → verify Turnstile → rate limit → **answer cache** → budget check → select documents → build prompt → OpenAI with a strict JSON schema → validate the answer against the source documents → store in cache.
 
 Where things live:
 - `lib/ai/config.ts` — **single source of truth for every limit and threshold.** Never hardcode these values elsewhere, and never restate them in documentation; they are tuned for cost and drift quickly.
@@ -164,7 +188,7 @@ Full request flow and cost analysis: `docs/ia-fluxo.md`. Operations and limits: 
 Two libraries coexist, with a boundary that must be respected:
 
 - **GSAP + ScrollTrigger** — everything scroll-driven: pinning, scrubbed timelines, reveal-on-scroll. Lenis provides smooth scrolling, integrated with GSAP via `useSmoothScroll` (ticker sync in `src/hooks/useSmoothScroll.ts`).
-- **framer-motion** — declarative animations tied to React state, not to scroll position: `AiChat` response reveals, `Navbar`, and entrance transitions in `Hero`, `DevProcess`, `Trajectory`. `main.tsx` wraps the app in `<MotionConfig reducedMotion="user">`, so every framer-motion animation already honours the system preference.
+- **framer-motion** — declarative animations tied to React state, not to scroll position: the response reveals and the whole of `/ia` (which imports no GSAP at all, by design), `Navbar`, and entrance transitions in `Hero`, `DevProcess`, `Trajectory`. `main.tsx` wraps the app in `<MotionConfig reducedMotion="user">`, so every framer-motion animation already honours the system preference.
 
 Reach for framer-motion when React state drives the animation; reach for GSAP when the scroll position does. Do not port existing animations from one to the other.
 
@@ -194,11 +218,12 @@ Rules that must be followed for every GSAP animation:
 There is no CSS-in-JS library, no CSS modules, no Tailwind. Three approaches coexist for
 historical reasons. Know which one you are in before writing a rule:
 
-1. **`src/index.css`** (854 lines) — the design system and global utilities: `:root` custom
+1. **`src/index.css`** (~1220 lines) — the design system and global utilities: `:root` custom
    properties (colours, spacing, type scale), `.btn-*`, `.container`, `.section-*`,
    `.glass`, `.sr-only`, and the `@media` envelopes for `prefers-reduced-motion` and
-   `pointer: coarse`. Also holds the whole `.ai-*` block (lines 487+, ~367 lines) for the
-   Marcilio IA section — an exception, not the pattern.
+   `pointer: coarse`. From line 487 on it also holds the page-transition keyframes, the
+   `.porta*` / `.convite-ia` navigation, and the whole `.ia-*` / `.ai-*` block for the
+   Marcilio IA page — an exception, not the pattern.
 2. **`<style>{\`...\`}</style>` inside the component** — `Hero`, `AboutMe`, `Avantis`,
    `Contact`, `FreelanceProjects`. This is where component CSS belongs.
 3. **`style={{}}` inline objects** — heavily used in `Trajectory` (75), `DevProcess`,

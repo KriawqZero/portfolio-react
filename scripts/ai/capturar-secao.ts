@@ -1,6 +1,9 @@
 /**
- * Captura a seção "Marcilio IA" rodando de verdade, em desktop e mobile,
+ * Captura a página "Marcilio IA" rodando de verdade, em desktop e mobile,
  * nos três estados que importam: vazio, esperando e respondido.
+ *
+ * A IA deixou de ser seção do portfólio e passou a ser destino próprio, então
+ * a captura vai direto em /ia em vez de rolar a página até uma âncora.
  *
  *   pnpm ai:shot            # usa http://127.0.0.1:5199
  *   pnpm ai:shot http://...
@@ -20,12 +23,11 @@ const navegador = await puppeteer.launch({ args: ['--no-sandbox'] })
 async function capturar(nome: string, largura: number, altura: number) {
   const pagina = await navegador.newPage()
   await pagina.setViewport({ width: largura, height: altura, deviceScaleFactor: 2 })
-  await pagina.goto(base, { waitUntil: 'networkidle2' })
-  await pagina.evaluate(() => document.querySelector('#ia')?.scrollIntoView({ block: 'center' }))
+  await pagina.goto(`${base}/ia`, { waitUntil: 'networkidle2' })
   await new Promise(r => setTimeout(r, 900))
 
-  const secao = await pagina.$('#ia')
-  if (!secao) throw new Error('Seção #ia não encontrada')
+  const secao = await pagina.$('.ia-pagina')
+  if (!secao) throw new Error('Página /ia não encontrada')
 
   await secao.screenshot({ path: `${destino}/${nome}-vazio.png` })
 

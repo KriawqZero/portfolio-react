@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import DuasPortas from './DuasPortas'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -54,6 +55,11 @@ export default function Navbar() {
           />
         </a>
 
+        {/* A navbar inteira é `pointer-events: none` para não bloquear o site;
+            cada elemento clicável devolve o seu. */}
+        <div style={{ pointerEvents: 'auto' }}>
+          <DuasPortas ativa="portfolio" />
+        </div>
       </div>
     </motion.nav>
   )
