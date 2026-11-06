@@ -277,7 +277,7 @@ export default function Contact() {
               alignItems: 'center',
               gap: '1.5rem',
               marginBottom: '4rem',
-            }}>
+            }}>{/*
               {links.map(([key, link], index) => (
                 <div key={key} style={{ display: 'flex', alignItems: 'center' }}>
                   <a
@@ -308,7 +308,7 @@ export default function Contact() {
                     }}>
                       {link.label}
                     </span>
-                  </a>
+                  </a>*/}
 
                   {/* Separator */}
                   {index < links.length - 1 && (
