@@ -88,14 +88,14 @@ export default function Contact() {
           0.66
         )
 
-        // ── Act 4: Contact links appear one by one (0.65 → 0.85) ──
+        /*// ── Act 4: Contact links appear one by one (0.65 → 0.85) ──
         links.forEach((_, i) => {
           tl.fromTo(`.ep-link-${i}`,
             { y: 15, opacity: 0 },
             { y: 0, opacity: 1, duration: 0.3, ease: 'power2.out' },
             0.7 + (i * 0.06)
           )
-        })
+        })*/
 
         // Separators fade in after links
         tl.fromTo('.ep-separator',
