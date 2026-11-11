@@ -24,7 +24,11 @@ describe('catálogo público de projetos', () => {
   })
 
   it('mantém estágio e escopo nos documentos usados pela IA', () => {
-    for (const project of getProjectCatalog('pt')) {
+    const projects = getProjectCatalog('pt')
+    const publicDocumentIds = projects.map(project => `catalog-${project.id}`).sort()
+    const indexedDocumentIds = KNOWLEDGE.filter(doc => doc.id.startsWith('catalog-')).map(doc => doc.id).sort()
+    expect(indexedDocumentIds).toEqual(publicDocumentIds)
+    for (const project of projects) {
       const doc = KNOWLEDGE.find(d => d.id === `catalog-${project.id}`)
       expect(doc, project.id).toBeDefined()
       expect(doc?.text).toContain(`Estágio: ${statusLabels.pt[project.status]}`)

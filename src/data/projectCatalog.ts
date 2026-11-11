@@ -44,12 +44,6 @@ const additions: CatalogEntry[] = [
     stack: ['Laravel', 'PHP'], links: [{ label: 'Site', href: 'https://www.aplicativodeimoveis.com.br/' }],
   },
   {
-    id: 'kriawq-finance', name: { pt: 'Kriawq Finance', en: 'Kriawq Finance' }, year: '2026', category: 'systems', status: 'implemented',
-    summary: { pt: 'Aplicação de finanças pessoais com contas, cartões, planejamento e relatórios exploráveis.', en: 'Personal finance application with accounts, cards, planning and interactive reports.' },
-    scope: { pt: 'Meu aplicativo de finanças pessoais. Reúne contas, cartões, planejamento e relatórios, com regras de cálculo e conciliação. Continuo desenvolvendo o produto.', en: 'My personal finance app. It brings together accounts, cards, planning and reports, with calculation and reconciliation rules. I am continuing to develop it.' },
-    stack: ['TypeScript', 'React', 'PostgreSQL'], links: [],
-  },
-  {
     id: 'studio-airbnb', name: { pt: 'Studio Airbnb', en: 'Studio Airbnb' }, year: '2026', category: 'systems', status: 'implemented',
     summary: { pt: 'Manutenção de uma plataforma imobiliária, com recuperação das fotos no catálogo e nas galerias.', en: 'Maintenance of a property platform, restoring photos in the catalog and galleries.' },
     scope: { pt: 'Diagnostiquei a falha no armazenamento de imagens, corrigi a integração e conferi o carregamento das fotos no site publicado.', en: 'I diagnosed the image storage failure, fixed the integration and checked that photos loaded on the published site.' },
