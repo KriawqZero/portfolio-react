@@ -85,14 +85,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     mensagensHistorico: config.limites.mensagensHistorico,
     caracteresHistorico: config.limites.caracteresHistorico,
   })
-  if (!validacao.ok) return erro(res, validacao.status, validacao.erro)
+  if (validacao.ok === false) return erro(res, validacao.status, validacao.erro)
 
   const { question, history, sessionId, lang, context, turnstileToken } = validacao.dados
 
   // Sem contadores confiáveis não existe teto de gasto — em produção isso
   // barra a requisição em vez de virar modo degradado silencioso.
   const dependencias = dependenciasOk(config.producao)
-  if (!dependencias.ok) return erro(res, dependencias.status, dependencias.codigo, dependencias.estado)
+  if (dependencias.ok === false) return erro(res, dependencias.status, dependencias.codigo, dependencias.estado)
 
   if (!config.habilitado) return erro(res, 503, 'desativado', 'disabled')
   if (!process.env.OPENAI_API_KEY) return erro(res, 503, 'sem_credencial', 'disabled')
@@ -101,10 +101,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const ip = ipDaRequisicao(req.headers)
 
   const verificacao = await verificarTurnstile(turnstileToken, ip, config.producao)
-  if (!verificacao.ok) return erro(res, verificacao.status, verificacao.codigo, verificacao.estado)
+  if (verificacao.ok === false) return erro(res, verificacao.status, verificacao.codigo, verificacao.estado)
 
   const limite = await dentroDoRateLimit(sessionId, ip)
-  if (!limite.ok) {
+  if (limite.ok === false) {
     if (limite.tentarEm) res.setHeader('Retry-After', String(limite.tentarEm))
     return erro(res, limite.status, limite.codigo, limite.estado)
   }
@@ -154,7 +154,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Última porta antes de gastar: incrementa os contadores globais do dia e
   // do mês. Se estourou, a OpenAI não é chamada.
   const orcamento = await dentroDoOrcamento()
-  if (!orcamento.ok) return erro(res, orcamento.status, orcamento.codigo, orcamento.estado)
+  if (orcamento.ok === false) return erro(res, orcamento.status, orcamento.codigo, orcamento.estado)
 
   const documentos = selecionarDocumentos(question, KNOWLEDGE, {
     maxDocumentos: config.limites.documentos,
