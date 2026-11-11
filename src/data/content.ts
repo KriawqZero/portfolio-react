@@ -418,6 +418,7 @@ export const ptContent = {
     titleHighlight: 'conversar.',
     titleHighlightClient: 'conversar.',
     text: 'Me conte o que você precisa desenvolver. Pode ser uma ideia nova ou algo que já existe e precisa de ajustes.',
+    directContact: { label: 'Me chame no Instagram', href: 'https://www.instagram.com/marciliortiz.dev/' },
     narrativePhrases: [
       'Uma vaga.',
       'Um novo projeto.',
@@ -913,6 +914,7 @@ export const enContent = {
     titleHighlight: 'talk.',
     titleHighlightClient: 'talk.',
     text: 'Tell me what you need to build. It can be a new idea or something you already have and want to improve.',
+    directContact: { label: 'Message me on Instagram', href: 'https://www.instagram.com/marciliortiz.dev/' },
     narrativePhrases: [
       'A job opening.',
       'A new project.',

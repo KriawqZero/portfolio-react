@@ -100,29 +100,6 @@ export default function Hero() {
       }
     })
 
-    mm.add('(max-width: 1023px) and (prefers-reduced-motion: no-preference)', () => {
-      // Subtle mobile fade out instead of large parallax
-      gsap.to(contentRef.current, {
-        opacity: 0.2,
-        y: -50,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1,
-        }
-      })
-      gsap.to(photoRef.current, {
-        yPercent: -5,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1,
-        }
-      })
-    })
-
     mm.add('(prefers-reduced-motion: no-preference)', () => {
       // Mask reveals for initial load (All devices)
       gsap.fromTo('.hero-mask',
@@ -165,18 +142,18 @@ export default function Hero() {
 
           {/* Left column */}
           <div ref={contentRef} className="hero-content" style={{ maxWidth: 800, position: 'relative', zIndex: 10 }}>
-            <div className="mask-text-container" style={{ marginBottom: '2rem' }}>
+            <div className="mask-text-container hero-greeting" style={{ marginBottom: '2rem' }}>
               <p className="section-label mask-text hero-mask">{hero.greeting}</p>
             </div>
 
-            <div className="mask-text-container" style={{ marginBottom: '3rem' }}>
+            <div className="mask-text-container hero-name" style={{ marginBottom: '3rem' }}>
               <p className="mask-text hero-mask" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 700, letterSpacing: '0.15em', color: 'var(--text-primary)', textTransform: 'uppercase' }}>
                 {hero.name}
               </p>
               <div className="mask-text hero-mask" style={{ width: '80px', height: '2px', background: 'linear-gradient(24deg, #F9FFFD, #3F18AB)', marginTop: '1.25rem' }} />
             </div>
 
-            <h1 style={{ marginBottom: '2rem' }}>
+            <h1 className="hero-heading" style={{ marginBottom: '2rem' }}>
               <div className="mask-text-container">
                 <span className="text-hero mask-text hero-mask" style={{ display: 'block', color: 'var(--text-primary)' }}>
                   {hero.role[0]}
@@ -214,7 +191,7 @@ export default function Hero() {
               </div>
             </div>*/}
 
-            <div className="hero-fade" style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '4rem' }}>
+            <div className="hero-fade hero-actions" style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '4rem' }}>
               <a href="#freelance-portfolio" className="btn-primary">
                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                 {hero.ctaPrimary}
@@ -318,97 +295,91 @@ export default function Hero() {
           .hero-grid { grid-template-columns: 1.2fr 0.8fr !important; }
         }
 
-        /* ── Mobile ────────────────────────────────────────────────────
-           A arte deixa de ser um bloco empilhado (onde a foto renderizava com
-           ~109px de largura) e volta a ser camada de fundo: ancorada na base
-           direita, sangrando pela borda, dissolvida por máscara à esquerda e
-           por gradiente na base. O texto ocupa a coluna esquerda por cima. */
+        /* Mobile: texto e retrato ocupam blocos separados, sem sobreposição. */
         @media (max-width: 1023px) {
           :root { --hero-padding-top: calc(5.5rem + env(safe-area-inset-top, 0px)); }
 
-          .hero-grid { display: flex !important; flex-direction: column; }
+          #inicio { min-height: auto !important; padding-bottom: 2rem !important; }
+          .hero-grid {
+            display: flex !important;
+            flex-direction: column;
+            min-height: auto !important;
+            gap: 1.5rem !important;
+          }
+          .hero-content { width: 100%; padding-bottom: 0; }
+          .hero-greeting { margin-bottom: 1rem !important; }
+          .hero-name { margin-bottom: 1.5rem !important; }
+          .hero-heading { margin-bottom: 1.25rem !important; }
+          .hero-subtitle {
+            width: 100%;
+            max-width: 100%;
+            font-size: 1rem;
+            line-height: 1.65;
+            margin-bottom: 1.5rem;
+          }
+          .hero-actions {
+            gap: 0.75rem !important;
+            margin-bottom: 1.75rem !important;
+          }
+          .hero-content .btn-primary,
+          .hero-content .btn-secondary { max-width: 100%; }
 
           .hero-art-col {
-            position: absolute !important;
-            right: 0;
-            bottom: 0;
-            top: auto;
-            height: 58dvh;
-            width: 82vw;
-            max-width: 400px;
-            margin-top: 0;
-            z-index: 1;
+            position: relative;
+            inset: auto;
+            height: clamp(22rem, 90vw, 30rem);
+            width: 100%;
+            max-width: 30rem;
+            margin: 0 auto;
           }
-
-          /* Dissolve o corte inferior do recorte contra o fundo da página */
+          .hero-art-col picture {
+            display: block;
+            position: relative;
+            width: 100%;
+            height: 100%;
+          }
           .hero-art-col::after {
             content: '';
             position: absolute;
             inset: auto 0 0 0;
-            height: 26%;
-            background: linear-gradient(to top, var(--bg-deep) 12%, transparent 100%);
+            height: 20%;
+            background: linear-gradient(to top, var(--bg-deep) 8%, transparent 100%);
             pointer-events: none;
             z-index: 3;
           }
-
           .hero-photo {
-            bottom: 0 !important;
-            top: auto;
-            left: auto !important;
-            right: -7%;
-            height: 100% !important;
+            position: relative;
+            inset: auto;
+            display: block;
             width: auto;
-            max-width: none;
+            height: 100%;
+            max-width: 100%;
+            margin: 0 auto;
             transform: none !important;
             object-fit: contain;
-            object-position: bottom right;
+            object-position: center bottom;
             filter: none;
-            -webkit-mask-image: linear-gradient(to left, #000 52%, transparent 96%);
-            mask-image: linear-gradient(to left, #000 52%, transparent 96%);
+            -webkit-mask-image: none;
+            mask-image: none;
           }
-
           .hero-logo {
-            top: auto;
-            bottom: 8%;
-            left: auto;
-            right: -14%;
-            transform: none;
-            width: 68%;
+            top: 15%;
+            bottom: auto;
+            left: 50%;
+            right: auto;
+            width: 85%;
+            transform: translateX(-50%);
             opacity: 0.22;
             filter: blur(16px);
           }
-
           .hero-glow {
-            bottom: 14%;
-            left: auto;
-            right: -18%;
-            transform: none;
-            width: 78%;
+            bottom: 10%;
+            left: 50%;
+            right: auto;
+            width: 100%;
+            transform: translateX(-50%);
             opacity: 0.75;
           }
-
-          /* Conteúdo por cima da arte. O texto fica contido na coluna esquerda
-             para que só a área já dissolvida pela máscara passe sob ele. */
-          .hero-content {
-            position: relative;
-            z-index: 10;
-            padding-bottom: 4vh;
-          }
-          .hero-subtitle {
-            font-size: 1rem;
-            line-height: 1.65;
-            max-width: 62%;
-          }
-          .hero-content .btn-primary,
-          .hero-content .btn-secondary {
-            max-width: 260px;
-          }
-        }
-
-        @media (max-width: 400px) {
-          .hero-art-col { height: 52dvh; }
-          .hero-subtitle { max-width: 60%; }
-          .hero-photo { right: -14%; }
         }
       `}</style>
     </section>
