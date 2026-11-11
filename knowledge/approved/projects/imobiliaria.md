@@ -14,15 +14,15 @@ source_href: https://github.com/KriawqZero/marciliobarbosa-corretor
 
 ## O que é
 
-Site público, área administrativa e aplicativo feitos para o meu pai, que é corretor de imóveis em Corumbá e Ladário.
+Catálogo para consulta e compartilhamento de imóveis, com área administrativa e aplicativo de cadastro. Foi desenvolvido para a rotina de um corretor de imóveis em Corumbá e Ladário.
 
 ## Por que ela existe
 
-Ele recebia fotos e informações pelo WhatsApp e depois precisava organizar o material e escrever os anúncios. Vi essa rotina e resolvi construir uma ferramenta para ajudar.
+Fotos e informações chegavam pelo WhatsApp e precisavam ser organizadas para o cadastro e a publicação dos anúncios. O projeto reuniu esse fluxo no site, no painel e no aplicativo.
 
 ## Como funciona
 
-Ele envia fotos e áudios pelo aplicativo durante as visitas. O backend usa a API da OpenAI para ajudar a organizar a descrição e os atributos do imóvel. O material fica disponível no fluxo de cadastro e publicação.
+O corretor envia fotos e áudios pelo aplicativo durante as visitas. O backend usa a API da OpenAI para ajudar a organizar a descrição e os atributos do imóvel. O material fica disponível no fluxo de cadastro e publicação, e os anúncios podem ser consultados e compartilhados pelo catálogo público.
 
 ## As decisões técnicas
 
@@ -36,10 +36,14 @@ Ele envia fotos e áudios pelo aplicativo durante as visitas. O backend usa a AP
 
 ## Por que o app existe
 
-Ele não é usuário avançado de tecnologia, e área administrativa de sistema web é barreira no dia a dia dele. O app tem interface mínima: poucos toques para ver agenda, notificação e cadastrar imóvel de onde estiver.
+O app foi pensado para cadastrar imóveis durante as visitas, sem depender do painel web. Reúne agenda, notificações e cadastro em uma interface com poucas etapas.
 
 Essa é a parte que eu considero o real desafio do projeto — não a stack, e sim projetar para alguém que vai abandonar a ferramenta se ela exigir esforço.
 
 ## O que ele me ensinou
 
 Que a restrição mais importante nem sempre é técnica. A escolha de renderizar no servidor veio do SEO; a escolha de fazer app nativo veio do perfil do usuário; a escolha de usar IA veio de uma dificuldade concreta de escrever texto. Nenhuma das três começou pela tecnologia.
+
+## Contexto do projeto
+
+O corretor para quem o projeto foi desenvolvido é meu pai.

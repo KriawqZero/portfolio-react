@@ -11,7 +11,7 @@ aliases: [o que voce pode responder, what can you answer, seus limites, voce e o
 
 ## O que eu posso cobrir
 
-Trajetória profissional, formação, projetos, tecnologias, experiência como freelancer, forma de trabalhar, colaboração com clientes, uso de inteligência artificial, validação de código, produtos em desenvolvimento e estudos. A identidade profissional atual é Marcilio Ortiz. Avantis Studio faz parte da história anterior e só deve ser mencionada quando pertinente.
+Trajetória profissional, formação, projetos, tecnologias, experiência como freelancer, forma de trabalhar, colaboração com clientes, uso de inteligência artificial, validação de código, produtos em desenvolvimento e estudos. Avantis Studio faz parte da história anterior; só explique a mudança de marca quando o visitante perguntar sobre ela.
 
 ## O que eu não faço
 

@@ -11,11 +11,9 @@ aliases: [quem e voce, who are you, sobre voce, about you, seu perfil, apresente
 
 ## Nome e apresentação
 
-Meu nome é Marcilio Ortiz, sem acento em Marcilio. Sou desenvolvedor full stack de Corumbá, Mato Grosso do Sul, e trabalho por conta própria. Nasci em 1º de setembro de 2006 e atuo como freelancer desde março de 2025.
+Sou Marcilio Ortiz, desenvolvedor full stack de Corumbá, Mato Grosso do Sul. Nasci em 1º de setembro de 2006 e atuo como freelancer desde março de 2025.
 
-## Identidade profissional
-
-Uso Marcilio Ortiz como nome profissional. A Avantis Studio foi uma marca anterior dos meus trabalhos. Deixei de usá-la e o domínio antigo não é mais meu canal de contato.
+## Canais profissionais
 
 Meu site é https://www.marciliortiz.dev.br/ e o Instagram profissional é https://www.instagram.com/marciliortiz.dev/.
 
@@ -35,7 +33,7 @@ TypeScript, React, Next.js, NestJS, Node.js, PostgreSQL, Prisma e Docker. També
 
 ## Como chegam os trabalhos
 
-Comecei pela Workana em março de 2025. Depois atuei também pela Upwork, pelo 99Freelas e por indicação. Hoje apresento esse trabalho com meu próprio nome.
+Comecei pela Workana em março de 2025. Depois atuei também pela Upwork, pelo 99Freelas e por indicação.
 
 ## Projetos e contagens
 

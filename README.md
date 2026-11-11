@@ -2,8 +2,6 @@
 
 Meu site profissional, com trabalhos para clientes, produtos em desenvolvimento e projetos de estudo. O conteúdo está em português e inglês.
 
-A identidade usa meu nome, sem acento em Marcilio, e o monograma MO. Avantis aparece como registro da marca anterior.
-
 ## O que tem no site
 
 - Apresentação, projetos para clientes e contato.

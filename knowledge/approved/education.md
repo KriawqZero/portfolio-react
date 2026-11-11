@@ -13,7 +13,7 @@ aliases: [onde voce estudou, sua formacao, faculdade, universidade, education, d
 
 Cursei o ensino médio técnico integrado em Informática no IFMS, campus Corumbá. Na última atualização desta informação, as disciplinas estavam concluídas e faltava o estágio obrigatório para finalizar o curso. Não há confirmação de conclusão do curso neste dossiê.
 
-Tenho interesse em estágio e em trabalhar numa equipe de engenharia. A disponibilidade para uma vaga precisa ser confirmada diretamente comigo.
+Tenho interesse em estágio e em trabalhar numa equipe de engenharia. A disponibilidade precisa ser confirmada no contato sobre a vaga.
 
 ## Ensino superior
 

@@ -4,7 +4,7 @@ title: Como eu trabalho com outras pessoas
 type: practice
 visibility: public
 approved: true
-last_reviewed: 2026-08-06
+last_reviewed: 2026-11-11
 topics: [equipe, equipes, time, times, colaboracao, socio, comunicacao, codigo, revisao, processo, pessoas, dupla, tcc]
 aliases: [trabalha em equipe, trabalho em equipe, como voce trabalha em time, teamwork, work in a team, team work, colaboracao, trabalhar com outras pessoas, outras pessoas, code review, revisao de codigo, ja trabalhou com alguem, divisao de tarefas]
 ---
@@ -37,7 +37,7 @@ Prefiro discordar cedo e por escrito a entregar calado uma coisa que eu acho err
 
 ## Com quem não é técnico
 
-Boa parte dos meus usuários finais não fala em termos técnicos: a coordenação do IFMS, o dono do restaurante, meu pai no sistema imobiliário. No SISCO, a parte difícil não foi o código — foi acertar com a coordenação o que o sistema deveria e o que não deveria fazer.
+Boa parte dos meus usuários finais não fala em termos técnicos: a coordenação do IFMS, o dono do restaurante, o corretor no sistema imobiliário. No SISCO, a parte difícil não foi o código — foi acertar com a coordenação o que o sistema deveria e o que não deveria fazer.
 
 Isso me obrigou a traduzir decisão técnica em consequência prática, que é uma habilidade separada de escrever o código.
 

@@ -17,7 +17,7 @@ Sigo aberto a projetos freelance em paralelo.
 
 ## Objetivos registrados
 
-Concluir o curso técnico, ganhar experiência em uma equipe de engenharia, desenvolver o VamoAgendar até o beta e continuar os trabalhos para clientes usando meu nome, Marcilio Ortiz. Esses objetivos não representam prazos ou resultados já alcançados.
+Concluir o curso técnico, ganhar experiência em uma equipe de engenharia, desenvolver o VamoAgendar até o beta e continuar os trabalhos para clientes. Esses objetivos não representam prazos ou resultados já alcançados.
 
 ## O que eu procuro num time
 

@@ -57,7 +57,7 @@ export const ptContent = {
             name: 'Catálogo & App Imobiliário',
             type: 'Solução sob Medida',
             year: '2026',
-            narrative: 'Um catálogo de imóveis e um aplicativo para meu pai, que é corretor. Pelo celular, ele envia fotos e áudios; a integração com IA ajuda a estruturar as informações para os anúncios. O trabalho reuniu site, área administrativa e app em um fluxo pensado para o uso em campo.',
+            narrative: 'Catálogo para consultar e compartilhar imóveis, com área administrativa e aplicativo de cadastro. O app permite enviar fotos e áudios durante as visitas; a integração com IA ajuda a organizar as informações dos anúncios. Site, painel e app fazem parte da mesma solução.',
             stack: 'Next.js SSR · Expo/React Native · Prisma · MinIO · OpenAI API',
             links: [
               { label: 'Visitar Site', href: 'https://marciliobarbosacorretor.com.br/' },
@@ -241,7 +241,7 @@ export const ptContent = {
       name: 'Avantis — site da marca anterior',
       type: 'Landing Page',
       stack: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
-      narrative: 'Site que fiz para apresentar meus serviços quando usava a marca Avantis. Ficou como registro dessa fase; meu trabalho agora é apresentado como Marcilio Ortiz.',
+      narrative: 'Site institucional com apresentação dos serviços e trabalhos realizados sob a antiga marca Avantis. Mantido no acervo como projeto histórico.',
       links: [
         { label: 'Repositório', href: 'https://github.com/KriawqZero/avantis-porfolio' }
       ],
@@ -259,16 +259,16 @@ export const ptContent = {
     principles: [
       { title: 'Antes de começar', text: 'Conversamos sobre o que você precisa, o que já existe e o que vai entrar na entrega.' },
       { title: 'O desenvolvimento', text: 'Trabalho no banco de dados, na API, nas telas, nos testes e na publicação, conforme o projeto precisa.' },
-      { title: 'Você fala comigo', text: 'Sou eu quem desenvolve e acompanha o trabalho. Quando uma decisão muda o escopo, a gente conversa antes de seguir.' },
+      { title: 'Acompanhamento', text: 'Relatórios de andamento registram o que foi feito e o que falta. Mudanças de escopo são discutidas antes de seguir.' },
     ],
   },
 
   avantis: {
     number: '02',
-    label: 'DESENVOLVIMENTO INDEPENDENTE',
-    title: 'Você fala',
-    titleHighlight: 'comigo.',
-    description: 'Sites, sistemas e automações',
+    label: 'DESENVOLVIMENTO WEB',
+    title: 'Sites e',
+    titleHighlight: 'sistemas.',
+    description: 'Automações, integrações e manutenção',
     text: 'Precisa criar um site, automatizar uma tarefa ou mexer em um sistema que já existe? Me conte como funciona hoje e o que precisa mudar. A gente define o trabalho antes de começar.',
     links: [
       { label: 'Conversar sobre um projeto', href: '#contato' },
@@ -389,7 +389,7 @@ export const ptContent = {
       items: [
         {
           question: 'O que você já construiu em produção?',
-          answer: 'Publiquei o catálogo imobiliário feito para meu pai e o site do Sushi do Verão. Também desenvolvi o SISCO, usado no IFMS para organizar horas complementares, e uma automação de faturamento para uma rede de lojas. O VamoAgendar é outro projeto meu, mas ainda está em desenvolvimento para o beta.',
+          answer: 'Publiquei um catálogo para consulta e compartilhamento de imóveis e o site do Sushi do Verão. Também desenvolvi o SISCO, usado no IFMS para organizar horas complementares, e uma automação de faturamento para uma rede de lojas. O VamoAgendar é outro projeto meu, mas ainda está em desenvolvimento para o beta.',
         },
         {
           question: 'Como você usa IA sem depender dela?',
@@ -401,7 +401,7 @@ export const ptContent = {
         },
         {
           question: 'Como funciona um projeto com você?',
-          answer: 'Primeiro conversamos sobre o que você precisa e o que já existe. Definimos o escopo por escrito, depois eu desenvolvo, testo e publico no ambiente combinado. Uso relatórios de andamento para acompanhar o trabalho. Preço, prazo e disponibilidade são combinados diretamente comigo.',
+          answer: 'Primeiro conversamos sobre o que você precisa e o que já existe. Definimos o escopo por escrito, depois eu desenvolvo, testo e publico no ambiente combinado. Uso relatórios de andamento para acompanhar o trabalho. Preço, prazo e disponibilidade são definidos na contratação.',
         },
         {
           question: 'O que você ainda está aprendendo?',
@@ -483,7 +483,7 @@ export const ptContent = {
         name: 'Catálogo & App Imobiliário',
         type: 'Projeto sob medida / Uso interno',
         url: 'https://marciliobarbosacorretor.com.br',
-        problem: 'Meu pai é corretor e recebia fotos e informações de imóveis pelo WhatsApp. Depois precisava organizar esse material e escrever os anúncios.',
+        problem: 'Fotos e informações de imóveis chegavam pelo WhatsApp e precisavam ser organizadas para o cadastro e a publicação dos anúncios.',
         solution: 'Fiz um app para enviar fotos e áudios durante as visitas, uma área administrativa e o catálogo público. A integração com a OpenAI ajuda a organizar as informações e preparar os anúncios.',
         stack: 'Next.js SSR · Expo/React Native · Prisma · MinIO · OpenAI API',
         year: '2026'
@@ -566,7 +566,7 @@ export const enContent = {
             name: 'Real Estate Catalog & App',
             type: 'Custom Solution',
             year: '2026',
-            narrative: 'A property catalog and mobile app for my father, a real estate agent. He sends photos and voice notes from his phone; AI helps structure the information for listings. The work connects the website, administration area and app in a workflow designed for field use.',
+            narrative: 'A catalog for browsing and sharing properties, with an administration area and a listing app. The app accepts photos and voice notes during property visits; AI helps organize listing information. Website, dashboard and app are parts of the same solution.',
             stack: 'Next.js SSR · Expo/React Native · Prisma · MinIO · OpenAI API',
             links: [
               { label: 'Visit Site', href: 'https://marciliobarbosacorretor.com.br/' },
@@ -750,7 +750,7 @@ export const enContent = {
       name: 'Avantis — former brand website',
       type: 'Landing Page',
       stack: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
-      narrative: 'The website I built to present my services under the Avantis name. It is now a record of that period; I present my work as Marcilio Ortiz.',
+      narrative: 'A business website presenting services and work completed under the former Avantis brand. Kept in the archive as a historical project.',
       media: { image: '/cases/thumbs/avantis.webp', alt: 'Archived view of the former Avantis website' },
       links: [
         { label: 'Repository', href: 'https://github.com/KriawqZero/avantis-porfolio' }
@@ -768,16 +768,16 @@ export const enContent = {
     principles: [
       { title: 'Before we start', text: 'We discuss what you need, what already exists and what the delivery should include.' },
       { title: 'Development', text: 'I work on databases, APIs, screens, tests and deployment, depending on what the project needs.' },
-      { title: 'You talk to me', text: 'I build and follow the work myself. When a decision changes the scope, we discuss it before moving on.' },
+      { title: 'Progress updates', text: 'Progress reports record what is done and what remains. Scope changes are discussed before moving on.' },
     ],
   },
 
   avantis: {
     number: '02',
-    label: 'INDEPENDENT DEVELOPMENT',
-    title: 'You work',
-    titleHighlight: 'with me.',
-    description: 'Websites, systems and automations',
+    label: 'WEB DEVELOPMENT',
+    title: 'Websites',
+    titleHighlight: '& systems.',
+    description: 'Automation, integrations and maintenance',
     text: 'Need a website, an automated task or changes to an existing system? Tell me how it works today and what needs to change. We can work out the scope before getting started.',
     links: [
       { label: 'Discuss a project', href: '#contato' },
@@ -885,7 +885,7 @@ export const enContent = {
       items: [
         {
           question: 'What have you built in production?',
-          answer: 'I published the property catalog I built for my father and the Sushi do Verão website. I also developed SISCO, used at IFMS to manage complementary course hours, and a revenue automation for a retail chain. VamoAgendar is another project of mine, but it is still in development toward beta.',
+          answer: 'I published a catalog for browsing and sharing properties and the Sushi do Verão website. I also developed SISCO, used at IFMS to manage complementary course hours, and a revenue automation for a retail chain. VamoAgendar is another project of mine, but it is still in development toward beta.',
         },
         {
           question: 'How do you use AI without depending on it?',
@@ -897,7 +897,7 @@ export const enContent = {
         },
         {
           question: 'How does a project with you work?',
-          answer: 'We first discuss what you need and what already exists. We write down the scope, then I build, test and deploy to the agreed environment. I use progress reports to keep track of the work. Prices, deadlines and availability are agreed directly with me.',
+          answer: 'We first discuss what you need and what already exists. We write down the scope, then I build, test and deploy to the agreed environment. I use progress reports to keep track of the work. Prices, deadlines and availability are agreed during contracting.',
         },
         {
           question: 'What are you still learning?',
@@ -979,7 +979,7 @@ export const enContent = {
         name: 'Real Estate Catalog & App',
         type: 'Custom Project / Internal Use',
         url: 'https://marciliobarbosacorretor.com.br',
-        problem: 'My father is a real estate agent. He received property photos and information through WhatsApp, then had to organize the material and write the listings.',
+        problem: 'Property photos and information arrived through WhatsApp and needed to be organized before creating and publishing listings.',
         solution: 'I built an app for sending photos and voice notes during visits, an administration area and the public catalog. The OpenAI integration helps organize the information and prepare listings.',
         stack: 'Next.js SSR · Expo/React Native · Prisma · MinIO · OpenAI API',
         year: '2026'

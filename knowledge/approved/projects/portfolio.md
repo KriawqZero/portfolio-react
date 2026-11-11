@@ -16,7 +16,7 @@ source_href: https://www.marciliortiz.dev.br/
 
 Este é meu portfólio profissional. Ele reúne trabalhos para clientes, produtos em desenvolvimento e projetos de estudo. Os textos estão em português e inglês, e o catálogo permite procurar por projeto, tecnologia, área e estágio.
 
-A identidade usa meu nome, Marcilio Ortiz, e o monograma MO. Avantis aparece somente no histórico da marca anterior.
+A identidade visual usa o monograma MO.
 
 ## Como foi feito
 
@@ -34,4 +34,4 @@ O servidor verifica o formato da resposta, os links e as referências aos docume
 
 O endpoint tem verificações de origem, proteção contra abuso, limites de uso e de gasto. Se os controles necessários estiverem indisponíveis ou o orçamento for atingido, a chamada ao modelo é interrompida.
 
-A IA não é o Marcilio conversando ao vivo. Ela não confirma disponibilidade, preço ou prazo e não pode fechar contratos em meu nome. Para isso, o visitante deve falar diretamente comigo.
+A IA não é o Marcilio conversando ao vivo. Ela não confirma disponibilidade, preço ou prazo e não pode fechar contratos em meu nome. A contratação é tratada pelos canais de contato do site.

@@ -11,13 +11,13 @@ aliases: [trabalha como freelancer, freelance, freelancer, projeto com cliente, 
 
 ## Desde quando e onde
 
-Trabalho como freelancer desde março de 2025. Comecei pela Workana e depois atuei também na Upwork, no 99Freelas e por indicação. Uso meu próprio nome, Marcilio Ortiz, para apresentar os serviços.
+Trabalho como freelancer desde março de 2025. Comecei pela Workana e depois atuei também na Upwork, no 99Freelas e por indicação.
 
 ## Trabalhos para clientes
 
 Construí uma automação de faturamento para uma rede de lojas em São Paulo. O sistema entrou no ar em abril de 2025 e o trabalho continuou com manutenção e novas regras, como metas e comissões. O número atual de filiais e a frequência de uso não foram verificados nesta revisão.
 
-Também entreguei um projeto pela Upwork para um cliente australiano e trabalhos para negócios da minha região. Entre os sites publicados estão o catálogo imobiliário feito para meu pai e o Sushi do Verão.
+Também entreguei um projeto pela Upwork para um cliente australiano e trabalhos para negócios da minha região. Entre os sites publicados estão o catálogo imobiliário e o Sushi do Verão.
 
 ## Como começa
 
@@ -39,4 +39,4 @@ No Sushi do Verão, refinei com o proprietário uma proposta de API e cardápio.
 
 ## Contratação
 
-Preço, prazo e disponibilidade precisam ser combinados diretamente com Marcilio. A IA do site explica o trabalho, mas não fecha proposta nem assume compromissos. Os contatos estão no e-mail e no LinkedIn do portfólio.
+Preço, prazo e disponibilidade precisam ser definidos na contratação. A IA do site explica o trabalho, mas não fecha proposta nem assume compromissos. O contato pode ser feito pelo Instagram profissional ou pela seção de contato do portfólio.

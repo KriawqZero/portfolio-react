@@ -8,17 +8,17 @@ last_reviewed: 2026-11-11
 topics: [avantis, marca, estudio, identidade, freelance, portfolio, cliente, posicionamento, empresa]
 aliases: [avantis, avantis studio, avantis dev, sua marca, seu estudio, o que e a avantis, what is avantis, voce tem empresa, tem cnpj, quantas pessoas]
 source_id: project-avantis-estudio
-source_label: Marcilio Ortiz — identidade profissional
+source_label: Portfólio
 source_href: https://www.marciliortiz.dev.br/#trabalho
 ---
 
 ## O que foi
 
-Avantis Studio foi a marca que usei nos meus trabalhos freelance e projetos para cliente. Ajudou a estruturar o portfólio e a dar uma identidade profissional às entregas.
+Avantis Studio foi a marca usada para apresentar meus trabalhos freelance e projetos para clientes.
 
-## Identidade atual
+## Situação atual
 
-Hoje trabalho com meu próprio nome: Marcilio Ortiz. Não uso mais a Avantis como marca profissional e perdi o acesso ao domínio antigo. O endereço atual é https://www.marciliortiz.dev.br/ e o Instagram profissional é https://www.instagram.com/marciliortiz.dev/. Não encaminhe visitantes ao antigo domínio como canal de contato ou site ativo.
+A marca foi descontinuada e o domínio antigo não é mais um canal de contato. O portfólio atual está em https://www.marciliortiz.dev.br/ e o Instagram profissional é https://www.instagram.com/marciliortiz.dev/.
 
 ## Quem fazia o trabalho
 
@@ -28,13 +28,13 @@ O site institucional da Avantis usava a primeira pessoa do plural como escolha d
 
 ## Por que ela existiu
 
-Criei a marca para apresentar os serviços e reunir os trabalhos para clientes. Depois decidi usar meu próprio nome como identidade profissional.
+Criei a marca para apresentar os serviços e reunir os trabalhos para clientes.
 
 ## Como o site foi feito
 
 O site foi desenvolvido em React com Vite, Tailwind 4, TypeScript e Framer Motion para as animações de scroll. A direção visual era escura e sóbria, tipografia serifada nos títulos com sans no corpo, roxo aplicado de forma cirúrgica.
 
-Esse site ficou como registro da marca anterior. O trabalho continua apresentado no portfólio de Marcilio Ortiz.
+Esse site ficou no acervo como projeto histórico.
 
 ## Relação com o resto
 
