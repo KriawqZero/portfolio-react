@@ -4,7 +4,7 @@ title: Plataforma imobiliária — site, app e IA para um corretor
 type: project
 visibility: public
 approved: true
-last_reviewed: 2026-08-06
+last_reviewed: 2026-11-11
 topics: [imobiliaria, corretor, imoveis, nextjs, ssr, seo, minio, openai, expo, react native, prisma, postgresql, pai, mobile, app]
 aliases: [imobiliaria, corretor, imoveis, catalogo, seu pai, projeto do pai, app mobile, react native, expo, openai, ia em projeto, minio, usa ia em produto, aplicativo]
 source_id: project-imobiliaria
@@ -14,15 +14,15 @@ source_href: https://github.com/KriawqZero/marciliobarbosa-corretor
 
 ## O que é
 
-Plataforma imobiliária completa — site público, área administrativa e aplicativo mobile — feita sob medida para o meu pai, que é corretor de imóveis em Corumbá e Ladário.
+Site público, área administrativa e aplicativo feitos para o meu pai, que é corretor de imóveis em Corumbá e Ladário.
 
 ## Por que ela existe
 
-Ele perdia horas por mês recebendo foto desorganizada no WhatsApp e tentando redigir anúncio. O processo inteiro era manual e lento. Não foi um pedido: eu vi o problema acontecendo e resolvi construir.
+Ele recebia fotos e informações pelo WhatsApp e depois precisava organizar o material e escrever os anúncios. Vi essa rotina e resolvi construir uma ferramenta para ajudar.
 
 ## Como funciona
 
-Ele grava áudio e tira foto em campo, pelo celular, no aplicativo. O backend recebe esse material bruto e usa a API da OpenAI para analisar imagem e áudio, estruturando descrição e atributos técnicos prontos para publicação. Ele nunca precisa escrever texto comercial.
+Ele envia fotos e áudios pelo aplicativo durante as visitas. O backend usa a API da OpenAI para ajudar a organizar a descrição e os atributos do imóvel. O material fica disponível no fluxo de cadastro e publicação.
 
 ## As decisões técnicas
 

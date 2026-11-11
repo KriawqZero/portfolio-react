@@ -37,14 +37,12 @@ export default function Trajectory() {
   }, [])
 
   useEffect(() => {
-    if (!isDesktop || !pinContainerRef.current) return
+    if (!isDesktop || reducedMotion || !pinContainerRef.current) return
 
     const mm = gsap.matchMedia(sectionRef)
 
     mm.add('(min-width: 1024px)', () => {
       const panels = gsap.utils.toArray('.traj-panel') as HTMLElement[]
-      const eraLabels = gsap.utils.toArray('.era-label') as HTMLElement[]
-      const eraVisuals = gsap.utils.toArray('.era-visual') as HTMLElement[]
       const shots = gsap.utils.toArray('.traj-shot') as HTMLElement[]
 
       // Set initial states
@@ -62,14 +60,6 @@ export default function Trajectory() {
         } else {
           gsap.set(shot, { pointerEvents: 'auto' })
         }
-      })
-
-      eraLabels.forEach((label, i) => {
-        if (i > 0) gsap.set(label, { opacity: 0, y: 20 })
-      })
-
-      eraVisuals.forEach((visual, i) => {
-        if (i > 0) gsap.set(visual, { opacity: 0 })
       })
 
       const tl = gsap.timeline({
@@ -182,10 +172,6 @@ export default function Trajectory() {
           const nextEraId = allProjects[i + 1]?.era.id
 
           if (currEraId !== nextEraId) {
-            // Find era indices
-            const currEraIdx = data.eras.findIndex(e => e.id === currEraId)
-            const nextEraIdx = data.eras.findIndex(e => e.id === nextEraId)
-
             // Shift glow
             if (glowRef.current) {
               tl.to(glowRef.current, {
@@ -194,53 +180,14 @@ export default function Trajectory() {
               }, i)
             }
 
-            // Crossfade labels
-            if (eraLabels[currEraIdx]) {
-              tl.to(eraLabels[currEraIdx], { opacity: 0, y: -20, duration: 0.4 }, i)
-            }
-            if (eraLabels[nextEraIdx]) {
-              tl.to(eraLabels[nextEraIdx], { opacity: 0.02, y: 0, duration: 0.4 }, i + 0.2)
-            }
-
-            // Crossfade visuals
-            if (eraVisuals[currEraIdx]) {
-              tl.to(eraVisuals[currEraIdx], { opacity: 0, duration: 0.5 }, i)
-            }
-            if (eraVisuals[nextEraIdx]) {
-              tl.to(eraVisuals[nextEraIdx], { opacity: 1, duration: 0.5 }, i + 0.2)
-            }
           }
         }
       })
 
-      const handleMouseMove = (e: MouseEvent) => {
-        const x = (e.clientX / window.innerWidth - 0.5) * 2
-        const y = (e.clientY / window.innerHeight - 0.5) * 2
-
-        gsap.to('.parallax-bg', {
-          x: x * 40,
-          y: y * 40,
-          ease: 'power2.out',
-          duration: 1.5
-        })
-
-        gsap.to('.parallax-fg', {
-          x: x * -15,
-          y: y * -15,
-          ease: 'power2.out',
-          duration: 1.5
-        })
-      }
-
-      window.addEventListener('mousemove', handleMouseMove)
-
-      return () => {
-        window.removeEventListener('mousemove', handleMouseMove)
-      }
     })
 
     return () => mm.revert()
-  }, [isDesktop, N, allProjects, data.eras])
+  }, [isDesktop, reducedMotion, N, allProjects, data.eras])
 
   const handleFastTravel = (eraId: string) => {
     const st = ScrollTrigger.getById('trajectory-pin')
@@ -257,17 +204,8 @@ export default function Trajectory() {
     })
   }
 
-  /* const handleSkip = () => {
-    const st = ScrollTrigger.getById('trajectory-pin')
-    if (!st) return
-    window.scrollTo({
-      top: st.end + 10,
-      behavior: 'smooth'
-    })
-  } */
-
-  // Mobile rendering (vertical stack)
-  if (!isDesktop) {
+  // Stack projects on smaller screens and when motion is reduced.
+  if (!isDesktop || reducedMotion) {
     return (
       <section id="projetos" style={{ padding: 'var(--section-spacing) 0', position: 'relative' }}>
         <div className="container">
@@ -285,7 +223,7 @@ export default function Trajectory() {
                 {era.projects.map((project) => (
                   <motion.div
                     key={project.name}
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={reducedMotion ? false : { opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-10%' }}
                     transition={{ duration: 0.8 }}
@@ -430,59 +368,6 @@ export default function Trajectory() {
             }}
           />
 
-          {/* Surface Grid */}
-          <div className="era-visual" style={{ position: 'absolute', inset: 0, opacity: 1, backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)', backgroundSize: '100px 100px', transform: 'perspective(500px) rotateX(60deg) translateY(-100px) scale(2)' }} />
-
-          {/* Infra Logs */}
-          <div className="era-visual" style={{ position: 'absolute', inset: 0, opacity: 0, padding: '4rem', fontFamily: 'monospace', color: 'rgba(16, 185, 129, 0.05)', fontSize: '12px', display: 'flex', flexDirection: 'column', gap: '8px', overflow: 'hidden' }}>
-            {Array.from({ length: 40 }).map((_, i) => <div key={i}>[WORKER-{Math.floor(Math.random() * 9999)}] SYNC STORE_{Math.floor(Math.random() * 99)} OK - EXTRACTED {Math.floor(Math.random() * 50)} RECORDS {Date.now() - i * 1000}ms</div>)}
-          </div>
-
-          {/* LowLevel Wireframe */}
-          <div className="era-visual" style={{ position: 'absolute', inset: 0, opacity: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ width: '40vw', height: '40vw', border: '1px solid rgba(239, 68, 68, 0.1)', borderRadius: '50%', transform: 'rotateX(75deg) rotateY(15deg) rotateZ(45deg)', position: 'absolute' }} />
-            <div style={{ width: '30vw', height: '30vw', border: '1px solid rgba(239, 68, 68, 0.1)', borderRadius: '50%', transform: 'rotateX(75deg) rotateY(15deg) rotateZ(45deg)', position: 'absolute' }} />
-            <div style={{ width: '20vw', height: '20vw', border: '1px solid rgba(239, 68, 68, 0.1)', borderRadius: '50%', transform: 'rotateX(75deg) rotateY(15deg) rotateZ(45deg)', position: 'absolute' }} />
-          </div>
-
-          {/* Roots Terminal */}
-          <div className="era-visual" style={{ position: 'absolute', inset: 0, opacity: 0, padding: '4rem', fontFamily: 'monospace', color: 'rgba(245, 158, 11, 0.06)', fontSize: '14px', whiteSpace: 'pre-line' }}>
-            {`C:\\marcilinho\\PythonP\\Player> python main.py
-[INFO] Loading dependencies...
-[INFO] Found 342 .mp3 files
-[INFO] Starting Kivy UI
-C:\\Users\\Marcilio\\Desktop\\vbmod> gradlew build
-:compileJava
-:processResources
-:classes
-:jar
-BUILD SUCCESSFUL`}
-          </div>
-        </div>
-
-        {/* ========================================================= */}
-        {/* LAYER 1: Texto Decorativo Gigante                         */}
-        {/* ========================================================= */}
-        <div className="parallax-bg" style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 1, overflow: 'hidden', willChange: 'transform' }}>
-          {data.eras.map((era, i) => (
-            <div
-              key={era.id}
-              className="era-label"
-              style={{
-                position: 'absolute',
-                fontFamily: 'var(--font-display)',
-                fontSize: '15vw',
-                fontWeight: 900,
-                color: 'var(--text-primary)',
-                opacity: i === 0 ? 0.02 : 0,
-                whiteSpace: 'nowrap',
-                letterSpacing: '-0.05em',
-                userSelect: 'none'
-              }}
-            >
-              {era.name.toUpperCase()}
-            </div>
-          ))}
         </div>
 
         {/* ========================================================= */}
@@ -658,7 +543,7 @@ BUILD SUCCESSFUL`}
             </div>
 
             {/* Coluna Direita: Painéis de Projeto */}
-            <div className="parallax-fg" style={{ position: 'relative', height: '60vh', width: '100%', willChange: 'transform' }}>
+            <div style={{ position: 'relative', height: '60vh', width: '100%' }}>
               {allProjects.map((project) => (
                 <div
                   key={project.name}

@@ -2,7 +2,7 @@
  * Gera lib/ai/generated/knowledge-index.ts a partir de duas fontes:
  *
  *   1. knowledge/approved/**.md  — escrito à mão, só informação pública aprovada
- *   2. src/data/content.ts       — o que o site já publica, derivado sem duplicar
+ *   2. src/data/content.ts e projectCatalog.ts — conteúdo público nos dois idiomas
  *
  * As políticas (knowledge/policies) não viram documento recuperável: elas entram
  * direto nas instruções do modelo, porque valem para toda pergunta.
@@ -162,16 +162,25 @@ function fonte(nome: string, links: ReadonlyArray<{ label: string; href: string 
 function derivarDoContent(): KnowledgeDoc[] {
   const docs: KnowledgeDoc[] = []
   const linhasIndice: string[] = []
+  const catalogoIngles = new Map(getProjectCatalog('en').map(project => [project.id, project]))
+  // Nomes próprios ficam iguais nos dois idiomas. Estes aliases traduzem o
+  // segmento da marca, sem mudar seu nome público ou criar fatos sobre o case.
+  const aliasesTraduzidos: Record<string, string[]> = {
+    'suzy-paiva': ['jewelry store', 'jewellery store'],
+  }
 
   for (const project of getProjectCatalog('pt')) {
     const stage = statusLabels.pt[project.status]
+    const english = catalogoIngles.get(project.id)
+    if (!english) throw new Error(`Tradução do catálogo ausente: ${project.id}`)
+    const englishText = `${english.name} (${english.year}). Status: ${statusLabels.en[english.status]}. Category: ${categoryLabels.en[english.category]}.\n\n${english.summary}\n\nScope: ${english.scope}`
     docs.push({
       id: `catalog-${project.id}`,
       title: project.name,
       type: 'project',
       topics: ['projeto', project.category, project.status, ...project.stack.map(slug)],
-      aliases: [project.name.toLowerCase()],
-      text: `${project.name} (${project.year}). Estágio: ${stage}. Área: ${categoryLabels.pt[project.category]}.\n\n${project.summary}\n\nEscopo: ${project.scope}\n\nTecnologias: ${project.stack.join(', ')}`,
+      aliases: [...new Set([project.name.toLowerCase(), english.name.toLowerCase(), ...(aliasesTraduzidos[project.id] ?? [])])],
+      text: `${project.name} (${project.year}). Estágio: ${stage}. Área: ${categoryLabels.pt[project.category]}.\n\n${project.summary}\n\nEscopo: ${project.scope}\n\nTecnologias: ${project.stack.join(', ')}\n\nEnglish:\n${englishText}`,
       ...fonte(project.name, project.links),
     })
     linhasIndice.push(`- ${project.name} (${project.year}) — ${stage}: ${project.scope}`)
@@ -188,12 +197,12 @@ function derivarDoContent(): KnowledgeDoc[] {
 
   docs.push({
     id: 'profile-professional-brand',
-    title: 'Marcílio Ortiz — desenvolvimento independente',
+    title: 'Marcilio Ortiz — desenvolvimento independente',
     type: 'profile',
     topics: ['avantis', 'marca', 'freelance'],
     aliases: ['avantis', 'avantis studio', 'sua marca'],
     text: `${ptContent.avantis.description}\n\n${ptContent.avantis.text}`,
-    sourceLabel: 'Marcílio Ortiz',
+    sourceLabel: 'Marcilio Ortiz',
     sourceHref: 'https://www.marciliortiz.dev.br/',
   })
 
@@ -214,7 +223,7 @@ function derivarDoContent(): KnowledgeDoc[] {
     type: 'index',
     topics: ['projetos', 'portfolio', 'o que construiu'],
     aliases: ['seus projetos', 'your projects', 'o que voce construiu', 'what have you built'],
-    text: `Seleção de projetos de Marcílio. Publicado, implementado, em desenvolvimento, experimento e histórico são estágios distintos. Não somar repositórios ou fases como novos produtos:\n${linhasIndice.join('\n')}`,
+    text: `Seleção de projetos de Marcilio. Publicado, implementado, em desenvolvimento, experimento e histórico são estágios distintos. Não somar repositórios ou fases como novos produtos:\n${linhasIndice.join('\n')}`,
   })
 
   return docs

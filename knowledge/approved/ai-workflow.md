@@ -4,39 +4,33 @@ title: Como eu uso inteligência artificial no trabalho
 type: practice
 visibility: public
 approved: true
-last_reviewed: 2026-08-06
+last_reviewed: 2026-11-11
 topics: [ia, inteligencia artificial, produtividade, claude code, revisao de codigo, ferramentas, papel do programador, profissao]
 aliases: [como usa ia, usa ia, how do you use ai, ai workflow, copilot, claude code, chatgpt, vibe coding, a ia vai substituir, depende de ia, ia substitui programador]
 ---
 
 ## Desde quando
 
-Uso IA para programar de verdade desde junho de 2025. Antes disso era uso acadêmico e tentativa frustrada de copiar e colar resposta de chat — quase toda a minha formação técnica aconteceu sem esse apoio.
+Passei a usar IA com frequência no desenvolvimento em junho de 2025. Antes disso, usava em atividades acadêmicas e fazia algumas tentativas de programação pelo chat.
 
-## Como eu uso
+## Como uso
 
-Uso IA todos os dias, principalmente o Claude Code, para acelerar implementação, explorar código que não conheço e revisar o que escrevi. Ela encurta a parte mecânica: gerar o esqueleto de um módulo, percorrer um repositório grande atrás de onde algo acontece, sugerir um caminho quando eu travei.
+Uso ferramentas de IA para explorar repositórios, discutir alternativas, implementar partes de um projeto e revisar alterações. Também uso para organizar o trabalho e a documentação.
 
-A sequência é sempre a mesma: eu defino o objetivo, discuto as possibilidades, valido a estratégia e só então peço implementação. A IA implementa; quem decide sou eu.
+Eu defino o que precisa ser feito e acompanho as decisões. A responsabilidade pela entrega continua comigo.
 
-## O que continua sendo meu
+## Como confiro
 
-Arquitetura, decisão técnica, revisão e entrega. A IA não desenha o sistema por mim, e eu não entrego código que não entendo.
+Reviso as alterações, consulto a documentação e testo o comportamento. Uma explicação convincente não basta para confirmar que o código funciona. Quando algo parece errado, reduzo o problema e comparo com um caso conhecido.
 
-## Como eu valido o que a IA gera
+A revisão precisa considerar o projeto inteiro: uma alteração pode funcionar isoladamente e ainda quebrar um fluxo em outra parte.
 
-Leio tudo antes de aceitar. Rodo o que dá para rodar e confiro o comportamento em vez de confiar na explicação. Quando a sugestão envolve uma biblioteca ou API, confiro na documentação oficial, porque modelo erra assinatura e inventa parâmetro com naturalidade. Se eu não consigo explicar por que aquele código funciona, ele não entra.
+## Onde já atrapalhou
 
-## Onde ela atrapalha
+No voxel engine em C++ de 2024, as sugestões para câmera e matrizes quebravam partes que funcionavam. Parei de usá-las nessa parte e continuei com documentação e depuração. A integração do Dear ImGui foi uma das partes em que a ferramenta ajudou.
 
-Em problema mal definido, a IA acelera na direção errada com muita confiança. Quando o problema ainda não está claro na minha cabeça, escrever com ela costuma custar mais caro do que pensar primeiro.
+## No meu site
 
-## O que eu acho que mudou na profissão
+O assistente do portfólio consulta os documentos disponíveis sobre meus projetos e minha forma de trabalhar. Ele tem fontes delimitadas, controles de uso e de custo, e deve reconhecer quando não tem informação suficiente.
 
-Escrever código ficou mais barato, então pensar ficou relativamente mais caro. O trabalho se deslocou para perguntas que a IA não responde sozinha: o problema está bem definido? esse fluxo faz sentido? o usuário precisa mesmo disso? existe alternativa mais simples?
-
-Isso não elimina a necessidade de saber programar — é justamente a base que permite perceber quando a resposta está errada e parece convincente. Quem nunca resolveu bug difícil na mão tem menos defesa contra uma solução plausível e furada.
-
-## Uma prova disso no meu próprio site
-
-Esta seção com que você está falando é um exemplo do que eu defendo. Ela não é um chatbot genérico ligado a um modelo: responde apenas a partir de documentos que eu revisei, valida a resposta contra esses documentos antes de mostrar, e tem limite de gasto, proteção contra abuso e desligamento de emergência. A parte de IA é a menor parte do trabalho.
+Não é uma conversa ao vivo comigo. Propostas, preços, prazos e disponibilidade passam pelo contato direto com Marcilio.

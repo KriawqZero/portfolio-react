@@ -41,4 +41,4 @@ Migrei parte da atuação para a Upwork, onde entreguei um projeto para um clien
 
 ## Onde eu atuo hoje
 
-Voltei à Workana, agora sem o prestígio de ranking que eu tinha antes, e trabalho também pela Upwork, pelo 99Freelas, por indicação e diretamente como Marcílio Ortiz. Avantis Studio foi o nome que usei antes; a identidade profissional atual é meu próprio nome.
+Voltei à Workana, agora sem o prestígio de ranking que eu tinha antes, e trabalho também pela Upwork, pelo 99Freelas, por indicação e diretamente como Marcilio Ortiz. Avantis Studio foi o nome que usei antes; a identidade profissional atual é meu próprio nome.

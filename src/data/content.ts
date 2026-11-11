@@ -10,14 +10,14 @@ export const ptContent = {
 
   hero: {
     greeting: 'OLÁ, EU SOU',
-    name: 'Marcílio Ortiz',
-    role: ['Fullstack', 'AI Developer'],
+    name: 'Marcilio Ortiz',
+    role: ['Desenvolvedor', 'Full Stack'],
     subtitle:
-      'Desenvolvo sites, sistemas e automações para negócios. Do banco de dados à interface, cuido da construção, dos testes e da publicação. Aqui você conhece os projetos e as decisões por trás deles.',
+      'Faço sites, sistemas e automações. Aqui estão alguns trabalhos para clientes, produtos que estou desenvolvendo e projetos que fiz para aprender.',
     availability: {
-      defaultStatus: 'Vamos conversar sobre seu projeto',
+      defaultStatus: 'Vamos falar sobre seu projeto',
       defaultTypes: ['Sites', 'Sistemas', 'Automações'],
-      freelanceStatus: 'Vamos conversar sobre seu projeto',
+      freelanceStatus: 'Vamos falar sobre seu projeto',
       freelanceTypes: ['Sistemas', 'Websites', 'APIs'],
       cta: 'O que você precisa construir?',
     },
@@ -29,7 +29,7 @@ export const ptContent = {
       { name: 'TypeScript', icon: 'typescript' },
       { name: 'React', icon: 'react' },
     ],
-    ctaPrimary: 'Ver Projetos',
+    ctaPrimary: 'Ver projetos',
     ctaSecondary: 'Sobre mim',
   },
 
@@ -49,7 +49,7 @@ export const ptContent = {
     eras: [
       {
         id: 'surface',
-        name: 'A Superfície',
+        name: 'Sites e sistemas',
         subtitle: 'Sites, sistemas e produtos em diferentes estágios.',
         glowColor: 'rgba(63, 24, 171, 0.12)',
         projects: [
@@ -88,7 +88,7 @@ export const ptContent = {
             name: 'VamoAgendar',
             type: 'SaaS em Desenvolvimento',
             year: '2026',
-            narrative: 'Produto de agendamento online com serviços, disponibilidade e painel do profissional. O desenvolvimento inclui regras de horários e a estrutura para assinaturas e notificações. O produto segue em evolução para o beta; a implementação de uma etapa não representa o lançamento do serviço completo.',
+            narrative: 'Estou desenvolvendo este produto de agendamento com um sócio investidor. O profissional cadastra os serviços e horários; o cliente escolhe pelo link. O painel e as regras de agenda estão implementados. A cobrança de assinaturas ainda precisa ser concluída antes do beta.',
             stack: 'Next.js 16 · Prisma 7 · PostgreSQL · Mercado Pago · better-auth',
             links: [{ label: 'Repositório', href: 'https://github.com/KriawqZero/vamoagendar' }, { label: 'Visitar', href: 'https://vamoagendar.com.br/' }],
             stat: { value: 'SaaS', label: 'em desenvolvimento' },
@@ -104,8 +104,8 @@ export const ptContent = {
       },
       {
         id: 'infra',
-        name: 'A Infraestrutura',
-        subtitle: 'Workers, fluxos de dados e a engenharia dos bastidores.',
+        name: 'Automações',
+        subtitle: 'Coleta de dados, integrações e tarefas que antes eram manuais.',
         glowColor: 'rgba(16, 185, 129, 0.10)',
         projects: [
           {
@@ -121,15 +121,15 @@ export const ptContent = {
       },
       {
         id: 'lowlevel',
-        name: 'O Baixo Nível',
-        subtitle: 'C++, OpenGL e o atrito direto com a renderização.',
+        name: 'Jogos e gráficos',
+        subtitle: 'Experimentos com C++, OpenGL e renderização 3D.',
         glowColor: 'rgba(239, 68, 68, 0.08)',
         projects: [
           {
             name: 'Voxel Engine (OpenGL Clássico)',
             type: 'Laboratório Pessoal',
             year: '2024',
-            narrative: 'Sim, o nome original era só uma abreviação preguiçosa para Minecraft. Minha intenção aqui era tentar recriar um clone básico do jogo do zero para entender matemática 3D e renderização gráfica sem engines prontas. Quebrei muito a cabeça no ensino médio com matrizes de projeção e vetores só para fazer uma câmera em primeira pessoa funcionar em C++.',
+            narrative: 'Tentei fazer um mundo de blocos em C++ para aprender renderização 3D sem uma engine pronta. Fiz câmera em primeira pessoa, geração de chunks e uma interface de depuração. As matrizes de projeção deram bastante trabalho até a câmera se comportar como eu queria.',
             stack: 'C++20 · OpenGL · GLFW · GLM · Dear ImGui',
             links: [{ label: 'Repositório', href: 'https://github.com/KriawqZero/mine' }],
             stat: { value: '3D Math', label: 'pipeline clássica' },
@@ -138,7 +138,7 @@ export const ptContent = {
             name: 'Voxel Engine (Shader Pipeline)',
             type: 'Experimento Incompleto',
             year: '2024',
-            narrative: 'Minha tentativa de pegar o clone de Minecraft e reescrevê-lo para a pipeline moderna da GPU (com Shaders e VBOs). O semestre letivo acabou e o projeto virou um cemitério de código incompleto, mas me ensinou na força bruta como alocar memória na mão e compilar shaders. Um atrito direto e muito divertido com a máquina.',
+            narrative: 'Comecei a reescrever o mundo de blocos usando shaders e buffers na GPU. A versão ficou incompleta quando o semestre terminou. Foi onde escrevi meus primeiros shaders e trabalhei com gerenciamento de memória em C++.',
             stack: 'C++20 · OpenGL Core Profile · GLEW · CMake',
             links: [{ label: 'Repositório', href: 'https://github.com/KriawqZero/mine_glModerno' }],
             stat: { value: 'GPU Pipeline', label: 'projeto incompleto' },
@@ -147,42 +147,42 @@ export const ptContent = {
       },
       {
         id: 'roots',
-        name: 'As Raízes',
-        subtitle: '12 anos. O começo de tudo, antes da pandemia.',
+        name: 'Os primeiros projetos',
+        subtitle: 'Mods de Minecraft e programas em Python, ainda na escola.',
         glowColor: 'rgba(245, 158, 11, 0.08)',
         projects: [
           {
             name: 'Simulador Bancário',
             type: 'Curiosidade de Infância',
             year: 'Março de 2020',
-            narrative: 'Desenvolvido aos 12 anos de idade, exatamente na semana em que a pandemia estourou. Eu queria entender como os programas mantinham dados salvos após fechar a janela. Sem saber o que era um banco de dados relacional, criei uma mecânica rudimentar em Python para coletar inputs de texto, serializá-los e gravá-los de forma permanente no disco do meu computador de infância em arquivos JSON.',
+            narrative: 'Um dos meus primeiros programas em Python. Eu queria descobrir como manter os dados depois de fechar a janela, então fiz formulários com Kivy e gravei as informações em arquivos JSON.',
             stack: 'Python · Kivy Framework · JSON Local',
             links: [{ label: 'Repositório', href: 'https://github.com/KriawqZero/bankkp' }],
-            stat: { value: '12 anos', label: 'persistência crua' },
+            stat: { value: 'JSON', label: 'dados em arquivo' },
           },
           {
             name: 'Player Desktop',
             type: 'Curiosidade de Infância',
             year: 'Março de 2020',
-            narrative: 'Meu segundo experimento visual com Python na infância. Construí um player de áudio completo capaz de ler um diretório do Windows, filtrar arquivos com extensão .mp3 e gerenciar o estado das faixas (play, stop, avançar e retroceder). O código original possui caminhos engessados diretamente para a partição do meu computador de infância (F:/marcilinho/...), expondo a natureza pura e caseira do meu início na programação.',
+            narrative: 'Um player em Python que lê uma pasta de arquivos MP3 e permite tocar, parar e trocar de faixa. No código original, o caminho da pasta ainda aponta para o computador em que eu programava.',
             stack: 'Python · Kivy Core Audio',
             links: [{ label: 'Repositório', href: 'https://github.com/KriawqZero/musicplayer' }],
-            stat: { value: '12 anos', label: 'gerenciamento de arquivos' },
+            stat: { value: 'Áudio', label: 'arquivos MP3' },
           },
           {
             name: 'Event Loop',
             type: 'Curiosidade de Infância',
             year: 'Início de 2020',
-            narrative: 'Criado um pouco antes da pandemia, este projeto nasceu da curiosidade de tirar o Python do terminal e colocá-lo em uma interface interativa. Me forçou a entender, pela primeira vez, o paradigma de desenvolvimento orientado a eventos. Descobrir que o tempo em uma tela não se atualiza sozinho e que era necessário criar um loop de agendamento em ciclos de 0.1 segundos sem travar a thread da UI foi minha primeira grande lição de arquitetura.',
+            narrative: 'Um cronômetro feito com Python e Kivy. Aprendi a atualizar o tempo na tela sem travar os botões, usando chamadas agendadas em intervalos curtos.',
             stack: 'Python · Kivy KV Language',
             links: [{ label: 'Repositório', href: 'https://github.com/KriawqZero/cronometer' }],
-            stat: { value: '12 anos', label: 'event loop' },
+            stat: { value: 'Eventos', label: 'atualização da tela' },
           },
           {
             name: 'Mod para Minecraft (1.12.2)',
             type: 'O Marco Zero',
             year: 'Maio de 2019',
-            narrative: 'O marco zero da minha jornada. O meu primeiro repositório publicado no GitHub, criado aos 12 anos de idade. Como jogador assíduo de Minecraft, eu queria mudar as regras do jogo. Me aventurei no Java para compilar meu próprio mod usando a API do Forge, adicionando novos blocos, minérios e uma fornalha funcional com interface gráfica própria. Uma colcha de retalhos feita na tentativa e erro que prova que programo desde criança por puro prazer.',
+            narrative: 'Meu primeiro repositório no GitHub, de maio de 2019. Eu jogava Minecraft e queria acrescentar coisas ao jogo. Fui aprendendo Java enquanto fazia blocos, minérios e uma fornalha com interface própria usando o Forge.',
             stack: 'Java · Forge API 1.12.2 · Gradle',
             links: [{ label: 'Repositório', href: 'https://github.com/KriawqZero/vbmod-minecraft' }],
             stat: { value: '12 anos', label: 'primeiro commit' },
@@ -198,7 +198,7 @@ export const ptContent = {
       name: 'Sushi do Verão (Ecossistema)',
       type: 'Sistema Comercial',
       stack: ['NestJS', 'Next.js', 'Expo', 'PostgreSQL'],
-      narrative: 'Projetado para dar autonomia à operação do restaurante: a API e o painel foram modelados para que a equipe alterasse preços e pratos no horário de pico sem intervenção técnica. A base foi construída, mas o sistema não chegou a ser aprovado para produção — do escopo original, o que está no ar é o site institucional.',
+      narrative: 'Construí a base de uma API, um painel e um cardápio para o restaurante alterar pratos e preços. Esse sistema não foi aprovado para produção. A entrega publicada para o cliente foi o site institucional.',
       links: [
         { label: 'API', href: 'https://github.com/KriawqZero/rv-api' },
         { label: 'Admin', href: 'https://github.com/KriawqZero/rv-admin' },
@@ -210,7 +210,7 @@ export const ptContent = {
       name: 'Labirinto Geométrico',
       type: 'Web Game',
       stack: ['HTML5 Canvas', 'TypeScript', 'Vite'],
-      narrative: 'Um experimento escolar de renderização e gamificação. O foco técnico foi abandonar engines prontas e gerenciar o game loop, colisões e renderização gráfica diretamente no HTML5 Canvas com TypeScript puro.',
+      narrative: 'Jogo feito para a escola, com labirinto, colisões e desenho em Canvas. Usei TypeScript para controlar os movimentos e a atualização da tela.',
       links: [
         { label: 'Repositório', href: 'https://github.com/KriawqZero/jogo_matematica' }
       ],
@@ -221,7 +221,7 @@ export const ptContent = {
       name: 'Storage Crates',
       type: 'NeoForge Mod',
       stack: ['Java', 'NeoForge', 'Minecraft API'],
-      narrative: 'Construído em Java sobre o ecossistema NeoForge para resolver o problema de armazenamento em grande escala no jogo. O maior aprendizado foi lidar com a complexidade e as restrições da API interna do Minecraft.',
+      narrative: 'Mod de Minecraft em Java com caixas de armazenamento. Trabalhei com o registro de blocos e a forma como o NeoForge guarda o estado dos itens no jogo.',
       links: [
         { label: 'Repositório', href: 'https://github.com/KriawqZero/kriawqsstoragecrates' }
       ]
@@ -231,7 +231,7 @@ export const ptContent = {
       name: 'Simple Machines',
       type: 'NeoForge Mod',
       stack: ['Java', 'NeoForge', 'Gradle'],
-      narrative: 'Focado em adicionar componentes mecânicos ao jogo. A arquitetura exigiu manipulação profunda dos estados de blocos e da física nativa do motor do Minecraft, além da configuração minuciosa de builds no Gradle.',
+      narrative: 'Mod com um gerador de energia e um macerador. Fiz os blocos trocarem energia e manterem o estado entre as atualizações do servidor.',
       links: [
         { label: 'Repositório', href: 'https://github.com/KriawqZero/kriawqssimplemachines-26.1.2' }
       ]
@@ -241,7 +241,7 @@ export const ptContent = {
       name: 'Avantis — site da marca anterior',
       type: 'Landing Page',
       stack: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
-      narrative: 'Site institucional desenvolvido para minha marca como freelancer. O objetivo foi criar uma página de alta conversão para atrair pequenas empresas e microempreendedores, utilizando Framer Motion para micro-interações que transmitem profissionalismo.',
+      narrative: 'Site que fiz para apresentar meus serviços quando usava a marca Avantis. Ficou como registro dessa fase; meu trabalho agora é apresentado como Marcilio Ortiz.',
       links: [
         { label: 'Repositório', href: 'https://github.com/KriawqZero/avantis-porfolio' }
       ],
@@ -252,24 +252,24 @@ export const ptContent = {
   about: {
     number: '03',
     label: 'SOBRE MIM',
-    title: 'Quem está',
-    titleHighlight: 'por trás.',
-    text: 'Sou Marcílio Ortiz, desenvolvedor independente de Corumbá, MS. Atuo como freelancer desde março de 2025. Aprendi construindo projetos e consultando documentação, e trabalho em diferentes partes de um produto: backend, interface, testes e infraestrutura. Gosto de entender como o negócio funciona antes de decidir o que desenvolver.',
+    title: 'Sobre',
+    titleHighlight: 'mim.',
+    text: 'Sou de Corumbá, MS, e trabalho como freelancer desde março de 2025. Comecei fazendo mods de Minecraft em Java. Depois vieram os programas em Python, o TCC no IFMS e os trabalhos para clientes. Gosto de entender como as coisas funcionam e de aprender enquanto construo.',
     cta: 'Conhecer meu processo',
     principles: [
-      { title: 'Escopo claro', text: 'O trabalho começa pelo problema e pelo que precisa ser entregue. As decisões viram um escopo que orienta o desenvolvimento.' },
-      { title: 'De ponta a ponta', text: 'Banco de dados, API, interface, testes e publicação fazem parte do meu trabalho, conforme a necessidade do projeto.' },
-      { title: 'Contato direto', text: 'Você conversa comigo, o desenvolvedor que acompanha o projeto e explica as decisões técnicas.' },
+      { title: 'Antes de começar', text: 'Conversamos sobre o que você precisa, o que já existe e o que vai entrar na entrega.' },
+      { title: 'O desenvolvimento', text: 'Trabalho no banco de dados, na API, nas telas, nos testes e na publicação, conforme o projeto precisa.' },
+      { title: 'Você fala comigo', text: 'Sou eu quem desenvolve e acompanha o trabalho. Quando uma decisão muda o escopo, a gente conversa antes de seguir.' },
     ],
   },
 
   avantis: {
     number: '02',
     label: 'DESENVOLVIMENTO INDEPENDENTE',
-    title: 'Seu projeto,',
+    title: 'Você fala',
     titleHighlight: 'comigo.',
     description: 'Sites, sistemas e automações',
-    text: 'Hoje meu trabalho leva meu nome: Marcílio Ortiz. Você fala diretamente com quem desenvolve, desde a primeira conversa até a publicação. Se o seu negócio precisa de um site, um sistema ou de menos tarefas manuais, podemos começar pelo problema que você quer resolver.',
+    text: 'Precisa criar um site, automatizar uma tarefa ou mexer em um sistema que já existe? Me conte como funciona hoje e o que precisa mudar. A gente define o trabalho antes de começar.',
     links: [
       { label: 'Conversar sobre um projeto', href: '#contato' },
       { label: '@marciliortiz.dev', href: 'https://www.instagram.com/marciliortiz.dev/' }
@@ -279,33 +279,33 @@ export const ptContent = {
   process: {
     number: '04',
     label: 'PROCESSO',
-    title: 'Como eu desenvolvo',
-    description: 'Cada projeto segue um processo pensado para entregar qualidade em cada etapa, do planejamento ao deploy.',
+    title: 'Como o projeto acontece',
+    description: 'Da primeira conversa à entrega, estas são as etapas do trabalho.',
     scrollText: 'role para avançar',
     steps: [
       {
         number: '01',
-        title: 'Ideia',
+        title: 'Conversa',
         description:
-          'Entendo o problema, pesquiso referências e defino o escopo do projeto com clareza.',
+          'Você me mostra como trabalha hoje, o que precisa mudar e o que já tentou.',
       },
       {
         number: '02',
-        title: 'Arquitetura',
+        title: 'Escopo',
         description:
-          'Planejo a estrutura, escolho as tecnologias certas e desenho a solução antes de codar.',
+          'Definimos as telas, integrações, prioridades e o que fica fora desta entrega.',
       },
       {
         number: '03',
-        title: 'Código',
+        title: 'Desenvolvimento',
         description:
-          'Implemento com qualidade, testes e atenção aos detalhes. Cada linha tem propósito.',
+          'Implemento as partes combinadas e testo os fluxos. Você acompanha o andamento e avalia o que está pronto.',
       },
       {
         number: '04',
-        title: 'Deploy',
+        title: 'Entrega',
         description:
-          'Entrego em produção com CI/CD, monitoramento e documentação. Pronto para escalar.',
+          'Publico no ambiente combinado, confiro o funcionamento e deixo as orientações de uso e manutenção.',
       },
     ],
   },
@@ -327,7 +327,7 @@ export const ptContent = {
       contactPrompt: 'Prefere perguntar antes de escrever?',
       contactCta: 'Converse com minha IA',
     },
-    description: 'Uma representação treinada com informações profissionais que eu mesmo revisei. Ela responde sobre projetos, stack e forma de trabalhar.',
+    description: 'Um assistente com informações sobre meus projetos e minha forma de trabalhar.',
     disclaimer: 'Você está falando com uma IA, não comigo. Ela explica meu trabalho, mas não decide nem assume compromissos por mim.',
     /**
      * As perguntas são gravadas. Avisar não é gentileza: é o que a LGPD chama
@@ -351,14 +351,9 @@ export const ptContent = {
      * espera soa defensivo.
      */
     thinking: [
-      'puxando da memória',
-      'consultando minhas anotações',
-      'procurando onde falei disso',
-      'juntando as peças',
-      'revendo os projetos',
-      'organizando a resposta',
-      'buscando o contexto',
-      'pensando um pouco',
+      'consultando os projetos',
+      'buscando as informações',
+      'preparando a resposta',
     ],
     sourcesLabel: 'fontes',
     followUpsLabel: 'continue por aqui',
@@ -367,9 +362,9 @@ export const ptContent = {
     errors: {
       generic: 'Deu problema aqui do meu lado. Tenta de novo em instantes.',
       timeout: 'Demorei demais para responder. Tenta perguntar de novo.',
-      disabled: 'A IA está desligada no momento. As respostas abaixo são do próprio Marcilio.',
+      disabled: 'A IA está desligada no momento. Você pode consultar as respostas fixas abaixo ou falar com o Marcilio.',
       rateLimit: 'Você fez muitas perguntas seguidas. Espere um pouco antes da próxima.',
-      budget: 'A IA atingiu o limite de uso de hoje. Volte amanhã ou fale direto com o Marcilio.',
+      budget: 'A IA atingiu o limite de uso. Você pode consultar as respostas abaixo ou falar direto com o Marcilio.',
     },
     suggestions: [
       'O que você já construiu em produção?',
@@ -387,31 +382,30 @@ export const ptContent = {
       'Quais trabalhos são parecidos com o meu?',
       'Como você usa IA nos projetos de clientes?',
     ],
-    // Quando a IA está fora, é isto que o visitante lê. Escrito à mão, sem
-    // modelo nenhum no meio — por isso o rótulo diz exatamente o que é.
+    // Respostas fixas do portfólio, exibidas sem uma chamada ao modelo.
     fallback: {
-      intro: 'Enquanto a IA não responde, ficam aqui algumas respostas que eu já tinha escrito.',
-      label: 'resposta pré-escrita — a IA está indisponível agora',
+      intro: 'Enquanto a IA está indisponível, você pode consultar estas respostas do portfólio.',
+      label: 'resposta fixa do portfólio',
       items: [
         {
           question: 'O que você já construiu em produção?',
-          answer: 'Sistemas com usuário real usando. O SISCO, que organiza as horas complementares de mais de 200 alunos e coordenadores no IFMS — era planilha em grupo de WhatsApp antes. Uma automação que consolida o faturamento diário de uma rede de lojas em São Paulo, cujo sistema de vendas não tem API pública: entrou no ar em abril de 2025 e roda todos os dias nas três filiais até hoje. Uma plataforma imobiliária com app próprio, onde a IA transforma foto e áudio gravados em campo em anúncio pronto. E o VamoAgendar, um SaaS de agendamento que desenvolvo com um sócio investidor.',
+          answer: 'Publiquei o catálogo imobiliário feito para meu pai e o site do Sushi do Verão. Também desenvolvi o SISCO, usado no IFMS para organizar horas complementares, e uma automação de faturamento para uma rede de lojas. O VamoAgendar é outro projeto meu, mas ainda está em desenvolvimento para o beta.',
         },
         {
           question: 'Como você usa IA sem depender dela?',
-          answer: 'Uso todos os dias para acelerar a parte mecânica: esqueleto de módulo, achar onde algo acontece num repositório grande, revisar o que escrevi. O que continua meu é arquitetura, decisão e revisão — leio tudo antes de aceitar, confiro assinatura de biblioteca na documentação oficial, e o que eu não consigo explicar não entra. A prova de que isso não é discurso é um projeto onde ela me atrapalhou: no voxel engine em C++ que fiz em 2024, cada tentativa de usar IA quebrava o que já funcionava, principalmente na matemática de matriz. Parei de usar e terminei à mão. Só passei a usar IA de verdade em junho de 2025 — antes disso eu já programava havia seis anos.',
+          answer: 'Uso para pesquisar código, discutir caminhos, implementar e revisar. Continuo responsável pelas decisões e pela entrega: confiro a documentação e testo o comportamento. Já tive um caso em que ela atrapalhou, no voxel engine em C++ de 2024. As sugestões para a câmera e as matrizes quebravam o que funcionava, então segui com a documentação e a depuração.',
         },
         {
           question: 'Você está disponível para estágio?',
-          answer: 'Estou. E tem um motivo a mais do que carreira: já cumpri todas as disciplinas do técnico em Informática no IFMS, e o estágio obrigatório é o que falta para eu concluir o curso — a previsão é fechar isso ainda em 2026. É também a experiência que me falta, porque nunca trabalhei dentro de um time de engenharia: minha experiência toda veio de cliente direto. Agenda, prazo e valor eu não trato por aqui — para isso, o contato direto está logo abaixo, no e-mail ou no LinkedIn.',
+          answer: 'Tenho interesse em estágio e em uma primeira vaga formal. Minha experiência até aqui veio de projetos próprios e clientes diretos, e quero trabalhar também em uma equipe de engenharia. Para conversar sobre uma vaga e confirmar disponibilidade, fale comigo pelo e-mail ou LinkedIn.',
         },
         {
           question: 'Como funciona um projeto com você?',
-          answer: 'Começa por entender o problema, não por escolher tecnologia: a primeira conversa é sobre o que está doendo hoje e quanto isso custa. Depois vem escopo por escrito, arquitetura, implementação e entrega em produção. Já aconteceu de o pedido inicial não ser o que resolvia o problema, e nesses casos eu digo — a decisão continua sendo do cliente, mas não entrego calado uma coisa que eu acho errada. Sobre acompanhamento: eu aprendi do jeito caro que entregar bem não substitui manter quem contratou informado, então hoje eu gero briefing automático de andamento em vez de depender da minha memória.',
+          answer: 'Primeiro conversamos sobre o que você precisa e o que já existe. Definimos o escopo por escrito, depois eu desenvolvo, testo e publico no ambiente combinado. Uso relatórios de andamento para acompanhar o trabalho. Preço, prazo e disponibilidade são combinados diretamente comigo.',
         },
         {
           question: 'O que você ainda está aprendendo?',
-          answer: 'Trabalhar dentro de um time de engenharia, que é o que eu nunca fiz: revisar código com gente mais experiente, mexer em base grande com decisões tomadas antes de eu chegar, e lidar com consequência real quando algo quebra. No lado técnico, o que tenho estudado vem do VamoAgendar — o motor que calcula horários livres e a parte de cobrança e assinatura, que é onde estão as decisões que eu ainda não tinha enfrentado. E aprender a usar IA melhor, que é trabalho contínuo: comecei a usar a sério faz pouco mais de um ano.',
+          answer: 'No VamoAgendar, tenho trabalhado com regras de horários, cobrança e assinaturas. Também quero ganhar experiência revisando código com outras pessoas e trabalhando em uma base mantida por uma equipe.',
         },
       ],
     },
@@ -419,11 +413,11 @@ export const ptContent = {
 
   contact: {
     number: '06',
-    label: 'PRÓXIMO CAPÍTULO',
-    title: 'Vamos construir',
-    titleHighlight: 'juntos.',
-    titleHighlightClient: 'sobre seu projeto.',
-    text: 'Se você chegou até aqui, já conhece meu trabalho, meu processo e minha forma de pensar. Agora só falta a conversa.',
+    label: 'CONTATO',
+    title: 'Vamos',
+    titleHighlight: 'conversar.',
+    titleHighlightClient: 'conversar.',
+    text: 'Me conte o que você precisa desenvolver. Pode ser uma ideia nova ou algo que já existe e precisa de ajustes.',
     narrativePhrases: [
       'Uma vaga.',
       'Um novo projeto.',
@@ -471,16 +465,16 @@ export const ptContent = {
     titleHighlight: 'Projects.',
     freelanceProjectsTitle: 'Projetos para',
     freelanceProjectsTitleHighlight: 'Clientes.',
-    problemLabel: 'Problema do Cliente',
-    solutionLabel: 'Solução Desenvolvida',
-    techsLabel: 'Tecnologias Utilizadas',
-    epilogue: 'Cada projeto começa com uma necessidade concreta. Explore também os produtos em desenvolvimento e os experimentos no catálogo de projetos.',
+    problemLabel: 'O que precisava mudar',
+    solutionLabel: 'O que eu fiz',
+    techsLabel: 'Tecnologias',
+    epilogue: 'No catálogo também estão os produtos que estou desenvolvendo e os projetos de estudo.',
     projects: [
       {
         name: 'Ecossistema de Coleta e Metas',
         type: 'Cliente Workana',
-        problem: 'Uma rede de lojas precisava consolidar o faturamento diário de suas filiais. O grande obstáculo era que o sistema de vendas utilizado não possuía API pública, o que obrigava a equipe a extrair os dados manualmente todos os dias.',
-        solution: 'Para contornar a falta de API, desenvolvi um worker autônomo em Node.js com Playwright rodando em instâncias isoladas via Docker. O script acessa os portais com segurança, raspa os dados do DOM de forma resiliente e os centraliza em um dashboard.',
+        problem: 'A equipe de uma rede de lojas copiava os dados de faturamento de cada filial todos os dias. O sistema de vendas não tinha uma API pública para buscar essas informações.',
+        solution: 'Criei um coletor que acessa o painel de cada loja em uma sessão separada, uma API que recebe os dados e um painel que reúne os resultados. Depois acrescentei metas, comissões e aprovação de premiações.',
         stack: 'Node.js · Playwright · Express · Prisma · Docker',
         year: '2025'
       },
@@ -488,8 +482,8 @@ export const ptContent = {
         name: 'Catálogo & App Imobiliário',
         type: 'Projeto sob medida / Uso interno',
         url: 'https://marciliobarbosacorretor.com.br',
-        problem: 'Meu pai, corretor de imóveis, perdia horas todo mês apenas recebendo fotos desorganizadas no WhatsApp e tentando redigir anúncios imobiliários atrativos. O processo inteiro era extremamente manual e lento.',
-        solution: 'Decidi construir uma plataforma para automatizar esse fluxo. Desenvolvi um app mobile para o envio rápido dos arquivos brutos e uma API conectada à OpenAI que analisa as imagens e os áudios gravados por ele em campo, estruturando e publicando o anúncio final no site.',
+        problem: 'Meu pai é corretor e recebia fotos e informações de imóveis pelo WhatsApp. Depois precisava organizar esse material e escrever os anúncios.',
+        solution: 'Fiz um app para enviar fotos e áudios durante as visitas, uma área administrativa e o catálogo público. A integração com a OpenAI ajuda a organizar as informações e preparar os anúncios.',
         stack: 'Next.js SSR · Expo/React Native · Prisma · MinIO · OpenAI API',
         year: '2026'
       },
@@ -503,7 +497,7 @@ export const ptContent = {
         year: '2026'
       }
     ],
-    reviewsLabel: 'PROVA SOCIAL',
+    reviewsLabel: 'DEPOIMENTO',
     reviewsTitle: 'O que os clientes',
     reviewsTitleHighlight: 'dizem.',
     reviews: [
@@ -530,10 +524,10 @@ export const enContent = {
 
   hero: {
     greeting: 'HELLO, I AM',
-    name: 'Marcílio Ortiz',
-    role: ['Fullstack', 'AI Developer'],
+    name: 'Marcilio Ortiz',
+    role: ['Full Stack', 'Developer'],
     subtitle:
-      'I build websites, systems and automations for businesses. From the database to the interface, I handle development, testing and deployment. Explore the projects and the decisions behind them.',
+      'I build websites, systems and automations. Here you can see my client work, products in development and projects I built to learn.',
     availability: {
       defaultStatus: 'Let\'s discuss your project',
       defaultTypes: ['Websites', 'Systems', 'Automations'],
@@ -563,7 +557,7 @@ export const enContent = {
     eras: [
       {
         id: 'surface',
-        name: 'The Surface',
+        name: 'Websites and systems',
         subtitle: 'Websites, systems and products at different stages.',
         glowColor: 'rgba(63, 24, 171, 0.12)',
         projects: [
@@ -602,7 +596,7 @@ export const enContent = {
             name: 'VamoAgendar',
             type: 'SaaS in Development',
             year: '2026',
-            narrative: 'An online scheduling product with services, availability and a professional dashboard. Development covers scheduling rules and infrastructure for subscriptions and notifications. The product is progressing toward beta; completing an implementation stage does not mean the full service has launched.',
+            narrative: 'I am building this scheduling product with an investing partner. Professionals enter their services and availability, and customers book through a link. The dashboard and scheduling rules are implemented. Subscription billing still needs work before beta.',
             stack: 'Next.js 16 · Prisma 7 · PostgreSQL · Mercado Pago · better-auth',
             links: [{ label: 'Repository', href: 'https://github.com/KriawqZero/vamoagendar' }, { label: 'Visit', href: 'https://vamoagendar.com.br/' }],
             stat: { value: 'SaaS', label: 'in development' },
@@ -618,8 +612,8 @@ export const enContent = {
       },
       {
         id: 'infra',
-        name: 'The Infrastructure',
-        subtitle: 'Workers, data flows, and behind-the-scenes engineering.',
+        name: 'Automations',
+        subtitle: 'Data collection, integrations and tasks that used to be manual.',
         glowColor: 'rgba(16, 185, 129, 0.10)',
         projects: [
           {
@@ -635,15 +629,15 @@ export const enContent = {
       },
       {
         id: 'lowlevel',
-        name: 'The Low Level',
-        subtitle: 'C++, OpenGL, and direct friction with rendering.',
+        name: 'Games and graphics',
+        subtitle: 'Experiments with C++, OpenGL and 3D rendering.',
         glowColor: 'rgba(239, 68, 68, 0.08)',
         projects: [
           {
             name: 'Voxel Engine (Classic OpenGL)',
             type: 'Personal Lab',
             year: '2024',
-            narrative: 'Yes, the original name was just a lazy abbreviation for Minecraft. My intention here was to try to recreate a basic clone of the game from scratch to understand 3D math and graphic rendering without pre-made engines. I struggled a lot in high school with projection matrices and vectors just to get a first-person camera working in C++.',
+            narrative: 'I tried building a block world in C++ to learn 3D rendering without an existing engine. I worked on a first-person camera, chunk generation and a debugging interface. Getting the projection matrices right took a while.',
             stack: 'C++20 · OpenGL · GLFW · GLM · Dear ImGui',
             links: [{ label: 'Repository', href: 'https://github.com/KriawqZero/mine' }],
             stat: { value: '3D Math', label: 'classic pipeline' },
@@ -652,7 +646,7 @@ export const enContent = {
             name: 'Voxel Engine (Shader Pipeline)',
             type: 'Incomplete Experiment',
             year: '2024',
-            narrative: 'My attempt to take the Minecraft clone and rewrite it for the modern GPU pipeline (with Shaders and VBOs). The school semester ended and the project became a cemetery of incomplete code, but it taught me through brute force how to manually allocate memory and compile shaders. A very fun and direct friction with the machine.',
+            narrative: 'I started rewriting the block world using shaders and GPU buffers. This version was left unfinished when the school semester ended. It was where I wrote my first shaders and worked with memory management in C++.',
             stack: 'C++20 · OpenGL Core Profile · GLEW · CMake',
             links: [{ label: 'Repository', href: 'https://github.com/KriawqZero/mine_glModerno' }],
             stat: { value: 'GPU Pipeline', label: 'incomplete project' },
@@ -661,42 +655,42 @@ export const enContent = {
       },
       {
         id: 'roots',
-        name: 'The Roots',
-        subtitle: '12 years old. The beginning of everything, before the pandemic.',
+        name: 'My first projects',
+        subtitle: 'Minecraft mods and Python programs I made while at school.',
         glowColor: 'rgba(245, 158, 11, 0.08)',
         projects: [
           {
             name: 'Bank Simulator',
             type: 'Childhood Curiosity',
             year: 'March 2020',
-            narrative: 'Developed at 12 years old, exactly the week the pandemic broke out. I wanted to understand how programs kept data saved after closing the window. Without knowing what a relational database was, I created a rudimentary mechanic in Python to collect text inputs, serialize them, and save them permanently to my childhood computer\'s disk in JSON files.',
+            narrative: 'One of my first Python programs. I wanted to find out how to keep data after closing a window, so I built forms with Kivy and saved the information in JSON files.',
             stack: 'Python · Kivy Framework · Local JSON',
             links: [{ label: 'Repository', href: 'https://github.com/KriawqZero/bankkp' }],
-            stat: { value: '12 years old', label: 'raw persistence' },
+            stat: { value: 'JSON', label: 'file storage' },
           },
           {
             name: 'Desktop Player',
             type: 'Childhood Curiosity',
             year: 'March 2020',
-            narrative: 'My second visual experiment with Python in childhood. I built a complete audio player capable of reading a Windows directory, filtering files with .mp3 extension, and managing track states (play, stop, forward, and rewind). The original code has hardcoded paths directly to my childhood computer\'s partition (F:/marcilinho/...), exposing the pure and homemade nature of my start in programming.',
+            narrative: 'A Python player that reads a folder of MP3 files and lets you play, stop and change tracks. The original code still points to the folder on the computer I used back then.',
             stack: 'Python · Kivy Core Audio',
             links: [{ label: 'Repository', href: 'https://github.com/KriawqZero/musicplayer' }],
-            stat: { value: '12 years old', label: 'file management' },
+            stat: { value: 'Audio', label: 'MP3 files' },
           },
           {
             name: 'Event Loop',
             type: 'Childhood Curiosity',
             year: 'Early 2020',
-            narrative: 'Created shortly before the pandemic, this project was born out of curiosity to take Python out of the terminal and put it into an interactive interface. It forced me to understand, for the first time, the event-driven programming paradigm. Discovering that time on a screen does not update itself and that it was necessary to create a scheduling loop in 0.1-second cycles without blocking the UI thread was my first big architecture lesson.',
+            narrative: 'A stopwatch made with Python and Kivy. I learned to update the time on screen without blocking the buttons, using scheduled callbacks at short intervals.',
             stack: 'Python · Kivy KV Language',
             links: [{ label: 'Repository', href: 'https://github.com/KriawqZero/cronometer' }],
-            stat: { value: '12 years old', label: 'event loop' },
+            stat: { value: 'Events', label: 'screen updates' },
           },
           {
             name: 'Mod for Minecraft (1.12.2)',
             type: 'Ground Zero',
             year: 'May 2019',
-            narrative: 'The ground zero of my journey. My first repository published on GitHub, created at 12 years old. As an active Minecraft player, I wanted to change the game rules. I ventured into Java to compile my own mod using the Forge API, adding new blocks, ores, and a functional furnace with its own graphical interface. A patchwork quilt made on trial and error that proves I have been programming since childhood for pure pleasure.',
+            narrative: 'My first GitHub repository, from May 2019. I played Minecraft and wanted to add things to the game. I learned Java while building blocks, ores and a furnace with its own interface using Forge.',
             stack: 'Java · Forge API 1.12.2 · Gradle',
             links: [{ label: 'Repository', href: 'https://github.com/KriawqZero/vbmod-minecraft' }],
             stat: { value: '12 years old', label: 'first commit' },
@@ -712,7 +706,7 @@ export const enContent = {
       name: 'Summer Sushi (Ecosystem)',
       type: 'Commercial System',
       stack: ['NestJS', 'Next.js', 'Expo', 'PostgreSQL'],
-      narrative: 'Developed to give real autonomy to the restaurant\'s operation. The central challenge was modeling the API and managing state on the client so that the staff could change prices and dishes during peak hours without technical intervention.',
+      narrative: 'I built the foundation of an API, a dashboard and a menu so the restaurant could change dishes and prices. That system was not approved for production. The published delivery was the restaurant website.',
       links: [
         { label: 'API', href: 'https://github.com/KriawqZero/rv-api' },
         { label: 'Admin', href: 'https://github.com/KriawqZero/rv-admin' },
@@ -724,7 +718,7 @@ export const enContent = {
       name: 'Geometric Labyrinth',
       type: 'Web Game',
       stack: ['HTML5 Canvas', 'TypeScript', 'Vite'],
-      narrative: 'A school experiment in rendering and gamification. The technical focus was to abandon pre-made engines and manage the game loop, collisions, and graphic rendering directly in HTML5 Canvas with pure TypeScript.',
+      narrative: 'A school game with a maze, collisions and Canvas rendering. I used TypeScript to control movement and screen updates.',
       links: [
         { label: 'Repository', href: 'https://github.com/KriawqZero/jogo_matematica' }
       ],
@@ -735,7 +729,7 @@ export const enContent = {
       name: 'Storage Crates',
       type: 'NeoForge Mod',
       stack: ['Java', 'NeoForge', 'Minecraft API'],
-      narrative: 'Built in Java on the NeoForge ecosystem to solve the large-scale storage problem in the game. The greatest learning was dealing with the complexity and constraints of the internal Minecraft API.',
+      narrative: 'A Java Minecraft mod with storage crates. I worked with block registration and how NeoForge stores item state in the game.',
       links: [
         { label: 'Repository', href: 'https://github.com/KriawqZero/kriawqsstoragecrates' }
       ]
@@ -745,7 +739,7 @@ export const enContent = {
       name: 'Simple Machines',
       type: 'NeoForge Mod',
       stack: ['Java', 'NeoForge', 'Gradle'],
-      narrative: 'Focused on adding mechanical components to the game. The architecture required deep manipulation of block states and the Minecraft engine\'s native physics, in addition to the detailed configuration of builds in Gradle.',
+      narrative: 'A mod with an energy generator and a macerator. I worked on transferring energy between blocks and preserving their state across server updates.',
       links: [
         { label: 'Repository', href: 'https://github.com/KriawqZero/kriawqssimplemachines-26.1.2' }
       ]
@@ -755,7 +749,7 @@ export const enContent = {
       name: 'Avantis — former brand website',
       type: 'Landing Page',
       stack: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
-      narrative: 'Institutional website developed for my brand as a freelancer. The goal was to create a high-converting page to attract small businesses and micro-entrepreneurs, using Framer Motion for micro-interactions that convey professionalism.',
+      narrative: 'The website I built to present my services under the Avantis name. It is now a record of that period; I present my work as Marcilio Ortiz.',
       media: { image: '/cases/thumbs/avantis.webp', alt: 'Archived view of the former Avantis website' },
       links: [
         { label: 'Repository', href: 'https://github.com/KriawqZero/avantis-porfolio' }
@@ -766,24 +760,24 @@ export const enContent = {
   about: {
     number: '03',
     label: 'ABOUT ME',
-    title: 'The person',
-    titleHighlight: 'behind the work.',
-    text: 'I am Marcílio Ortiz, an independent developer from Corumbá, Brazil. I have been freelancing since March 2025. I learned by building projects and reading documentation, and I work across backend, interfaces, testing and infrastructure. I like to understand how a business works before deciding what to build.',
+    title: 'About',
+    titleHighlight: 'me.',
+    text: 'I am from Corumbá, Brazil, and have been freelancing since March 2025. I started with Minecraft mods in Java, then Python programs, my final project at IFMS and work for clients. I like figuring out how things work and learning by building them.',
     cta: 'Explore my process',
     principles: [
-      { title: 'Clear scope', text: 'The work starts with the problem and the expected deliverables. Those decisions become a scope that guides development.' },
-      { title: 'End to end', text: 'Database, API, interface, testing and deployment are part of my work, according to the needs of each project.' },
-      { title: 'Direct contact', text: 'You speak with me, the developer who follows the project and explains the technical decisions.' },
+      { title: 'Before we start', text: 'We discuss what you need, what already exists and what the delivery should include.' },
+      { title: 'Development', text: 'I work on databases, APIs, screens, tests and deployment, depending on what the project needs.' },
+      { title: 'You talk to me', text: 'I build and follow the work myself. When a decision changes the scope, we discuss it before moving on.' },
     ],
   },
 
   avantis: {
     number: '02',
     label: 'INDEPENDENT DEVELOPMENT',
-    title: 'Your project,',
-    titleHighlight: 'built with me.',
+    title: 'You work',
+    titleHighlight: 'with me.',
     description: 'Websites, systems and automations',
-    text: 'My work now carries my name: Marcílio Ortiz. You speak directly with the developer, from the first conversation to deployment. If your business needs a website, a system or fewer manual tasks, we can start with the problem you want to solve.',
+    text: 'Need a website, an automated task or changes to an existing system? Tell me how it works today and what needs to change. We can work out the scope before getting started.',
     links: [
       { label: 'Discuss a project', href: '#contato' },
       { label: '@marciliortiz.dev', href: 'https://www.instagram.com/marciliortiz.dev/' }
@@ -793,33 +787,33 @@ export const enContent = {
   process: {
     number: '04',
     label: 'PROCESS',
-    title: 'How I develop',
-    description: 'Each project follows a process designed to deliver quality at every stage, from planning to deployment.',
+    title: 'How a project works',
+    description: 'These are the steps from our first conversation to delivery.',
     scrollText: 'scroll to advance',
     steps: [
       {
         number: '01',
-        title: 'Idea',
+        title: 'Conversation',
         description:
-          'I understand the problem, research references, and define the project scope clearly.',
+          'You show me how you work today, what needs to change and what you have already tried.',
       },
       {
         number: '02',
-        title: 'Architecture',
+        title: 'Scope',
         description:
-          'I plan the structure, choose the right technologies, and design the solution before coding.',
+          'We agree on screens, integrations, priorities and what is outside this delivery.',
       },
       {
         number: '03',
-        title: 'Code',
+        title: 'Development',
         description:
-          'I implement with quality, testing, and attention to detail. Every line has a purpose.',
+          'I build the agreed features and test the flows. You follow the progress and review what is ready.',
       },
       {
         number: '04',
-        title: 'Deploy',
+        title: 'Delivery',
         description:
-          'I deliver to production with CI/CD, monitoring, and documentation. Ready to scale.',
+          'I deploy to the agreed environment, check that it works and leave instructions for use and maintenance.',
       },
     ],
   },
@@ -841,7 +835,7 @@ export const enContent = {
       contactPrompt: 'Rather ask before writing?',
       contactCta: 'Talk to my AI',
     },
-    description: 'A representation built from professional information I reviewed myself. It answers about projects, stack and how I work.',
+    description: 'An assistant with information about my projects and how I work.',
     disclaimer: 'You are talking to an AI, not to me. It explains my work, but it does not decide anything or commit to anything on my behalf.',
     /** Ver a nota no bloco em português. */
     privacy: 'Questions are recorded on my side, so I can follow what people ask and improve the answers.',
@@ -853,14 +847,9 @@ export const enContent = {
     clear: 'clear conversation',
     /** Ver a nota no bloco em português. */
     thinking: [
-      'pulling from memory',
-      'checking my notes',
-      'finding where I said this',
-      'putting the pieces together',
-      'going back over the projects',
-      'shaping the answer',
-      'getting the context',
-      'thinking for a second',
+      'checking the projects',
+      'finding the information',
+      'preparing the answer',
     ],
     sourcesLabel: 'sources',
     followUpsLabel: 'keep going',
@@ -869,9 +858,9 @@ export const enContent = {
     errors: {
       generic: 'Something broke on my side. Try again in a moment.',
       timeout: 'I took too long to answer. Try asking again.',
-      disabled: 'The AI is switched off right now. The answers below come from Marcilio himself.',
+      disabled: 'The AI is switched off right now. You can read the prepared answers below or contact Marcilio.',
       rateLimit: 'That was a lot of questions in a row. Give it a minute before the next one.',
-      budget: 'The AI hit today\'s usage limit. Come back tomorrow or talk to Marcilio directly.',
+      budget: 'The AI has reached its usage limit. You can read the answers below or contact Marcilio directly.',
     },
     suggestions: [
       'What have you built in production?',
@@ -890,28 +879,28 @@ export const enContent = {
       'How do you use AI on client projects?',
     ],
     fallback: {
-      intro: 'While the AI is not answering, here are a few answers I had already written.',
-      label: 'pre-written answer — the AI is unavailable right now',
+      intro: 'While the AI is unavailable, you can read these answers from the portfolio.',
+      label: 'prepared portfolio answer',
       items: [
         {
           question: 'What have you built in production?',
-          answer: 'Systems with real users on them. SISCO, which handles the complementary-hours records of more than 200 students and coordinators at IFMS — it used to be a spreadsheet passed around a WhatsApp group. An automation that consolidates daily revenue for a retail chain in São Paulo whose sales system has no public API: it went live in April 2025 and still runs every day across their three stores. A real estate platform with its own app, where AI turns photos and voice notes recorded on site into a finished listing. And VamoAgendar, a scheduling SaaS I build with an investing partner.',
+          answer: 'I published the property catalog I built for my father and the Sushi do Verão website. I also developed SISCO, used at IFMS to manage complementary course hours, and a revenue automation for a retail chain. VamoAgendar is another project of mine, but it is still in development toward beta.',
         },
         {
           question: 'How do you use AI without depending on it?',
-          answer: 'Every day, for the mechanical part: scaffolding a module, finding where something happens in a large repository, reviewing what I wrote. What stays mine is architecture, decisions and review — I read everything before accepting it, I check library signatures against the official docs, and what I cannot explain does not ship. The proof that this is not just talk is a project where AI got in my way: on the C++ voxel engine I built in 2024, every attempt to use it broke what already worked, mostly on matrix math. I stopped and finished by hand. I only started using AI seriously in June 2025 — by then I had been programming for six years.',
+          answer: 'I use it to explore code, discuss options, implement and review. I remain responsible for the decisions and delivery: I check documentation and test the behavior. It has also got in the way. On my 2024 C++ voxel engine, suggestions for the camera and matrices broke working code, so I continued with documentation and debugging.',
         },
         {
           question: 'Are you available for an internship?',
-          answer: 'I am. And there is a reason beyond career: I have completed every course of my technical degree in IT at IFMS, and the mandatory internship is what is left for me to graduate — the plan is to close that in 2026. It is also the experience I lack, because I have never worked inside an engineering team: all of my experience came from direct clients. Schedule, deadlines and rates are not something I handle here — for that, the direct contact is right below, by email or LinkedIn.',
+          answer: 'I am interested in an internship or my first formal role. My experience so far comes from personal projects and direct clients, and I want to work in an engineering team too. Please contact me by email or LinkedIn to discuss a role and confirm availability.',
         },
         {
           question: 'How does a project with you work?',
-          answer: 'It starts by understanding the problem, not by picking technology: the first conversation is about what hurts today and what it costs. Then written scope, architecture, implementation and delivery to production. It has happened that the initial request was not what solved the problem, and in those cases I say so — the decision stays with the client, but I do not quietly ship something I believe is wrong. On follow-up: I learned the expensive way that delivering well does not replace keeping the client informed, so today I generate automatic progress briefings instead of relying on my memory.',
+          answer: 'We first discuss what you need and what already exists. We write down the scope, then I build, test and deploy to the agreed environment. I use progress reports to keep track of the work. Prices, deadlines and availability are agreed directly with me.',
         },
         {
           question: 'What are you still learning?',
-          answer: 'Working inside an engineering team, which I have never done: reviewing code with more experienced people, working on a large codebase with decisions made before I arrived, and dealing with real consequences when something breaks. On the technical side, what I have been studying comes from VamoAgendar — the engine that computes free slots and the billing and subscription side, where the decisions I had not faced before are. And learning to use AI better, which is ongoing: I only started using it seriously a little over a year ago.',
+          answer: 'On VamoAgendar, I have been working on scheduling rules, billing and subscriptions. I also want more experience reviewing code with other people and working on a codebase maintained by a team.',
         },
       ],
     },
@@ -919,11 +908,11 @@ export const enContent = {
 
   contact: {
     number: '06',
-    label: 'NEXT CHAPTER',
-    title: 'Let\'s build',
-    titleHighlight: 'together.',
-    titleHighlightClient: 'about your project.',
-    text: 'If you made it this far, you already know my work, my process, and my way of thinking. Now all that\'s left is the conversation.',
+    label: 'CONTACT',
+    title: 'Let\'s',
+    titleHighlight: 'talk.',
+    titleHighlightClient: 'talk.',
+    text: 'Tell me what you need to build. It can be a new idea or something you already have and want to improve.',
     narrativePhrases: [
       'A job opening.',
       'A new project.',
@@ -971,16 +960,16 @@ export const enContent = {
     titleHighlight: 'Projects.',
     freelanceProjectsTitle: 'Projects for',
     freelanceProjectsTitleHighlight: 'Clients.',
-    problemLabel: 'Client Problem',
-    solutionLabel: 'Developed Solution',
-    techsLabel: 'Core Technologies',
-    epilogue: 'Each project starts with a concrete need. The project catalog also includes products in development and experiments.',
+    problemLabel: 'What needed to change',
+    solutionLabel: 'What I built',
+    techsLabel: 'Technologies',
+    epilogue: 'The catalog also includes products I am working on and projects I built to learn.',
     projects: [
       {
         name: 'Data Collection & Goals Ecosystem',
         type: 'Workana Client',
-        problem: 'A retail chain needed to consolidate daily billing data from their branches. The main obstacle was that their POS system didn\'t have a public API, forcing the team to extract data manually every single day.',
-        solution: 'To bypass the lack of an API, I developed an autonomous worker in Node.js using Playwright, running on isolated Docker instances. The script securely accesses the portals, scrapes the DOM resiliently, and centralizes everything in a dashboard.',
+        problem: 'A retail team copied revenue data from each store every day. Their sales system had no public API for retrieving that information.',
+        solution: 'I built a collector that opens each store dashboard in a separate session, an API that receives the data and a dashboard that brings the results together. I later added goals, commissions and reward approvals.',
         stack: 'Node.js · Playwright · Express · Prisma · Docker',
         year: '2025'
       },
@@ -988,8 +977,8 @@ export const enContent = {
         name: 'Real Estate Catalog & App',
         type: 'Custom Project / Internal Use',
         url: 'https://marciliobarbosacorretor.com.br',
-        problem: 'My father, a real estate agent, wasted hours every month just receiving unorganized photos on WhatsApp and trying to write appealing property listings. The entire process was extremely manual and slow.',
-        solution: 'I decided to build a platform to automate this workflow. I developed a mobile app for quick uploads of raw files and an API connected to OpenAI that analyzes the images and voice notes he records on-site, automatically drafting and publishing the final listing.',
+        problem: 'My father is a real estate agent. He received property photos and information through WhatsApp, then had to organize the material and write the listings.',
+        solution: 'I built an app for sending photos and voice notes during visits, an administration area and the public catalog. The OpenAI integration helps organize the information and prepare listings.',
         stack: 'Next.js SSR · Expo/React Native · Prisma · MinIO · OpenAI API',
         year: '2026'
       },
@@ -1003,7 +992,7 @@ export const enContent = {
         year: '2026'
       }
     ],
-    reviewsLabel: 'SOCIAL PROOF',
+    reviewsLabel: 'TESTIMONIAL',
     reviewsTitle: 'What clients',
     reviewsTitleHighlight: 'are saying.',
     reviews: [

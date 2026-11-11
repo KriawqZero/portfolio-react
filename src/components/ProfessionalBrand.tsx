@@ -123,8 +123,6 @@ export default function ProfessionalBrand() {
               </div>
             </h2>
 
-
-
             <p className="avantis-fade" style={{ fontSize: 'var(--text-lg)', color: 'var(--text-primary)', lineHeight: 1.5, paddingLeft: '1.5rem', borderLeft: '1px solid var(--glass-border)' }}>
               {data.text}
             </p>
@@ -144,7 +142,7 @@ export default function ProfessionalBrand() {
                 />
                 <div>
                   <span style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: 'var(--text-primary)', display: 'block', marginBottom: '0.25rem' }}>
-                    Marcílio Ortiz
+                    Marcilio Ortiz
                   </span>
                   <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-body)' }}>
                     {data.description}
@@ -190,25 +188,15 @@ export default function ProfessionalBrand() {
                 willChange: 'transform, opacity, filter',
               }}
             >
-              {/* Glassmorphism backing for the logo */}
-              <div style={{
-                position: 'absolute',
-                inset: '-10%',
-                background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)',
-                borderRadius: '50%',
-                pointerEvents: 'none',
-              }} />
-              
               <img
                 src="/marciliortiz-logo.svg"
-                alt="Monograma de Marcílio Ortiz"
+                alt="Monograma de Marcilio Ortiz"
                 width={400}
                 height={400}
                 loading="lazy"
                 style={{
                   width: '60%',
                   height: 'auto',
-                  filter: 'drop-shadow(0px 20px 40px rgba(139, 92, 246, 0.2))',
                 }}
               />
             </div>
@@ -248,7 +236,6 @@ export default function ProfessionalBrand() {
             width: 56px;
             height: 56px;
             flex-shrink: 0;
-            filter: drop-shadow(0 8px 20px rgba(139, 92, 246, 0.25));
           }
           .avantis-grid { gap: 0 !important; }
         }

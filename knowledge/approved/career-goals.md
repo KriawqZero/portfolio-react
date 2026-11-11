@@ -4,7 +4,7 @@ title: Objetivos profissionais e disponibilidade
 type: profile
 visibility: public
 approved: true
-last_reviewed: 2026-08-06
+last_reviewed: 2026-11-11
 topics: [objetivos, carreira, estagio, emprego, disponibilidade, contratacao, futuro, motivacao, dinheiro]
 aliases: [objetivos, esta disponivel, procura emprego, estagio, internship, are you available, hiring, contratar, o que voce quer, seus planos, por que contratar voce, sua motivacao]
 ---
@@ -15,9 +15,9 @@ Estágio ou primeira vaga formal. É a prioridade, e tem dois motivos empilhados
 
 Sigo aberto a projetos freelance em paralelo.
 
-## Objetivos para os próximos 12 meses
+## Objetivos registrados
 
-Concluir o curso técnico, entrar em uma empresa, lançar o beta do VamoAgendar e manter a Avantis como marca de trabalho para cliente.
+Concluir o curso técnico, ganhar experiência em uma equipe de engenharia, desenvolver o VamoAgendar até o beta e continuar os trabalhos para clientes usando meu nome, Marcilio Ortiz. Esses objetivos não representam prazos ou resultados já alcançados.
 
 ## O que eu procuro num time
 

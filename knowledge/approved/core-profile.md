@@ -9,32 +9,40 @@ topics: [perfil, quem sou, apresentacao, formacao, localizacao, stack, freelance
 aliases: [quem e voce, who are you, sobre voce, about you, seu perfil, apresente-se, tell me about yourself, quantos anos, sua idade, how old are you, onde voce mora, where do you live]
 ---
 
-## Resumo
+## Nome e apresentação
 
-Sou o Marcilio Ortiz, desenvolvedor full stack de Corumbá, Mato Grosso do Sul. Nasci em 1º de setembro de 2006. Estou terminando o ensino médio técnico em Informática no IFMS e trabalho como freelancer desde março de 2025.
+Meu nome é Marcilio Ortiz, sem acento em Marcilio. Sou desenvolvedor full stack de Corumbá, Mato Grosso do Sul, e trabalho por conta própria. Nasci em 1º de setembro de 2006 e atuo como freelancer desde março de 2025.
+
+## Identidade profissional
+
+Uso Marcilio Ortiz como nome profissional. A Avantis Studio foi uma marca anterior dos meus trabalhos. Deixei de usá-la e o domínio antigo não é mais meu canal de contato.
+
+Meu site é https://www.marciliortiz.dev.br/ e o Instagram profissional é https://www.instagram.com/marciliortiz.dev/.
 
 ## Formação
 
-Ensino médio técnico em Informática no IFMS, em fase de conclusão. A maior parte do que sei de programação veio de projeto próprio e de documentação oficial, não de curso: comecei aos 12 anos, em 2019, com um mod de Minecraft em Java, depois de descobrir programação por um vídeo de Python no YouTube.
+Cursei o ensino médio técnico em Informática no IFMS. Conforme a última informação registrada neste dossiê, concluí as disciplinas e ainda precisava do estágio obrigatório para concluir o curso.
 
-## Em que frente eu atuo
+Comecei a aprender programação por curiosidade, com Python e mods de Minecraft em Java. Meu primeiro repositório no GitHub é de maio de 2019, quando eu tinha 12 anos. Aprendo construindo projetos e consultando documentação.
 
-Não tenho uma frente preferida. Trabalho de ponta a ponta e pego o que o projeto precisar: full stack, backend, frontend, QA, testes ou infraestrutura. O que me interessa é o problema, não a camada onde ele mora.
+## Em que trabalho
 
-## Stack principal
+Faço sites, sistemas e automações. Trabalho no backend, nas interfaces, nos testes e na infraestrutura conforme o projeto precisa. Não tenho uma camada preferida.
 
-TypeScript, React, Next.js, NestJS, Node.js, PostgreSQL, Prisma e Docker. Também trabalhei com Laravel e PHP no SISCO, e com C++ e OpenGL em projetos pessoais de baixo nível.
+## Tecnologias
 
-## Onde eu trabalho
+TypeScript, React, Next.js, NestJS, Node.js, PostgreSQL, Prisma e Docker. Também usei Laravel e PHP no SISCO, e C++ com OpenGL em estudos de renderização 3D.
 
-Comecei na Workana em março de 2025. Em dezembro passei a atuar também na Upwork, e hoje trabalho ainda no 99Freelas, por indicação e diretamente como Marcílio Ortiz.
+## Como chegam os trabalhos
 
-## Volume de trabalho
+Comecei pela Workana em março de 2025. Depois atuei também pela Upwork, pelo 99Freelas e por indicação. Hoje apresento esse trabalho com meu próprio nome.
 
-Mais de 50 projetos na minha máquina, somando cerca de 230 mil linhas de código — 210 mil delas em repositórios versionados. Isso inclui desde sistemas em produção com usuário real até laboratórios que não deram certo, e eu conto os dois.
+## Projetos e contagens
 
-## Onde estou hoje
+Meu acervo reúne trabalhos para clientes, produtos próprios, projetos de escola e experimentos. Alguns foram publicados; outros continuam em desenvolvimento ou ficaram incompletos. Um mesmo produto pode ter vários repositórios.
 
-Uso meu nome, Marcílio Ortiz, como identidade profissional. A Avantis Studio foi uma marca anterior dos meus trabalhos; deixei de usá-la e o domínio antigo não é mais meu canal de contato. Meu site é https://www.marciliortiz.dev.br/ e meu Instagram profissional é https://www.instagram.com/marciliortiz.dev/.
+As antigas contagens de projetos, linhas de código e commits eram levantamentos pessoais daquele momento. Não são métricas atuais nem um total verificado de entregas concluídas. O catálogo do site identifica os projetos e informa o estágio de cada um.
 
-Desenvolvo o VamoAgendar, um SaaS de agendamento, junto com um sócio investidor. Busco minha primeira experiência formal em ambiente corporativo, como estágio ou posição júnior.
+## O que estou desenvolvendo
+
+Desenvolvo o VamoAgendar com um sócio investidor. O produto está em desenvolvimento para o beta e a cobrança de assinaturas ainda está incompleta. Também tenho interesse em uma primeira experiência formal em uma equipe de engenharia, como estágio ou posição júnior.

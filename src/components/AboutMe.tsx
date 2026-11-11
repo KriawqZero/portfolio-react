@@ -9,7 +9,6 @@ export default function AboutMe() {
   const sectionRef = useRef<HTMLElement>(null)
   const textColRef = useRef<HTMLDivElement>(null)
   const numberRef = useRef<HTMLSpanElement>(null)
-  const artRef = useRef<HTMLDivElement>(null)
 
   const { t } = useLanguage()
   const { about: data } = t
@@ -40,19 +39,6 @@ export default function AboutMe() {
         pinSpacing: false,
       })
 
-      // Gentle rotation of background Art
-      if (artRef.current) {
-        gsap.to(artRef.current, {
-          rotation: 15,
-          scale: 1.05,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: 2,
-          }
-        })
-      }
     })
 
     mm.add('(prefers-reduced-motion: reduce)', () => {
@@ -93,7 +79,6 @@ export default function AboutMe() {
           }
         )
       })
-
 
     })
     return () => mm.revert()
@@ -163,30 +148,6 @@ export default function AboutMe() {
             </ul>
           </div>
 
-          {/* Background Ambient MO Art */}
-          <div className="about-art-col">
-            <div
-              ref={artRef}
-              style={{
-                width: '100%',
-                aspectRatio: '1 / 1',
-                borderRadius: '50%',
-                background: 'radial-gradient(circle, rgba(63, 24, 171, 0.08) 0%, transparent 60%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                filter: 'blur(20px)',
-                willChange: 'transform, filter'
-              }}
-            >
-              <img src="/logo-simple.svg" alt="MO" style={{ width: 'clamp(200px, 30vw, 400px)', opacity: 0.1, userSelect: 'none', pointerEvents: 'none', position: 'relative', filter: 'grayscale(1)' }} />
-
-              {/* Orbital rings */}
-              <div style={{ position: 'absolute', inset: '10%', border: '1px solid rgba(63, 24, 171, 0.15)', borderRadius: '50%', borderTopColor: 'transparent', borderBottomColor: 'transparent' }} />
-              <div style={{ position: 'absolute', inset: '20%', border: '1px dashed rgba(63, 24, 171, 0.08)', borderRadius: '50%', transform: 'rotate(45deg)' }} />
-            </div>
-          </div>
-
         </div>
       </div>
 
@@ -194,28 +155,13 @@ export default function AboutMe() {
         .about-section { min-height: auto; }
         .about-text-col { height: auto; padding-top: 0; padding-bottom: 2rem; }
         .about-principles-col { padding-top: 2rem; padding-bottom: 4rem; }
-        .about-art-col {
-          position: absolute;
-          right: -20%;
-          top: 10%;
-          width: 100%;
-          opacity: 0.3;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          pointer-events: none;
-        }
 
         @media (min-width: 1024px) { 
           .about-section { min-height: 200dvh; }
           .about-text-col { height: 100dvh; padding-top: 0; padding-bottom: 0; }
           .about-principles-col { padding-top: 50dvh; padding-bottom: 50dvh; }
           .about-grid { grid-template-columns: 1fr 1fr !important; gap: 4rem !important; } 
-          .about-art-col { 
-            right: -10%;
-            top: 20%;
-            opacity: 0.6;
-          }
+
         }
         @media (prefers-reduced-motion: reduce) {
           .about-section { min-height: auto; }

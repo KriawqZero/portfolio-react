@@ -5,9 +5,6 @@ import { useLanguage } from '../hooks/useLanguage'
 
 gsap.registerPlugin(ScrollTrigger)
 
-// Palavras-chave editoriais para a textura de fundo (watermark)
-const WATERMARK_KEYWORDS = ["AUTOMATION", "GENERATION", "REAL-TIME"]
-
 export default function FreelanceProjects() {
   const { t, language } = useLanguage()
   const { freelance } = t
@@ -33,11 +30,10 @@ export default function FreelanceProjects() {
     })
 
     // Desktop: Pinned viewport, sequential cinematic scroll
-    mm.add('(min-width: 1024px)', () => {
+    mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
       const wrappers = gsap.utils.toArray('.freelance-case-wrapper') as HTMLElement[]
       
       wrappers.forEach((wrapper) => {
-        const watermark = wrapper.querySelector('.editorial-watermark')
         const num = wrapper.querySelector('.giant-case-number')
         
         const narrativeCol = wrapper.querySelector('.case-narrative-col')
@@ -46,7 +42,8 @@ export default function FreelanceProjects() {
         const review = wrapper.querySelector('.step-review')
 
         // Initial setup for heavy crossfading
-        gsap.set([solution, review], { opacity: 0.05, y: 40 })
+        gsap.set(solution, { opacity: 0.05, y: 40 })
+        if (review) gsap.set(review, { opacity: 0.05, y: 40 })
         gsap.set(problem, { opacity: 1, y: 0 })
         if (num) gsap.set(num, { opacity: 0.08, y: 0 })
 
@@ -61,8 +58,6 @@ export default function FreelanceProjects() {
           }
         })
 
-        // Background Watermark Parallax (slow and deep)
-        if (watermark) tl.to(watermark, { y: -150, ease: 'none' }, 0)
         if (num) tl.to(num, { y: -30, opacity: 0.3, ease: 'none' }, 0)
         
         // Left Column Parallax (Drifts up noticeably while right side stays completely pinned)
@@ -78,36 +73,14 @@ export default function FreelanceProjects() {
         // 4.5 to 7: Solution is active
         
         // 7 to 9.5: Transition Solution out, Review in (Synchronous Crossfade)
-        tl.to(solution, { opacity: 0.05, y: -30, duration: 2.5, ease: 'power2.inOut' }, 7)
-        tl.to(review, { opacity: 1, y: 0, duration: 2.5, ease: 'power2.inOut' }, 7)
+        if (review) {
+          tl.to(solution, { opacity: 0.05, y: -30, duration: 2.5, ease: 'power2.inOut' }, 7)
+          tl.to(review, { opacity: 1, y: 0, duration: 2.5, ease: 'power2.inOut' }, 7)
+        }
         
         // The outro fade is removed. The case will unpin naturally and be pushed up by the next chapter.
       })
 
-      const handleMouseMove = (e: MouseEvent) => {
-        const x = (e.clientX / window.innerWidth - 0.5) * 2
-        const y = (e.clientY / window.innerHeight - 0.5) * 2
-
-        gsap.to('.mouse-parallax-bg', {
-          x: x * 40,
-          y: y * 40,
-          ease: 'power2.out',
-          duration: 1.5
-        })
-
-        gsap.to('.mouse-parallax-fg', {
-          x: x * -15,
-          y: y * -15,
-          ease: 'power2.out',
-          duration: 1.5
-        })
-      }
-
-      window.addEventListener('mousemove', handleMouseMove)
-
-      return () => {
-        window.removeEventListener('mousemove', handleMouseMove)
-      }
     })
 
     // Mobile: Simple stacked clean blocks
@@ -192,25 +165,17 @@ export default function FreelanceProjects() {
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         {freelance.projects.map((project, i) => {
           const review = freelance.reviews[i]
-          const watermarkKeyword = WATERMARK_KEYWORDS[i % WATERMARK_KEYWORDS.length]
           
           return (
             <div key={i} className="freelance-case-wrapper">
               <div className="case-viewport">
                 
-                {/* Deep Editorial Texture (Watermark) */}
-                <div className="mouse-parallax-bg" style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 1, willChange: 'transform' }}>
-                  <div className="editorial-watermark">
-                    {watermarkKeyword}
-                  </div>
-                </div>
-
                 {/* Case Grid Layout */}
                 <div className="case-content-grid container">
                   
                   {/* Left Column - Story Narrative */}
                   <div className="case-narrative-col">
-                    <div className="mouse-parallax-fg" style={{ willChange: 'transform' }}>
+                    <div>
                       <div className="narrative-step step-problem">
                         <span className="narrative-label">{freelance.problemLabel}</span>
                         <p className="narrative-text">{project.problem}</p>
@@ -333,25 +298,6 @@ export default function FreelanceProjects() {
             position: sticky;
             top: 0;
           }
-        }
-
-        /* Watermark Background */
-        .editorial-watermark {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-family: var(--font-display);
-          font-size: clamp(10rem, 25vw, 30rem);
-          font-weight: 900;
-          color: var(--text-primary);
-          opacity: 0.02;
-          filter: blur(8px);
-          white-space: nowrap;
-          pointer-events: none;
-          z-index: 1;
-          letter-spacing: -0.05em;
-          user-select: none;
         }
 
         /* Grid */
@@ -535,6 +481,15 @@ export default function FreelanceProjects() {
           color: var(--accent-light);
           font-weight: 400;
           opacity: 0.4;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .freelance-case-wrapper { height: auto; margin-bottom: 2rem; }
+          .case-viewport { height: auto; position: relative; }
+          .case-content-grid { height: auto; padding: 4rem var(--container-padding); }
+          .case-narrative-col { height: auto; }
+          .narrative-step { opacity: 1; transform: none; transition: none; }
+          .giant-case-number { opacity: 0.4; transition: none; }
         }
 
         /* External Link */

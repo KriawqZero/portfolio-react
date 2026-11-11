@@ -8,7 +8,7 @@ last_reviewed: 2026-11-11
 topics: [avantis, marca, estudio, identidade, freelance, portfolio, cliente, posicionamento, empresa]
 aliases: [avantis, avantis studio, avantis dev, sua marca, seu estudio, o que e a avantis, what is avantis, voce tem empresa, tem cnpj, quantas pessoas]
 source_id: project-avantis-estudio
-source_label: Marcílio Ortiz — identidade profissional
+source_label: Marcilio Ortiz — identidade profissional
 source_href: https://www.marciliortiz.dev.br/#trabalho
 ---
 
@@ -18,7 +18,7 @@ Avantis Studio foi a marca que usei nos meus trabalhos freelance e projetos para
 
 ## Identidade atual
 
-Hoje trabalho com meu próprio nome: Marcílio Ortiz. Não uso mais a Avantis como marca profissional e perdi o acesso ao domínio antigo. O endereço atual é https://www.marciliortiz.dev.br/ e o Instagram profissional é https://www.instagram.com/marciliortiz.dev/. Não encaminhe visitantes ao antigo domínio como canal de contato ou site ativo.
+Hoje trabalho com meu próprio nome: Marcilio Ortiz. Não uso mais a Avantis como marca profissional e perdi o acesso ao domínio antigo. O endereço atual é https://www.marciliortiz.dev.br/ e o Instagram profissional é https://www.instagram.com/marciliortiz.dev/. Não encaminhe visitantes ao antigo domínio como canal de contato ou site ativo.
 
 ## Quem fazia o trabalho
 
@@ -28,13 +28,13 @@ O site institucional da Avantis usava a primeira pessoa do plural como escolha d
 
 ## Por que ela existiu
 
-Quando comecei a desenvolver para cliente, percebi que a apresentação importava tanto quanto o código: proposta, identidade e entrega organizada mudavam a conversa antes mesmo de discutir tecnologia. A Avantis marcou a fase em que eu assumi a responsabilidade de transformar estudo em solução real, com cliente do outro lado.
+Criei a marca para apresentar os serviços e reunir os trabalhos para clientes. Depois decidi usar meu próprio nome como identidade profissional.
 
 ## Como o site foi feito
 
 O site foi desenvolvido em React com Vite, Tailwind 4, TypeScript e Framer Motion para as animações de scroll. A direção visual era escura e sóbria, tipografia serifada nos títulos com sans no corpo, roxo aplicado de forma cirúrgica.
 
-A parte difícil não foi técnica: foi cortar jargão e exagero de marketing do texto até sobrar só o que eu sustentaria numa conversa. Autoridade transmitida por design limpo e comunicação direta, sem promessa inflada.
+Esse site ficou como registro da marca anterior. O trabalho continua apresentado no portfólio de Marcilio Ortiz.
 
 ## Relação com o resto
 

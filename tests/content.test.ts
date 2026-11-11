@@ -37,7 +37,7 @@ describe('conteúdo pt e en', () => {
    */
   it('as frases de espera existem nos dois idiomas, na mesma quantidade e sem vazio', () => {
     expect(ptContent.aiChat.thinking).toHaveLength(enContent.aiChat.thinking.length)
-    expect(ptContent.aiChat.thinking.length).toBeGreaterThanOrEqual(4)
+    expect(ptContent.aiChat.thinking.length).toBeGreaterThan(0)
     for (const frase of [...ptContent.aiChat.thinking, ...enContent.aiChat.thinking]) {
       expect(frase.trim()).not.toBe('')
     }

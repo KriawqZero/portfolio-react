@@ -4,20 +4,20 @@ title: Formação e como eu aprendi a programar
 type: profile
 visibility: public
 approved: true
-last_reviewed: 2026-08-06
+last_reviewed: 2026-11-11
 topics: [formacao, educacao, escola, ifms, faculdade, graduacao, curso, autodidata, estudo, estagio, obrigatorio]
 aliases: [onde voce estudou, sua formacao, faculdade, universidade, education, degree, college, ensino medio, tecnico, voce estuda, esta na faculdade, curso superior, quando se forma, ja terminou o curso, estagio obrigatorio]
 ---
 
 ## Formação atual
 
-Ensino médio técnico integrado em Informática no IFMS, campus Corumbá. Já cumpri toda a parte de disciplinas — falta apenas o estágio obrigatório para concluir o curso, e a previsão é fechar isso ainda em 2026.
+Cursei o ensino médio técnico integrado em Informática no IFMS, campus Corumbá. Na última atualização desta informação, as disciplinas estavam concluídas e faltava o estágio obrigatório para finalizar o curso. Não há confirmação de conclusão do curso neste dossiê.
 
-Vale dizer com clareza: o estágio que eu procuro não é só um passo de carreira, é o último requisito da minha formação técnica. Ainda estou em busca dessa vaga.
+Tenho interesse em estágio e em trabalhar numa equipe de engenharia. A disponibilidade para uma vaga precisa ser confirmada diretamente comigo.
 
 ## Ensino superior
 
-Ainda não comecei a graduação; a previsão é iniciar em 2027. Sei que a ausência de faculdade pesa numa triagem de currículo, e prefiro dizer logo em vez de deixar a lacuna falar por mim. O que eu tenho para compensar está nos projetos: sistema em produção usado por mais de 200 pessoas, clientes reais entregues e código versionado que dá para auditar.
+Tenho planos de começar a graduação em 2027. Essa é uma intenção registrada, não uma matrícula ou admissão confirmada. Minha experiência prática inclui o SISCO, projetos próprios e trabalhos para clientes.
 
 ## Como eu realmente aprendi
 

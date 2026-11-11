@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { filterProjects, getProjectCatalog, statusLabels } from '../src/data/projectCatalog'
 import { KNOWLEDGE } from '../lib/ai/generated/knowledge-index'
+import { selecionarDocumentos } from '../lib/ai/retrieval'
 
 describe('catálogo público de projetos', () => {
   it('mantém a mesma seleção sem duplicatas nos dois idiomas', () => {
@@ -29,6 +30,21 @@ describe('catálogo público de projetos', () => {
       expect(doc?.text).toContain(`Estágio: ${statusLabels.pt[project.status]}`)
       expect(doc?.text).toContain(project.scope)
     }
+  })
+
+  it.each([
+    ['Tell me about your price adjustment system', 'price-adjustment'],
+    ['What did you build for the jewelry store?', 'suzy-paiva'],
+    ['What maintenance did you do on Studio Airbnb?', 'studio-airbnb'],
+  ])('recupera o case certo em inglês: %s', (question, projectId) => {
+    const selected = selecionarDocumentos(question, KNOWLEDGE, {
+      maxDocumentos: 4,
+      maxCaracteres: 6000,
+    })
+    expect(selected[0]?.id).toBe(`catalog-${projectId}`)
+    const project = getProjectCatalog('pt').find(p => p.id === projectId)!
+    expect(selected[0].text).toContain(project.scope)
+    expect(selected.reduce((total, doc) => total + doc.text.length, 0)).toBeLessThanOrEqual(6000)
   })
 
   it('não oferece o domínio perdido como destino nem confunde Sushi com o sistema não aprovado', () => {

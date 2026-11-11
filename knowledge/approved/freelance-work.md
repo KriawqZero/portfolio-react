@@ -11,28 +11,32 @@ aliases: [trabalha como freelancer, freelance, freelancer, projeto com cliente, 
 
 ## Desde quando e onde
 
-Freelancer desde março de 2025. Comecei na Workana, depois passei a atuar também na Upwork e no 99Freelas, e hoje recebo trabalho por indicação e diretamente como Marcílio Ortiz. Na fase mais intensa da Workana atendi cerca de 30 clientes.
+Trabalho como freelancer desde março de 2025. Comecei pela Workana e depois atuei também na Upwork, no 99Freelas e por indicação. Uso meu próprio nome, Marcilio Ortiz, para apresentar os serviços.
 
-## O que já entreguei para cliente
+## Trabalhos para clientes
 
-O caso mais longo é uma rede de lojas em São Paulo, que virou cliente fixo: o sistema que construí em abril de 2025 é usado todos os dias nas três filiais, até hoje. Também entreguei um projeto internacional pela Upwork, para um cliente australiano, e trabalhos para negócios da minha região.
+Construí uma automação de faturamento para uma rede de lojas em São Paulo. O sistema entrou no ar em abril de 2025 e o trabalho continuou com manutenção e novas regras, como metas e comissões. O número atual de filiais e a frequência de uso não foram verificados nesta revisão.
 
-## Como o projeto costuma correr
+Também entreguei um projeto pela Upwork para um cliente australiano e trabalhos para negócios da minha região. Entre os sites publicados estão o catálogo imobiliário feito para meu pai e o Sushi do Verão.
 
-Começa por entender o problema, não por escolher tecnologia. Depois vem escopo por escrito, arquitetura, implementação e entrega em produção.
+## Como começa
 
-Na prática, a primeira conversa é sobre o que está doendo hoje e quanto isso custa ao cliente. Já aconteceu de o pedido inicial não ser o que resolvia o problema: no Sushi do Verão eu levei uma proposta e a ideia foi refinada junto com o proprietário, saindo do template para uma API própria com painel. Aquele sistema não chegou a ser aprovado para produção, e o que ficou no ar para eles foi o site institucional.
+Conversamos sobre o que a pessoa precisa, o que já existe e o que está atrapalhando. Depois definimos por escrito as entregas, prioridades e limites do trabalho. A tecnologia depende dessas decisões.
 
-## O que eu entrego
+## O que faço
 
-Produto inteiro. Não me prendo a uma camada: pego backend, frontend, testes ou infraestrutura conforme o projeto precisa, incluindo o deploy.
+Posso trabalhar no banco de dados, na API, nas telas, nos testes e na publicação. O que entra em cada trabalho depende do escopo combinado.
 
-## Comunicação
+## Acompanhamento
 
-Aprendi essa parte do jeito caro. Já perdi posicionamento numa plataforma por passar um único dia sem responder — estava em foco construindo o sistema daquele mesmo cliente.
+Já tive problema numa plataforma por passar um dia sem responder enquanto trabalhava no projeto. Aprendi que desenvolver e informar o andamento são duas partes do trabalho.
 
-Hoje eu não confio na minha disciplina para isso: automatizo. Gero briefing de andamento para o cliente, de forma que a informação continue saindo mesmo quando eu mergulho no código. Quando algo atrasa ou o escopo muda, o cliente sabe quando eu percebo, não na data da entrega.
+Uso relatórios de andamento para registrar o que foi feito e o que falta. Mudanças de escopo precisam ser conversadas com o cliente.
 
-## O que eu não trato por aqui
+## Um exemplo de limite de escopo
 
-Preço, prazo específico, agenda e proposta são conversa com o Marcilio, não comigo. Eu explico como ele costuma conduzir um projeto; qualquer compromisso passa pelo e-mail ou pelo LinkedIn da seção de contato.
+No Sushi do Verão, refinei com o proprietário uma proposta de API e cardápio. Construí a base, mas o sistema não foi aprovado para produção. A entrega publicada foi o site institucional. Proposta, código implementado e entrega aprovada são etapas diferentes desse caso.
+
+## Contratação
+
+Preço, prazo e disponibilidade precisam ser combinados diretamente com Marcilio. A IA do site explica o trabalho, mas não fecha proposta nem assume compromissos. Os contatos estão no e-mail e no LinkedIn do portfólio.
