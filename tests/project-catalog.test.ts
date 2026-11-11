@@ -34,7 +34,6 @@ describe('catálogo público de projetos', () => {
 
   it.each([
     ['Tell me about your price adjustment system', 'price-adjustment'],
-    ['What did you build for the jewelry store?', 'suzy-paiva'],
     ['What maintenance did you do on Studio Airbnb?', 'studio-airbnb'],
   ])('recupera o case certo em inglês: %s', (question, projectId) => {
     const selected = selecionarDocumentos(question, KNOWLEDGE, {
@@ -45,6 +44,13 @@ describe('catálogo público de projetos', () => {
     const project = getProjectCatalog('pt').find(p => p.id === projectId)!
     expect(selected[0].text).toContain(project.scope)
     expect(selected.reduce((total, doc) => total + doc.text.length, 0)).toBeLessThanOrEqual(6000)
+  })
+
+  it('não atribui ao portfólio ou ao dossiê projetos descartados pelo titular', () => {
+    for (const language of ['pt', 'en'] as const) {
+      expect(JSON.stringify(getProjectCatalog(language))).not.toMatch(/suzy[ -]paiva/i)
+    }
+    expect(JSON.stringify(KNOWLEDGE)).not.toMatch(/suzy[ -]paiva/i)
   })
 
   it('não oferece o domínio perdido como destino nem confunde Sushi com o sistema não aprovado', () => {

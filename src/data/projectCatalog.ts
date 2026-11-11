@@ -86,12 +86,6 @@ const additions: CatalogEntry[] = [
     stack: ['Python', 'Tkinter', 'SQLite', 'Google Sheets'], links: [],
   },
   {
-    id: 'suzy-paiva', name: { pt: 'Suzy Paiva Joias', en: 'Suzy Paiva Joias' }, year: '2026', category: 'web', status: 'published',
-    summary: { pt: 'Microsite de inauguração para apresentar a loja e orientar quem chega pelo link da bio.', en: 'A store launch microsite that introduces the business and guides visitors arriving from its social bio.' },
-    scope: { pt: 'Página publicada com a identidade visual, as informações da loja e os links de contato, organizada para quem acessa pelo celular.', en: 'A published page with the store identity, business information and contact links, arranged for mobile visitors.' },
-    stack: ['Web', 'CSS'], links: [{ label: 'Site', href: 'https://suzy-paiva-joias.vercel.app/' }],
-  },
-  {
     id: 'gesture-math', name: { pt: 'Gesture Math', en: 'Gesture Math' }, year: '2026', category: 'systems', status: 'experiment',
     summary: { pt: 'Calculadora experimental controlada por gestos captados pela webcam, com processamento no navegador.', en: 'An experimental calculator controlled through webcam gestures, with processing in the browser.' },
     scope: { pt: 'Usei a câmera para reconhecer gestos e controlar uma calculadora. É um experimento; o reconhecimento ainda precisa ser avaliado em diferentes condições de uso.', en: 'I used the camera to recognize gestures and control a calculator. It is an experiment; recognition still needs evaluation under different conditions.' },
