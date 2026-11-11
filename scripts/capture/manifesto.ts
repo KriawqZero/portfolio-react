@@ -1,7 +1,7 @@
 /**
  * Manifesto de capturas de tela dos cases.
  *
- * Contrato editorial (mesmo do avantis-porfolio): só entra print de UI real
+ * Contrato editorial: só entra print de UI real
  * rodando — produção quando existe, localhost quando não. Nenhum mockup
  * fabricado. A captura grava em ./capturas/ (staging, fora do git); o que
  * integra o site é copiado manualmente para public/cases/.
@@ -38,7 +38,6 @@ export const CAPTURAS: Captura[] = [
   // ── No ar (captura autônoma) ─────────────────────────────────────────
   { slug: 'vamoagendar', origem: 'https://vamoagendar.com.br/' },
   { slug: 'catalogo-corretor', origem: 'https://marciliobarbosacorretor.com.br/' },
-  { slug: 'avantis', origem: 'https://avantis.dev' },
   // ── Estático em disco (captura autônoma) ─────────────────────────────
   {
     slug: 'jogo-matematica',

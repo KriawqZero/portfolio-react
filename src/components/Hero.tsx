@@ -215,7 +215,7 @@ export default function Hero() {
             </div>*/}
 
             <div className="hero-fade" style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', marginBottom: '4rem' }}>
-              <a href="#projetos" className="btn-primary">
+              <a href="#freelance-portfolio" className="btn-primary">
                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
                 {hero.ctaPrimary}
               </a>

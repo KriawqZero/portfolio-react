@@ -10,16 +10,16 @@ export const ptContent = {
 
   hero: {
     greeting: 'OLÁ, EU SOU',
-    name: 'Marcilio Ortiz',
+    name: 'Marcílio Ortiz',
     role: ['Fullstack', 'AI Developer'],
     subtitle:
-      'Estudante Técnico em Informática com experiência real em projetos freelancer. Atuo de ponta a ponta: banco de dados, API, interface e o que mais o projeto pedir — inclusive testes e infraestrutura.',
+      'Desenvolvo sites, sistemas e automações para negócios. Do banco de dados à interface, cuido da construção, dos testes e da publicação. Aqui você conhece os projetos e as decisões por trás deles.',
     availability: {
-      defaultStatus: 'Disponível para oportunidades',
-      defaultTypes: ['Estágio', 'Emprego', 'Projetos'],
-      freelanceStatus: 'Disponível para projetos',
+      defaultStatus: 'Vamos conversar sobre seu projeto',
+      defaultTypes: ['Sites', 'Sistemas', 'Automações'],
+      freelanceStatus: 'Vamos conversar sobre seu projeto',
       freelanceTypes: ['Sistemas', 'Websites', 'APIs'],
-      cta: 'Vamos construir algo incrível juntos?',
+      cta: 'O que você precisa construir?',
     },
     techs: [
       { name: 'NestJS', icon: 'nestjs' },
@@ -37,7 +37,7 @@ export const ptContent = {
     label: 'TRAJETÓRIA',
     title: 'O que eu construí',
     titleHighlight: 'até aqui.',
-    archiveText: 'Explorar Arquivo Completo',
+    archiveText: 'Explorar todos os projetos',
     scrollText: 'role para avançar',
     openText: 'Abrir',
     /**
@@ -50,14 +50,14 @@ export const ptContent = {
       {
         id: 'surface',
         name: 'A Superfície',
-        subtitle: 'Produtos em produção. Engenharia com foco em negócios.',
+        subtitle: 'Sites, sistemas e produtos em diferentes estágios.',
         glowColor: 'rgba(63, 24, 171, 0.12)',
         projects: [
           {
             name: 'Catálogo & App Imobiliário',
             type: 'Solução sob Medida',
             year: '2026',
-            narrative: 'Um site catálogo de imóveis para o meu pai e um app simples para ele enviar fotos da rua. A interface é super direta, mas o verdadeiro brilho é a tecnologia invisível: ele manda os dados todos crus e bagunçados pelo celular, e a OpenAI formata tudo em uma descrição comercial perfeita para o site. É engenharia tirando o atrito da vida de um usuário leigo.',
+            narrative: 'Um catálogo de imóveis e um aplicativo para meu pai, que é corretor. Pelo celular, ele envia fotos e áudios; a integração com IA ajuda a estruturar as informações para os anúncios. O trabalho reuniu site, área administrativa e app em um fluxo pensado para o uso em campo.',
             stack: 'Next.js SSR · Expo/React Native · Prisma · MinIO · OpenAI API',
             links: [
               { label: 'Visitar Site', href: 'https://marciliobarbosacorretor.com.br/' },
@@ -73,12 +73,12 @@ export const ptContent = {
           },
           {
             name: 'SISCO',
-            type: 'Acadêmico (Em Produção)',
+            type: 'Sistema Acadêmico',
             year: '2025',
-            narrative: 'Meu TCC do ensino médio. O impacto real desse sistema não está na arquitetura do código, mas na organização. Antes dele, a gestão de horas complementares era um caos de planilhas desorganizadas jogadas em grupos de WhatsApp. O SISCO pegou essa bagunça e transformou num sistema de verdade, centralizado, que hoje mais de 200 alunos e coordenadores usam. Eu substituí o caos do Excel por um software real.',
+            narrative: 'Meu TCC do ensino médio no IFMS: um sistema para organizar horas complementares. Alunos enviam certificados e professores acompanham a validação em um painel, reunindo informações que antes ficavam dispersas em planilhas e mensagens.',
             stack: 'Laravel 11 · Livewire 3 · Alpine.js · MariaDB',
             links: [{ label: 'Repositório', href: 'https://github.com/KriawqZero/SISCO-IFMS' }],
-            stat: { value: '200+', label: 'usuários ativos' },
+            stat: { value: 'IFMS', label: 'horas complementares' },
             media: {
               image: '/cases/sisco.webp',
               alt: 'Painel do SISCO: certificados pendentes de validação e turmas designadas ao professor',
@@ -86,15 +86,15 @@ export const ptContent = {
           },
           {
             name: 'VamoAgendar',
-            type: 'SaaS Autoral',
+            type: 'SaaS em Desenvolvimento',
             year: '2026',
-            narrative: 'Um software como serviço (SaaS) completo de agendamento online focado em profissionais autônomos. Toda a complexidade da aplicação está concentrada no backend: desenvolvi um motor temporal complexo que calcula slots de horários livres cruzando fusos horários, durações de serviços, feriados locais e agendamentos existentes. Usei este projeto para dominar Server Actions e criptografia de assinaturas via webhooks.',
+            narrative: 'Produto de agendamento online com serviços, disponibilidade e painel do profissional. O desenvolvimento inclui regras de horários e a estrutura para assinaturas e notificações. O produto segue em evolução para o beta; a implementação de uma etapa não representa o lançamento do serviço completo.',
             stack: 'Next.js 16 · Prisma 7 · PostgreSQL · Mercado Pago · better-auth',
             links: [{ label: 'Repositório', href: 'https://github.com/KriawqZero/vamoagendar' }, { label: 'Visitar', href: 'https://vamoagendar.com.br/' }],
-            stat: { value: 'SaaS', label: 'infraestrutura temporal' },
+            stat: { value: 'SaaS', label: 'em desenvolvimento' },
             media: {
               image: '/cases/vamoagendar.webp',
-              alt: 'Home do VamoAgendar em produção, com o simulador de agendamento na etapa de escolha do serviço',
+              alt: 'Interface do VamoAgendar, com o simulador de agendamento na etapa de escolha do serviço',
               url: 'https://vamoagendar.com.br/',
               video: '/cases/vamoagendar.webm',
               poster: '/cases/vamoagendar-poster.webp',
@@ -112,7 +112,7 @@ export const ptContent = {
             name: 'Ecossistema de Coleta',
             type: 'Solução sob Medida / B2B',
             year: '2025',
-            narrative: 'Desenvolvi um ecossistema distribuído para um cliente corporativo de grande porte em São Paulo que precisava centralizar dados financeiros de dezenas de lojas a partir de um sistema de vendas que não possui API oficial. A solução foi criar um worker autônomo em Playwright que navega em lote através de instâncias de navegadores estéreis, isolando cookies e sessões para extrair as métricas de faturamento direto do DOM e centralizá-las em uma API própria.',
+            narrative: 'Automação para consolidar dados de faturamento de uma rede de lojas cujo sistema de vendas não oferecia API pública. Desenvolvi um coletor com sessões isoladas, uma API para armazenar os dados e um painel para acompanhar as informações. Os três serviços fazem parte da mesma solução.',
             stack: 'Node.js · Playwright · Express · Prisma · Docker',
             links: [],
             stat: { value: '3 Serviços', label: 'arquitetura distribuída' },
@@ -238,49 +238,41 @@ export const ptContent = {
     },
     {
       year: '2023',
-      name: 'Portfolio Avantis',
+      name: 'Avantis — site da marca anterior',
       type: 'Landing Page',
       stack: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
       narrative: 'Site institucional desenvolvido para minha marca como freelancer. O objetivo foi criar uma página de alta conversão para atrair pequenas empresas e microempreendedores, utilizando Framer Motion para micro-interações que transmitem profissionalismo.',
       links: [
-        { label: 'Acessar Site', href: 'https://avantis.dev' },
         { label: 'Repositório', href: 'https://github.com/KriawqZero/avantis-porfolio' }
       ],
-      media: { image: '/cases/thumbs/avantis.webp', alt: 'Landing page da Avantis no ar' }
+      media: { image: '/cases/thumbs/avantis.webp', alt: 'Registro do site da antiga marca Avantis' }
     }
   ],
 
   about: {
     number: '03',
     label: 'SOBRE MIM',
-    title: 'Mais que código,',
-    titleHighlight: 'propósito.',
-    text: 'Ainda no Ensino Técnico, atuo como freelancer desde março de 2025 entregando soluções reais. Como desenvolvedor independente, domino o ciclo completo do produto e não me prendo a uma camada: pego backend, frontend, testes ou infraestrutura conforme o projeto precisa. Busco minha primeira oportunidade corporativa para transformar essa vivência em valor real para uma equipe.',
-    cta: 'Conhecer minha jornada',
-    stats: [
-      { value: '+1', label: 'ano', sublabel: 'De imersão diária em programação' },
-      { value: '+50', label: 'projetos', sublabel: 'Aplicações web e desafios práticos' },
-      { value: '+10', label: 'clientes', sublabel: 'Atendidos com soluções em produção' },
-      { value: '+1200', label: 'commits', sublabel: 'Registrados no GitHub no último ano' },
-      { value: '+5', label: 'tecnologias', sublabel: 'Dominadas na stack principal' },
-      { value: '100%', label: 'foco', sublabel: 'Em construir sistemas robustos e escaláveis' },
-      { value: '+1000', label: 'horas', sublabel: 'Lendo documentação oficial' },
-      { value: '+200k', label: 'linhas', sublabel: 'De código escritas ou refatoradas' },
-      { value: '∞', label: 'bugs', sublabel: 'Resolvidos com muita paciência' },
-      { value: '∞', label: 'vontade', sublabel: 'Vontade de aprender e evoluir' },
+    title: 'Quem está',
+    titleHighlight: 'por trás.',
+    text: 'Sou Marcílio Ortiz, desenvolvedor independente de Corumbá, MS. Atuo como freelancer desde março de 2025. Aprendi construindo projetos e consultando documentação, e trabalho em diferentes partes de um produto: backend, interface, testes e infraestrutura. Gosto de entender como o negócio funciona antes de decidir o que desenvolver.',
+    cta: 'Conhecer meu processo',
+    principles: [
+      { title: 'Escopo claro', text: 'O trabalho começa pelo problema e pelo que precisa ser entregue. As decisões viram um escopo que orienta o desenvolvimento.' },
+      { title: 'De ponta a ponta', text: 'Banco de dados, API, interface, testes e publicação fazem parte do meu trabalho, conforme a necessidade do projeto.' },
+      { title: 'Contato direto', text: 'Você conversa comigo, o desenvolvedor que acompanha o projeto e explica as decisões técnicas.' },
     ],
   },
 
   avantis: {
     number: '02',
-    label: 'A INICIATIVA',
-    title: 'Do estudo à',
-    titleHighlight: 'prática real.',
-    description: 'Marca utilizada nos meus projetos freelance e trabalhos para clientes.',
-    text: 'Quando comecei a desenvolver trabalhos para clientes, percebi que a apresentação importava tanto quanto o código. Foi assim que criei a Avantis: uma marca para estruturar meu portfólio, padronizar entregas e consolidar minha identidade profissional. Ela marca a fase em que assumi a responsabilidade de transformar estudo em soluções reais.',
+    label: 'DESENVOLVIMENTO INDEPENDENTE',
+    title: 'Seu projeto,',
+    titleHighlight: 'comigo.',
+    description: 'Sites, sistemas e automações',
+    text: 'Hoje meu trabalho leva meu nome: Marcílio Ortiz. Você fala diretamente com quem desenvolve, desde a primeira conversa até a publicação. Se o seu negócio precisa de um site, um sistema ou de menos tarefas manuais, podemos começar pelo problema que você quer resolver.',
     links: [
-      { label: 'avantis.dev', href: 'https://avantis.dev' },
-      { label: 'instagram.com/avantis.dev', href: 'https://instagram.com/avantis.dev' }
+      { label: 'Conversar sobre um projeto', href: '#contato' },
+      { label: '@marciliortiz.dev', href: 'https://www.instagram.com/marciliortiz.dev/' }
     ]
   },
 
@@ -482,7 +474,7 @@ export const ptContent = {
     problemLabel: 'Problema do Cliente',
     solutionLabel: 'Solução Desenvolvida',
     techsLabel: 'Tecnologias Utilizadas',
-    epilogue: 'Uma fração da minha experiência. Além dos cases selecionados, dezenas de outros sistemas complexos foram entregues e permanecem sob confidencialidade.',
+    epilogue: 'Cada projeto começa com uma necessidade concreta. Explore também os produtos em desenvolvimento e os experimentos no catálogo de projetos.',
     projects: [
       {
         name: 'Ecossistema de Coleta e Metas',
@@ -504,9 +496,10 @@ export const ptContent = {
       {
         name: 'Sushi do Verão',
         type: 'Empresa local',
-        problem: 'Um restaurante de alto volume da minha cidade sofria com cardápios online genéricos e lentos, que não permitiam atualizar preços e indisponibilidades em tempo real durante os picos de pedidos.',
-        solution: 'Levei uma proposta inicial ao proprietário e refinamos a ideia juntos: em vez de um template, uma API própria em NestJS com painel administrativo e cardápio em PWA. Construí a base do sistema, mas ele não foi aprovado para produção. O que está no ar hoje é o site institucional que desenvolvi para eles.',
-        stack: 'NestJS · Next.js · Expo · PostgreSQL',
+        problem: 'Um restaurante da minha cidade precisava apresentar os pratos, a localização e os horários para quem chega pelo celular, com um caminho direto até o atendimento.',
+        solution: 'Desenvolvi o site institucional com fotos, informações do restaurante e contato pelo WhatsApp. Também construí a base de uma proposta de sistema de pedidos; essa parte não foi aprovada para produção e não integra a entrega publicada.',
+        url: 'https://sushidoverao.com.br/',
+        stack: 'TypeScript · Vite · CSS',
         year: '2026'
       }
     ],
@@ -537,16 +530,16 @@ export const enContent = {
 
   hero: {
     greeting: 'HELLO, I AM',
-    name: 'Marcilio Ortiz',
+    name: 'Marcílio Ortiz',
     role: ['Fullstack', 'AI Developer'],
     subtitle:
-      'Technical IT Student with real experience in freelance projects. I work end to end: database, API, interface and whatever else the project needs — testing and infrastructure included.',
+      'I build websites, systems and automations for businesses. From the database to the interface, I handle development, testing and deployment. Explore the projects and the decisions behind them.',
     availability: {
-      defaultStatus: 'Available for opportunities',
-      defaultTypes: ['Internship', 'Full-time', 'Projects'],
-      freelanceStatus: 'Available for freelance projects',
+      defaultStatus: 'Let\'s discuss your project',
+      defaultTypes: ['Websites', 'Systems', 'Automations'],
+      freelanceStatus: 'Let\'s discuss your project',
       freelanceTypes: ['Web Apps', 'Websites', 'APIs'],
-      cta: 'Let\'s build something incredible together?',
+      cta: 'What do you need to build?',
     },
     techs: [
       { name: 'NestJS', icon: 'nestjs' },
@@ -564,21 +557,21 @@ export const enContent = {
     label: 'TRAJECTORY',
     title: 'What I have built',
     titleHighlight: 'so far.',
-    archiveText: 'Explore Full Archive',
+    archiveText: 'Explore all projects',
     scrollText: 'scroll to advance',
     openText: 'Open',
     eras: [
       {
         id: 'surface',
         name: 'The Surface',
-        subtitle: 'Production products. Engineering with a business focus.',
+        subtitle: 'Websites, systems and products at different stages.',
         glowColor: 'rgba(63, 24, 171, 0.12)',
         projects: [
           {
             name: 'Real Estate Catalog & App',
             type: 'Custom Solution',
             year: '2026',
-            narrative: 'A real estate catalog website for my father and a simple app for him to send photos from the street. The interface is super direct, but the real highlight is the invisible technology: he sends raw and messy data from his cell phone, and the OpenAI API formats everything into a perfect commercial description for the website. It is engineering removing friction from a non-technical user\'s life.',
+            narrative: 'A property catalog and mobile app for my father, a real estate agent. He sends photos and voice notes from his phone; AI helps structure the information for listings. The work connects the website, administration area and app in a workflow designed for field use.',
             stack: 'Next.js SSR · Expo/React Native · Prisma · MinIO · OpenAI API',
             links: [
               { label: 'Visit Site', href: 'https://marciliobarbosacorretor.com.br/' },
@@ -594,12 +587,12 @@ export const enContent = {
           },
           {
             name: 'SISCO',
-            type: 'Academic (In Production)',
+            type: 'Academic System',
             year: '2025',
-            narrative: 'My high school graduation project. The real impact of this system is not in the code architecture, but in the organization. Before it, managing complementary hours was a chaos of messy spreadsheets shared in WhatsApp groups. SISCO took this mess and turned it into a real, centralized system that more than 200 students and coordinators use today. I replaced the chaos of Excel with real software.',
+            narrative: 'My high school graduation project at IFMS: a system for managing complementary course hours. Students submit certificates and teachers review them in a dashboard, bringing together information previously scattered across spreadsheets and messages.',
             stack: 'Laravel 11 · Livewire 3 · Alpine.js · MariaDB',
             links: [{ label: 'Repository', href: 'https://github.com/KriawqZero/SISCO-IFMS' }],
-            stat: { value: '200+', label: 'active users' },
+            stat: { value: 'IFMS', label: 'complementary hours' },
             media: {
               image: '/cases/sisco.webp',
               alt: 'SISCO dashboard: certificates awaiting validation and the classes assigned to the professor',
@@ -607,15 +600,15 @@ export const enContent = {
           },
           {
             name: 'VamoAgendar',
-            type: 'Proprietary SaaS',
+            type: 'SaaS in Development',
             year: '2026',
-            narrative: 'A complete scheduling Software as a Service (SaaS) focused on self-employed professionals. All application complexity is concentrated in the backend: I developed a complex time engine that calculates free slots by crossing time zones, service durations, local holidays, and existing appointments. I used this project to master Server Actions and signature encryption via webhooks.',
+            narrative: 'An online scheduling product with services, availability and a professional dashboard. Development covers scheduling rules and infrastructure for subscriptions and notifications. The product is progressing toward beta; completing an implementation stage does not mean the full service has launched.',
             stack: 'Next.js 16 · Prisma 7 · PostgreSQL · Mercado Pago · better-auth',
             links: [{ label: 'Repository', href: 'https://github.com/KriawqZero/vamoagendar' }, { label: 'Visit', href: 'https://vamoagendar.com.br/' }],
-            stat: { value: 'SaaS', label: 'temporal infra' },
+            stat: { value: 'SaaS', label: 'in development' },
             media: {
               image: '/cases/vamoagendar.webp',
-              alt: 'VamoAgendar home page in production, with the booking simulator on the service selection step',
+              alt: 'VamoAgendar interface, with the booking simulator on the service selection step',
               url: 'https://vamoagendar.com.br/',
               video: '/cases/vamoagendar.webm',
               poster: '/cases/vamoagendar-poster.webp',
@@ -633,7 +626,7 @@ export const enContent = {
             name: 'Data Collection Ecosystem',
             type: 'Custom Solution / B2B',
             year: '2025',
-            narrative: 'I developed a distributed ecosystem for a large corporate client in São Paulo who needed to centralize financial data from dozens of stores out of a sales system with no official API. The solution was to create an autonomous worker in Playwright that navigates through headless browser instances in batches, isolating cookies and sessions to extract billing metrics directly from the DOM and centralize them in a proprietary API.',
+            narrative: 'Automation to consolidate revenue data for a retail chain whose sales system had no public API. I developed a collector with isolated sessions, an API for storing the data and a dashboard for reviewing it. The three services form a single solution.',
             stack: 'Node.js · Playwright · Express · Prisma · Docker',
             links: [],
             stat: { value: '3 Services', label: 'distributed architecture' },
@@ -759,13 +752,12 @@ export const enContent = {
     },
     {
       year: '2023',
-      name: 'Portfolio Avantis',
+      name: 'Avantis — former brand website',
       type: 'Landing Page',
       stack: ['Next.js', 'Tailwind CSS', 'Framer Motion'],
       narrative: 'Institutional website developed for my brand as a freelancer. The goal was to create a high-converting page to attract small businesses and micro-entrepreneurs, using Framer Motion for micro-interactions that convey professionalism.',
-      media: { image: '/cases/thumbs/avantis.webp', alt: 'Avantis landing page, live' },
+      media: { image: '/cases/thumbs/avantis.webp', alt: 'Archived view of the former Avantis website' },
       links: [
-        { label: 'Visit Site', href: 'https://avantis.dev' },
         { label: 'Repository', href: 'https://github.com/KriawqZero/avantis-porfolio' }
       ]
     }
@@ -774,34 +766,27 @@ export const enContent = {
   about: {
     number: '03',
     label: 'ABOUT ME',
-    title: 'More than code,',
-    titleHighlight: 'purpose.',
-    text: 'Still in Technical High School, I have been freelancing since March 2025, delivering real solutions. As an independent developer, I own the entire product cycle and I do not stick to one layer: backend, frontend, testing or infrastructure, whatever the project needs. I am seeking my first corporate opportunity to turn that experience into real value for a team.',
-    cta: 'Explore my journey',
-    stats: [
-      { value: '+1', label: 'year', sublabel: 'Of daily programming immersion' },
-      { value: '+50', label: 'projects', sublabel: 'Web apps and practical challenges' },
-      { value: '+10', label: 'clients', sublabel: 'Served with solutions in production' },
-      { value: '+1200', label: 'commits', sublabel: 'Recorded on GitHub in the last year' },
-      { value: '+5', label: 'technologies', sublabel: 'Mastered in the main tech stack' },
-      { value: '100%', label: 'focus', sublabel: 'On building robust and scalable systems' },
-      { value: '+1000', label: 'hours', sublabel: 'Reading official documentation' },
-      { value: '+200k', label: 'lines', sublabel: 'Of code written or refactored' },
-      { value: '∞', label: 'bugs', sublabel: 'Solved with a lot of patience' },
-      { value: '∞', label: 'drive', sublabel: 'Drive to learn and evolve' },
+    title: 'The person',
+    titleHighlight: 'behind the work.',
+    text: 'I am Marcílio Ortiz, an independent developer from Corumbá, Brazil. I have been freelancing since March 2025. I learned by building projects and reading documentation, and I work across backend, interfaces, testing and infrastructure. I like to understand how a business works before deciding what to build.',
+    cta: 'Explore my process',
+    principles: [
+      { title: 'Clear scope', text: 'The work starts with the problem and the expected deliverables. Those decisions become a scope that guides development.' },
+      { title: 'End to end', text: 'Database, API, interface, testing and deployment are part of my work, according to the needs of each project.' },
+      { title: 'Direct contact', text: 'You speak with me, the developer who follows the project and explains the technical decisions.' },
     ],
   },
 
   avantis: {
     number: '02',
-    label: 'THE INITIATIVE',
-    title: 'From study to',
-    titleHighlight: 'real practice.',
-    description: 'Brand used for my freelance projects and client work.',
-    text: 'When I started developing work for clients, I realized that presentation mattered as much as the code. That is how I created Avantis: a brand to structure my portfolio, standardize deliveries, and consolidate my professional identity. It marks the phase when I took the responsibility of transforming study into real solutions.',
+    label: 'INDEPENDENT DEVELOPMENT',
+    title: 'Your project,',
+    titleHighlight: 'built with me.',
+    description: 'Websites, systems and automations',
+    text: 'My work now carries my name: Marcílio Ortiz. You speak directly with the developer, from the first conversation to deployment. If your business needs a website, a system or fewer manual tasks, we can start with the problem you want to solve.',
     links: [
-      { label: 'avantis.dev', href: 'https://avantis.dev' },
-      { label: 'instagram.com/avantis.dev', href: 'https://instagram.com/avantis.dev' }
+      { label: 'Discuss a project', href: '#contato' },
+      { label: '@marciliortiz.dev', href: 'https://www.instagram.com/marciliortiz.dev/' }
     ]
   },
 
@@ -989,7 +974,7 @@ export const enContent = {
     problemLabel: 'Client Problem',
     solutionLabel: 'Developed Solution',
     techsLabel: 'Core Technologies',
-    epilogue: 'A fraction of my experience. Beyond the selected cases, dozens of other complex systems have been delivered and remain under confidentiality.',
+    epilogue: 'Each project starts with a concrete need. The project catalog also includes products in development and experiments.',
     projects: [
       {
         name: 'Data Collection & Goals Ecosystem',
@@ -1011,9 +996,10 @@ export const enContent = {
       {
         name: 'Sushi do Verão',
         type: 'Local Business',
-        problem: 'A high-volume restaurant in my city suffered from slow, generic online menus that didn\'t allow them to update prices and out-of-stock items in real-time during peak delivery hours.',
-        solution: 'I brought an initial proposal to the owner and we refined the idea together: instead of a template, a NestJS API with an admin panel and a PWA menu. I built the base of the system, but it was not approved for production. What is live today is the institutional site I built for them.',
-        stack: 'NestJS · Next.js · Expo · PostgreSQL',
+        problem: 'A local restaurant needed to present its dishes, location and opening hours to mobile visitors, with a direct path to contact the business.',
+        solution: 'I built the institutional website with photography, restaurant information and WhatsApp contact. I also built the foundation of an ordering system proposal; that part was not approved for production and is not part of the published delivery.',
+        url: 'https://sushidoverao.com.br/',
+        stack: 'TypeScript · Vite · CSS',
         year: '2026'
       }
     ],

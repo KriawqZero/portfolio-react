@@ -14,6 +14,7 @@ import { createHash } from 'node:crypto'
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, statSync } from 'node:fs'
 import { join, resolve } from 'node:path'
 import { ptContent } from '../../src/data/content'
+import { getProjectCatalog, statusLabels, categoryLabels } from '../../src/data/projectCatalog'
 import type { DocType, KnowledgeDoc } from '../../lib/ai/types'
 
 const RAIZ = resolve(import.meta.dirname, '../..')
@@ -162,43 +163,18 @@ function derivarDoContent(): KnowledgeDoc[] {
   const docs: KnowledgeDoc[] = []
   const linhasIndice: string[] = []
 
-  for (const era of ptContent.trajectory.eras) {
-    for (const p of era.projects) {
-      docs.push({
-        id: `project-${slug(p.name)}`,
-        title: p.name,
-        type: 'project',
-        topics: [era.id, 'projeto', ...p.stack.split('·').map(s => slug(s))],
-        aliases: [p.name.toLowerCase()],
-        text: `${p.name} (${p.type}, ${p.year}).\n\n${p.narrative}\n\nStack: ${p.stack}`,
-        ...fonte(p.name, p.links),
-      })
-      linhasIndice.push(`- ${p.name} (${p.year}, ${p.type}) — ${p.stack}`)
-    }
-  }
-
-  for (const item of ptContent.archive) {
+  for (const project of getProjectCatalog('pt')) {
+    const stage = statusLabels.pt[project.status]
     docs.push({
-      id: `archive-${slug(item.name)}`,
-      title: item.name,
+      id: `catalog-${project.id}`,
+      title: project.name,
       type: 'project',
-      topics: ['arquivo', 'projeto', ...item.stack.map(s => slug(s))],
-      aliases: [item.name.toLowerCase()],
-      text: `${item.name} (${item.type}, ${item.year}).\n\n${item.narrative}\n\nStack: ${item.stack.join(', ')}`,
-      ...fonte(item.name, item.links),
+      topics: ['projeto', project.category, project.status, ...project.stack.map(slug)],
+      aliases: [project.name.toLowerCase()],
+      text: `${project.name} (${project.year}). Estágio: ${stage}. Área: ${categoryLabels.pt[project.category]}.\n\n${project.summary}\n\nEscopo: ${project.scope}\n\nTecnologias: ${project.stack.join(', ')}`,
+      ...fonte(project.name, project.links),
     })
-    linhasIndice.push(`- ${item.name} (${item.year}, ${item.type}) — ${item.stack.join(', ')}`)
-  }
-
-  for (const c of ptContent.freelance.projects) {
-    docs.push({
-      id: `client-${slug(c.name)}`,
-      title: `${c.name} — trabalho para cliente`,
-      type: 'project',
-      topics: ['cliente', 'freelance', 'workana', slug(c.type)],
-      aliases: [c.name.toLowerCase()],
-      text: `${c.name} (${c.type}, ${c.year}).\n\nProblema do cliente: ${c.problem}\n\nSolução: ${c.solution}\n\nStack: ${c.stack}`,
-    })
+    linhasIndice.push(`- ${project.name} (${project.year}) — ${stage}: ${project.scope}`)
   }
 
   docs.push({
@@ -211,14 +187,14 @@ function derivarDoContent(): KnowledgeDoc[] {
   })
 
   docs.push({
-    id: 'profile-avantis',
-    title: 'Avantis Studio',
+    id: 'profile-professional-brand',
+    title: 'Marcílio Ortiz — desenvolvimento independente',
     type: 'profile',
     topics: ['avantis', 'marca', 'freelance'],
     aliases: ['avantis', 'avantis studio', 'sua marca'],
     text: `${ptContent.avantis.description}\n\n${ptContent.avantis.text}`,
-    sourceLabel: 'avantis.dev',
-    sourceHref: 'https://avantis.dev',
+    sourceLabel: 'Marcílio Ortiz',
+    sourceHref: 'https://www.marciliortiz.dev.br/',
   })
 
   docs.push({
@@ -234,11 +210,11 @@ function derivarDoContent(): KnowledgeDoc[] {
 
   docs.push({
     id: 'projects-overview',
-    title: 'Índice de todos os projetos',
+    title: 'Catálogo de projetos e estágios',
     type: 'index',
     topics: ['projetos', 'portfolio', 'o que construiu'],
     aliases: ['seus projetos', 'your projects', 'o que voce construiu', 'what have you built'],
-    text: `Projetos do Marcilio, do mais recente ao mais antigo:\n${linhasIndice.join('\n')}`,
+    text: `Seleção de projetos de Marcílio. Publicado, implementado, em desenvolvimento, experimento e histórico são estágios distintos. Não somar repositórios ou fases como novos produtos:\n${linhasIndice.join('\n')}`,
   })
 
   return docs
@@ -262,7 +238,7 @@ const versao = createHash('sha256')
   .slice(0, 12)
 
 const conteudo = `// GERADO por scripts/knowledge/build-index.ts — não edite à mão.
-// Rode \`pnpm knowledge:build\` depois de mexer em knowledge/ ou em src/data/content.ts.
+// Rode \`pnpm knowledge:build\` depois de mexer em knowledge/, content.ts ou projectCatalog.ts.
 
 import type { KnowledgeDoc } from '../types.js'
 

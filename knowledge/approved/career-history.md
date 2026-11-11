@@ -4,7 +4,7 @@ title: Minha trajetória até aqui
 type: profile
 visibility: public
 approved: true
-last_reviewed: 2026-08-06
+last_reviewed: 2026-11-11
 topics: [trajetoria, historia, carreira, workana, upwork, 99freelas, ranking, pausa, licao, comunicacao, briefing]
 aliases: [sua trajetoria, sua historia, como comecou, career, background, workana, upwork, 99freelas, seu ranking, ja parou, hiato, por que parou, trabalhou fora do brasil, cliente internacional, projeto internacional]
 ---
@@ -41,4 +41,4 @@ Migrei parte da atuação para a Upwork, onde entreguei um projeto para um clien
 
 ## Onde eu atuo hoje
 
-Voltei à Workana, agora sem o prestígio de ranking que eu tinha antes, e trabalho também pela Upwork, pelo 99Freelas, por indicação e pela marca própria, avantis.dev.
+Voltei à Workana, agora sem o prestígio de ranking que eu tinha antes, e trabalho também pela Upwork, pelo 99Freelas, por indicação e diretamente como Marcílio Ortiz. Avantis Studio foi o nome que usei antes; a identidade profissional atual é meu próprio nome.

@@ -9,7 +9,7 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Trajectory from './components/Trajectory'
 import FreelanceProjects from './components/FreelanceProjects'
-import Avantis from './components/Avantis'
+import ProfessionalBrand from './components/ProfessionalBrand'
 import AboutMe from './components/AboutMe'
 import DevProcess from './components/DevProcess'
 import Contact from './components/Contact'
@@ -125,10 +125,10 @@ export default function App() {
 
       <main style={{ position: 'relative', zIndex: 10 }}>
         <Hero />
-        {isFreelanceView && <FreelanceProjects />}
+        <FreelanceProjects />
         <AboutMe />
         <Trajectory />
-        <Avantis />
+        <ProfessionalBrand />
         <DevProcess />
         <Contact />
       </main>

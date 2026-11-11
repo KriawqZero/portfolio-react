@@ -31,7 +31,7 @@ A jornada é dividida em atos interconectados, muitas vezes utilizando ancoragem
 * **O Estudo de Caso:** Um mergulho focado em um sistema complexo, detalhando a arquitetura e as métricas em vez de apenas fornecer um link.
 * **O Processo:** Uma linha do tempo horizontal que exige do usuário uma rolagem física controlada, cadenciando a leitura do meu método de trabalho.
 * **O Catálogo:** Outros projetos apresentados através de um *scrubbing* contínuo, onde o tempo da transição é ditado diretamente pela velocidade do scroll do usuário.
-* **A Vida Real (Avantis):** Um respiro visual focado no mercado e na entrega de valor via consultoria e negócios.
+* **Desenvolvimento independente:** Marcílio Ortiz como identidade profissional, com o monograma MO e contato direto para sites, sistemas e automações. Avantis permanece apenas como parte da história dos projetos.
 * **Marcilio IA:** Uma seção onde o visitante pergunta o que quiser e recebe resposta em primeira pessoa. A IA responde apenas a partir de um dossiê que eu revisei e aprovei, deixa claro o tempo inteiro que não é o Marcilio humano, e não tem acesso a nada além desse dossiê. Nenhuma pergunta é antecipada por mim — é a única parte do site que eu não roteirizei.
 * **Epílogo:** O substituto do clássico "Contato". Uma seção travada na tela que evolui como os créditos de um filme, terminando com convites (e não botões) para iniciar uma conversa.
 

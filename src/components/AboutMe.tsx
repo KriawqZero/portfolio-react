@@ -10,7 +10,6 @@ export default function AboutMe() {
   const textColRef = useRef<HTMLDivElement>(null)
   const numberRef = useRef<HTMLSpanElement>(null)
   const artRef = useRef<HTMLDivElement>(null)
-  const statsContainerRef = useRef<HTMLDivElement>(null)
 
   const { t } = useLanguage()
   const { about: data } = t
@@ -18,7 +17,7 @@ export default function AboutMe() {
   useEffect(() => {
     const mm = gsap.matchMedia(sectionRef)
 
-    mm.add('(min-width: 1024px)', () => {
+    mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
       if (numberRef.current) {
         gsap.to(numberRef.current, {
           y: -100,
@@ -58,11 +57,7 @@ export default function AboutMe() {
 
     mm.add('(prefers-reduced-motion: reduce)', () => {
       gsap.set('.about-mask', { y: '0%' })
-      gsap.set('.about-fade, .stat-item', { opacity: 1, y: 0, scale: 1 })
-      document.querySelectorAll('.stat-number').forEach((el) => {
-        const alvo = el.getAttribute('data-val') || '0'
-        el.innerHTML = (el.getAttribute('data-prefix') || '') + alvo + (el.getAttribute('data-suffix') || '')
-      })
+      gsap.set('.about-fade, .about-principle', { opacity: 1, y: 0, scale: 1 })
     })
 
     mm.add('(prefers-reduced-motion: no-preference)', () => {
@@ -83,8 +78,8 @@ export default function AboutMe() {
         }
       )
 
-      // Stats Micro-animations
-      gsap.utils.toArray<HTMLElement>('.stat-item').forEach((item) => {
+      // Reveal the working principles as they enter the viewport
+      gsap.utils.toArray<HTMLElement>('.about-principle').forEach((item) => {
         gsap.fromTo(item,
           { opacity: 0, y: 50, scale: 0.9 },
           {
@@ -99,28 +94,6 @@ export default function AboutMe() {
         )
       })
 
-      // Stat counters
-      const statElements = document.querySelectorAll('.stat-number')
-      statElements.forEach((el) => {
-        const targetValue = parseFloat(el.getAttribute('data-val') || '0')
-        if (targetValue > 0) {
-          gsap.fromTo(el,
-            { innerHTML: 0 },
-            {
-              innerHTML: targetValue,
-              duration: 2,
-              ease: 'power3.out',
-              scrollTrigger: { trigger: el, start: 'top 80%' },
-              snap: { innerHTML: 1 },
-              onUpdate: function () {
-                const prefix = el.getAttribute('data-prefix') || ''
-                const suffix = el.getAttribute('data-suffix') || ''
-                el.innerHTML = prefix + Math.round(this.targets()[0].innerHTML) + suffix
-              }
-            }
-          )
-        }
-      })
 
     })
     return () => mm.revert()
@@ -174,40 +147,20 @@ export default function AboutMe() {
             </div>
           </div>
 
-          {/* Right Column — Scrolling Stats */}
-          <div className="about-stats-col" style={{ display: 'flex', alignItems: 'center', zIndex: 10 }}>
-            <div ref={statsContainerRef} className="about-stats-container" style={{ display: 'flex', flexDirection: 'column', gap: '4rem', width: '100%' }}>
-              {data.stats.map((stat, i) => {
-                const numOnly = stat.value.replace(/[^0-9.]/g, '')
-                const prefix = stat.value.replace(/[0-9.].*/g, '')
-                const suffix = stat.value.replace(/^[^0-9.]*[0-9.]*/, '')
-                const isInfinity = stat.value === '∞'
-
-                return (
-                  <div key={i} className="stat-item" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-                    <div style={{ minWidth: 'clamp(140px, 15vw, 220px)', flexShrink: 0 }}>
-                      <span
-                        className={`gradient-text ${!isInfinity ? 'stat-number' : ''}`}
-                        data-val={numOnly}
-                        data-prefix={prefix}
-                        data-suffix={suffix}
-                        style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(3rem, 6vw, 4.5rem)', fontWeight: 800, lineHeight: 1, display: 'block' }}
-                      >
-                        {isInfinity ? '∞' : '0'}
-                      </span>
-                    </div>
-                    <div>
-                      <span style={{ fontSize: 'var(--text-lg)', fontWeight: 600, color: 'var(--text-primary)', display: 'block', marginBottom: '0.25rem' }}>
-                        {stat.label}
-                      </span>
-                      <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-body)' }}>
-                        {stat.sublabel}
-                      </span>
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
+          {/* Right Column — How the work is handled */}
+          <div className="about-principles-col" style={{ display: 'flex', alignItems: 'center', zIndex: 10 }}>
+            <ul className="about-principles" style={{ display: 'flex', flexDirection: 'column', gap: '4rem', width: '100%', listStyle: 'none' }}>
+              {data.principles.map((principle) => (
+                <li key={principle.title} className="about-principle" style={{ paddingTop: '1.5rem', borderTop: '1px solid var(--glass-border)' }}>
+                  <h3 style={{ fontFamily: 'var(--font-display)', fontSize: 'var(--text-3xl)', fontWeight: 600, color: 'var(--text-primary)', lineHeight: 1.15, marginBottom: '1rem' }}>
+                    {principle.title}
+                  </h3>
+                  <p style={{ fontSize: 'var(--text-lg)', color: 'var(--text-body)', lineHeight: 1.6, maxWidth: '44ch' }}>
+                    {principle.text}
+                  </p>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Background Ambient MO Art */}
@@ -240,7 +193,7 @@ export default function AboutMe() {
       <style>{`
         .about-section { min-height: auto; }
         .about-text-col { height: auto; padding-top: 0; padding-bottom: 2rem; }
-        .about-stats-col { padding-top: 2rem; padding-bottom: 4rem; }
+        .about-principles-col { padding-top: 2rem; padding-bottom: 4rem; }
         .about-art-col {
           position: absolute;
           right: -20%;
@@ -256,7 +209,7 @@ export default function AboutMe() {
         @media (min-width: 1024px) { 
           .about-section { min-height: 200dvh; }
           .about-text-col { height: 100dvh; padding-top: 0; padding-bottom: 0; }
-          .about-stats-col { padding-top: 50dvh; padding-bottom: 50dvh; }
+          .about-principles-col { padding-top: 50dvh; padding-bottom: 50dvh; }
           .about-grid { grid-template-columns: 1fr 1fr !important; gap: 4rem !important; } 
           .about-art-col { 
             right: -10%;
@@ -264,8 +217,13 @@ export default function AboutMe() {
             opacity: 0.6;
           }
         }
+        @media (prefers-reduced-motion: reduce) {
+          .about-section { min-height: auto; }
+          .about-text-col { height: auto; }
+          .about-principles-col { padding-top: 2rem; padding-bottom: 2rem; }
+        }
         @media (max-width: 767px) {
-          .about-stats-container { gap: 2rem !important; }
+          .about-principles { gap: 2rem !important; }
         }
       `}</style>
     </section>

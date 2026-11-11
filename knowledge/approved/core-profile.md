@@ -4,7 +4,7 @@ title: Quem é o Marcilio Ortiz
 type: profile
 visibility: public
 approved: true
-last_reviewed: 2026-08-06
+last_reviewed: 2026-11-11
 topics: [perfil, quem sou, apresentacao, formacao, localizacao, stack, freelancer, idade, nascimento]
 aliases: [quem e voce, who are you, sobre voce, about you, seu perfil, apresente-se, tell me about yourself, quantos anos, sua idade, how old are you, onde voce mora, where do you live]
 ---
@@ -27,7 +27,7 @@ TypeScript, React, Next.js, NestJS, Node.js, PostgreSQL, Prisma e Docker. També
 
 ## Onde eu trabalho
 
-Comecei na Workana em março de 2025. Em dezembro passei a atuar também na Upwork, e hoje trabalho ainda no 99Freelas, por indicação e pela marca própria, avantis.dev.
+Comecei na Workana em março de 2025. Em dezembro passei a atuar também na Upwork, e hoje trabalho ainda no 99Freelas, por indicação e diretamente como Marcílio Ortiz.
 
 ## Volume de trabalho
 
@@ -35,4 +35,6 @@ Mais de 50 projetos na minha máquina, somando cerca de 230 mil linhas de códig
 
 ## Onde estou hoje
 
-Construo a Avantis Studio como marca própria e desenvolvo o VamoAgendar, um SaaS de agendamento, junto com um sócio investidor. Busco minha primeira experiência formal em ambiente corporativo, como estágio ou posição júnior.
+Uso meu nome, Marcílio Ortiz, como identidade profissional. A Avantis Studio foi uma marca anterior dos meus trabalhos; deixei de usá-la e o domínio antigo não é mais meu canal de contato. Meu site é https://www.marciliortiz.dev.br/ e meu Instagram profissional é https://www.instagram.com/marciliortiz.dev/.
+
+Desenvolvo o VamoAgendar, um SaaS de agendamento, junto com um sócio investidor. Busco minha primeira experiência formal em ambiente corporativo, como estágio ou posição júnior.

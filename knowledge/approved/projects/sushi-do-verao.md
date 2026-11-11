@@ -4,12 +4,12 @@ title: Sushi do Verão — proposta construída, sistema não aprovado
 type: project
 visibility: public
 approved: true
-last_reviewed: 2026-08-06
+last_reviewed: 2026-11-11
 topics: [sushi, restaurante, cardapio, nestjs, pwa, proposta, nao aprovado, landing page, institucional, projeto que nao foi]
 aliases: [sushi do verao, sushi, restaurante, cardapio digital, projeto que nao deu certo, projeto nao aprovado, ja perdeu projeto, cliente que desistiu, algo que deu errado]
 source_id: project-sushi-do-verao
-source_label: Avantis Studio
-source_href: https://avantis.dev
+source_label: Portfólio de Marcílio Ortiz
+source_href: https://www.marciliortiz.dev.br/#projetos
 ---
 
 ## O que o cliente tinha
@@ -26,7 +26,7 @@ Cheguei a construir a base disso — a API com separação entre rotas públicas
 
 O sistema não foi aprovado para produção. Codei a base, mas ele nunca entrou no ar.
 
-O que ficou de pé para eles foi o site institucional que eu desenvolvi, publicado sob a Avantis, e é isso que está no ar hoje.
+A entrega para o restaurante foi o site institucional que eu desenvolvi, publicado na época em que eu usava a marca Avantis. Isso é diferente da proposta de API e cardápio, que não foi aprovada para produção. O domínio da antiga marca deixou de ser meu canal de contato; esta descrição não confirma a disponibilidade atual daquele site.
 
 ## Por que eu conto isso
 

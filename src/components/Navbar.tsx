@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import DuasPortas from './DuasPortas'
+import ArchiveOverlay from './ArchiveOverlay'
+import { useLanguage } from '../hooks/useLanguage'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [catalogOpen, setCatalogOpen] = useState(false)
+  const { language } = useLanguage()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -13,6 +17,7 @@ export default function Navbar() {
 
   return (
     <motion.nav
+      className="portfolio-navbar"
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -35,6 +40,7 @@ export default function Navbar() {
           style={{
             pointerEvents: 'auto', // Re-enable clicks for the logo
             display: 'inline-flex',
+            flexShrink: 0,
             alignItems: 'center',
             transition: 'all 0.4s var(--ease-cinematic)',
             opacity: scrolled ? 0.4 : 1,
@@ -57,10 +63,14 @@ export default function Navbar() {
 
         {/* A navbar inteira é `pointer-events: none` para não bloquear o site;
             cada elemento clicável devolve o seu. */}
-        <div style={{ pointerEvents: 'auto' }}>
+        <div style={{ pointerEvents: 'auto', display: 'flex', alignItems: 'center', gap: 10 }}>
+          <button type="button" className="catalog-nav-button" onClick={() => setCatalogOpen(true)}>
+            {language === 'en' ? 'Projects' : 'Projetos'}
+          </button>
           <DuasPortas ativa="portfolio" />
         </div>
       </div>
+      <ArchiveOverlay isOpen={catalogOpen} onClose={() => setCatalogOpen(false)} />
     </motion.nav>
   )
 }

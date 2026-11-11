@@ -4,14 +4,14 @@ title: Como funciona um projeto freelance comigo
 type: practice
 visibility: public
 approved: true
-last_reviewed: 2026-08-06
+last_reviewed: 2026-11-11
 topics: [freelance, freelancer, cliente, clientes, workana, upwork, 99freelas, projeto, projetos, entrega, prazo, orcamento, proposta, briefing, comunicacao, sistemas]
 aliases: [trabalha como freelancer, freelance, freelancer, projeto com cliente, projetos para clientes, sistemas para clientes, entregou sistemas, trabalhos parecidos, projetos parecidos, trabalhos similares, similar work, como funciona um projeto, contratar voce, hire you, client work, real clients, quanto tempo demora, entrega]
 ---
 
 ## Desde quando e onde
 
-Freelancer desde março de 2025. Comecei na Workana, depois passei a atuar também na Upwork e no 99Freelas, e hoje recebo trabalho por indicação e pela marca própria, avantis.dev. Na fase mais intensa da Workana atendi cerca de 30 clientes.
+Freelancer desde março de 2025. Comecei na Workana, depois passei a atuar também na Upwork e no 99Freelas, e hoje recebo trabalho por indicação e diretamente como Marcílio Ortiz. Na fase mais intensa da Workana atendi cerca de 30 clientes.
 
 ## O que já entreguei para cliente
 

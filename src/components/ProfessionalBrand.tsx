@@ -5,7 +5,7 @@ import { useLanguage } from '../hooks/useLanguage'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export default function Avantis() {
+export default function ProfessionalBrand() {
   const sectionRef = useRef<HTMLElement>(null)
   const textColRef = useRef<HTMLDivElement>(null)
   const numberRef = useRef<HTMLSpanElement>(null)
@@ -42,7 +42,7 @@ export default function Avantis() {
     })
 
     // Desktop: Pin text and scroll logo
-    mm.add('(min-width: 1024px)', () => {
+    mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
       if (numberRef.current) {
         gsap.to(numberRef.current, {
           y: -100,
@@ -90,7 +90,7 @@ export default function Avantis() {
   return (
     <section
       ref={sectionRef}
-      id="avantis"
+      id="trabalho"
       className="avantis-section"
       style={{
         position: 'relative',
@@ -136,7 +136,7 @@ export default function Avantis() {
                     aparece aqui — junto do nome, com contexto. */}
                 <img
                   className="avantis-brand-mark"
-                  src="/icone-avantis-com-fundo-redondo.svg"
+                  src="/marciliortiz-logo.svg"
                   alt=""
                   width={56}
                   height={56}
@@ -144,7 +144,7 @@ export default function Avantis() {
                 />
                 <div>
                   <span style={{ fontSize: 'var(--text-base)', fontWeight: 600, color: 'var(--text-primary)', display: 'block', marginBottom: '0.25rem' }}>
-                    Avantis
+                    Marcílio Ortiz
                   </span>
                   <span style={{ fontSize: 'var(--text-sm)', color: 'var(--text-body)' }}>
                     {data.description}
@@ -156,8 +156,8 @@ export default function Avantis() {
                   <a
                     key={i}
                     href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    target={link.href.startsWith('http') ? '_blank' : undefined}
+                    rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                     className="avantis-card-link"
                     style={{ 
                       display: 'inline-flex', alignItems: 'center', gap: '0.5rem', 
@@ -175,7 +175,7 @@ export default function Avantis() {
             </div>
           </div>
 
-          {/* Right — The Avantis Logo/Identity */}
+          {/* Right — The personal MO identity */}
           <div className="avantis-logo-col" style={{ position: 'relative' }}>
             <div 
               ref={logoContainerRef}
@@ -200,8 +200,8 @@ export default function Avantis() {
               }} />
               
               <img
-                src="/icone-avantis-com-fundo-redondo.svg"
-                alt="Avantis"
+                src="/marciliortiz-logo.svg"
+                alt="Monograma de Marcílio Ortiz"
                 width={400}
                 height={400}
                 loading="lazy"
@@ -251,6 +251,12 @@ export default function Avantis() {
             filter: drop-shadow(0 8px 20px rgba(139, 92, 246, 0.25));
           }
           .avantis-grid { gap: 0 !important; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .avantis-section { min-height: auto; }
+          .avantis-text-col { height: auto; }
+          .avantis-logo-col { padding-top: 4rem; padding-bottom: 4rem; }
         }
 
         @media (hover: hover) and (pointer: fine) {

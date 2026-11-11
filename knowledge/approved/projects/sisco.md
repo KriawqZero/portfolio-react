@@ -4,7 +4,7 @@ title: SISCO — sistema de horas complementares do IFMS
 type: project
 visibility: public
 approved: true
-last_reviewed: 2026-08-06
+last_reviewed: 2026-11-11
 topics: [sisco, tcc, ifms, laravel, livewire, php, producao, certificados, horas, vps, linux, docker, autenticacao, escola]
 aliases: [sisco, tcc, seu tcc, trabalho de conclusao, ifms, sistema da escola, horas complementares, certificados, laravel, maior projeto, projeto em producao, sabe linux, ja mexeu com servidor, deploy]
 source_id: project-sisco-sistema
@@ -32,11 +32,11 @@ O aluno abre o link e envia. O professor abre o painel e vê todos os alunos, to
 
 Ficou pronto no fim de dezembro de 2024 e já estava funcionando em janeiro de 2025. Foram dois meses de desenvolvimento praticamente ininterrupto. A apresentação só aconteceu em julho porque faltava a outra metade de um TCC — texto, defesa, papelada. O código ficou de pé seis meses esperando a burocracia.
 
-Recebeu nota máxima da banca. Depois da defesa entrou em uso com os alunos dos últimos semestres de Informática, somando mais de 200 alunos, além dos professores e do coordenador responsável pela validação.
+Recebeu nota máxima da banca. Depois da defesa entrou em uso com alunos dos últimos semestres de Informática, professores e o coordenador responsável pela validação.
 
 ## O que eu não sei sobre ele hoje
 
-Passou mais de um ano e eu perdi o acompanhamento de perto. Não sei dizer se foi estendido para Metalurgia ou para o curso de Administração que abriu depois. Prefiro não chutar número que não posso verificar.
+Perdi o acompanhamento de perto. Não sei dizer se foi estendido para Metalurgia ou para o curso de Administração que abriu depois, nem quantos usuários estão ativos hoje.
 
 ## Como foi feito
 
@@ -52,7 +52,7 @@ O custo dessa escolha é real: amarra o sistema a um serviço que só existe na 
 
 ## O quanto de IA teve
 
-O código foi escrito à mão. No fim de 2024 as ferramentas ainda eram fracas para esse tipo de trabalho, e havia o desconforto de usá-las num TCC — meu orientador liberava, mas eu recorri a elas em pontos isolados de front-end, algo entre 3% e 5% do projeto.
+O código foi escrito à mão. No fim de 2024 as ferramentas ainda eram fracas para esse tipo de trabalho, e havia o desconforto de usá-las num TCC — meu orientador liberava, mas eu recorri a elas em pontos isolados de front-end.
 
 ## O que eu aprendi fora do código
 

@@ -16,6 +16,20 @@ export function useSmoothScroll() {
 
     lenisRef.current = lenis
 
+    // A native dialog traps focus, but Lenis also needs to stop its current
+    // animation so that the page behind the dialog keeps its scroll position.
+    let modalWasOpen = false
+    const syncModalScroll = () => {
+      const modalIsOpen = document.querySelector('dialog[open]') !== null
+      if (modalIsOpen === modalWasOpen) return
+      modalWasOpen = modalIsOpen
+      if (modalIsOpen) lenis.stop()
+      else lenis.start()
+    }
+    const modalObserver = new MutationObserver(syncModalScroll)
+    modalObserver.observe(document.body, { subtree: true, attributes: true, attributeFilter: ['open'] })
+    syncModalScroll()
+
     // Sync Lenis with GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update)
 
@@ -49,6 +63,7 @@ export function useSmoothScroll() {
     document.addEventListener('click', handleAnchorClick)
 
     return () => {
+      modalObserver.disconnect()
       document.removeEventListener('click', handleAnchorClick)
       gsap.ticker.remove(avancarLenis)
       lenis.destroy()

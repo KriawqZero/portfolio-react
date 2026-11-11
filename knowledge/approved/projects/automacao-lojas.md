@@ -4,7 +4,7 @@ title: Automação de faturamento para uma rede de lojas
 type: project
 visibility: public
 approved: true
-last_reviewed: 2026-08-06
+last_reviewed: 2026-11-11
 topics: [automacao, scraping, playwright, worker, api, dashboard, prisma, docker, cliente fixo, sao paulo, faturamento, metas, comissionamento, integracao]
 aliases: [automacao, robo, scraper, scrapper, rede de lojas, cliente de sao paulo, maior cliente, cliente mais antigo, playwright, faturamento, sistema sem api, integracao, worker]
 source_id: project-automacao-lojas
@@ -30,16 +30,16 @@ Um **dashboard** em Next.js, onde a operação vê as métricas consolidadas de 
 
 Coletar dados de uma aplicação de página única traz dois problemas que moldaram a arquitetura.
 
-O primeiro é isolamento: como o script processa dezenas de lojas em sequência, encerrar sessão do jeito comum é frágil, e uma falha vaza sessão de uma loja para a próxima — o que significa gravar o faturamento da loja errada. Resolvi com contexto novo do navegador por loja: um ambiente estéril, sem cookie, localStorage ou service worker anterior, destruído ao fim de cada sincronização.
+O primeiro é isolamento: como o script processa contas de lojas em sequência, encerrar sessão do jeito comum é frágil, e uma falha vaza sessão de uma loja para a próxima — o que significa gravar o faturamento da loja errada. Resolvi com contexto novo do navegador por loja: um ambiente estéril, sem cookie, localStorage ou service worker anterior, destruído ao fim de cada sincronização.
 
 O segundo é carregamento dinâmico. Verificar URL depois de uma transição de rota via JavaScript é enganoso, então o worker avalia estado na árvore do DOM e tem nova tentativa nas partes críticas da extração.
 
-## Onde ele está hoje
+## Entrega e evolução
 
-É o meu cliente mais antigo e segue ativo. O sistema entrou no ar em abril de 2025 e é usado todos os dias nas três filiais, até hoje.
+O sistema entrou no ar em abril de 2025 para uma rede de lojas em São Paulo. O trabalho continuou com manutenção e ampliação do escopo. O volume atual de uso não foi verificado nesta revisão.
 
 O escopo cresceu junto: a API deixou de ser só repositório de relatório e virou motor de regra de negócio, gerenciando metas semanais por loja, funcionários, comissionamento e aprovação de premiações.
 
 ## Por que esse caso importa
 
-É a prova de que eu entrego integração onde não existe caminho oficial, e de que o resultado sobreviveu ao teste mais duro: continuar rodando todo dia, mais de um ano depois, para quem depende dele.
+O caso reúne coleta de dados sem API pública, isolamento de sessões, integração entre serviços e regras de negócio de faturamento. Também mostra a evolução de uma integração inicial para um sistema com manutenção recorrente.
